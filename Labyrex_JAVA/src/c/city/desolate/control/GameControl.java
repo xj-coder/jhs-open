@@ -1,5 +1,8 @@
 package c.city.desolate.control;
 
+import java.awt.Cursor;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
 import c.city.desolate.Define;
 import c.city.desolate.ui.Canvas;
 import c.city.desolate.ui.LabyrexFrame;
@@ -8,8 +11,6 @@ import c.city.desolate.ui.canvas.panel.GameCanvas;
 import c.city.desolate.ui.canvas.panel.HelpCanvas;
 import c.city.desolate.ui.canvas.panel.MainCanvas;
 import c.city.desolate.ui.canvas.panel.MenuCanvas;
-
-import java.awt.*;
 
 /**
  * 游戏管理类
@@ -41,6 +42,8 @@ public class GameControl {
 	private boolean isMusic = true;
 
 	private boolean lock = false;
+
+	private ReentrantReadWriteLock readWriteLock;
 
 	private GameControl() {
 		setCurrCanvas(G_Main);
@@ -87,7 +90,8 @@ public class GameControl {
 			}
 			if (currCanvas != null) {
 				for (int i = 0; i < currCanvas.getMouseListeners().size(); i++) {
-					ListenerControl.gi().registMouseListener(currCanvas, currCanvas.getMouseListeners().get(i));
+					ListenerControl.gi().registMouseListener(currCanvas,
+							currCanvas.getMouseListeners().get(i));
 				}
 			}
 		}
@@ -103,14 +107,16 @@ public class GameControl {
 	}
 
 	public void resetMap() {
-		getLock();
+		// getLock();
+		getReadWriteLock().writeLock().lock();
 
 		int index = getCurrGameCanvasIndex();
 		setCurrCanvas(G_Null);
 		MapControl.resetMap();
 		setCurrCanvas(index);
 
-		unlock();
+		getReadWriteLock().writeLock().unlock();
+		// unlock();
 	}
 
 	public MapCanvas getCurrMap() {
@@ -145,6 +151,10 @@ public class GameControl {
 		return instance;
 	}
 
+	/**
+	 * 该方法过期，由ReentrantReadWriteLock替代
+	 */
+	@Deprecated
 	public synchronized void getLock() {
 		if (lock) {
 			try {
@@ -156,9 +166,19 @@ public class GameControl {
 		lock = true;
 	}
 
+	/**
+	 * 该方法过期，由ReentrantReadWriteLock替代
+	 */
+	@Deprecated
 	public synchronized void unlock() {
 		lock = false;
 		notify();
 	}
 
+	public ReentrantReadWriteLock getReadWriteLock() {
+		if (readWriteLock == null) {
+			readWriteLock = new ReentrantReadWriteLock();
+		}
+		return readWriteLock;
+	}
 }
