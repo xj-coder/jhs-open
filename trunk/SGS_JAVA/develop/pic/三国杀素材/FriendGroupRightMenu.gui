@@ -1,0 +1,134 @@
+new guiFriendRightMenu(mFriendGroupRightMenu2) {      
+     
+      Profile = "GuiMainProfile";
+      HorizSizing = "relative";
+      VertSizing = "relative";
+      position = "0 0";
+      Extent = "1024 768";
+      MinExtent = "8 2";
+      Visible = "0";
+      tile = "0";	
+      Command = "mFriendGroupRightMenu2.setVisible(false);";
+
+      new GuiBitmapCtrl(mFriendGroupRightPopMenu2) 
+      {
+      Profile = "GuiMainProfile";
+      HorizSizing = "relative";
+      VertSizing = "relative";
+      position = "0 0";
+      Extent = "97 30";
+      MinExtent = "8 2";
+      Visible = "1";
+      tile = "0";
+      canSave = "1";
+      hovertime = "1000";
+      wrap = "0";
+      bitmap = "./friend/RightBg.png";
+      new GuiBitmapButtonCtrl() {
+         canSaveDynamicFields = "0";
+         isContainer = "0";
+         Profile = "GuiFriendRightButtonProfile";
+         //Profile ="GuiButtonProfile";
+         HorizSizing = "relative";
+         VertSizing = "relative";
+         Position = "0 0";
+         Extent = "98 30";
+         MinExtent = "8 2";
+         canSave = "1";
+         Visible = "1";
+         hovertime = "1000";
+         text = "添加分组";
+         groupNum = "-1";
+         buttonType = "PushButton";
+         useMouseEvents = "0";
+         Command = "AddFriendGroup();";
+      }; 
+   };
+};
+
+new guiFriendRightMenu(mFriendGroupRightMenu) {      
+     
+      Profile = "GuiMainProfile";
+      HorizSizing = "relative";
+      VertSizing = "relative";
+      position = "0 0";
+      Extent = "1024 768";
+      MinExtent = "8 2";
+      Visible = "0";
+      tile = "0";	
+      Command = "mFriendGroupRightMenu.setVisible(false);";
+
+      new GuiBitmapCtrl(mFriendGroupRightPopMenu) 
+      {
+      Profile = "GuiMainProfile";
+      HorizSizing = "relative";
+      VertSizing = "relative";
+      position = "0 0";
+      Extent = "97 90";
+      MinExtent = "8 2";
+      Visible = "1";
+      tile = "0";
+      canSave = "1";
+      hovertime = "1000";
+      wrap = "0";
+      bitmap = "./friend/RightBg.png";
+      new GuiBitmapButtonCtrl(mAddFriendGroupName) {
+         canSaveDynamicFields = "0";
+         isContainer = "0";
+         Profile = "GuiFriendRightButtonProfile";
+         //Profile ="GuiButtonProfile";
+         HorizSizing = "relative";
+         VertSizing = "relative";
+         Position = "0 0";
+         Extent = "98 30";
+         MinExtent = "8 2";
+         canSave = "1";
+         Visible = "1";
+         hovertime = "1000";
+         text = "添加分组";
+         groupNum = "-1";
+         buttonType = "PushButton";
+         useMouseEvents = "0";
+         Command = "AddFriendGroup();";
+      };
+      new GuiBitmapButtonCtrl(mReNameFriendGroupName) {
+         canSaveDynamicFields = "0";
+         isContainer = "0";
+         Profile = "GuiFriendRightButtonProfile";
+         //Profile ="GuiButtonProfile";
+         HorizSizing = "relative";
+         VertSizing = "relative";
+         Position = "0 30";
+         Extent = "98 30";
+         MinExtent = "8 2";
+         canSave = "1";
+         Visible = "1";
+         hovertime = "1000";
+         text = "重命名";
+         groupNum = "-1";
+         buttonType = "PushButton";
+         useMouseEvents = "0";
+         Command = "ReNameFriendGroup();";
+      };
+      new GuiBitmapButtonCtrl(mDeleteFriendGroupName) {
+         canSaveDynamicFields = "0";
+         isContainer = "0";
+         Profile = "GuiFriendRightButtonProfile";
+         //Profile ="GuiButtonProfile";
+         HorizSizing = "relative";
+         VertSizing = "relative";
+         Position = "0 60";
+         Extent = "98 30";
+         MinExtent = "8 2";
+         canSave = "1";
+         Visible = "1";
+         hovertime = "1000";
+         text = "删除该组";
+         groupNum = "-1";
+         buttonType = "PushButton";
+         useMouseEvents = "0";
+         Command = "DeleteFriendGroup();";
+      };
+           
+   };
+};

@@ -1,0 +1,171 @@
+//--- OBJECT WRITE BEGIN ---
+/*
+new GuiControl(mLaBaDlg) {
+   canSaveDynamicFields = "0";
+   isContainer = "1";
+   Profile = "GuiDefaultProfile";
+   HorizSizing = "relative";
+   VertSizing = "relative";
+   Position = "0 0";
+   Extent = "1024 768";
+   MinExtent = "8 2";
+   canSave = "1";
+   Visible = "1";
+   hovertime = "1000";
+   MouseThrough = "true";
+   
+	$LaBaDlgPosition = "358 196";
+	$LaBaDlgPositionX = "358";
+	$LaBaDlgPositionY = "196";
+	$LaBaDlgExtent = "308 375";
+	$LaBaDlgExtentX = "308";
+	$LaBaDlgExtentY = "375";
+*/
+	$LaBaDlgPosition = "323 247";
+	$LaBaDlgPositionX = "323";
+	$LaBaDlgPositionY = "247";
+	$LaBaDlgExtent = "377 273";
+	$LaBaDlgExtentX = "377";
+	$LaBaDlgExtentY = "273";
+	
+   new GuiGameChatBack(mLaBaDlg) 
+   {
+      canSaveDynamicFields = "0";
+      isContainer = "1";
+      Profile = "GuiDefaultProfile";
+      HorizSizing = "relative";
+      VertSizing = "relative";
+      Position = $LaBaDlgPosition;
+      Extent = $LaBaDlgExtent;
+      MinExtent = "8 2";
+      canSave = "1";
+      Visible = "0";
+      hovertime = "1000";
+      bitmap = "./Chat/LaBa/Back.png";
+      wrap = "0";
+      //MouseThrough = "false";
+      new GuiScrollCtrl()
+      {
+         Profile = "GuiScrollChatProfile";
+         HorizSizing = "relative";
+         VertSizing = "relative";
+         //position = "34 180";
+         //Extent = "240 84";
+         position = "40 80";
+         Extent = "304 68";
+         MinExtent = "8 8";
+         Visible = "1";
+         willFirstRespond = "1";
+         hScrollBar = "alwaysOff";
+         vScrollBar = "dynamic";
+         constantThumbHeight = "0";
+         childMargin = "0 0";
+         new GuiMLTextEditCtrl(LaBaDlg_InputText)
+         {
+            canSaveDynamicFields = "0";
+            isContainer = "0";
+            Profile = "GuiChatTextEditProfile";
+            HorizSizing = "relative";
+            VertSizing = "relative";
+            //Position = "2 0";
+            //Extent = "216 84";
+            Position = "2 2";
+            Extent = "287 68";
+            MinExtent = "8 2";
+            canSave = "1";
+            Visible = "1";
+            hovertime = "1000";
+            lineSpacing = "2";
+            allowColorChars = "1";
+            maxChars = "60";
+            AltCommand = "SendUseItemLaBa();";
+            charCommand = "OnLaBaDlgMsgChange();";
+         };
+      };
+      
+      new GuiTextCtrl(LaBaDlg_MaxTextMsg) {
+         canSaveDynamicFields = "0";
+         isContainer = "0";
+         Profile = "GuiLabaDlgTextProfile";
+         HorizSizing = "relative";
+         VertSizing = "relative";
+         Position = "230 148";
+         Extent = "110 18";
+         MinExtent = "8 2";
+         canSave = "1";
+         Visible = "1";
+         hovertime = "1000";
+         maxLength = "1024";
+      };
+     
+      new GuiBitmapButtonCtrl(LaBaDlgOk_Button) 
+      {
+         canSaveDynamicFields = "0";
+         isContainer = "0";
+         Profile = "GuiConfirmButtonProfile";
+         HorizSizing = "relative";
+         VertSizing = "relative";
+         //Position = "36 280";
+         Position = "94 183";
+         Extent = "88 32";
+         MinExtent = "8 2";
+         canSave = "1";
+         Visible = "1";
+         hovertime = "1000";
+         groupNum = "-1";
+         buttonType = "PushButton";
+         bitmap = "./common/Button/OKButton.png";
+         command = "SendUseItemLaBa();";
+      };
+      new GuiBitmapButtonCtrl(LaBaDlgCancel_Button) 
+      {
+         canSaveDynamicFields = "0";
+         isContainer = "0";
+         Profile = "GuiCancelButtonProfile";
+         HorizSizing = "relative";
+         VertSizing = "relative";
+         //Position = "184 280";
+         Position = "209 183";
+         Extent = "88 32";
+         MinExtent = "8 2";
+         canSave = "1";
+         Visible = "1";
+         hovertime = "1000";
+         groupNum = "-1";
+         buttonType = "PushButton";
+         bitmap = "./common/Button/CancelButton.png";
+         command = "HideLabaDlg();";
+      };
+   };
+//};
+
+function mLaBaDlg::onWake(%this)
+{
+   //LaBaDlg_InputText.setText("");
+}
+
+function LaBaDlg_InputText::onResize(%x, %y)
+{
+   LaBaDlg_InputText.scrollToBottom();
+}
+
+function SendUseItemLaBa()
+{
+   %text = LaBaDlg_InputText.getText();
+   if(strlen(%text) > 0)
+   {
+      //发送使用喇叭信息
+      sendUseLaBa(%text);
+      //mLaBaDlg.setVisible(0);
+      //LaBaDlg_InputText.setText("");
+   		//LaBaDlg_InputText.makeFirstResponder(false);
+   }
+}
+
+function HideLabaDlg()
+{
+	mLaBaDlg.setVisible(0);
+	LaBaDlg_InputText.setText("");
+  LaBaDlg_InputText.makeFirstResponder(false);
+}
+//--- OBJECT WRITE END ---
