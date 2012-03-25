@@ -1,0 +1,171 @@
+   new guiFriendRightMenu(mFriendRightMouseMenu) {      
+     
+      Profile = "GuiMainProfile";
+      HorizSizing = "relative";
+      VertSizing = "relative";
+      position = "0 0";
+      Extent = "1024 768";
+      MinExtent = "8 2";
+      Visible = "0";
+      tile = "0";	
+      Command = "mFriendRightMouseMenu.setVisible(false);";
+
+      new GuiBitmapCtrl(mFriendRightPopMouseMenu) 
+      {
+      Profile = "GuiMainProfile";
+      HorizSizing = "relative";
+      VertSizing = "relative";
+      position = "0 0";
+      Extent = "97 152";
+      MinExtent = "8 2";
+      Visible = "1";
+      tile = "0";
+      canSave = "1";
+      hovertime = "1000";
+      wrap = "0";
+      bitmap = "./friend/RightBg.png";
+      new GuiBitmapButtonCtrl() {
+         canSaveDynamicFields = "0";
+         isContainer = "0";
+         Profile = "GuiFriendRightButtonProfile";
+         //Profile ="GuiButtonProfile";
+         HorizSizing = "relative";
+         VertSizing = "relative";
+         Position = "0 0";
+         Extent = "98 30";
+         MinExtent = "8 2";
+         canSave = "1";
+         Visible = "1";
+         hovertime = "1000";
+         text = "个人信息";
+         groupNum = "-1";
+         buttonType = "PushButton";
+         useMouseEvents = "0";
+         Command = "ShowFriendUserInfo();";
+         //bitmap="./friend/userinfo.png";
+      };
+      new GuiBitmapButtonCtrl() {
+         canSaveDynamicFields = "0";
+         isContainer = "0";
+         Profile = "GuiFriendRightButtonProfile";
+        // Profile ="GuiButtonProfile";
+         HorizSizing = "relative";
+         VertSizing = "relative";
+         Position = "0 30";
+         Extent = "98 30";
+         MinExtent = "8 2";
+         canSave = "1";
+         Visible = "1";
+         hovertime = "1000";
+         text = "发送信息";
+         groupNum = "-1";
+         buttonType = "PushButton";
+         useMouseEvents = "0";
+         Command = "ShowFriendChatDlg();";
+        // bitmap="./friend/send.png";
+      };
+      /*new GuiBitmapButtonCtrl() {
+         canSaveDynamicFields = "0";
+         isContainer = "0";
+         Profile = "GuiFriendInviteButtonProfile";
+       // Profile ="GuiButtonProfile";
+         HorizSizing = "relative";
+         VertSizing = "relative";
+         Position = "0 150";
+         Extent = "98 30";
+         MinExtent = "8 2";
+         canSave = "1";
+         Visible = "1";
+         hovertime = "1000";
+         text = "邀请好友";
+         groupNum = "-1";
+         buttonType = "PushButton";
+         useMouseEvents = "0";
+         bitmap="./friend/invite.png";         
+      };*/
+      new GuiBitmapButtonCtrl() {
+         canSaveDynamicFields = "0";
+         isContainer = "0";
+         Profile = "GuiFriendRightButtonProfile";
+         //Profile ="GuiButtonProfile";
+         HorizSizing = "relative";
+         VertSizing = "relative";
+         Position = "0 120";
+         Extent = "98 30";
+         MinExtent = "8 2";
+         canSave = "1";
+         Visible = "1";
+         hovertime = "1000";
+         text = "删除好友";
+         groupNum = "-1";
+         buttonType = "PushButton";
+         useMouseEvents = "0";
+         Command = "DeleteFriend();";
+        // bitmap="./friend/deletefriend.png";   
+         
+      };
+      new GuiBitmapButtonCtrl() {
+         canSaveDynamicFields = "0";
+         isContainer = "0";
+         Profile = "GuiFriendRightButtonProfile";
+         //Profile ="GuiButtonProfile";
+         HorizSizing = "relative";
+         VertSizing = "relative";
+         Position = "0 90";
+         Extent = "98 30";
+         MinExtent = "8 2";
+         canSave = "1";
+         Visible = "1";
+         hovertime = "1000";
+         text = "加入黑名单";
+         groupNum = "-1";
+         buttonType = "PushButton";
+         useMouseEvents = "0";
+        // bitmap="./friend/entertobadman.png";  
+         Command="AddToBadManGroup();"; 
+      };
+      new GuiBitmapButtonCtrl() {
+         canSaveDynamicFields = "0";
+         isContainer = "0";
+         Profile = "GuiFriendRightButtonProfile";       
+         //Profile ="GuiButtonProfile";
+         HorizSizing = "relative";
+         VertSizing = "relative";
+         Position = "0 60";
+         Extent = "98 30";
+         MinExtent = "8 2";
+         canSave = "1";
+         Visible = "1";
+         hovertime = "1000";
+         text = "移至分组>>";
+         groupNum = "-1";
+         buttonType = "PushButton";
+         useMouseEvents = "0";
+         // bitmap="./friend/moveto.png";
+          Command="MoveFriendToGroupName();";
+      };
+      /*new GuiBitmapButtonCtrl() {
+         canSaveDynamicFields = "0";
+         isContainer = "0";
+         Profile = "GuiEnterFriendRoomrofile";
+         //Profile ="GuiButtonProfile";
+         HorizSizing = "relative";
+         VertSizing = "relative";
+         Position = "0 180";
+         Extent = "98 30";
+         MinExtent = "8 2";
+         canSave = "1";
+         Visible = "1";
+         hovertime = "1000";
+         text = "进入好友房间";
+         groupNum = "-1";
+         buttonType = "PushButton";
+         useMouseEvents = "0";
+         bitmap="./friend/enterfriendroom.png";
+      };*/
+   };
+   };
+   
+   
+
+//--- OBJECT WRITE END ---
