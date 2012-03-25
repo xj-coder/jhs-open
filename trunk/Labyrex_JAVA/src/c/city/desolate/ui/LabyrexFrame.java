@@ -1,13 +1,18 @@
 package c.city.desolate.ui;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 import c.city.desolate.Define;
 import c.city.desolate.control.GameControl;
 import c.city.desolate.control.MapControl;
 import c.city.desolate.control.SoundControl;
 import c.city.desolate.tool.ScreenTools;
-
-import javax.swing.*;
-import java.awt.*;
 
 public class LabyrexFrame extends JFrame implements Runnable {
 
@@ -50,7 +55,8 @@ public class LabyrexFrame extends JFrame implements Runnable {
 		long step = 35l;
 		long sleep = 10l;
 		while (gameLoop == Thread.currentThread()) {
-			GameControl.gi().getLock();// 获得锁
+			// GameControl.gi().getLock();// 获得锁
+			GameControl.gi().getReadWriteLock().writeLock().lock();
 
 			// 帧刷新频率矫正，确保每秒刷新的帧数最大值为固定的，最快每隔(step-sleep)毫秒刷新一帧,即每秒的帧数为1000/(step-sleep)
 			long l3 = System.currentTimeMillis();
@@ -66,8 +72,9 @@ public class LabyrexFrame extends JFrame implements Runnable {
 			gamestate.update(l1);
 			gamestate.render();
 			if (Define.FPS) {
-				gamestate.drawText(new StringBuilder().append("FPS : ").append(fps).toString(), 500, 25, Color.red,
-						new Font("Dialog", Font.PLAIN, 18));
+				gamestate.drawText(new StringBuilder().append("FPS : ").append(
+						fps).toString(), 500, 25, Color.red, new Font("Dialog",
+						Font.PLAIN, 18));
 			}
 			gamestate.flip(g);
 			// 游戏渲染结束
@@ -83,7 +90,8 @@ public class LabyrexFrame extends JFrame implements Runnable {
 				i++;
 			}
 
-			GameControl.gi().unlock();// 解锁
+			// GameControl.gi().unlock();// 解锁
+			GameControl.gi().getReadWriteLock().writeLock().unlock();
 
 			try {
 				// 线程休眠
