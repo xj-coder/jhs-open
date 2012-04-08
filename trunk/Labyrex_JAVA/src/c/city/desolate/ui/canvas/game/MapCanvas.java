@@ -1,69 +1,126 @@
 package c.city.desolate.ui.canvas.game;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import java.util.ArrayList;
+
 import c.city.desolate.Define;
+import c.city.desolate.bean.MapBean;
+import c.city.desolate.bean.Rect2D;
+import c.city.desolate.control.GameControl;
+import c.city.desolate.control.event.map.EmitterMouseClickedAdapter;
+import c.city.desolate.control.event.map.MirrorMouseClickedAdapter;
+import c.city.desolate.control.event.map.MouseMoveOnMapAdapter;
+import c.city.desolate.control.event.map.ReceiverMouseClickedAdapter;
 import c.city.desolate.tool.ImageTools;
+import c.city.desolate.tool.ImgSelector;
 import c.city.desolate.ui.Canvas;
 import c.city.desolate.ui.shape.EmitterShape;
 import c.city.desolate.ui.shape.MirrorShape;
 import c.city.desolate.ui.shape.PathShape;
 import c.city.desolate.ui.shape.ReceiverShape;
 
-import java.awt.*;
-import java.util.Vector;
+public class MapCanvas extends Canvas {
 
-public class MapCanvas extends Canvas implements Comparable<MapCanvas> {
-	public String name;// 地图名
-	public boolean isEnabled = false;
+	private MapBean map;// 地图数据
+
+	private ArrayList<PathShape> pathList;// 路线集合
 
 	public EmitterShape[] emitterList;// 发射器集合
 	public ReceiverShape[] receiverList;// 接收器集合
 	public MirrorShape[] mirrorList;// 挡板集合
 
-	private Vector<PathShape> pathVector;// 路线集合
-
-	public MapCanvas(int x, int y, int width, int height) {
+	public MapCanvas(int x, int y, int width, int height, MapBean map) {
 		super(x, y, width, height);
+		this.map = map;
 	}
 
-	public void init() {
-		pathVector = new Vector<PathShape>();
-
+	public MapCanvas(MapBean map) {
+		super();
+		width = map.width * Define.Main.grid_size;
+		height = map.height * Define.Main.grid_size;
 		x = (Define.Main.width - width) / 2;
 		y = (Define.Main.height - height) / 2 - 20;
+		this.map = map;
 
-		if (emitterList != null) {
-			for (int i = 0; i < emitterList.length; i++) {
-				addCanvas(emitterList[i]);
+	}
+
+	@Override
+	public void init() {
+
+		pathList = new ArrayList<PathShape>();
+
+		for (int i = 0; i < map.mirrorList.length; i++) {
+			map.mirrorList[i].type = map.mirrorList[i].iniType;
+		}
+
+		if (map.emitterList != null) {
+			emitterList = new EmitterShape[map.emitterList.length];
+			for (int i = 0; i < map.emitterList.length; i++) {
+				EmitterShape emitterShape = new EmitterShape(map.emitterList[i].x * Define.Main.grid_size,
+						map.emitterList[i].y * Define.Main.grid_size, map.emitterList[i]);
+
+				emitterShape.bgImage = ImgSelector.emitterSelector(emitterShape, new Rect2D(0, 0, width, height));
+				emitterShape.addMouseListener(new MouseMoveOnMapAdapter(emitterShape));
+				emitterShape.addMouseListener(new EmitterMouseClickedAdapter(emitterShape));
+
+				emitterList[i] = emitterShape;
+				addCanvas(emitterShape);
 			}
 		}
-		if (receiverList != null) {
-			for (int i = 0; i < receiverList.length; i++) {
-				addCanvas(receiverList[i]);
+		if (map.receiverList != null) {
+			receiverList = new ReceiverShape[map.receiverList.length];
+			for (int i = 0; i < map.receiverList.length; i++) {
+				ReceiverShape receiverShape = new ReceiverShape(map.receiverList[i].x * Define.Main.grid_size,
+						map.receiverList[i].y * Define.Main.grid_size, map.receiverList[i]);
+
+				receiverShape.bgImage = ImgSelector.receiverSelector(receiverShape, new Rect2D(0, 0, width, height));
+				receiverShape.addMouseListener(new MouseMoveOnMapAdapter(receiverShape));
+				receiverShape.addMouseListener(new ReceiverMouseClickedAdapter(receiverShape));
+
+				receiverList[i] = receiverShape;
+				addCanvas(receiverShape);
 			}
 		}
-		if (mirrorList != null) {
-			for (int i = 0; i < mirrorList.length; i++) {
-				addCanvas(mirrorList[i]);
+		if (map.mirrorList != null) {
+			mirrorList = new MirrorShape[map.mirrorList.length];
+			for (int i = 0; i < map.mirrorList.length; i++) {
+				MirrorShape mirrorShape = new MirrorShape(map.mirrorList[i].x * Define.Main.grid_size,
+						map.mirrorList[i].y * Define.Main.grid_size, map.mirrorList[i]);
+
+				mirrorShape.addMouseListener(new MouseMoveOnMapAdapter(mirrorShape));
+				mirrorShape.addMouseListener(new MirrorMouseClickedAdapter(mirrorShape));
+
+				mirrorList[i] = mirrorShape;
+				addCanvas(mirrorShape);
 			}
 		}
 	}
 
 	public void addPath(PathShape path) {
-		pathVector.add(path);
+		pathList.add(path);
 		addCanvas(path);
 	}
 
 	public void removePath(PathShape path) {
-		pathVector.remove(path);
+		pathList.remove(path);
 		removeCanvas(path);
 	}
 
 	public PathShape getPath(int index) {
-		return pathVector.get(index);
+		return pathList.get(index);
 	}
 
 	public int getPathCount() {
-		return pathVector.size();
+		return pathList.size();
+	}
+
+	public MapBean getMap() {
+		return map;
+	}
+
+	public void setMap(MapBean map) {
+		this.map = map;
 	}
 
 	@Override
@@ -82,9 +139,14 @@ public class MapCanvas extends Canvas implements Comparable<MapCanvas> {
 		super.render(g);
 	}
 
-	@Override
-	public int compareTo(MapCanvas map) {
-		return Integer.parseInt(this.name.substring(this.name.lastIndexOf(".") + 1, this.name.length()))
-				- Integer.parseInt(map.name.substring(map.name.lastIndexOf(".") + 1, map.name.length()));
+	public void resetMap() {
+		GameControl.gi().getReadWriteLock().writeLock().lock();
+		try {
+			removeAllCanvas();
+
+			init();
+		} finally {
+			GameControl.gi().getReadWriteLock().writeLock().unlock();
+		}
 	}
 }

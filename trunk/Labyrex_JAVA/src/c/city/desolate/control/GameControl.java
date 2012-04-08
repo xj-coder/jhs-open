@@ -4,9 +4,9 @@ import java.awt.Cursor;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import c.city.desolate.Define;
+import c.city.desolate.bean.MapBean;
 import c.city.desolate.ui.Canvas;
 import c.city.desolate.ui.LabyrexFrame;
-import c.city.desolate.ui.canvas.game.MapCanvas;
 import c.city.desolate.ui.canvas.panel.GameCanvas;
 import c.city.desolate.ui.canvas.panel.HelpCanvas;
 import c.city.desolate.ui.canvas.panel.MainCanvas;
@@ -36,7 +36,7 @@ public class GameControl {
 
 	private Canvas currCanvas;
 
-	private static GameControl instance;
+	private static GameControl gi;
 
 	private boolean isSound = true;
 	private boolean isMusic = true;
@@ -45,8 +45,19 @@ public class GameControl {
 
 	private ReentrantReadWriteLock readWriteLock;
 
+	public static GameControl gi() {
+		if (gi == null) {
+			gi = new GameControl();
+			gi.initCanvas();
+		}
+		return gi;
+	}
+
 	private GameControl() {
-		setCurrCanvas(G_Main);
+	}
+
+	private void initCanvas() {
+		gi.setCurrCanvas(G_Main);
 	}
 
 	public int getCurrGameCanvasIndex() {
@@ -55,16 +66,21 @@ public class GameControl {
 
 	public void setCurrCanvas(int index) {
 		if (currCanvasIndex != index) {
-			if (currCanvas != null) {
-				preCanvasIndex = currCanvasIndex;
+			getReadWriteLock().writeLock().lock();
+			try {
+				if (currCanvas != null) {
+					preCanvasIndex = currCanvasIndex;
 
-				ListenerControl.gi().loopRemoveCanvasListener(currCanvas);
+					ListenerControl.gi().loopRemoveCanvasListener(currCanvas);
+				}
+
+				LabyrexFrame.gi().setCursor(Cursor.getDefaultCursor());
+
+				currCanvasIndex = index;
+				currCanvas = null;
+			} finally {
+				getReadWriteLock().writeLock().unlock();
 			}
-
-			LabyrexFrame.gi().setCursor(Cursor.getDefaultCursor());
-
-			currCanvasIndex = index;
-			currCanvas = null;
 		}
 	}
 
@@ -74,25 +90,28 @@ public class GameControl {
 
 	public Canvas getCurrGameCanvas() {
 		if (currCanvas == null) {
-			switch (getCurrGameCanvasIndex()) {
-			case G_Main:
-				currCanvas = new MainCanvas();
-				break;
-			case G_Menu:
-				currCanvas = new MenuCanvas();
-				break;
-			case G_Game:
-				currCanvas = new GameCanvas();
-				break;
-			case G_Help:
-				currCanvas = new HelpCanvas();
-				break;
-			}
-			if (currCanvas != null) {
-				for (int i = 0; i < currCanvas.getMouseListeners().size(); i++) {
-					ListenerControl.gi().registMouseListener(currCanvas,
-							currCanvas.getMouseListeners().get(i));
+			getReadWriteLock().readLock().lock();
+			try {
+				switch (getCurrGameCanvasIndex()) {
+				case G_Main:
+					currCanvas = new MainCanvas();
+					break;
+				case G_Menu:
+					currCanvas = new MenuCanvas();
+					break;
+				case G_Game:
+					currCanvas = new GameCanvas();
+					break;
+				case G_Help:
+					currCanvas = new HelpCanvas();
+					break;
 				}
+				// if (currCanvas != null) {
+				// ListenerControl.gi().loopRegistCanvasListener(currCanvas);
+				// }
+				currCanvas.init();
+			} finally {
+				getReadWriteLock().readLock().unlock();
 			}
 		}
 		return currCanvas;
@@ -106,20 +125,20 @@ public class GameControl {
 		return currMapName;
 	}
 
-	public void resetMap() {
-		// getLock();
-		getReadWriteLock().writeLock().lock();
+	// public void resetMap() {
+	// // getLock();
+	// getReadWriteLock().writeLock().lock();
+	//
+	// int index = getCurrGameCanvasIndex();
+	// setCurrCanvas(G_Null);
+	// MapControl.resetMap();
+	// setCurrCanvas(index);
+	//
+	// getReadWriteLock().writeLock().unlock();
+	// // unlock();
+	// }
 
-		int index = getCurrGameCanvasIndex();
-		setCurrCanvas(G_Null);
-		MapControl.resetMap();
-		setCurrCanvas(index);
-
-		getReadWriteLock().writeLock().unlock();
-		// unlock();
-	}
-
-	public MapCanvas getCurrMap() {
+	public MapBean getCurrMap() {
 		return MapControl.getMapByName(currMapName);
 	}
 
@@ -142,13 +161,6 @@ public class GameControl {
 		} else {
 			SoundControl.pause(Define.Sound.bg_sound);
 		}
-	}
-
-	public static GameControl gi() {
-		if (instance == null) {
-			instance = new GameControl();
-		}
-		return instance;
 	}
 
 	/**

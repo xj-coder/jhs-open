@@ -1,13 +1,13 @@
 package c.city.desolate.ui.shape;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 import c.city.desolate.Define;
-import c.city.desolate.control.event.map.MirrorMouseClickedAdapter;
-import c.city.desolate.control.event.map.MouseMoveOnMapAdapter;
+import c.city.desolate.bean.MirrorBean;
 import c.city.desolate.tool.GraphicsTools;
 import c.city.desolate.tool.ImgSelector;
 import c.city.desolate.ui.Canvas;
-
-import java.awt.*;
 
 /**
  * 挡板
@@ -16,22 +16,15 @@ import java.awt.*;
  * 
  */
 public class MirrorShape extends Canvas {
-	public static final String LEFT = "L";
-	public static final String RIGHT = "R";
+	public MirrorBean bean;
 
-	public String type;// 类型，左挡板和右挡板两种，以挡板头所指的方向为准
-
-	public boolean isLock = false;
-
-	public MirrorShape(int x, int y, int width, int height) {
-		super(x, y, width, height);
-
-		initEvent();
+	public MirrorShape(int x, int y, MirrorBean bean) {
+		super(x, y, Define.Main.grid_size, Define.Main.grid_size);
+		this.bean = bean;
 	}
 
-	private void initEvent() {
-		addMouseListener(new MouseMoveOnMapAdapter(this));
-		addMouseListener(new MirrorMouseClickedAdapter(this));
+	@Override
+	public void init() {
 	}
 
 	@Override
@@ -39,7 +32,7 @@ public class MirrorShape extends Canvas {
 		g.drawImage(ImgSelector.mirrorSelector(this), owner.x + x, owner.y + y, Define.Main.grid_size,
 				Define.Main.grid_size, null);
 
-		if (isLock) {
+		if (bean.isLock) {
 			GraphicsTools.backupGraphics(g);
 			g.setColor(Color.white);
 			g.fillOval(owner.x + x + Define.Main.grid_size / 4, owner.y + y + Define.Main.grid_size / 4,

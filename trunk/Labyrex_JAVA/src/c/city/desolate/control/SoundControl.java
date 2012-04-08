@@ -1,13 +1,24 @@
 package c.city.desolate.control;
 
-import c.city.desolate.Define;
-
-import javax.sound.sampled.*;
 import java.io.File;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Vector;
 
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.SourceDataLine;
+
+import c.city.desolate.Define;
+
+/**
+ * 声音管理器
+ * 
+ * @author JHS
+ * 
+ */
 public class SoundControl {
 
 	private static HashMap<String, Mp3Date> soundMap = new HashMap<String, Mp3Date>();
@@ -83,6 +94,7 @@ public class SoundControl {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
+				System.out.println("Sound Thread running begin  " + srcPath);
 				Mp3Date date = loadSound(srcPath);
 				try {
 					DataLine.Info info = new DataLine.Info(SourceDataLine.class, date.audioFormat);
@@ -111,8 +123,10 @@ public class SoundControl {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				System.out.println("Sound Thread running end  " + srcPath);
 			}
 		}).start();
+		System.out.println("Sound Thread Start  " + srcPath);
 	}
 
 	/**
