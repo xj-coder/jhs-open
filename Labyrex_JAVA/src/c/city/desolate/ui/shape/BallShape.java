@@ -1,18 +1,20 @@
 package c.city.desolate.ui.shape;
 
+import java.awt.Graphics;
+
 import c.city.desolate.Define;
+import c.city.desolate.bean.MapBean;
+import c.city.desolate.bean.MirrorBean;
 import c.city.desolate.control.GameControl;
 import c.city.desolate.control.ListenerControl;
-import c.city.desolate.control.MapControl;
 import c.city.desolate.control.SoundControl;
 import c.city.desolate.tool.CanvasSearcher;
 import c.city.desolate.tool.GameTools;
 import c.city.desolate.tool.ImgSelector;
 import c.city.desolate.ui.Canvas;
 import c.city.desolate.ui.canvas.game.MapCanvas;
+import c.city.desolate.ui.canvas.panel.GameCanvas;
 import c.city.desolate.ui.canvas.panel.WinPanel;
-
-import java.awt.*;
 
 /**
  * 球
@@ -35,20 +37,24 @@ public class BallShape extends Canvas {
 
 	public BallShape(int x, int y, int width, int height) {
 		super(x, y, width, height);
+	}
 
-		MapCanvas map = MapControl.getMapByName(GameControl.gi().getCurrMapName());
-		path = new PathShape(map.x, map.y, map.width, map.height);
+	@Override
+	public void init() {
+		MapBean map = GameControl.gi().getCurrMap();
+		path = new PathShape(0, 0, map.width, map.height);
 	}
 
 	@Override
 	public void render(Graphics g) {
 		super.render(g);
 
-		MapCanvas map = MapControl.getMapByName(GameControl.gi().getCurrMapName());
+		MapCanvas map = ((GameCanvas) GameControl.gi().getCurrGameCanvas()).getMapCanvas();
 
 		if (isBomb) {
 			if (bombTimer < bombTimeNum) {
-				g.drawImage(ImgSelector.ballSelector(this), x, y, Define.Main.grid_size, Define.Main.grid_size, null);
+				g.drawImage(ImgSelector.ballSelector(this), owner.x + x, owner.y + y, Define.Main.grid_size,
+						Define.Main.grid_size, null);
 			} else {
 				map.removeCanvas(this);
 
@@ -58,7 +64,8 @@ public class BallShape extends Canvas {
 				// ListenerControl.gi().openAllMapListener();
 			}
 		} else {
-			g.drawImage(ImgSelector.ballSelector(this), x, y, Define.Main.grid_size, Define.Main.grid_size, null);
+			g.drawImage(ImgSelector.ballSelector(this), owner.x + x, owner.y + y, Define.Main.grid_size,
+					Define.Main.grid_size, null);
 		}
 	}
 
@@ -72,7 +79,8 @@ public class BallShape extends Canvas {
 			return;
 		}
 
-		MapCanvas map = MapControl.getMapByName(GameControl.gi().getCurrMapName());
+		MapCanvas map = ((GameCanvas) GameControl.gi().getCurrGameCanvas()).getMapCanvas();
+
 		// 移动球
 		switch (dir) {
 		case DIR_UP:
@@ -89,7 +97,7 @@ public class BallShape extends Canvas {
 			break;
 		}
 
-		MirrorShape mirror = CanvasSearcher.findBallInMirror(x + width / 2, y + height / 2);
+		MirrorShape mirror = CanvasSearcher.findBallInMirror(owner.x + x + width / 2, owner.y + y + height / 2);
 
 		// 球碰到镜面后转向
 		if (mirror != null) {
@@ -101,7 +109,7 @@ public class BallShape extends Canvas {
 
 			path.mirrors.add(mirror);
 
-			if (mirror.type.equals(MirrorShape.LEFT)) {
+			if (mirror.bean.type.equals(MirrorBean.LEFT)) {
 				switch (dir) {
 				case DIR_UP:
 					dir = EDir.DIR_LEFT;
@@ -136,9 +144,9 @@ public class BallShape extends Canvas {
 		}
 
 		// 碰到接收器
-		ReceiverShape receiver = CanvasSearcher.findReceiver(x + width / 2, y + height / 2);
+		ReceiverShape receiver = CanvasSearcher.findReceiver(owner.x + x + width / 2, owner.y + y + height / 2);
 		if (receiver != null) {
-			if (receiver.type.equals(type)) {
+			if (receiver.bean.type.equals(type)) {
 
 				if (GameControl.gi().isSound()) {
 					SoundControl.play(Define.Sound.path_right_sound);
@@ -161,13 +169,13 @@ public class BallShape extends Canvas {
 		}
 
 		// 碰到发射器
-		EmitterShape emitter = CanvasSearcher.findEmitter(x + width / 2, y + height / 2);
+		EmitterShape emitter = CanvasSearcher.findEmitter(owner.x + x + width / 2, owner.y + y + height / 2);
 		if (emitter != null) {
 			System.out.println("碰到发射器");
 		}
 
 		// 出界
-		if (CanvasSearcher.outMap(x + width / 2, y + height / 2)) {
+		if (CanvasSearcher.outMap(owner.x + x + width / 2, owner.y + y + height / 2)) {
 			System.out.println("球出界");
 
 			if (GameControl.gi().isSound()) {

@@ -1,15 +1,17 @@
 package c.city.desolate.ui.canvas.panel;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.util.ArrayList;
+
 import c.city.desolate.Define;
+import c.city.desolate.bean.MapBean;
 import c.city.desolate.control.MapControl;
 import c.city.desolate.tool.ImageResLoader;
 import c.city.desolate.ui.Canvas;
-import c.city.desolate.ui.canvas.game.MapCanvas;
 import c.city.desolate.ui.shape.CardShape;
 import c.city.desolate.ui.shape.EXButton;
-
-import java.awt.*;
-import java.util.Vector;
 
 /**
  * 游戏关卡选择界面
@@ -28,10 +30,13 @@ public class MenuCanvas extends Canvas {
 
 	public MenuCanvas() {
 		super(0, 0, Define.Main.width, Define.Main.height);
+	}
+
+	public void init() {
 
 		bgImage = ImageResLoader.getImage(Define.MenuPanel.bg_image_path);
 
-		Vector<MapCanvas> easyList = MapControl.getEasyMap();
+		ArrayList<MapBean> easyList = MapControl.getEasyMap();
 		int begin_x = 35;
 		int begin_y = 170;
 		if (easyList != null) {
@@ -44,7 +49,7 @@ public class MenuCanvas extends Canvas {
 		}
 		begin_x = 385;
 		begin_y = 170;
-		Vector<MapCanvas> moderateList = MapControl.getModerateMap();
+		ArrayList<MapBean> moderateList = MapControl.getModerateMap();
 		if (moderateList != null) {
 			for (int i = 0; i < moderateList.size(); i++) {
 				CardShape card = new CardShape(begin_x + i % Define.MenuPanel.card_col * Define.MenuPanel.card_size
@@ -55,7 +60,7 @@ public class MenuCanvas extends Canvas {
 		}
 		begin_x = 35;
 		begin_y = 360;
-		Vector<MapCanvas> difficuteList = MapControl.getDifficuteMap();
+		ArrayList<MapBean> difficuteList = MapControl.getDifficuteMap();
 		if (difficuteList != null) {
 			for (int i = 0; i < difficuteList.size(); i++) {
 				CardShape card = new CardShape(begin_x + i % Define.MenuPanel.card_col * Define.MenuPanel.card_size
@@ -66,7 +71,7 @@ public class MenuCanvas extends Canvas {
 		}
 		begin_x = 385;
 		begin_y = 360;
-		Vector<MapCanvas> absurdList = MapControl.getAbsurdMap();
+		ArrayList<MapBean> absurdList = MapControl.getAbsurdMap();
 		if (absurdList != null) {
 			for (int i = 0; i < absurdList.size(); i++) {
 				CardShape card = new CardShape(begin_x + i % Define.MenuPanel.card_col * Define.MenuPanel.card_size

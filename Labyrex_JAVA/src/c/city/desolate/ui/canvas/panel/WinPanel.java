@@ -1,5 +1,11 @@
 package c.city.desolate.ui.canvas.panel;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
 import c.city.desolate.Define;
 import c.city.desolate.control.GameControl;
 import c.city.desolate.control.ListenerControl;
@@ -8,8 +14,6 @@ import c.city.desolate.control.event.win.WinCanvasMouseClickedEvent;
 import c.city.desolate.control.event.win.WinCanvasMouseMoveEvent;
 import c.city.desolate.tool.GraphicsTools;
 import c.city.desolate.ui.Canvas;
-
-import java.awt.*;
 
 /**
  * 胜利界面
@@ -23,7 +27,10 @@ public class WinPanel extends Canvas {
 
 	public WinPanel() {
 		super((Define.Main.width - Define.WinCanvas.width) / 2, 0, Define.WinCanvas.width, Define.WinCanvas.height);
+	}
 
+	@Override
+	public void init() {
 		addMouseListener(new WinCanvasMouseClickedEvent());
 		addMouseListener(new WinCanvasMouseMoveEvent());
 	}

@@ -1,13 +1,14 @@
 package c.city.desolate.ui.canvas.panel;
 
+import java.awt.Color;
+import java.awt.Image;
+
 import c.city.desolate.Define;
 import c.city.desolate.control.GameControl;
 import c.city.desolate.tool.ImageResLoader;
 import c.city.desolate.tool.ImageTools;
 import c.city.desolate.ui.Canvas;
 import c.city.desolate.ui.shape.EXButton;
-
-import java.awt.*;
 
 /**
  * 开始界面
@@ -33,7 +34,9 @@ public class MainCanvas extends Canvas {
 
 	public MainCanvas() {
 		super(0, 0, Define.Main.width, Define.Main.height);
+	}
 
+	public void init() {
 		bgImage = ImageTools.cut(Define.MainPanel.bg_image_path, 0, 0, Define.Main.width, Define.Main.height, "png");
 
 		buttonBgImage = ImageTools.resizeImage(ImageResLoader.getImage(Define.Button.bg_path),
@@ -41,10 +44,6 @@ public class MainCanvas extends Canvas {
 		buttonBgrImage = ImageTools.resizeImage(ImageResLoader.getImage(Define.Button.bg_r_path),
 				Define.MainPanel.start_button_width, Define.MainPanel.start_button_height);
 
-		initRes();
-	}
-
-	public void initRes() {
 		addCanvas(getStartButton());
 		addCanvas(getMusicButton());
 		addCanvas(getSoundButton());

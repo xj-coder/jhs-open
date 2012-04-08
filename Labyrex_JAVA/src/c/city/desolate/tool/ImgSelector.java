@@ -1,14 +1,20 @@
 package c.city.desolate.tool;
 
+import java.awt.Image;
+import java.util.Vector;
+
 import c.city.desolate.Define;
+import c.city.desolate.bean.Rect2D;
 import c.city.desolate.control.GameControl;
-import c.city.desolate.control.MapControl;
 import c.city.desolate.ui.Canvas;
 import c.city.desolate.ui.canvas.game.MapCanvas;
-import c.city.desolate.ui.shape.*;
-
-import java.awt.*;
-import java.util.Vector;
+import c.city.desolate.ui.canvas.panel.GameCanvas;
+import c.city.desolate.ui.shape.BallShape;
+import c.city.desolate.ui.shape.EDir;
+import c.city.desolate.ui.shape.EmitterShape;
+import c.city.desolate.ui.shape.MirrorShape;
+import c.city.desolate.ui.shape.PathShape;
+import c.city.desolate.ui.shape.ReceiverShape;
 
 public class ImgSelector {
 
@@ -42,14 +48,14 @@ public class ImgSelector {
 		return image;
 	}
 
-	public static Image emitterSelector(EmitterShape emitter) {
+	public static Image emitterSelector(EmitterShape emitter, Rect2D rec) {
 		Image image = null;
 
 		boolean inPath = inPath(emitter).size() == 0 ? false : true;
 
 		int degree = 0;// 选择角度
 
-		switch (getDir(emitter)) {
+		switch (getDir(emitter, rec)) {
 		case DIR_DOWN:
 			degree = 180;
 			break;
@@ -61,19 +67,27 @@ public class ImgSelector {
 			break;
 		}
 
-		image = ImageTools.cut(Define.IMG_PATH + Define.Emitter.typeMap.get(emitter.type) + (inPath ? "_r" : "")
+		image = ImageTools.cut(Define.IMG_PATH + Define.Emitter.typeMap.get(emitter.bean.type) + (inPath ? "_r" : "")
 				+ ".png", 0, 0, emitter.width, emitter.height, "png");
 		image = ImageTools.rotateImage(image, degree);
 		return image;
 	}
 
-	public static Image receiverSelector(ReceiverShape receiver) {
+	public static Image emitterSelector(String type) {
+		Image image = null;
+
+		image = ImageTools.cut(Define.IMG_PATH + Define.Emitter.typeMap.get(type) + ".png", 0, 0,
+				Define.Main.grid_size, Define.Main.grid_size, "png");
+		return image;
+	}
+
+	public static Image receiverSelector(ReceiverShape receiver, Rect2D rec) {
 		Image image = null;
 
 		boolean inPath = inPath(receiver).size() == 0 ? false : true;
 
 		int degree = 0;
-		switch (getDir(receiver)) {
+		switch (getDir(receiver, rec)) {
 		case DIR_DOWN:
 			degree = 180;
 			break;
@@ -85,9 +99,17 @@ public class ImgSelector {
 			break;
 		}
 
-		image = ImageTools.cut(Define.IMG_PATH + Define.Receiver.typeMap.get(receiver.type) + (inPath ? "_r" : "")
+		image = ImageTools.cut(Define.IMG_PATH + Define.Receiver.typeMap.get(receiver.bean.type) + (inPath ? "_r" : "")
 				+ ".png", 0, 0, receiver.width, receiver.height, "png");
 		image = ImageTools.rotateImage(image, degree);
+		return image;
+	}
+
+	public static Image receiverSelector(String type) {
+		Image image = null;
+
+		image = ImageTools.cut(Define.IMG_PATH + Define.Receiver.typeMap.get(type) + ".png", 0, 0,
+				Define.Main.grid_size, Define.Main.grid_size, "png");
 		return image;
 	}
 
@@ -96,9 +118,17 @@ public class ImgSelector {
 
 		boolean inPath = inPath(mirror).size() == 0 ? false : true;
 
-		image = ImageTools.cut(
-				Define.IMG_PATH + Define.Mirror.typeMap.get(mirror.type) + (inPath ? "_r" : "") + ".png", 0, 0,
-				mirror.width, mirror.height, "png");
+		image = ImageTools.cut(Define.IMG_PATH + Define.Mirror.typeMap.get(mirror.bean.type) + (inPath ? "_r" : "")
+				+ ".png", 0, 0, mirror.width, mirror.height, "png");
+
+		return image;
+	}
+
+	public static Image mirrorSelector(String type) {
+		Image image = null;
+
+		image = ImageTools.cut(Define.IMG_PATH + Define.Mirror.typeMap.get(type) + ".png", 0, 0, Define.Main.grid_size,
+				Define.Main.grid_size, "png");
 
 		return image;
 	}
@@ -106,19 +136,16 @@ public class ImgSelector {
 	/**
 	 * 根据Shape的x、y值判断Shape所在的方向。
 	 */
-	public static EDir getDir(Canvas canvas) {
+	public static EDir getDir(Canvas canvas, Rect2D rec) {
 
-		MapCanvas map = MapControl.getMapByName(GameControl.gi().getCurrMapName());
-		if (map != null) {
-			if (canvas.x < 0) {
-				return EDir.DIR_LEFT;
-			} else if (canvas.y < 0) {
-				return EDir.DIR_UP;
-			} else if (canvas.x >= map.width) {
-				return EDir.DIR_RIGHT;
-			} else if (canvas.y >= map.height) {
-				return EDir.DIR_DOWN;
-			}
+		if (canvas.x < 0) {
+			return EDir.DIR_LEFT;
+		} else if (canvas.y < 0) {
+			return EDir.DIR_UP;
+		} else if (canvas.x >= rec.w) {
+			return EDir.DIR_RIGHT;
+		} else if (canvas.y >= rec.h) {
+			return EDir.DIR_DOWN;
 		}
 
 		return EDir.DIR_LEFT;
@@ -126,12 +153,15 @@ public class ImgSelector {
 
 	public static Vector<PathShape> inPath(EmitterShape shape) {
 		Vector<PathShape> paths = new Vector<PathShape>();
-		MapCanvas map = MapControl.getMapByName(GameControl.gi().getCurrMapName());
-		if (map != null) {
-			for (int i = 0; i < map.getPathCount(); i++) {
-				PathShape path = map.getPath(i);
-				if (path.emitter == shape) {
-					paths.add(path);
+		if (GameControl.gi().getCurrGameCanvas() instanceof GameCanvas) {
+			MapCanvas map = ((GameCanvas) GameControl.gi().getCurrGameCanvas()).getMapCanvas();
+
+			if (map != null) {
+				for (int i = 0; i < map.getPathCount(); i++) {
+					PathShape path = map.getPath(i);
+					if (path.emitter == shape) {
+						paths.add(path);
+					}
 				}
 			}
 		}
@@ -140,12 +170,15 @@ public class ImgSelector {
 
 	public static Vector<PathShape> inPath(ReceiverShape shape) {
 		Vector<PathShape> paths = new Vector<PathShape>();
-		MapCanvas map = MapControl.getMapByName(GameControl.gi().getCurrMapName());
-		if (map != null) {
-			for (int i = 0; i < map.getPathCount(); i++) {
-				PathShape path = map.getPath(i);
-				if (path.receiver == shape) {
-					paths.add(path);
+		if (GameControl.gi().getCurrGameCanvas() instanceof GameCanvas) {
+			MapCanvas map = ((GameCanvas) GameControl.gi().getCurrGameCanvas()).getMapCanvas();
+
+			if (map != null) {
+				for (int i = 0; i < map.getPathCount(); i++) {
+					PathShape path = map.getPath(i);
+					if (path.receiver == shape) {
+						paths.add(path);
+					}
 				}
 			}
 		}
@@ -154,13 +187,16 @@ public class ImgSelector {
 
 	public static Vector<PathShape> inPath(MirrorShape shape) {
 		Vector<PathShape> paths = new Vector<PathShape>();
-		MapCanvas map = MapControl.getMapByName(GameControl.gi().getCurrMapName());
-		if (map != null) {
-			for (int i = 0; i < map.getPathCount(); i++) {
-				PathShape path = map.getPath(i);
-				for (int j = 0; j < path.mirrors.size(); j++) {
-					if (path.mirrors.get(j) == shape) {
-						paths.add(path);
+		if (GameControl.gi().getCurrGameCanvas() instanceof GameCanvas) {
+			MapCanvas map = ((GameCanvas) GameControl.gi().getCurrGameCanvas()).getMapCanvas();
+
+			if (map != null) {
+				for (int i = 0; i < map.getPathCount(); i++) {
+					PathShape path = map.getPath(i);
+					for (int j = 0; j < path.mirrors.size(); j++) {
+						if (path.mirrors.get(j) == shape) {
+							paths.add(path);
+						}
 					}
 				}
 			}

@@ -1,12 +1,12 @@
 package c.city.desolate.ui.shape;
 
-import c.city.desolate.control.GameControl;
-import c.city.desolate.control.MapControl;
-import c.city.desolate.ui.Canvas;
-import c.city.desolate.ui.canvas.game.MapCanvas;
-
-import java.awt.*;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.Vector;
+
+import c.city.desolate.ui.Canvas;
 
 public class PathShape extends Canvas {
 	public EmitterShape emitter;
@@ -29,8 +29,6 @@ public class PathShape extends Canvas {
 		Color c = g2.getColor();
 		g2.setColor(Color.red);
 
-		MapCanvas map = MapControl.getMapByName(GameControl.gi().getCurrMapName());
-
 		Canvas c1 = emitter;
 		Canvas c2 = null;
 
@@ -52,26 +50,26 @@ public class PathShape extends Canvas {
 			end_y = c2.owner.y + c2.y + c2.height / 2;
 
 			// begin_x、begin_y值校正，保证线画在地图内
-			if (begin_x < map.x) {
-				begin_x = map.x;
-			} else if (begin_x > map.x + map.width) {
-				begin_x = map.x + map.width;
+			if (begin_x < owner.x) {
+				begin_x = owner.x;
+			} else if (begin_x > owner.x + owner.width) {
+				begin_x = owner.x + owner.width;
 			}
-			if (begin_y > map.y + map.height) {
-				begin_y = map.y + map.height;
-			} else if (begin_y < map.y) {
-				begin_y = map.y;
+			if (begin_y > owner.y + owner.height) {
+				begin_y = owner.y + owner.height;
+			} else if (begin_y < owner.y) {
+				begin_y = owner.y;
 
 			}
-			if (end_x < map.x) {
-				end_x = map.x;
-			} else if (end_x > map.x + map.width) {
-				end_x = map.x + map.width;
+			if (end_x < owner.x) {
+				end_x = owner.x;
+			} else if (end_x > owner.x + owner.width) {
+				end_x = owner.x + owner.width;
 			}
-			if (end_y > map.y + map.height) {
-				end_y = map.y + map.height;
-			} else if (end_y < map.y) {
-				end_y = map.y;
+			if (end_y > owner.y + owner.height) {
+				end_y = owner.y + owner.height;
+			} else if (end_y < owner.y) {
+				end_y = owner.y;
 			}
 
 			// 图片画线法

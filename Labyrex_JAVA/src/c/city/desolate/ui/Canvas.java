@@ -1,16 +1,19 @@
 package c.city.desolate.ui;
 
-import c.city.desolate.Define;
-import c.city.desolate.control.ListenerControl;
-import c.city.desolate.control.event.CanvasMouseMoveEvent;
-import c.city.desolate.tool.GraphicsTools;
-
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Vector;
+
+import c.city.desolate.Define;
+import c.city.desolate.control.ListenerControl;
+import c.city.desolate.control.event.CanvasMouseMoveEvent;
+import c.city.desolate.tool.GraphicsTools;
 
 public abstract class Canvas {
 	protected BufferedImage backbuffer;// 画布缓存
@@ -60,12 +63,16 @@ public abstract class Canvas {
 		this.height = height;
 
 		addMouseListener(new CanvasMouseMoveEvent(this));
-		ListenerControl.gi().registMouseListener(this, new CanvasMouseMoveEvent(this));
+	}
+
+	public void init() {
+
 	}
 
 	public void addCanvas(Canvas canvas) {
-		canvasList.add(canvas);
 		canvas.owner = this;
+		canvasList.add(canvas);
+		canvas.init();
 
 		for (int i = 0; i < canvas.getMouseListeners().size(); i++) {
 			ListenerControl.gi().registMouseListener(canvas, canvas.getMouseListeners().get(i));
@@ -75,9 +82,15 @@ public abstract class Canvas {
 	public boolean removeCanvas(Canvas shape) {
 		shape.owner = null;
 
-		ListenerControl.gi().removeMouseListener(this);
+		ListenerControl.gi().removeMouseListener(shape);
 
 		return canvasList.remove(shape);
+	}
+
+	public void removeAllCanvas() {
+		while (getCanvasCount() > 0) {
+			System.out.println(getCanvas(0) + "  " + removeCanvas(getCanvas(0)));
+		}
 	}
 
 	public int getCanvasCount() {

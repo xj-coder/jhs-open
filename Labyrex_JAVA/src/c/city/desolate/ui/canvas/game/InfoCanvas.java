@@ -1,9 +1,10 @@
 package c.city.desolate.ui.canvas.game;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 import c.city.desolate.tool.GraphicsTools;
 import c.city.desolate.ui.Canvas;
-
-import java.awt.*;
 
 public class InfoCanvas extends Canvas {
 	private static final long serialVersionUID = 7579261364033303534L;
@@ -14,12 +15,12 @@ public class InfoCanvas extends Canvas {
 
 	@Override
 	public void render(Graphics g) {
-		GraphicsTools.backupGraphics((Graphics2D) g);
+		GraphicsTools.backupGraphics(g);
 
 		g.setColor(Color.yellow);
 		g.drawRect(x, y, width, height);
 
-		GraphicsTools.restoreGraphics((Graphics2D) g);
+		GraphicsTools.restoreGraphics(g);
 		super.render(g);
 	}
 }

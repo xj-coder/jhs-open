@@ -1,13 +1,13 @@
 package c.city.desolate.control.event.exbutton;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import c.city.desolate.Define;
 import c.city.desolate.control.GameControl;
 import c.city.desolate.control.SoundControl;
 import c.city.desolate.ui.canvas.panel.GameCanvas;
 import c.city.desolate.ui.shape.EXButton;
-
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class EXButtonMouseClickedEvent extends MouseAdapter {
 
@@ -37,7 +37,7 @@ public class EXButtonMouseClickedEvent extends MouseAdapter {
 		} else if (button.getName().equals("back")) {
 			GameControl.gi().setCurrCanvas(GameControl.G_Main);
 		} else if (button.getName().equals("reset")) {
-			GameControl.gi().resetMap();
+			((GameCanvas) GameControl.gi().getCurrGameCanvas()).getMapCanvas().resetMap();
 		} else if (button.getName().equals("menu")) {
 			GameControl.gi().setCurrCanvas(GameControl.G_Menu);
 		} else if (button.getName().equals("lock")) {

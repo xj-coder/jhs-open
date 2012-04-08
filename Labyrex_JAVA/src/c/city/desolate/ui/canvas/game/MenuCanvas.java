@@ -1,13 +1,16 @@
 package c.city.desolate.ui.canvas.game;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
 import c.city.desolate.Define;
 import c.city.desolate.control.GameControl;
 import c.city.desolate.tool.GraphicsTools;
 import c.city.desolate.tool.ImageResLoader;
 import c.city.desolate.ui.Canvas;
 import c.city.desolate.ui.shape.EXButton;
-
-import java.awt.*;
 
 public class MenuCanvas extends Canvas {
 	private static final long serialVersionUID = -5451216572057652277L;
@@ -19,7 +22,10 @@ public class MenuCanvas extends Canvas {
 
 	public MenuCanvas(int x, int y, int width, int height) {
 		super(x, y, width, height);
+	}
 
+	@Override
+	public void init() {
 		addCanvas(getMenuButton());
 		addCanvas(getMusicButton());
 		addCanvas(getSoundButton());

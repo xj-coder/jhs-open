@@ -1,12 +1,24 @@
 package c.city.desolate.control;
 
+import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.Vector;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
 import c.city.desolate.tool.CanvasSearcher;
 import c.city.desolate.ui.Canvas;
 import c.city.desolate.ui.LabyrexFrame;
-
-import java.awt.event.*;
-import java.lang.reflect.Method;
-import java.util.*;
 
 /**
  * 事件监听管理类
@@ -18,16 +30,23 @@ public class ListenerControl {
 	private final HashMap<Canvas, Vector<MouseAdapter>> mouseListenerMap = new HashMap<Canvas, Vector<MouseAdapter>>();
 	private final HashMap<Canvas, Vector<KeyListener>> keyListenerMap = new HashMap<Canvas, Vector<KeyListener>>();
 
+	private ReentrantReadWriteLock readWriteLock;
+
 	private static ListenerControl gi;
 
 	public static ListenerControl gi() {
 		if (gi == null) {
 			gi = new ListenerControl();
+			gi.initEvent();
 		}
 		return gi;
 	}
 
 	private ListenerControl() {
+	}
+
+	private void initEvent() {
+
 		LabyrexFrame.gi().addMouseListener(new MouseListener() {
 
 			@Override
@@ -97,42 +116,17 @@ public class ListenerControl {
 				loopInvokeMouseEventMethod("mouseWheelMoved", e);
 			}
 		});
+
 	}
 
 	private void loopInvokeMouseEventMethod(Canvas canvas, String methodName, MouseEvent e) {
-		Vector<MouseAdapter> adapters = mouseListenerMap.get(canvas);
-		if (adapters != null) {
-			for (int i = 0; i < adapters.size(); i++) {
-				MouseAdapter adapter = adapters.get(i);
-				try {
-					Method method = adapter.getClass().getMethod(methodName, MouseEvent.class);
-					method.invoke(adapter, e);
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-			}
-		}
-	}
-
-	private void loopInvokeMouseEventMethod(String methodName, MouseEvent e) {
-		Vector<Canvas> canvasVector = new Vector<Canvas>();
-
-		Set<Canvas> keySet = mouseListenerMap.keySet();
-		Iterator<Canvas> it = keySet.iterator();
-		while (it.hasNext()) {
-			Canvas key = it.next();
-			if (key.isMouseIn(e.getX(), e.getY())) {
-				canvasVector.add(key);
-			}
-		}
-
-		for (int i = 0; i < canvasVector.size(); i++) {
-			Vector<MouseAdapter> adapters = mouseListenerMap.get(canvasVector.get(i));
+		getReadWriteLock().writeLock().lock();
+		try {
+			Vector<MouseAdapter> adapters = mouseListenerMap.get(canvas);
 			if (adapters != null) {
-				for (int j = 0; j < adapters.size(); j++) {
-					MouseAdapter adapter = adapters.get(j);
+				for (int i = 0; i < adapters.size(); i++) {
+					MouseAdapter adapter = adapters.get(i);
 					try {
-						System.out.println(canvasVector.get(i) + " -- " + methodName);
 						Method method = adapter.getClass().getMethod(methodName, MouseEvent.class);
 						method.invoke(adapter, e);
 					} catch (Exception e1) {
@@ -140,33 +134,95 @@ public class ListenerControl {
 					}
 				}
 			}
+		} finally {
+			getReadWriteLock().writeLock().unlock();
 		}
 	}
 
-	public synchronized void registMouseListener(Canvas owner, MouseAdapter listener) {
-		Vector<MouseAdapter> listeners = mouseListenerMap.get(owner);
-		if (listeners == null) {
-			listeners = new Vector<MouseAdapter>();
-			mouseListenerMap.put(owner, listeners);
+	private void loopInvokeMouseEventMethod(String methodName, MouseEvent e) {
+		getReadWriteLock().writeLock().lock();
+		System.out.println("fire event : " + methodName + " " + e.getSource());
+		try {
+
+			Vector<Canvas> canvasVector = new Vector<Canvas>();
+
+			Set<Canvas> keySet = mouseListenerMap.keySet();
+
+			System.out.println("all canvas " + keySet);
+
+			Iterator<Canvas> it = keySet.iterator();
+			while (it.hasNext()) {
+				Canvas key = it.next();
+				if (key.isMouseIn(e.getX(), e.getY())) {
+					canvasVector.add(key);
+				}
+			}
+
+			System.out.println("selected canvas " + canvasVector);
+			for (int i = 0; i < canvasVector.size(); i++) {
+				Vector<MouseAdapter> adapters = mouseListenerMap.get(canvasVector.get(i));
+				if (adapters != null) {
+					for (int j = 0; j < adapters.size(); j++) {
+						MouseAdapter adapter = adapters.get(j);
+						try {
+							System.out.println(canvasVector.get(i) + " -- " + methodName);
+							Method method = adapter.getClass().getMethod(methodName, MouseEvent.class);
+							method.invoke(adapter, e);
+						} catch (Exception e1) {
+							e1.printStackTrace();
+						}
+					}
+				}
+			}
+		} finally {
+			getReadWriteLock().writeLock().unlock();
 		}
-		listeners.add(listener);
 	}
 
-	public synchronized void removeMouseListener(Canvas owner) {
-		mouseListenerMap.remove(owner);
-	}
-
-	public synchronized void registKeyListener(Canvas owner, KeyListener listener) {
-		Vector<KeyListener> listeners = keyListenerMap.get(owner);
-		if (listeners == null) {
-			listeners = new Vector<KeyListener>();
-			keyListenerMap.put(owner, listeners);
+	public void registMouseListener(Canvas owner, MouseAdapter listener) {
+		getReadWriteLock().writeLock().lock();
+		try {
+			Vector<MouseAdapter> listeners = mouseListenerMap.get(owner);
+			if (listeners == null) {
+				listeners = new Vector<MouseAdapter>();
+				mouseListenerMap.put(owner, listeners);
+			}
+			listeners.add(listener);
+		} finally {
+			getReadWriteLock().writeLock().unlock();
 		}
-		listeners.add(listener);
 	}
 
-	public synchronized void removeKeyListener(Canvas owner) {
-		keyListenerMap.remove(owner);
+	public void removeMouseListener(Canvas owner) {
+		getReadWriteLock().writeLock().lock();
+		try {
+			mouseListenerMap.remove(owner);
+		} finally {
+			getReadWriteLock().writeLock().unlock();
+		}
+	}
+
+	public void registKeyListener(Canvas owner, KeyListener listener) {
+		getReadWriteLock().writeLock().lock();
+		try {
+			Vector<KeyListener> listeners = keyListenerMap.get(owner);
+			if (listeners == null) {
+				listeners = new Vector<KeyListener>();
+				keyListenerMap.put(owner, listeners);
+			}
+			listeners.add(listener);
+		} finally {
+			getReadWriteLock().writeLock().unlock();
+		}
+	}
+
+	public void removeKeyListener(Canvas owner) {
+		getReadWriteLock().writeLock().lock();
+		try {
+			keyListenerMap.remove(owner);
+		} finally {
+			getReadWriteLock().writeLock().unlock();
+		}
 	}
 
 	public void loopRemoveCanvasListener(Canvas canvas) {
@@ -189,5 +245,12 @@ public class ListenerControl {
 		for (int i = 0; i < canvas.getCanvasCount(); i++) {
 			loopRegistCanvasListener(canvas.getCanvas(i));
 		}
+	}
+
+	public ReentrantReadWriteLock getReadWriteLock() {
+		if (readWriteLock == null) {
+			readWriteLock = new ReentrantReadWriteLock();
+		}
+		return readWriteLock;
 	}
 }

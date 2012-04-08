@@ -1,14 +1,17 @@
 package c.city.desolate.ui.canvas.panel;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Image;
+
 import c.city.desolate.Define;
 import c.city.desolate.control.GameControl;
 import c.city.desolate.tool.ImageResLoader;
 import c.city.desolate.ui.Canvas;
 import c.city.desolate.ui.canvas.game.InfoCanvas;
+import c.city.desolate.ui.canvas.game.MapCanvas;
 import c.city.desolate.ui.canvas.game.MenuCanvas;
 import c.city.desolate.ui.canvas.game.ToolCanvas;
-
-import java.awt.*;
 
 /**
  * 游戏界面
@@ -20,6 +23,7 @@ public class GameCanvas extends Canvas {
 	private InfoCanvas infoCanvas;
 	private MenuCanvas menuCanvas;
 	private ToolCanvas toolCanvas;
+	private MapCanvas mapCanvas;
 
 	private int bgColorR = 0xFF;
 	private int bgColorG = 0xFF;
@@ -29,12 +33,12 @@ public class GameCanvas extends Canvas {
 
 	public GameCanvas() {
 		super(0, 0, Define.Main.width, Define.Main.height);
+	}
 
+	public void init() {
 		bgImage = ImageResLoader.getImage(Define.GamePanel.bg_image_path);
 
-		GameControl.gi().getCurrMap().init();
-
-		addCanvas(GameControl.gi().getCurrMap());
+		addCanvas(getMapCanvas());
 		addCanvas(getInfoCanvas());
 		addCanvas(getMenuCanvas());
 		addCanvas(getToolCanvas());
@@ -61,6 +65,13 @@ public class GameCanvas extends Canvas {
 					Define.GamePanel.tool_canvas_width, Define.GamePanel.tool_canvas_height);
 		}
 		return toolCanvas;
+	}
+
+	public MapCanvas getMapCanvas() {
+		if (mapCanvas == null) {
+			mapCanvas = new MapCanvas(GameControl.gi().getCurrMap());
+		}
+		return mapCanvas;
 	}
 
 	@Override

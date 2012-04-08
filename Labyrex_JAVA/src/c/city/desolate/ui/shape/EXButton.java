@@ -1,12 +1,15 @@
 package c.city.desolate.ui.shape;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.RenderingHints;
+
 import c.city.desolate.Define;
 import c.city.desolate.control.event.exbutton.EXButtonMouseClickedEvent;
 import c.city.desolate.control.event.exbutton.EXButtonMouseMoveEvent;
 import c.city.desolate.tool.ImageResLoader;
 import c.city.desolate.ui.Canvas;
-
-import java.awt.*;
 
 public class EXButton extends Canvas {
 	private String name;
@@ -33,17 +36,16 @@ public class EXButton extends Canvas {
 
 		this.name = name;
 		this.isToggle = isToggle;
-
-		addMouseListener(new EXButtonMouseClickedEvent(this));
-		addMouseListener(new EXButtonMouseMoveEvent());
-		// ListenerControl.gi().registMouseListener(this, new EXButtonMouseClickedEvent(this));
-		// ListenerControl.gi().registMouseListener(this, new EXButtonMouseMoveEvent());
-
-		lineImage = ImageResLoader.getImage(Define.Button.line_path);
 	}
 
 	public EXButton(String name, int x, int y, int width, int height) {
 		this(name, false, x, y, width, height);
+	}
+
+	@Override
+	public void init() {
+		addMouseListener(new EXButtonMouseClickedEvent(this));
+		addMouseListener(new EXButtonMouseMoveEvent());
 	}
 
 	public void setBgImage(Image bgImage) {
@@ -110,6 +112,9 @@ public class EXButton extends Canvas {
 		}
 
 		if (isSelected) {
+			if (lineImage == null) {
+				lineImage = ImageResLoader.getImage(Define.Button.line_path);
+			}
 			g2.drawImage(lineImage, owner.x + x, owner.y + y, width, height, null);
 		}
 

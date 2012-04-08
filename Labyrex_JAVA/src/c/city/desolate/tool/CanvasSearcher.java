@@ -1,21 +1,21 @@
 package c.city.desolate.tool;
 
+import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.List;
+
 import c.city.desolate.control.GameControl;
-import c.city.desolate.control.MapControl;
 import c.city.desolate.ui.Canvas;
 import c.city.desolate.ui.canvas.game.MapCanvas;
+import c.city.desolate.ui.canvas.panel.GameCanvas;
 import c.city.desolate.ui.shape.BallShape;
 import c.city.desolate.ui.shape.EmitterShape;
 import c.city.desolate.ui.shape.MirrorShape;
 import c.city.desolate.ui.shape.ReceiverShape;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
-
 public class CanvasSearcher {
 	public static EmitterShape findEmitter(int x, int y) {
-		MapCanvas map = MapControl.getMapByName(GameControl.gi().getCurrMapName());
+		MapCanvas map = ((GameCanvas) GameControl.gi().getCurrGameCanvas()).getMapCanvas();
 
 		for (int i = 0; i < map.emitterList.length; i++) {
 			EmitterShape emitter = map.emitterList[i];
@@ -31,7 +31,7 @@ public class CanvasSearcher {
 	}
 
 	public static ReceiverShape findReceiver(int x, int y) {
-		MapCanvas map = MapControl.getMapByName(GameControl.gi().getCurrMapName());
+		MapCanvas map = ((GameCanvas) GameControl.gi().getCurrGameCanvas()).getMapCanvas();
 
 		for (int i = 0; i < map.receiverList.length; i++) {
 			ReceiverShape receiver = map.receiverList[i];
@@ -47,7 +47,7 @@ public class CanvasSearcher {
 	}
 
 	public static MirrorShape findMirror(int x, int y) {
-		MapCanvas map = MapControl.getMapByName(GameControl.gi().getCurrMapName());
+		MapCanvas map = ((GameCanvas) GameControl.gi().getCurrGameCanvas()).getMapCanvas();
 
 		for (int i = 0; i < map.mirrorList.length; i++) {
 			MirrorShape mirror = map.mirrorList[i];
@@ -63,7 +63,7 @@ public class CanvasSearcher {
 	}
 
 	public static MirrorShape findBallInMirror(int x, int y) {
-		MapCanvas map = MapControl.getMapByName(GameControl.gi().getCurrMapName());
+		MapCanvas map = ((GameCanvas) GameControl.gi().getCurrGameCanvas()).getMapCanvas();
 
 		for (int i = 0; i < map.mirrorList.length; i++) {
 			MirrorShape mirror = map.mirrorList[i];
@@ -101,9 +101,9 @@ public class CanvasSearcher {
 	}
 
 	public static boolean outMap(int x, int y) {
-		MapCanvas map = MapControl.getMapByName(GameControl.gi().getCurrMapName());
+		MapCanvas map = ((GameCanvas) GameControl.gi().getCurrGameCanvas()).getMapCanvas();
 
-		Rectangle rec = new Rectangle(map.x, map.y, map.width, map.height);
+		Rectangle rec = new Rectangle(map.owner.x + map.x, map.owner.y + map.y, map.width, map.height);
 
 		if (rec.contains(x, y)) {
 			return false;

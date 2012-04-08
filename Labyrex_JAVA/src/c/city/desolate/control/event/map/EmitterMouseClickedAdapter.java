@@ -1,18 +1,19 @@
 package c.city.desolate.control.event.map;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import c.city.desolate.Define;
+import c.city.desolate.bean.Rect2D;
 import c.city.desolate.control.GameControl;
 import c.city.desolate.control.ListenerControl;
-import c.city.desolate.control.MapControl;
 import c.city.desolate.control.SoundControl;
 import c.city.desolate.tool.ImgSelector;
 import c.city.desolate.ui.canvas.game.MapCanvas;
+import c.city.desolate.ui.canvas.panel.GameCanvas;
 import c.city.desolate.ui.shape.BallShape;
 import c.city.desolate.ui.shape.EDir;
 import c.city.desolate.ui.shape.EmitterShape;
-
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class EmitterMouseClickedAdapter extends MouseAdapter {
 
@@ -33,11 +34,16 @@ public class EmitterMouseClickedAdapter extends MouseAdapter {
 			SoundControl.play(Define.Sound.emitter_ball_sound);
 		}
 
+		MapCanvas map = ((GameCanvas) GameControl.gi().getCurrGameCanvas()).getMapCanvas();
+
 		// 计算球的初始位置
-		int y = emitter.owner.y + emitter.y;
-		int x = emitter.owner.x + emitter.x;
+		int y = +emitter.y;
+		int x = +emitter.x;
 		EDir dir = EDir.DIR_UP;
-		switch (ImgSelector.getDir(emitter)) {
+
+		Rect2D rect = new Rect2D(0, 0, map.width, map.height);
+
+		switch (ImgSelector.getDir(emitter, rect)) {
 		case DIR_UP:
 			y = y + emitter.height / 2;
 			dir = EDir.DIR_DOWN;
@@ -57,16 +63,14 @@ public class EmitterMouseClickedAdapter extends MouseAdapter {
 		}
 
 		BallShape ball = new BallShape(x, y, Define.Main.grid_size, Define.Main.grid_size);
-		ball.dir = dir;
-		ball.type = emitter.type;
-		ball.path.emitter = emitter;
+		map.addCanvas(ball);
 
-		MapCanvas map = MapControl.getMapByName(GameControl.gi().getCurrMapName());
+		ball.dir = dir;
+		ball.type = emitter.bean.type;
+		ball.path.emitter = emitter;
 
 		ListenerControl.gi().loopRemoveCanvasListener(map);
 		// ListenerControl.gi().closeAllMapListener();
-
-		map.addCanvas(ball);
 
 	}
 

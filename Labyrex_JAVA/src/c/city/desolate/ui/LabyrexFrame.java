@@ -14,6 +14,12 @@ import c.city.desolate.control.MapControl;
 import c.city.desolate.control.SoundControl;
 import c.city.desolate.tool.ScreenTools;
 
+/**
+ * 游戏主界面
+ * 
+ * @author JHS
+ * 
+ */
 public class LabyrexFrame extends JFrame implements Runnable {
 
 	private static final long serialVersionUID = -3215657325431795628L;
@@ -72,9 +78,8 @@ public class LabyrexFrame extends JFrame implements Runnable {
 			gamestate.update(l1);
 			gamestate.render();
 			if (Define.FPS) {
-				gamestate.drawText(new StringBuilder().append("FPS : ").append(
-						fps).toString(), 500, 25, Color.red, new Font("Dialog",
-						Font.PLAIN, 18));
+				gamestate.drawText(new StringBuilder().append("FPS : ").append(fps).toString(), 500, 25, Color.red,
+						new Font("Dialog", Font.PLAIN, 18));
 			}
 			gamestate.flip(g);
 			// 游戏渲染结束
@@ -114,9 +119,9 @@ public class LabyrexFrame extends JFrame implements Runnable {
 	}
 
 	public void begin() {
-		MapControl.loadMap();
-		GameControl.gi().setCurrCanvas(GameControl.G_Main);
-		SoundControl.play(Define.Sound.bg_sound, -1);
+		MapControl.readMaps();// 读入地图数据
+		SoundControl.play(Define.Sound.bg_sound, -1);// 启动声音管理器并播放背景音乐
+		GameControl.gi().setCurrCanvas(GameControl.G_Main);// 启动游戏管理器并设置当前画面
 		if (!GameControl.gi().isMusic()) {
 			SoundControl.pause(Define.Sound.bg_sound);
 		}
