@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!-- saved from url=(0036)http://arcade.rawrbitrary.com/mario/ -->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>Infinite Mario - HTML5</title>
+    <link rel="shortcut icon" href="favicon.png">
+    <link rel="stylesheet" type="text/css" href="css/css.css">
+    <!--<script type="text/javascript" src="js/jquery.min.js"></script>-->
+    <script type="text/javascript" src="js/jquery-1.4.2.js"></script>
+</head>
+<body>
+<div class="spacing"></div>
+<div class="main">
+    <canvas id="canvas" width="640" height="480">
+        <p style="text-align: center;">I'm sorry, but your broswer does not support the canvas element!</p>
+    </canvas>
+    <div class="spacing"></div>
+</div>
+<script src="js/engine.js"></script>
+<script src="js/mario.js"></script>
+<script>
+    $(document).ready(function () {
+        new Engine.Application().Initialize(new Mario.LoadingState(), 320, 240)
+    });
+</script>
+</body>
+</html>
