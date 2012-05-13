@@ -50,7 +50,7 @@ public class BallShape extends Canvas {
 	public void render(Graphics g) {
 		super.render(g);
 
-		MapCanvas map = ((GameCanvas) GameControl.gi().getCurrGameCanvas()).getMapCanvas();
+		MapCanvas map = ((GameCanvas) GameControl.gi().getCurrCanvas()).getMapCanvas();
 
 		if (isBomb) {
 			if (bombTimer < bombTimeNum) {
@@ -80,7 +80,7 @@ public class BallShape extends Canvas {
 			return;
 		}
 
-		MapCanvas map = ((GameCanvas) GameControl.gi().getCurrGameCanvas()).getMapCanvas();
+		MapCanvas map = ((GameCanvas) GameControl.gi().getCurrCanvas()).getMapCanvas();
 
 		// 移动球
 		switch (dir) {
@@ -159,7 +159,7 @@ public class BallShape extends Canvas {
 				if (GameTools.isWin()) {
 					SoundControl.play(Define.Sound.win_sound);
 
-					Canvas canvas = GameControl.gi().getCurrGameCanvas();
+					Canvas canvas = GameControl.gi().getCurrCanvas();
 					canvas.addCanvas(new WinPanel());
 				}
 				System.out.println("碰到对应的接收器");

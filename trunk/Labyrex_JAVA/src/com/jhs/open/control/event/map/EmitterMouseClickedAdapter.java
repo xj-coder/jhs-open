@@ -35,7 +35,7 @@ public class EmitterMouseClickedAdapter extends MouseAdapter {
 			SoundControl.play(Define.Sound.emitter_ball_sound);
 		}
 
-		MapCanvas map = ((GameCanvas) GameControl.gi().getCurrGameCanvas()).getMapCanvas();
+		MapCanvas map = ((GameCanvas) GameControl.gi().getCurrCanvas()).getMapCanvas();
 
 		// 计算球的初始位置
 		int y = +emitter.y;

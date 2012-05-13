@@ -8,7 +8,6 @@ import java.util.Vector;
 
 import com.jhs.open.ui.Canvas;
 
-
 public class PathShape extends Canvas {
 	public EmitterShape emitter;
 	public ReceiverShape receiver;
@@ -72,40 +71,6 @@ public class PathShape extends Canvas {
 			} else if (end_y < owner.y) {
 				end_y = owner.y;
 			}
-
-			// 图片画线法
-			// if (begin_x != end_x) {
-			// int _dir = (begin_x - end_x) / Math.abs(begin_x - end_x);
-			//
-			// if (_dir < 0) {
-			// Image img = ImgSelector.lineSelector(emitter.type, isThick, EDir.DIR_LEFT);
-			// for (int j = begin_x; j < end_x; j -= Define.Line.width / 2 * _dir) {
-			// g.drawImage(img, j - Define.Line.width / 2, begin_y - Define.Line.height / 2,
-			// Define.Line.width, Define.Line.height, null);
-			// }
-			// } else {
-			// Image img = ImgSelector.lineSelector(emitter.type, isThick, EDir.DIR_RIGHT);
-			// for (int j = end_x; j < begin_x; j += Define.Line.width / 2 * _dir) {
-			// g.drawImage(img, j - Define.Line.width / 2, begin_y - Define.Line.height / 2,
-			// Define.Line.width, Define.Line.height, null);
-			// }
-			// }
-			// } else if (begin_y != end_y) {
-			// int _dir = (begin_y - end_y) / Math.abs(begin_y - end_y);
-			// if (_dir < 0) {
-			// Image img = ImgSelector.lineSelector(emitter.type, isThick, EDir.DIR_DOWN);
-			// for (int j = begin_y; j < end_y; j -= Define.Line.height / 2 * _dir) {
-			// g.drawImage(img, begin_x - Define.Line.width / 2, j - Define.Line.height / 2,
-			// Define.Line.width, Define.Line.height, null);
-			// }
-			// } else {
-			// Image img = ImgSelector.lineSelector(emitter.type, isThick, EDir.DIR_DOWN);
-			// for (int j = end_y; j < begin_y; j += Define.Line.height / 2 * _dir) {
-			// g.drawImage(img, begin_x - Define.Line.width / 2, j - Define.Line.height / 2,
-			// Define.Line.width, Define.Line.height, null);
-			// }
-			// }
-			// }
 
 			// 普通画线法
 			if (isThick) {

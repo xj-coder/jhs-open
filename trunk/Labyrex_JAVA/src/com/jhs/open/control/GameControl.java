@@ -12,7 +12,6 @@ import com.jhs.open.ui.canvas.panel.HelpCanvas;
 import com.jhs.open.ui.canvas.panel.MainCanvas;
 import com.jhs.open.ui.canvas.panel.MenuCanvas;
 
-
 /**
  * 游戏管理类
  * 
@@ -22,7 +21,7 @@ import com.jhs.open.ui.canvas.panel.MenuCanvas;
 public class GameControl {
 	public static final int G_Null = -1;
 
-	public static final int G_Main = 0;
+	public static final int G_Title = 0;
 
 	public static final int G_Menu = 1;
 
@@ -30,7 +29,7 @@ public class GameControl {
 
 	public static final int G_Help = 3;
 
-	private String currMapName;
+	private MapBean currMap;
 
 	private int currCanvasIndex;
 	private int preCanvasIndex;
@@ -58,14 +57,14 @@ public class GameControl {
 	}
 
 	private void initCanvas() {
-		gi.setCurrCanvas(G_Main);
+		gi.setCurrCanvasIndex(G_Title);
 	}
 
-	public int getCurrGameCanvasIndex() {
+	public int getCurrCanvasIndex() {
 		return currCanvasIndex;
 	}
 
-	public void setCurrCanvas(int index) {
+	public void setCurrCanvasIndex(int index) {
 		if (currCanvasIndex != index) {
 			getReadWriteLock().writeLock().lock();
 			try {
@@ -73,6 +72,7 @@ public class GameControl {
 					preCanvasIndex = currCanvasIndex;
 
 					ListenerControl.gi().loopRemoveCanvasListener(currCanvas);
+					currCanvas.removeAllCanvas();
 				}
 
 				LabyrexFrame.gi().setCursor(Cursor.getDefaultCursor());
@@ -89,12 +89,12 @@ public class GameControl {
 		return preCanvasIndex;
 	}
 
-	public Canvas getCurrGameCanvas() {
+	public Canvas getCurrCanvas() {
 		if (currCanvas == null) {
-			getReadWriteLock().readLock().lock();
+			getReadWriteLock().readLock().lock();// 获得读锁
 			try {
-				switch (getCurrGameCanvasIndex()) {
-				case G_Main:
+				switch (getCurrCanvasIndex()) {
+				case G_Title:
 					currCanvas = new MainCanvas();
 					break;
 				case G_Menu:
@@ -107,40 +107,20 @@ public class GameControl {
 					currCanvas = new HelpCanvas();
 					break;
 				}
-				// if (currCanvas != null) {
-				// ListenerControl.gi().loopRegistCanvasListener(currCanvas);
-				// }
 				currCanvas.init();
 			} finally {
-				getReadWriteLock().readLock().unlock();
+				getReadWriteLock().readLock().unlock();// 释放读锁
 			}
 		}
 		return currCanvas;
 	}
 
-	public void setCurrMapName(String currMapName) {
-		this.currMapName = currMapName;
-	}
-
-	public String getCurrMapName() {
-		return currMapName;
-	}
-
-	// public void resetMap() {
-	// // getLock();
-	// getReadWriteLock().writeLock().lock();
-	//
-	// int index = getCurrGameCanvasIndex();
-	// setCurrCanvas(G_Null);
-	// MapControl.resetMap();
-	// setCurrCanvas(index);
-	//
-	// getReadWriteLock().writeLock().unlock();
-	// // unlock();
-	// }
-
 	public MapBean getCurrMap() {
-		return MapControl.getMapByName(currMapName);
+		return currMap;
+	}
+
+	public void setCurrMap(MapBean currMap) {
+		this.currMap = currMap;
 	}
 
 	public boolean isMusic() {

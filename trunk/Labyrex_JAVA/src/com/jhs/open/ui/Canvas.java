@@ -15,8 +15,7 @@ import com.jhs.open.control.ListenerControl;
 import com.jhs.open.control.event.CanvasMouseMoveEvent;
 import com.jhs.open.tool.GraphicsTools;
 
-
-public abstract class Canvas {
+public class Canvas {
 	protected BufferedImage backbuffer;// 画布缓存
 
 	private Graphics2D g;// 画笔
@@ -28,14 +27,17 @@ public abstract class Canvas {
 	public final Vector<MouseAdapter> mouseListeners = new Vector<MouseAdapter>();
 	public final Vector<KeyListener> keyListeners = new Vector<KeyListener>();
 
-	public int x;// x轴值，像素单位
-	public int y;// y轴值，像素单位
+	public int offsetX;// x轴值，像素单位,相对于整个容器
+	public int offsetY;// y轴值，像素单位,相对于整个容器
+	public int x;// x轴值，像素单位,相对于父画板（owner）
+	public int y;// y轴值，像素单位,相对于父画板（owner）
 	public int width;// 宽度值，像素单位
 	public int height;// 高度值，像素单位
 
 	public Canvas owner;
 
-	protected boolean isOver = false;
+	protected boolean isOver = false;// 鼠标悬停
+	protected boolean isSelected = false;// 鼠标选择
 
 	public boolean isMouseIn(int x, int y) {
 		if (owner != null) {
@@ -90,7 +92,7 @@ public abstract class Canvas {
 
 	public void removeAllCanvas() {
 		while (getCanvasCount() > 0) {
-			System.out.println(getCanvas(0) + "  " + removeCanvas(getCanvas(0)));
+			removeCanvas(getCanvas(0));
 		}
 	}
 
@@ -161,6 +163,14 @@ public abstract class Canvas {
 		this.isOver = isOver;
 	}
 
+	public boolean isSelected() {
+		return isSelected;
+	}
+
+	public void setSelected(boolean isSelected) {
+		this.isSelected = isSelected;
+	}
+
 	public void initGraphics() {
 		backbuffer = new BufferedImage(Define.Main.width, Define.Main.height, 1);
 		g = backbuffer.createGraphics();
@@ -198,4 +208,19 @@ public abstract class Canvas {
 		keyListeners.remove(index);
 	}
 
+	public int getWidth() {
+		return width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
 }

@@ -6,13 +6,12 @@ import java.awt.Image;
 
 import com.jhs.open.Define;
 import com.jhs.open.control.GameControl;
-import com.jhs.open.tool.ImageResLoader;
+import com.jhs.open.tool.ImageTools;
 import com.jhs.open.ui.Canvas;
 import com.jhs.open.ui.canvas.game.InfoCanvas;
 import com.jhs.open.ui.canvas.game.MapCanvas;
 import com.jhs.open.ui.canvas.game.MenuCanvas;
 import com.jhs.open.ui.canvas.game.ToolCanvas;
-
 
 /**
  * 游戏界面
@@ -36,8 +35,9 @@ public class GameCanvas extends Canvas {
 		super(0, 0, Define.Main.width, Define.Main.height);
 	}
 
+	@Override
 	public void init() {
-		bgImage = ImageResLoader.getImage(Define.GamePanel.bg_image_path);
+		bgImage = ImageTools.getImage(Define.GamePanel.bg_image_path);
 
 		addCanvas(getMapCanvas());
 		addCanvas(getInfoCanvas());
@@ -98,6 +98,7 @@ public class GameCanvas extends Canvas {
 		super.update(l);
 		int step = 15;
 
+		// 背景变色
 		bgColorR = bgColorR - step * dirR;
 		if (bgColorR <= 0 || bgColorR > 255) {
 			bgColorR = bgColorR <= 0 ? 0 : 255;

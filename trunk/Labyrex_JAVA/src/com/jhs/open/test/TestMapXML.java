@@ -1,29 +1,42 @@
 package com.jhs.open.test;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 
-import com.jhs.open.bean.MapBean;
-import com.jhs.open.control.MapControl;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 
+import com.jhs.open.Define;
 
 public class TestMapXML {
 
 	public static void main(String[] args) {
-		Map<String, ArrayList<MapBean>> maps = MapControl.readMaps();
 
-		Set<String> keySet = maps.keySet();
-		Iterator<String> it = keySet.iterator();
+		InputStream in = null;
+		try {
+			in = new FileInputStream(new File(Define.MAP_PATH));
+			SAXReader saxReader = new SAXReader();
+			Document document = saxReader.read(in);
+			// 将整个games-config.xml文件解析出来
+			Element _root = document.getRootElement();
 
-		while (it.hasNext()) {
-			String key = it.next();
-			ArrayList<MapBean> mapList = maps.get(key);
-			for (int i = 0; i < mapList.size(); i++) {
-				mapList.get(i).isEnabled = false;
+			System.out.println(_root.selectObject("//group[@name='easy']//map[@name='2']"));
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (DocumentException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				in.close();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 		}
-		MapControl.saveMap(maps);
 	}
 }

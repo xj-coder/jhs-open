@@ -1,6 +1,10 @@
 package com.jhs.open.tool;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Paint;
+import java.awt.Stroke;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,6 +30,7 @@ public class GraphicsTools {
 			g2.setColor(gd.color);
 			g2.setPaint(gd.paint);
 		}
+		graphicsMap.remove(g2);
 	}
 
 }

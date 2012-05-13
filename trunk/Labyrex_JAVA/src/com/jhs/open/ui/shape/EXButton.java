@@ -8,9 +8,8 @@ import java.awt.RenderingHints;
 import com.jhs.open.Define;
 import com.jhs.open.control.event.exbutton.EXButtonMouseClickedEvent;
 import com.jhs.open.control.event.exbutton.EXButtonMouseMoveEvent;
-import com.jhs.open.tool.ImageResLoader;
+import com.jhs.open.tool.ImageTools;
 import com.jhs.open.ui.Canvas;
-
 
 public class EXButton extends Canvas {
 	private String name;
@@ -65,10 +64,12 @@ public class EXButton extends Canvas {
 		this.lineImage = lineImage;
 	}
 
+	@Override
 	public boolean isSelected() {
 		return isSelected;
 	}
 
+	@Override
 	public void setSelected(boolean isSelected) {
 		this.isSelected = isSelected;
 	}
@@ -95,28 +96,35 @@ public class EXButton extends Canvas {
 		// 抗锯齿,绘制质量等可参考RenderingHints类的文档！
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
+		offsetX = x;
+		offsetY = y;
+		if (owner != null) {
+			offsetX = owner.x + x;
+			offsetY = owner.y + y;
+		}
+
 		if (isOver) {
 			if (bgrImage != null) {
 				if (bgImage != null) {
-					g2.drawImage(bgImage, owner.x + x, owner.y + y, width, height, null);
+					g2.drawImage(bgImage, offsetX, offsetY, width, height, null);
 				}
-				g2.drawImage(bgrImage, owner.x + x, owner.y + y, width, height, null);
+				g2.drawImage(bgrImage, offsetX, offsetY, width, height, null);
 			}
 		} else {
 			if (bgImage != null) {
-				g2.drawImage(bgImage, owner.x + x, owner.y + y, width, height, null);
+				g2.drawImage(bgImage, offsetX, offsetY, width, height, null);
 			}
 		}
 
 		if (fgImage != null) {
-			g2.drawImage(fgImage, owner.x + x, owner.y + y, width, height, null);
+			g2.drawImage(fgImage, offsetX, offsetY, width, height, null);
 		}
 
 		if (isSelected) {
 			if (lineImage == null) {
-				lineImage = ImageResLoader.getImage(Define.Button.line_path);
+				lineImage = ImageTools.getImage(Define.Button.line_path);
 			}
-			g2.drawImage(lineImage, owner.x + x, owner.y + y, width, height, null);
+			g2.drawImage(lineImage, offsetX, offsetY, width, height, null);
 		}
 
 		super.render(g2);

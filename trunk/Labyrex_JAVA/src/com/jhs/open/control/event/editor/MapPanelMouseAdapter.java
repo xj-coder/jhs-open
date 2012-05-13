@@ -5,7 +5,6 @@ import java.awt.event.MouseEvent;
 
 import com.jhs.open.ui.editor.MapEditorPanel;
 
-
 public class MapPanelMouseAdapter extends MouseAdapter {
 
 	private MapEditorPanel editorPanel;
@@ -15,8 +14,18 @@ public class MapPanelMouseAdapter extends MouseAdapter {
 	}
 
 	@Override
+	public void mouseClicked(MouseEvent e) {
+		if (e.getButton() == MouseEvent.BUTTON1) {
+			editorPanel.mouseLeftClicked();
+		} else if (e.getButton() == MouseEvent.BUTTON3) {
+			editorPanel.mouseRightClicked();
+		}
+	}
+
+	@Override
 	public void mouseEntered(MouseEvent e) {
 		editorPanel.setMouseIn(true);
+		editorPanel.requestFocus();
 	}
 
 	@Override

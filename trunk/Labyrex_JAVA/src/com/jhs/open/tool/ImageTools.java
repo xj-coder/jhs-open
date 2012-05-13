@@ -1,62 +1,32 @@
 package com.jhs.open.tool;
 
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReadParam;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.Iterator;
 
 public class ImageTools {
-	/**
-	 * 剪切图片
-	 * 
-	 * @param image
-	 * @param x
-	 * @param y
-	 * @param width
-	 * @param height
-	 * @param format
-	 * @return
-	 */
-	public static Image cut(BufferedImage image, int x, int y, int width, int height, String format) {
-		Image result = null;
+	private static Map<String, BufferedImage> imgMap = new HashMap<String, BufferedImage>();
 
-		ImageInputStream iis = null;
-
-		try {
-
-			Iterator<ImageReader> it = ImageIO.getImageReadersByFormatName(format);
-			ImageReader reader = it.next();
-
-			iis = ImageIO.createImageInputStream(image);
-
-			reader.setInput(iis, true);
-
-			ImageReadParam param = reader.getDefaultReadParam();
-
-			Rectangle rect = new Rectangle(x, y, width, height);
-
-			param.setSourceRegion(rect);
-
-			BufferedImage bi = reader.read(0, param);
-
-			result = Toolkit.getDefaultToolkit().createImage(bi.getSource());
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			if (iis != null) {
-				try {
-					iis.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
+	public static BufferedImage getImage(String path) {
+		BufferedImage img = imgMap.get(path);
+		if (img == null) {
+			img = loadImage(path);
+			imgMap.put(path, img);
 		}
-		return result;
+		return img;
 	}
 
 	/**
@@ -183,5 +153,15 @@ public class ImageTools {
 		} else {
 			return new BufferedImage(width, height, 1);
 		}
+	}
+
+	private static BufferedImage loadImage(String path) {
+		BufferedImage bufferedimage = null;
+		try {
+			bufferedimage = ImageIO.read(new File(path));
+		} catch (Exception exception) {
+			System.err.print(new StringBuilder().append("Could not load file ").append(path).toString());
+		}
+		return bufferedimage;
 	}
 }

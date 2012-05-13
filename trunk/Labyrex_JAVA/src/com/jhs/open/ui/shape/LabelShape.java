@@ -6,7 +6,6 @@ import java.awt.Graphics;
 
 import com.jhs.open.ui.Canvas;
 
-
 public class LabelShape extends Canvas {
 
 	public String text = "";
@@ -31,13 +30,20 @@ public class LabelShape extends Canvas {
 		Font f = g.getFont();
 		Color c = g.getColor();
 
+		offsetX = x;
+		offsetY = y;
+		if (owner != null) {
+			offsetX = owner.x + x;
+			offsetY = owner.y + y;
+		}
+
 		if (bgColor != null) {
 			g.setColor(bgColor);
-			g.fillRect(owner.x + x, owner.y + y, width, height);
+			g.fillRect(offsetX + x, offsetY + y, width, height);
 		}
 		g.setFont(font);
 		g.setColor(fgColor);
-		g.drawString(text, owner.x + x, owner.y + y);
+		g.drawString(text, offsetX + x, offsetY + y);
 
 		g.setFont(f);
 		g.setColor(c);

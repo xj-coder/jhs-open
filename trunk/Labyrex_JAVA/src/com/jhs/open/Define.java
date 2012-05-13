@@ -226,4 +226,17 @@ public class Define {
 		public static final int width = 300;
 		public static final int height = 120;
 	}
+
+	public static final class Editor {
+		public static int WIDTH = 1024;
+		public static int HEIGHT = 680;
+
+		public static final int min_map_width = 6;
+		public static final int min_map_height = 6;
+		public static final int max_map_width = 16;
+		public static final int max_map_height = 16;
+
+		public static final String x_icon_path = IMG_PATH + "xx.png";
+
+	}
 }

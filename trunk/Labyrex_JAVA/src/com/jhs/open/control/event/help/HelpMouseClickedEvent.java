@@ -10,6 +10,6 @@ public class HelpMouseClickedEvent extends MouseAdapter {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		GameControl.gi().setCurrCanvas(GameControl.gi().getPreCanvasIndex());
+		GameControl.gi().setCurrCanvasIndex(GameControl.gi().getPreCanvasIndex());
 	}
 }

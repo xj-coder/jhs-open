@@ -20,7 +20,6 @@ import com.jhs.open.ui.shape.MirrorShape;
 import com.jhs.open.ui.shape.PathShape;
 import com.jhs.open.ui.shape.ReceiverShape;
 
-
 public class MapCanvas extends Canvas {
 
 	private MapBean map;// 地图数据
@@ -31,11 +30,6 @@ public class MapCanvas extends Canvas {
 	public ReceiverShape[] receiverList;// 接收器集合
 	public MirrorShape[] mirrorList;// 挡板集合
 
-	public MapCanvas(int x, int y, int width, int height, MapBean map) {
-		super(x, y, width, height);
-		this.map = map;
-	}
-
 	public MapCanvas(MapBean map) {
 		super();
 		width = map.width * Define.Main.grid_size;
@@ -43,58 +37,66 @@ public class MapCanvas extends Canvas {
 		x = (Define.Main.width - width) / 2;
 		y = (Define.Main.height - height) / 2 - 20;
 		this.map = map;
-
 	}
 
 	@Override
 	public void init() {
+		GameControl.gi().getReadWriteLock().writeLock().lock();
+		try {
+			map.restore();
 
-		pathList = new ArrayList<PathShape>();
+			removeAllCanvas();
 
-		for (int i = 0; i < map.mirrorList.length; i++) {
-			map.mirrorList[i].type = map.mirrorList[i].iniType;
-		}
+			pathList = new ArrayList<PathShape>();
 
-		if (map.emitterList != null) {
-			emitterList = new EmitterShape[map.emitterList.length];
-			for (int i = 0; i < map.emitterList.length; i++) {
-				EmitterShape emitterShape = new EmitterShape(map.emitterList[i].x * Define.Main.grid_size,
-						map.emitterList[i].y * Define.Main.grid_size, map.emitterList[i]);
+			if (map.emitterList != null) {
+				emitterList = new EmitterShape[map.emitterList.size()];
+				for (int i = 0; i < map.emitterList.size(); i++) {
+					EmitterShape emitterShape = new EmitterShape(map.emitterList.get(i));
+					// EmitterShape emitterShape = new EmitterShape(map.emitterList.get(i).x * Define.Main.grid_size,
+					// map.emitterList.get(i).y * Define.Main.grid_size, map.emitterList.get(i));
 
-				emitterShape.bgImage = ImgSelector.emitterSelector(emitterShape, new Rect2D(0, 0, width, height));
-				emitterShape.addMouseListener(new MouseMoveOnMapAdapter(emitterShape));
-				emitterShape.addMouseListener(new EmitterMouseClickedAdapter(emitterShape));
+					emitterShape.bgImage = ImgSelector.emitterSelector(emitterShape, new Rect2D(0, 0, width, height));
+					emitterShape.addMouseListener(new MouseMoveOnMapAdapter(emitterShape));
+					emitterShape.addMouseListener(new EmitterMouseClickedAdapter(emitterShape));
 
-				emitterList[i] = emitterShape;
-				addCanvas(emitterShape);
+					emitterList[i] = emitterShape;
+					addCanvas(emitterShape);
+				}
 			}
-		}
-		if (map.receiverList != null) {
-			receiverList = new ReceiverShape[map.receiverList.length];
-			for (int i = 0; i < map.receiverList.length; i++) {
-				ReceiverShape receiverShape = new ReceiverShape(map.receiverList[i].x * Define.Main.grid_size,
-						map.receiverList[i].y * Define.Main.grid_size, map.receiverList[i]);
+			if (map.receiverList != null) {
+				receiverList = new ReceiverShape[map.receiverList.size()];
+				for (int i = 0; i < map.receiverList.size(); i++) {
+					ReceiverShape receiverShape = new ReceiverShape(map.receiverList.get(i));
+					// ReceiverShape receiverShape = new ReceiverShape(map.receiverList.get(i).x *
+					// Define.Main.grid_size,
+					// map.receiverList.get(i).y * Define.Main.grid_size, map.receiverList.get(i));
 
-				receiverShape.bgImage = ImgSelector.receiverSelector(receiverShape, new Rect2D(0, 0, width, height));
-				receiverShape.addMouseListener(new MouseMoveOnMapAdapter(receiverShape));
-				receiverShape.addMouseListener(new ReceiverMouseClickedAdapter(receiverShape));
+					receiverShape.bgImage = ImgSelector
+							.receiverSelector(receiverShape, new Rect2D(0, 0, width, height));
+					receiverShape.addMouseListener(new MouseMoveOnMapAdapter(receiverShape));
+					receiverShape.addMouseListener(new ReceiverMouseClickedAdapter(receiverShape));
 
-				receiverList[i] = receiverShape;
-				addCanvas(receiverShape);
+					receiverList[i] = receiverShape;
+					addCanvas(receiverShape);
+				}
 			}
-		}
-		if (map.mirrorList != null) {
-			mirrorList = new MirrorShape[map.mirrorList.length];
-			for (int i = 0; i < map.mirrorList.length; i++) {
-				MirrorShape mirrorShape = new MirrorShape(map.mirrorList[i].x * Define.Main.grid_size,
-						map.mirrorList[i].y * Define.Main.grid_size, map.mirrorList[i]);
+			if (map.mirrorList != null) {
+				mirrorList = new MirrorShape[map.mirrorList.size()];
+				for (int i = 0; i < map.mirrorList.size(); i++) {
+					MirrorShape mirrorShape = new MirrorShape(map.mirrorList.get(i));
+					// MirrorShape mirrorShape = new MirrorShape(map.mirrorList.get(i).x * Define.Main.grid_size,
+					// map.mirrorList.get(i).y * Define.Main.grid_size, map.mirrorList.get(i));
 
-				mirrorShape.addMouseListener(new MouseMoveOnMapAdapter(mirrorShape));
-				mirrorShape.addMouseListener(new MirrorMouseClickedAdapter(mirrorShape));
+					mirrorShape.addMouseListener(new MouseMoveOnMapAdapter(mirrorShape));
+					mirrorShape.addMouseListener(new MirrorMouseClickedAdapter(mirrorShape));
 
-				mirrorList[i] = mirrorShape;
-				addCanvas(mirrorShape);
+					mirrorList[i] = mirrorShape;
+					addCanvas(mirrorShape);
+				}
 			}
+		} finally {
+			GameControl.gi().getReadWriteLock().writeLock().unlock();
 		}
 	}
 
@@ -138,16 +140,5 @@ public class MapCanvas extends Canvas {
 		// 画地图表格[end]
 
 		super.render(g);
-	}
-
-	public void resetMap() {
-		GameControl.gi().getReadWriteLock().writeLock().lock();
-		try {
-			removeAllCanvas();
-
-			init();
-		} finally {
-			GameControl.gi().getReadWriteLock().writeLock().unlock();
-		}
 	}
 }

@@ -14,7 +14,6 @@ import com.jhs.open.control.MapControl;
 import com.jhs.open.control.SoundControl;
 import com.jhs.open.tool.ScreenTools;
 
-
 /**
  * 游戏主界面
  * 
@@ -62,7 +61,7 @@ public class LabyrexFrame extends JFrame implements Runnable {
 		long step = 35l;
 		long sleep = 10l;
 		while (gameLoop == Thread.currentThread()) {
-			// GameControl.gi().getLock();// 获得锁
+			// 获得写锁
 			GameControl.gi().getReadWriteLock().writeLock().lock();
 
 			// 帧刷新频率矫正，确保每秒刷新的帧数最大值为固定的，最快每隔(step-sleep)毫秒刷新一帧,即每秒的帧数为1000/(step-sleep)
@@ -75,7 +74,7 @@ public class LabyrexFrame extends JFrame implements Runnable {
 			l = l2;
 
 			// 游戏渲染开始
-			Canvas gamestate = GameControl.gi().getCurrGameCanvas();
+			Canvas gamestate = GameControl.gi().getCurrCanvas();
 			gamestate.update(l1);
 			gamestate.render();
 			if (Define.FPS) {
@@ -96,7 +95,7 @@ public class LabyrexFrame extends JFrame implements Runnable {
 				i++;
 			}
 
-			// GameControl.gi().unlock();// 解锁
+			// 释放写锁
 			GameControl.gi().getReadWriteLock().writeLock().unlock();
 
 			try {
@@ -119,10 +118,13 @@ public class LabyrexFrame extends JFrame implements Runnable {
 		gameLoop = null;
 	}
 
+	/**
+	 * 游戏开发方法，初始化关卡控制器、声音控制器、游戏控制器，该方法应该有且只能调用一次
+	 */
 	public void begin() {
-		MapControl.readMaps();// 读入地图数据
+		MapControl.read();// 读入地图数据
 		SoundControl.play(Define.Sound.bg_sound, -1);// 启动声音管理器并播放背景音乐
-		GameControl.gi().setCurrCanvas(GameControl.G_Main);// 启动游戏管理器并设置当前画面
+		GameControl.gi().setCurrCanvasIndex(GameControl.G_Title);// 启动游戏管理器并设置当前画面
 		if (!GameControl.gi().isMusic()) {
 			SoundControl.pause(Define.Sound.bg_sound);
 		}

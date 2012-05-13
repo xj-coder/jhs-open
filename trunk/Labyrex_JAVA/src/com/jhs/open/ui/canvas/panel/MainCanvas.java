@@ -5,11 +5,9 @@ import java.awt.Image;
 
 import com.jhs.open.Define;
 import com.jhs.open.control.GameControl;
-import com.jhs.open.tool.ImageResLoader;
 import com.jhs.open.tool.ImageTools;
 import com.jhs.open.ui.Canvas;
 import com.jhs.open.ui.shape.EXButton;
-
 
 /**
  * 开始界面
@@ -18,9 +16,6 @@ import com.jhs.open.ui.shape.EXButton;
  * 
  */
 public class MainCanvas extends Canvas {
-
-	private static final long serialVersionUID = 5297281265748850707L;
-
 	private Image bgImage;
 	private Image buttonBgImage;
 	private Image buttonBgrImage;
@@ -37,12 +32,13 @@ public class MainCanvas extends Canvas {
 		super(0, 0, Define.Main.width, Define.Main.height);
 	}
 
+	@Override
 	public void init() {
 		bgImage = ImageTools.cut(Define.MainPanel.bg_image_path, 0, 0, Define.Main.width, Define.Main.height, "png");
 
-		buttonBgImage = ImageTools.resizeImage(ImageResLoader.getImage(Define.Button.bg_path),
+		buttonBgImage = ImageTools.resizeImage(ImageTools.getImage(Define.Button.bg_path),
 				Define.MainPanel.start_button_width, Define.MainPanel.start_button_height);
-		buttonBgrImage = ImageTools.resizeImage(ImageResLoader.getImage(Define.Button.bg_r_path),
+		buttonBgrImage = ImageTools.resizeImage(ImageTools.getImage(Define.Button.bg_r_path),
 				Define.MainPanel.start_button_width, Define.MainPanel.start_button_height);
 
 		addCanvas(getStartButton());
@@ -56,7 +52,7 @@ public class MainCanvas extends Canvas {
 			startButton = new EXButton("start", Define.MainPanel.start_button_x, Define.MainPanel.start_button_y,
 					Define.MainPanel.start_button_width, Define.MainPanel.start_button_height);
 
-			startButton.setFgImage(ImageResLoader.getImage(Define.Button.start_fg_path));
+			startButton.setFgImage(ImageTools.getImage(Define.Button.start_fg_path));
 			startButton.setBgImage(buttonBgImage);
 			startButton.setBgrImage(buttonBgrImage);
 		}
@@ -68,7 +64,7 @@ public class MainCanvas extends Canvas {
 			musicButton = new EXButton("music", true, Define.MainPanel.music_button_x, Define.MainPanel.music_button_y,
 					Define.MainPanel.music_button_width, Define.MainPanel.music_button_height);
 
-			musicButton.setFgImage(ImageResLoader.getImage(Define.Button.music_fg_path));
+			musicButton.setFgImage(ImageTools.getImage(Define.Button.music_fg_path));
 			musicButton.setBgImage(buttonBgImage);
 			musicButton.setBgrImage(buttonBgrImage);
 
@@ -82,7 +78,7 @@ public class MainCanvas extends Canvas {
 			soundButton = new EXButton("sound", true, Define.MainPanel.sound_button_x, Define.MainPanel.sound_button_y,
 					Define.MainPanel.sound_button_width, Define.MainPanel.sound_button_height);
 
-			soundButton.setFgImage(ImageResLoader.getImage(Define.Button.sound_fg_path));
+			soundButton.setFgImage(ImageTools.getImage(Define.Button.sound_fg_path));
 			soundButton.setBgImage(buttonBgImage);
 			soundButton.setBgrImage(buttonBgrImage);
 
@@ -96,7 +92,7 @@ public class MainCanvas extends Canvas {
 			helpButton = new EXButton("help", Define.MainPanel.help_button_x, Define.MainPanel.help_button_y,
 					Define.MainPanel.help_button_width, Define.MainPanel.help_button_height);
 
-			helpButton.setFgImage(ImageResLoader.getImage(Define.Button.help_fg_path));
+			helpButton.setFgImage(ImageTools.getImage(Define.Button.help_fg_path));
 			helpButton.setBgImage(buttonBgImage);
 			helpButton.setBgrImage(buttonBgrImage);
 		}

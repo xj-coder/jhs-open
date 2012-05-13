@@ -63,7 +63,7 @@ public class WinPanel extends Canvas {
 	@Override
 	public void update(long l) {
 		if (timer == 0) {
-			Canvas canvas = GameControl.gi().getCurrGameCanvas();
+			Canvas canvas = GameControl.gi().getCurrCanvas();
 			ListenerControl.gi().loopRemoveCanvasListener(canvas);
 			MapControl.enableNext(GameControl.gi().getCurrMap());
 		}

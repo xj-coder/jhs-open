@@ -81,7 +81,7 @@ public class ListenerControl {
 
 			@Override
 			public void mouseMoved(MouseEvent e) {
-				List<Canvas> canvasList = CanvasSearcher.findCanvas(GameControl.gi().getCurrGameCanvas(), e.getX(), e
+				List<Canvas> canvasList = CanvasSearcher.findCanvas(GameControl.gi().getCurrCanvas(), e.getX(), e
 						.getY());
 
 				if (enterCanvas.size() > 0) {
