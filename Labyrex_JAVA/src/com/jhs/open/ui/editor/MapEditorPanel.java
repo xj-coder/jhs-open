@@ -4,19 +4,29 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import com.jhs.open.Define;
+import com.jhs.open.bean.EmitterBean;
 import com.jhs.open.bean.MapBean;
+import com.jhs.open.bean.MirrorBean;
+import com.jhs.open.bean.ReceiverBean;
+import com.jhs.open.bean.Rect2D;
+import com.jhs.open.control.event.editor.MapPanelMouseAdapter;
+import com.jhs.open.tool.CanvasSearcher;
 import com.jhs.open.tool.GraphicsTools;
 import com.jhs.open.tool.ImageTools;
+import com.jhs.open.tool.ImgSelector;
+import com.jhs.open.ui.Canvas;
 import com.jhs.open.ui.LabyrexMapEditorFrame;
 import com.jhs.open.ui.shape.EmitterShape;
 import com.jhs.open.ui.shape.MirrorShape;
 import com.jhs.open.ui.shape.ReceiverShape;
-
 
 /**
  * 地图编辑面板
@@ -33,6 +43,7 @@ public class MapEditorPanel extends JPanel {
 	public MirrorShape[] mirrorList;// 挡板集合
 
 	private boolean isMouseIn = false;
+
 	private int mouseX;
 	private int mouseY;
 
@@ -43,57 +54,111 @@ public class MapEditorPanel extends JPanel {
 
 	private boolean isShowGrid = true;
 
-	private LabyrexMapEditorFrame editorFrame;
-
-	public MapEditorPanel(LabyrexMapEditorFrame editorFrame) {
-		this.editorFrame = editorFrame;
+	public MapEditorPanel() {
+		setFocusable(true);
 
 		initData();
 		initEvent();
 	}
 
 	private void initEvent() {
+		addMouseListener(new MapPanelMouseAdapter(this));
+		addMouseMotionListener(new MapPanelMouseAdapter(this));
+		addMouseWheelListener(new MapPanelMouseAdapter(this));
 
+		// LabyrexMapEditorFrame.gi().
+		addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (e.isControlDown()) {
+					if (e.getKeyCode() == KeyEvent.VK_UP) {
+
+					} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+
+					}
+				} else {
+					if (e.getKeyCode() == KeyEvent.VK_DELETE) {
+						Canvas selectCanvas = LabyrexMapEditorFrame.gi().getCurrSelectedCanvas();
+
+						if (selectCanvas instanceof MirrorShape) {
+							LabyrexMapEditorFrame.gi().getCurrMapBean().mirrorList
+									.remove(((MirrorShape) selectCanvas).bean);
+						} else if (selectCanvas instanceof EmitterShape) {
+							LabyrexMapEditorFrame.gi().getCurrMapBean().emitterList
+									.remove(((EmitterShape) selectCanvas).bean);
+						} else if (selectCanvas instanceof ReceiverShape) {
+							LabyrexMapEditorFrame.gi().getCurrMapBean().receiverList
+									.remove(((ReceiverShape) selectCanvas).bean);
+						}
+
+						LabyrexMapEditorFrame.gi().setCurrSelectedCanvas(null);
+						LabyrexMapEditorFrame.gi().updateAttrField();
+						initData();
+						repaint();
+						LabyrexMapEditorFrame.gi().getCurrMapBean().setSave(false);
+					}
+				}
+			}
+		});
 	}
 
-	private void initData() {
-		MapBean map = editorFrame.getCurrMapBean();
-
-		// for (int i = 0; i < map.mirrorList.length; i++) {
-		// map.mirrorList[i].type = map.mirrorList[i].iniType;
-		// }
+	public void initData() {
+		MapBean map = LabyrexMapEditorFrame.gi().getCurrMapBean();
 
 		if (map != null) {
+			// 计算地图绘制数据
+			draw_width = map.width * Define.Main.grid_size;
+			draw_height = map.height * Define.Main.grid_size;
+			draw_x = (getWidth() - draw_width) / 2;
+			draw_y = (getHeight() - draw_height) / 2;
+			if (draw_x % Define.Main.grid_size != 0) {
+				draw_x = draw_x - draw_x % Define.Main.grid_size;
+			}
+			if (draw_y % Define.Main.grid_size != 0) {
+				draw_y = draw_y - draw_y % Define.Main.grid_size;
+			}
+
+			Canvas owner = new Canvas(draw_x, draw_y, draw_width, draw_height);
+
 			if (map.emitterList != null) {
-				emitterList = new EmitterShape[map.emitterList.length];
-				for (int i = 0; i < map.emitterList.length; i++) {
-					EmitterShape emitterShape = new EmitterShape(map.emitterList[i].x * Define.Main.grid_size,
-							map.emitterList[i].y * Define.Main.grid_size, map.emitterList[i]);
+				emitterList = new EmitterShape[map.emitterList.size()];
+				for (int i = 0; i < map.emitterList.size(); i++) {
+					EmitterShape emitterShape = new EmitterShape(map.emitterList.get(i));
+					// EmitterShape emitterShape = new EmitterShape(map.emitterList.get(i).x * Define.Main.grid_size,
+					// map.emitterList.get(i).y * Define.Main.grid_size, map.emitterList.get(i));
+
+					emitterShape.bgImage = ImgSelector.emitterSelector(emitterShape, new Rect2D(0, 0, draw_width,
+							draw_height));
+					emitterShape.owner = owner;
 					emitterList[i] = emitterShape;
 				}
 			}
 			if (map.receiverList != null) {
-				receiverList = new ReceiverShape[map.receiverList.length];
-				for (int i = 0; i < map.receiverList.length; i++) {
-					ReceiverShape receiverShape = new ReceiverShape(map.receiverList[i].x * Define.Main.grid_size,
-							map.receiverList[i].y * Define.Main.grid_size, map.receiverList[i]);
+				receiverList = new ReceiverShape[map.receiverList.size()];
+				for (int i = 0; i < map.receiverList.size(); i++) {
+					ReceiverShape receiverShape = new ReceiverShape(map.receiverList.get(i));
+					// ReceiverShape receiverShape = new ReceiverShape(map.receiverList.get(i).x *
+					// Define.Main.grid_size,
+					// map.receiverList.get(i).y * Define.Main.grid_size, map.receiverList.get(i));
+
+					receiverShape.bgImage = ImgSelector.receiverSelector(receiverShape, new Rect2D(0, 0, draw_width,
+							draw_height));
+
+					receiverShape.owner = owner;
 					receiverList[i] = receiverShape;
 				}
 			}
 			if (map.mirrorList != null) {
-				mirrorList = new MirrorShape[map.mirrorList.length];
-				for (int i = 0; i < map.mirrorList.length; i++) {
-					MirrorShape mirrorShape = new MirrorShape(map.mirrorList[i].x * Define.Main.grid_size,
-							map.mirrorList[i].y * Define.Main.grid_size, map.mirrorList[i]);
+				mirrorList = new MirrorShape[map.mirrorList.size()];
+				for (int i = 0; i < map.mirrorList.size(); i++) {
+					MirrorShape mirrorShape = new MirrorShape(map.mirrorList.get(i));
+					// MirrorShape mirrorShape = new MirrorShape(map.mirrorList.get(i).x * Define.Main.grid_size,
+					// map.mirrorList.get(i).y * Define.Main.grid_size, map.mirrorList.get(i));
+					mirrorShape.owner = owner;
 					mirrorList[i] = mirrorShape;
 				}
 			}
 		}
-	}
-
-	public void reset() {
-		initData();
-		repaint();
 	}
 
 	public boolean isMouseIn() {
@@ -102,8 +167,9 @@ public class MapEditorPanel extends JPanel {
 
 	public void setMouseIn(boolean isMouseIn) {
 		this.isMouseIn = isMouseIn;
-		if (LabyrexMapEditorFrame.gi().getCurrMapBean() != null) {
-			repaint();
+		if (LabyrexMapEditorFrame.gi().getCurrClickButton() != null) {
+			repaint(getMouseX() - Define.Main.grid_size / 2, getMouseY() - Define.Main.grid_size / 2,
+					Define.Main.grid_size, Define.Main.grid_size);
 		}
 	}
 
@@ -112,9 +178,14 @@ public class MapEditorPanel extends JPanel {
 	}
 
 	public void setMouseX(int mouseX) {
+		if (LabyrexMapEditorFrame.gi().getCurrClickButton() != null) {
+			repaint(getMouseX() - Define.Main.grid_size / 2, getMouseY() - Define.Main.grid_size / 2,
+					Define.Main.grid_size, Define.Main.grid_size);
+		}
 		this.mouseX = mouseX;
-		if (LabyrexMapEditorFrame.gi().getCurrMapBean() != null) {
-			repaint();
+		if (LabyrexMapEditorFrame.gi().getCurrClickButton() != null) {
+			repaint(getMouseX() - Define.Main.grid_size / 2, getMouseY() - Define.Main.grid_size / 2,
+					Define.Main.grid_size, Define.Main.grid_size);
 		}
 	}
 
@@ -123,9 +194,166 @@ public class MapEditorPanel extends JPanel {
 	}
 
 	public void setMouseY(int mouseY) {
+		if (LabyrexMapEditorFrame.gi().getCurrClickButton() != null) {
+			repaint(getMouseX() - Define.Main.grid_size / 2, getMouseY() - Define.Main.grid_size / 2,
+					Define.Main.grid_size, Define.Main.grid_size);
+		}
 		this.mouseY = mouseY;
-		if (LabyrexMapEditorFrame.gi().getCurrMapBean() != null) {
-			repaint();
+		if (LabyrexMapEditorFrame.gi().getCurrClickButton() != null) {
+			repaint(getMouseX() - Define.Main.grid_size / 2, getMouseY() - Define.Main.grid_size / 2,
+					Define.Main.grid_size, Define.Main.grid_size);
+		}
+	}
+
+	public void mouseLeftClicked() {
+		boolean isRepaint = false;
+
+		if (LabyrexMapEditorFrame.gi().getCurrClickButton() != null) {
+
+			if (getMouseX() > draw_x - Define.Main.grid_size
+					&& getMouseX() < draw_x + draw_width + Define.Main.grid_size
+					&& getMouseY() > draw_y - Define.Main.grid_size
+					&& getMouseY() < draw_y + draw_height + Define.Main.grid_size) {
+
+				EmitterShape emitterShape = CanvasSearcher.findEmitter(emitterList, getMouseX(), getMouseY());
+				ReceiverShape receiverShape = CanvasSearcher.findReceiver(receiverList, getMouseX(), getMouseY());
+				MirrorShape mirrorShape = CanvasSearcher.findMirror(mirrorList, getMouseX(), getMouseY());
+				if (emitterShape != null || receiverShape != null || mirrorShape != null) {
+					return;
+				}
+
+				int _x = -100;
+				int _y = -100;
+
+				if (getMouseX() > draw_x && getMouseX() < draw_x + draw_width) {
+					_x = (getMouseX() - draw_x) / Define.Main.grid_size;
+				} else if (getMouseX() < draw_x && getMouseX() > draw_x - Define.Main.grid_size) {
+					_x = -1;
+				} else if (getMouseX() < draw_x + draw_width + Define.Main.grid_size
+						&& getMouseX() > draw_x + draw_width) {
+					_x = LabyrexMapEditorFrame.gi().getCurrMapBean().width;
+				}
+				if (getMouseY() > draw_y && getMouseY() < draw_y + draw_height) {
+					_y = (getMouseY() - draw_y) / Define.Main.grid_size;
+				} else if (getMouseY() < draw_y && getMouseY() > draw_y - Define.Main.grid_size) {
+					_y = -1;
+				} else if (getMouseY() < draw_y + draw_height + Define.Main.grid_size
+						&& getMouseY() > draw_y + draw_height) {
+					_y = LabyrexMapEditorFrame.gi().getCurrMapBean().height;
+				}
+
+				if ((_x != -100 && _y != -100)
+						&& (_x == -1 || _x == LabyrexMapEditorFrame.gi().getCurrMapBean().width || _y == -1 || _y == LabyrexMapEditorFrame
+								.gi().getCurrMapBean().height)
+						&& !(_x == -1 && _y == -1)
+						&& !(_x == -1 && _y == LabyrexMapEditorFrame.gi().getCurrMapBean().height)
+						&& !(_x == LabyrexMapEditorFrame.gi().getCurrMapBean().width && _y == LabyrexMapEditorFrame
+								.gi().getCurrMapBean().height)
+						&& !(_x == LabyrexMapEditorFrame.gi().getCurrMapBean().width && _y == -1)) {
+
+					if (LabyrexMapEditorFrame.gi().getCurrClickButton() == LabyrexMapEditorFrame.gi()
+							.getEmitterButton()) {
+						EmitterBean bean = new EmitterBean();
+						bean.type = LabyrexMapEditorFrame.gi().getEmitterButton().getName();
+						bean.x = _x;
+						bean.y = _y;
+						bean.backup();
+						LabyrexMapEditorFrame.gi().getCurrMapBean().emitterList.add(bean);
+						isRepaint = true;
+					} else if (LabyrexMapEditorFrame.gi().getCurrClickButton() == LabyrexMapEditorFrame.gi()
+							.getReceiverButton()) {
+						ReceiverBean bean = new ReceiverBean();
+						bean.type = LabyrexMapEditorFrame.gi().getReceiverButton().getName();
+						bean.x = _x;
+						bean.y = _y;
+						bean.backup();
+						LabyrexMapEditorFrame.gi().getCurrMapBean().receiverList.add(bean);
+						isRepaint = true;
+					} else {
+
+					}
+				} else if (_x != -100 && _y != -100) {
+					if (LabyrexMapEditorFrame.gi().getCurrClickButton() == LabyrexMapEditorFrame.gi().getMirrorButton()) {
+						MirrorBean bean = new MirrorBean();
+						bean.type = LabyrexMapEditorFrame.gi().getMirrorButton().getName();
+						bean.x = _x;
+						bean.y = _y;
+						bean.backup();
+						LabyrexMapEditorFrame.gi().getCurrMapBean().mirrorList.add(bean);
+						isRepaint = true;
+					} else {
+
+					}
+				}
+				if (isRepaint) {
+					LabyrexMapEditorFrame.gi().updateAttrField();
+					initData();
+					repaint();
+					LabyrexMapEditorFrame.gi().getCurrMapBean().setSave(false);
+				}
+			}
+		} else {
+			if (getMouseX() > draw_x - Define.Main.grid_size
+					&& getMouseX() < draw_x + draw_width + Define.Main.grid_size
+					&& getMouseY() > draw_y - Define.Main.grid_size
+					&& getMouseY() < draw_y + draw_height + Define.Main.grid_size) {
+
+				EmitterShape emitterShape = CanvasSearcher.findEmitter(emitterList, getMouseX(), getMouseY());
+				ReceiverShape receiverShape = CanvasSearcher.findReceiver(receiverList, getMouseX(), getMouseY());
+				MirrorShape mirrorShape = CanvasSearcher.findMirror(mirrorList, getMouseX(), getMouseY());
+
+				if (emitterShape != null) {
+					if (emitterShape.isSelected()) {
+						emitterShape.setSelected(false);
+						LabyrexMapEditorFrame.gi().setCurrSelectedCanvas(null);
+					} else {
+						LabyrexMapEditorFrame.gi().setCurrSelectedCanvas(emitterShape);
+						emitterShape.setSelected(true);
+					}
+					isRepaint = true;
+				} else if (receiverShape != null) {
+					if (receiverShape.isSelected()) {
+						receiverShape.setSelected(false);
+						LabyrexMapEditorFrame.gi().setCurrSelectedCanvas(null);
+					} else {
+						LabyrexMapEditorFrame.gi().setCurrSelectedCanvas(receiverShape);
+						receiverShape.setSelected(true);
+					}
+					isRepaint = true;
+				} else if (mirrorShape != null) {
+					if (mirrorShape.isSelected()) {
+						mirrorShape.setSelected(false);
+						LabyrexMapEditorFrame.gi().setCurrSelectedCanvas(null);
+					} else {
+						LabyrexMapEditorFrame.gi().setCurrSelectedCanvas(mirrorShape);
+						mirrorShape.setSelected(true);
+					}
+					isRepaint = true;
+				}
+			}
+		}
+
+		if (isRepaint) {
+			int _x = (getMouseX() - draw_x)
+					- ((getMouseX() - draw_x) % Define.Main.grid_size > 0 ? (getMouseX() - draw_x)
+							% Define.Main.grid_size : Define.Main.grid_size + (getMouseX() - draw_x)
+							% Define.Main.grid_size);
+			int _y = (getMouseY() - draw_y)
+					- ((getMouseY() - draw_y) % Define.Main.grid_size > 0 ? (getMouseY() - draw_y)
+							% Define.Main.grid_size : Define.Main.grid_size + (getMouseY() - draw_y)
+							% Define.Main.grid_size);
+
+			repaint(draw_x + _x, draw_y + _y, Define.Main.grid_size, Define.Main.grid_size);
+		}
+	}
+
+	public void mouseRightClicked() {
+		if (LabyrexMapEditorFrame.gi().getCurrClickButton() != null) {
+			repaint(getMouseX() - Define.Main.grid_size / 2, getMouseY() - Define.Main.grid_size / 2,
+					Define.Main.grid_size, Define.Main.grid_size);
+
+			LabyrexMapEditorFrame.gi().getCurrClickButton().setButtonSelected(false);
+			LabyrexMapEditorFrame.gi().setCurrClickButton(null);
 		}
 	}
 
@@ -137,32 +365,53 @@ public class MapEditorPanel extends JPanel {
 		this.isShowGrid = isShowGrid;
 	}
 
+	public int getDraw_width() {
+		return draw_width;
+	}
+
+	public void setDraw_width(int draw_width) {
+		this.draw_width = draw_width;
+	}
+
+	public int getDraw_height() {
+		return draw_height;
+	}
+
+	public void setDraw_height(int draw_height) {
+		this.draw_height = draw_height;
+	}
+
+	public int getDraw_x() {
+		return draw_x;
+	}
+
+	public void setDraw_x(int draw_x) {
+		this.draw_x = draw_x;
+	}
+
+	public int getDraw_y() {
+		return draw_y;
+	}
+
+	public void setDraw_y(int draw_y) {
+		this.draw_y = draw_y;
+	}
+
 	@Override
 	public void update(Graphics g) {
-		Image screen = createImage(getWidth(), getHeight(), true);// 双缓冲
+		MapBean map = LabyrexMapEditorFrame.gi().getCurrMapBean();
 
-		Graphics2D graphics = (Graphics2D) screen.getGraphics();
+		Image screen = ImageTools.createImage(getWidth(), getHeight(), true);// 双缓冲
 
 		// 自己的代码[begin]
-		// 画背景
+
+		Graphics2D graphics = (Graphics2D) screen.getGraphics();
 		GraphicsTools.backupGraphics(graphics);
+		// 画背景
 		graphics.setColor(Color.gray);
 		graphics.fillRect(0, 0, getWidth(), getHeight());
 
-		MapBean map = editorFrame.getCurrMapBean();
 		if (map != null) {
-			// 计算地图绘制数据
-			draw_width = map.width * Define.Main.grid_size;
-			draw_height = map.height * Define.Main.grid_size;
-			draw_x = (getWidth() - draw_width) / 2;
-			draw_y = (getHeight() - draw_height) / 2;
-
-			if (draw_x % Define.Main.grid_size != 0) {
-				draw_x = draw_x - draw_x % Define.Main.grid_size;
-			}
-			if (draw_y % Define.Main.grid_size != 0) {
-				draw_y = draw_y - draw_y % Define.Main.grid_size;
-			}
 
 			// 绘制可设置区域
 			graphics.setColor(Color.black);
@@ -195,20 +444,104 @@ public class MapEditorPanel extends JPanel {
 				}
 			}
 
-		}
+			if (isMouseIn) {
+				if (LabyrexMapEditorFrame.gi().getCurrClickButton() != null) {
 
-		if (isShowGrid()) {
-			graphics.setColor(Color.gray);
-			for (int i = 0; i < getWidth(); i += Define.Main.grid_size) {
-				graphics.drawLine(i, 0, i, getHeight());
-			}
-			for (int i = 0; i < getHeight(); i += Define.Main.grid_size) {
-				graphics.drawLine(0, i, getWidth(), i);
-			}
-		}
+					Image bgImage = null;
+					if (LabyrexMapEditorFrame.gi().getCurrClickButton() == LabyrexMapEditorFrame.gi()
+							.getEmitterButton()) {
+						bgImage = ImgSelector.emitterSelector(getMouseX(), getMouseY(), Define.Main.grid_size,
+								Define.Main.grid_size, LabyrexMapEditorFrame.gi().getCurrClickButton().getName(),
+								new Rect2D(draw_x, draw_y, draw_width, draw_height));
+					} else if (LabyrexMapEditorFrame.gi().getCurrClickButton() == LabyrexMapEditorFrame.gi()
+							.getReceiverButton()) {
+						bgImage = ImgSelector.receiverSelector(getMouseX(), getMouseY(), Define.Main.grid_size,
+								Define.Main.grid_size, LabyrexMapEditorFrame.gi().getCurrClickButton().getName(),
+								new Rect2D(draw_x, draw_y, draw_width, draw_height));
+					} else {
+						bgImage = ((ImageIcon) LabyrexMapEditorFrame.gi().getCurrClickButton().getIcon()).getImage();
+					}
 
-		GraphicsTools.restoreGraphics(graphics);
-		// 自己的代码[end]
+					EmitterShape emitterShape = CanvasSearcher.findEmitter(emitterList, getMouseX(), getMouseY());
+					ReceiverShape receiverShape = CanvasSearcher.findReceiver(receiverList, getMouseX(), getMouseY());
+					MirrorShape mirrorShape = CanvasSearcher.findMirror(mirrorList, getMouseX(), getMouseY());
+					if (emitterShape != null || receiverShape != null || mirrorShape != null) {
+
+					}
+
+					int _x = -100;
+					int _y = -100;
+
+					if (getMouseX() > draw_x && getMouseX() < draw_x + draw_width) {
+						_x = (getMouseX() - draw_x) / Define.Main.grid_size;
+					} else if (getMouseX() < draw_x && getMouseX() > draw_x - Define.Main.grid_size) {
+						_x = -1;
+					} else if (getMouseX() < draw_x + draw_width + Define.Main.grid_size
+							&& getMouseX() > draw_x + draw_width) {
+						_x = LabyrexMapEditorFrame.gi().getCurrMapBean().width;
+					}
+					if (getMouseY() > draw_y && getMouseY() < draw_y + draw_height) {
+						_y = (getMouseY() - draw_y) / Define.Main.grid_size;
+					} else if (getMouseY() < draw_y && getMouseY() > draw_y - Define.Main.grid_size) {
+						_y = -1;
+					} else if (getMouseY() < draw_y + draw_height + Define.Main.grid_size
+							&& getMouseY() > draw_y + draw_height) {
+						_y = LabyrexMapEditorFrame.gi().getCurrMapBean().height;
+					}
+
+					BufferedImage img = ImageTools.getImage(Define.Editor.x_icon_path);
+					if ((_x != -100 && _y != -100)
+							&& (_x == -1 || _x == LabyrexMapEditorFrame.gi().getCurrMapBean().width || _y == -1 || _y == LabyrexMapEditorFrame
+									.gi().getCurrMapBean().height)
+							&& !(_x == -1 && _y == -1)
+							&& !(_x == -1 && _y == LabyrexMapEditorFrame.gi().getCurrMapBean().height)
+							&& !(_x == LabyrexMapEditorFrame.gi().getCurrMapBean().width && _y == LabyrexMapEditorFrame
+									.gi().getCurrMapBean().height)
+							&& !(_x == LabyrexMapEditorFrame.gi().getCurrMapBean().width && _y == -1)) {
+
+						if (LabyrexMapEditorFrame.gi().getCurrClickButton() == LabyrexMapEditorFrame.gi()
+								.getMirrorButton()) {
+							graphics.drawImage(img, getMouseX() - img.getWidth() / 2,
+									getMouseY() - img.getHeight() / 2, null);
+						} else {
+							graphics.drawImage(bgImage, getMouseX() - Define.Main.grid_size / 2, getMouseY()
+									- Define.Main.grid_size / 2, Define.Main.grid_size, Define.Main.grid_size, null);
+						}
+					} else if (_x != -100 && _y != -100 && getMouseX() > draw_x && getMouseX() < draw_x + draw_width
+							&& getMouseY() > draw_y && getMouseY() < draw_y + draw_height) {
+						if (LabyrexMapEditorFrame.gi().getCurrClickButton() == LabyrexMapEditorFrame.gi()
+								.getEmitterButton()) {
+							graphics.drawImage(img, getMouseX() - img.getWidth() / 2,
+									getMouseY() - img.getHeight() / 2, null);
+						} else if (LabyrexMapEditorFrame.gi().getCurrClickButton() == LabyrexMapEditorFrame.gi()
+								.getReceiverButton()) {
+							graphics.drawImage(img, getMouseX() - img.getWidth() / 2,
+									getMouseY() - img.getHeight() / 2, null);
+						} else {
+							graphics.drawImage(bgImage, getMouseX() - Define.Main.grid_size / 2, getMouseY()
+									- Define.Main.grid_size / 2, Define.Main.grid_size, Define.Main.grid_size, null);
+						}
+					} else {
+						graphics.drawImage(img, getMouseX() - img.getWidth() / 2, getMouseY() - img.getHeight() / 2,
+								null);
+					}
+				}
+			}
+
+			// 绘制网格
+			if (isShowGrid()) {
+				graphics.setColor(Color.gray);
+				for (int i = 0; i < getWidth(); i += Define.Main.grid_size) {
+					graphics.drawLine(i, 0, i, getHeight());
+				}
+				for (int i = 0; i < getHeight(); i += Define.Main.grid_size) {
+					graphics.drawLine(0, i, getWidth(), i);
+				}
+			}
+
+			GraphicsTools.restoreGraphics(graphics);
+			// 自己的代码[end]
+		}
 
 		g.drawImage(screen, 0, 0, null);// 最后个参数一定要用null，这样可以防止drawImage调用update方法
 		g.dispose();
@@ -217,13 +550,5 @@ public class MapEditorPanel extends JPanel {
 	@Override
 	public void paint(Graphics g) {
 		update(g);// 我们在paint方法中，直接调用update方法
-	}
-
-	final static public BufferedImage createImage(int width, int height, boolean flag) {
-		if (flag) {
-			return new BufferedImage(width, height, 2);
-		} else {
-			return new BufferedImage(width, height, 1);
-		}
 	}
 }

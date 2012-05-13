@@ -25,7 +25,7 @@ public class MirrorMouseClickedAdapter extends MouseAdapter {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 
-		GameCanvas gameCanvas = (GameCanvas) GameControl.gi().getCurrGameCanvas();
+		GameCanvas gameCanvas = (GameCanvas) GameControl.gi().getCurrCanvas();
 		MapCanvas map = gameCanvas.getMapCanvas();
 
 		boolean lockSelected = gameCanvas.getToolCanvas().getLockButton().isSelected();

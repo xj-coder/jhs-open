@@ -7,15 +7,11 @@ import java.awt.Graphics2D;
 
 import com.jhs.open.Define;
 import com.jhs.open.tool.GraphicsTools;
-import com.jhs.open.tool.ImageResLoader;
+import com.jhs.open.tool.ImageTools;
 import com.jhs.open.ui.Canvas;
 import com.jhs.open.ui.shape.EXButton;
 
-
 public class ToolCanvas extends Canvas {
-
-	private static final long serialVersionUID = 1115121122104407235L;
-
 	private EXButton lockButton;
 	private EXButton unlockButton;
 
@@ -35,8 +31,8 @@ public class ToolCanvas extends Canvas {
 					Define.GamePanel.Tool.lock_button_y, Define.GamePanel.Tool.lock_button_width,
 					Define.GamePanel.Tool.lock_button_height);
 
-			lockButton.setFgImage(ImageResLoader.getImage(Define.Button.lock_bg_path));
-			lockButton.setLineImage(ImageResLoader.getImage(Define.Button.lock_line_path));
+			lockButton.setFgImage(ImageTools.getImage(Define.Button.lock_bg_path));
+			lockButton.setLineImage(ImageTools.getImage(Define.Button.lock_line_path));
 		}
 		return lockButton;
 	}
@@ -47,8 +43,8 @@ public class ToolCanvas extends Canvas {
 					Define.GamePanel.Tool.unlock_button_y, Define.GamePanel.Tool.unlock_button_width,
 					Define.GamePanel.Tool.unlock_button_height);
 
-			unlockButton.setFgImage(ImageResLoader.getImage(Define.Button.unlock_bg_path));
-			unlockButton.setLineImage(ImageResLoader.getImage(Define.Button.unlock_line_path));
+			unlockButton.setFgImage(ImageTools.getImage(Define.Button.unlock_bg_path));
+			unlockButton.setLineImage(ImageTools.getImage(Define.Button.unlock_line_path));
 		}
 		return unlockButton;
 	}

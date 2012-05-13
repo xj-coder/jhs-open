@@ -10,6 +10,6 @@ public class WinCanvasMouseClickedEvent extends MouseAdapter {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		GameControl.gi().setCurrCanvas(GameControl.G_Menu);
+		GameControl.gi().setCurrCanvasIndex(GameControl.G_Menu);
 	}
 }
