@@ -6,6 +6,8 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -47,6 +49,7 @@ import com.jhs.open.control.MapControl;
 import com.jhs.open.tool.CanvasSearcher;
 import com.jhs.open.tool.ImgSelector;
 import com.jhs.open.tool.ScreenTools;
+import com.jhs.open.ui.editor.GroupEditorPanel;
 import com.jhs.open.ui.editor.MapEditorPanel;
 import com.jhs.open.ui.editor.dialog.NewMapDialog;
 import com.jhs.open.ui.shape.EmitterShape;
@@ -71,8 +74,16 @@ public class LabyrexMapEditorFrame extends JFrame {
 	private JTree tree;
 
 	private MapEditorPanel mapPanel;
+	private GroupEditorPanel groupPanel;
+
+	private JPanel centerPanel;
 
 	private JPanel toolPanel;
+	private JCheckBox showGridCheckBox;
+	private JCheckBox showRulerCheckBox;
+	private JCheckBox showAssistCheckBox;
+
+	private JPanel operatePanel;
 
 	private JPanel mapInfoPanel;
 	private JTextField nameField;
@@ -183,6 +194,7 @@ public class LabyrexMapEditorFrame extends JFrame {
 			getTree().expandPath(new TreePath(cNode.getPath()));
 		}
 		getTree().updateUI();
+		getTree().setSelectionRow(0);
 	}
 
 	private void initUI() {
@@ -197,10 +209,9 @@ public class LabyrexMapEditorFrame extends JFrame {
 	public JSplitPane getSplitPane1() {
 		if (splitPane1 == null) {
 			splitPane1 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
-			splitPane1.setDividerLocation(160);
+
 			splitPane1.setLeftComponent(new JideScrollPane(getTree()));
-			splitPane1.setRightComponent(getMapPanel());
-			splitPane1.setEnabled(false);
+			splitPane1.setRightComponent(getCenterPanel());
 		}
 		return splitPane1;
 	}
@@ -208,12 +219,21 @@ public class LabyrexMapEditorFrame extends JFrame {
 	public JSplitPane getSplitPane2() {
 		if (splitPane2 == null) {
 			splitPane2 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
-			splitPane2.setDividerLocation(760);
 			splitPane2.setLeftComponent(getSplitPane1());
-			splitPane2.setRightComponent(getToolPanel());
-			splitPane2.setEnabled(false);
+			splitPane2.setRightComponent(getOperatePanel());
 		}
 		return splitPane2;
+	}
+
+	public JPanel getCenterPanel() {
+		if (centerPanel == null) {
+			centerPanel = new JPanel();
+			centerPanel.setLayout(new BorderLayout());
+
+			centerPanel.add(getToolPanel(), BorderLayout.NORTH);
+			centerPanel.add(getMapPanel(), BorderLayout.CENTER);
+		}
+		return centerPanel;
 	}
 
 	public JideToggleSplitButton getCurrClickButton() {
@@ -256,11 +276,14 @@ public class LabyrexMapEditorFrame extends JFrame {
 
 	private void resetData() {
 		if (currMapBean != null) {
-			getToolPanel().setVisible(true);
+			getSplitPane1().setRightComponent(getCenterPanel());
+			getOperatePanel().setVisible(true);
 		} else {
-			getToolPanel().setVisible(false);
+			getSplitPane1().setRightComponent(getGroupPanel());
+			getOperatePanel().setVisible(false);
 		}
-		getSplitPane2().updateUI();
+		getSplitPane1().setDividerLocation(160);
+		getSplitPane2().setDividerLocation(760);
 		updateAttrField();
 
 		SwingUtilities.invokeLater(new Runnable() {
@@ -383,16 +406,86 @@ public class LabyrexMapEditorFrame extends JFrame {
 		return mapPanel;
 	}
 
+	public GroupEditorPanel getGroupPanel() {
+		if (groupPanel == null) {
+			groupPanel = new GroupEditorPanel();
+		}
+		return groupPanel;
+	}
+
 	public JPanel getToolPanel() {
 		if (toolPanel == null) {
 			toolPanel = new JPanel();
-			toolPanel.setLayout(new BorderLayout());
-
-			toolPanel.add(getMapInfoPanel(), BorderLayout.NORTH);
-			toolPanel.add(getBodysPanel(), BorderLayout.CENTER);
-			toolPanel.add(getButtonPanel(), BorderLayout.SOUTH);
+			toolPanel.add(getShowGridCheckBox());
+			toolPanel.add(getShowRulerCheckBox());
+			toolPanel.add(getShowAssistCheckBox());
 		}
 		return toolPanel;
+	}
+
+	public JCheckBox getShowAssistCheckBox() {
+		if (showAssistCheckBox == null) {
+			showAssistCheckBox = new JCheckBox("显示位置提示");
+
+			showAssistCheckBox.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					getMapPanel().setShowAssist(getShowAssistCheckBox().isSelected());
+					getMapPanel().repaint();
+				}
+			});
+
+			showAssistCheckBox.setSelected(true);
+		}
+		return showAssistCheckBox;
+	}
+
+	public JCheckBox getShowGridCheckBox() {
+		if (showGridCheckBox == null) {
+			showGridCheckBox = new JCheckBox("显示网格");
+
+			showGridCheckBox.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					getMapPanel().setShowGrid(getShowGridCheckBox().isSelected());
+					getMapPanel().repaint();
+				}
+			});
+
+			showGridCheckBox.setSelected(true);
+		}
+		return showGridCheckBox;
+	}
+
+	public JCheckBox getShowRulerCheckBox() {
+		if (showRulerCheckBox == null) {
+			showRulerCheckBox = new JCheckBox("显示标尺");
+			showRulerCheckBox.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					getMapPanel().setShowRuler(getShowRulerCheckBox().isSelected());
+					getMapPanel().repaint();
+				}
+			});
+
+			showRulerCheckBox.setSelected(true);
+		}
+		return showRulerCheckBox;
+	}
+
+	public JPanel getOperatePanel() {
+		if (operatePanel == null) {
+			operatePanel = new JPanel();
+			operatePanel.setLayout(new BorderLayout());
+
+			operatePanel.add(getMapInfoPanel(), BorderLayout.NORTH);
+			operatePanel.add(getBodysPanel(), BorderLayout.CENTER);
+			operatePanel.add(getButtonPanel(), BorderLayout.SOUTH);
+		}
+		return operatePanel;
 	}
 
 	public JPanel getMapInfoPanel() {
@@ -434,6 +527,10 @@ public class LabyrexMapEditorFrame extends JFrame {
 	public JTextField getNameField() {
 		if (nameField == null) {
 			nameField = new JTextField();
+
+			NameFieldListener nameFieldListener = new NameFieldListener();
+			nameField.addActionListener(nameFieldListener);
+			nameField.addFocusListener(nameFieldListener);
 		}
 		return nameField;
 	}
@@ -445,6 +542,10 @@ public class LabyrexMapEditorFrame extends JFrame {
 			for (int i = 0; i < MapControl.getGroupCount(); i++) {
 				groupComboBox.addItem(MapControl.getGroup(i));
 			}
+
+			GroupFieldListener groupFieldListener = new GroupFieldListener();
+			groupComboBox.addActionListener(groupFieldListener);
+			groupComboBox.addFocusListener(groupFieldListener);
 		}
 		return groupComboBox;
 	}
@@ -452,6 +553,10 @@ public class LabyrexMapEditorFrame extends JFrame {
 	public JTextField getWidthField() {
 		if (widthField == null) {
 			widthField = new JTextField();
+
+			WidthFieldListener widthFieldListener = new WidthFieldListener();
+			widthField.addActionListener(widthFieldListener);
+			widthField.addFocusListener(widthFieldListener);
 		}
 		return widthField;
 	}
@@ -459,6 +564,10 @@ public class LabyrexMapEditorFrame extends JFrame {
 	public JTextField getHeightField() {
 		if (heightField == null) {
 			heightField = new JTextField();
+
+			HeightFieldListener heightFieldListener = new HeightFieldListener();
+			heightField.addActionListener(heightFieldListener);
+			heightField.addFocusListener(heightFieldListener);
 		}
 		return heightField;
 	}
@@ -817,8 +926,8 @@ public class LabyrexMapEditorFrame extends JFrame {
 							if (groupBean.sort > group.sort) {
 								DefaultMutableTreeNode newGroupNode = new DefaultMutableTreeNode(group);
 								rootNode.insert(newGroupNode, i);
-								LabyrexMapEditorFrame.gi().getTree()
-										.setSelectionPath(new TreePath(newGroupNode.getPath()));
+								LabyrexMapEditorFrame.gi().getTree().setSelectionPath(
+										new TreePath(newGroupNode.getPath()));
 								break;
 							}
 
@@ -1085,8 +1194,8 @@ public class LabyrexMapEditorFrame extends JFrame {
 				}
 
 				for (int i = 0; i < getCurrMapBean().width; i++) {
-					MirrorBean bean = CanvasSearcher.findMirror(
-							getCurrMapBean().mirrorList.toArray(new MirrorBean[] {}), i, shape.bean.y);
+					MirrorBean bean = CanvasSearcher.findMirror(getCurrMapBean().mirrorList
+							.toArray(new MirrorBean[] {}), i, shape.bean.y);
 					if (bean == null || bean == shape.bean) {
 						xItems.add(i);
 					}
@@ -1110,16 +1219,16 @@ public class LabyrexMapEditorFrame extends JFrame {
 				}
 				if (shape.bean.y == -1 || shape.bean.y == getCurrMapBean().height) {
 					for (int i = 0; i < getCurrMapBean().width; i++) {
-						EmitterBean bean = CanvasSearcher.findEmitter(
-								getCurrMapBean().emitterList.toArray(new EmitterBean[] {}), i, shape.bean.y);
+						EmitterBean bean = CanvasSearcher.findEmitter(getCurrMapBean().emitterList
+								.toArray(new EmitterBean[] {}), i, shape.bean.y);
 						if (bean == null || bean == shape.bean) {
 							xItems.add(i);
 						}
 					}
 				} else {
 					for (int i = -1; i <= getCurrMapBean().width; i++) {
-						EmitterBean bean = CanvasSearcher.findEmitter(
-								getCurrMapBean().emitterList.toArray(new EmitterBean[] {}), i, shape.bean.y);
+						EmitterBean bean = CanvasSearcher.findEmitter(getCurrMapBean().emitterList
+								.toArray(new EmitterBean[] {}), i, shape.bean.y);
 						if (bean == null || bean == shape.bean) {
 							xItems.add(i);
 						}
@@ -1144,16 +1253,16 @@ public class LabyrexMapEditorFrame extends JFrame {
 				}
 				if (shape.bean.y == -1 || shape.bean.y == getCurrMapBean().height) {
 					for (int i = 0; i < getCurrMapBean().width; i++) {
-						ReceiverBean bean = CanvasSearcher.findReceiver(
-								getCurrMapBean().receiverList.toArray(new ReceiverBean[] {}), i, shape.bean.y);
+						ReceiverBean bean = CanvasSearcher.findReceiver(getCurrMapBean().receiverList
+								.toArray(new ReceiverBean[] {}), i, shape.bean.y);
 						if (bean == null || bean == shape.bean) {
 							xItems.add(i);
 						}
 					}
 				} else {
 					for (int i = -1; i <= getCurrMapBean().width; i++) {
-						ReceiverBean bean = CanvasSearcher.findReceiver(
-								getCurrMapBean().receiverList.toArray(new ReceiverBean[] {}), i, shape.bean.y);
+						ReceiverBean bean = CanvasSearcher.findReceiver(getCurrMapBean().receiverList
+								.toArray(new ReceiverBean[] {}), i, shape.bean.y);
 						if (bean == null || bean == shape.bean) {
 							xItems.add(i);
 						}
@@ -1259,20 +1368,20 @@ public class LabyrexMapEditorFrame extends JFrame {
 
 				if (value == -1 || value == getCurrMapBean().width) {
 					for (int i = -1; i <= getCurrMapBean().height; i++) {
-						EmitterBean bean = CanvasSearcher.findEmitter(
-								getCurrMapBean().emitterList.toArray(new EmitterBean[] {}), value, i);
+						EmitterBean bean = CanvasSearcher.findEmitter(getCurrMapBean().emitterList
+								.toArray(new EmitterBean[] {}), value, i);
 						if (bean == null || bean == shape.bean) {
 							getBodyYComboBox().addItem(i);
 						}
 					}
 				} else {
-					EmitterBean bean1 = CanvasSearcher.findEmitter(
-							getCurrMapBean().emitterList.toArray(new EmitterBean[] {}), value, -1);
+					EmitterBean bean1 = CanvasSearcher.findEmitter(getCurrMapBean().emitterList
+							.toArray(new EmitterBean[] {}), value, -1);
 					if (bean1 == null || bean1 == shape.bean) {
 						getBodyYComboBox().addItem(-1);
 					}
-					EmitterBean bean2 = CanvasSearcher.findEmitter(
-							getCurrMapBean().emitterList.toArray(new EmitterBean[] {}), value, getCurrMapBean().height);
+					EmitterBean bean2 = CanvasSearcher.findEmitter(getCurrMapBean().emitterList
+							.toArray(new EmitterBean[] {}), value, getCurrMapBean().height);
 					if (bean2 == null || bean2 == shape.bean) {
 						getBodyYComboBox().addItem(getCurrMapBean().height);
 					}
@@ -1285,21 +1394,20 @@ public class LabyrexMapEditorFrame extends JFrame {
 				ReceiverShape shape = (ReceiverShape) selectCanvas;
 				if (value == -1 || value == getCurrMapBean().width) {
 					for (int i = -1; i <= getCurrMapBean().height; i++) {
-						ReceiverBean bean = CanvasSearcher.findReceiver(
-								getCurrMapBean().receiverList.toArray(new ReceiverBean[] {}), value, i);
+						ReceiverBean bean = CanvasSearcher.findReceiver(getCurrMapBean().receiverList
+								.toArray(new ReceiverBean[] {}), value, i);
 						if (bean == null || bean == shape.bean) {
 							getBodyYComboBox().addItem(i);
 						}
 					}
 				} else {
-					ReceiverBean bean1 = CanvasSearcher.findReceiver(
-							getCurrMapBean().receiverList.toArray(new ReceiverBean[] {}), value, -1);
+					ReceiverBean bean1 = CanvasSearcher.findReceiver(getCurrMapBean().receiverList
+							.toArray(new ReceiverBean[] {}), value, -1);
 					if (bean1 == null || bean1 == shape.bean) {
 						getBodyYComboBox().addItem(-1);
 					}
-					ReceiverBean bean2 = CanvasSearcher.findReceiver(
-							getCurrMapBean().receiverList.toArray(new ReceiverBean[] {}), value,
-							getCurrMapBean().height);
+					ReceiverBean bean2 = CanvasSearcher.findReceiver(getCurrMapBean().receiverList
+							.toArray(new ReceiverBean[] {}), value, getCurrMapBean().height);
 					if (bean2 == null || bean2 == shape.bean) {
 						getBodyYComboBox().addItem(getCurrMapBean().height);
 					}
@@ -1312,8 +1420,8 @@ public class LabyrexMapEditorFrame extends JFrame {
 				MirrorShape shape = (MirrorShape) selectCanvas;
 
 				for (int i = 0; i < getCurrMapBean().height; i++) {
-					MirrorBean bean = CanvasSearcher.findMirror(
-							getCurrMapBean().mirrorList.toArray(new MirrorBean[] {}), value, i);
+					MirrorBean bean = CanvasSearcher.findMirror(getCurrMapBean().mirrorList
+							.toArray(new MirrorBean[] {}), value, i);
 					if (bean == null || bean == shape.bean) {
 						getBodyYComboBox().addItem(i);
 					}
@@ -1334,6 +1442,159 @@ public class LabyrexMapEditorFrame extends JFrame {
 			if (isEnable) {
 				updateBodyInfoValue();
 			}
+		}
+
+		public boolean isEnable() {
+			return isEnable;
+		}
+
+		public void setEnable(boolean isEnable) {
+			this.isEnable = isEnable;
+		}
+	}
+
+	class NameFieldListener implements ActionListener, FocusListener {
+		private boolean isEnable = true;
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			setEnable(false);
+			change();
+			setEnable(true);
+		}
+
+		@Override
+		public void focusGained(FocusEvent e) {
+		}
+
+		@Override
+		public void focusLost(FocusEvent e) {
+			if (isEnable) {
+				change();
+			}
+		}
+
+		private void change() {
+			String name = getNameField().getText();
+
+			if (name == null || name.trim().equals("")) {
+				JOptionPane.showMessageDialog(getNameField(), "关卡名不能为空");
+				getNameField().setText(LabyrexMapEditorFrame.gi.getCurrMapBean().getName());
+				return;
+			}
+
+			GroupBean group = (GroupBean) getGroupComboBox().getSelectedItem();
+			MapBean map = group.getMap(name);
+			if (map != null && !map.equals(getCurrMapBean())) {
+				JOptionPane.showMessageDialog(getNameField(), "关卡名已存在");
+				getNameField().setText(LabyrexMapEditorFrame.gi.getCurrMapBean().getName());
+				return;
+			} else {
+				LabyrexMapEditorFrame.gi.getCurrMapBean().setName(name);
+				getTree().updateUI();
+			}
+		}
+
+		public boolean isEnable() {
+			return isEnable;
+		}
+
+		public void setEnable(boolean isEnable) {
+			this.isEnable = isEnable;
+		}
+	}
+
+	class GroupFieldListener implements ActionListener, FocusListener {
+		private boolean isEnable = true;
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			setEnable(false);
+			change();
+			setEnable(true);
+		}
+
+		@Override
+		public void focusGained(FocusEvent e) {
+		}
+
+		@Override
+		public void focusLost(FocusEvent e) {
+			if (isEnable) {
+				change();
+			}
+		}
+
+		private void change() {
+
+		}
+
+		public boolean isEnable() {
+			return isEnable;
+		}
+
+		public void setEnable(boolean isEnable) {
+			this.isEnable = isEnable;
+		}
+	}
+
+	class HeightFieldListener implements ActionListener, FocusListener {
+		private boolean isEnable = true;
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			setEnable(false);
+			change();
+			setEnable(true);
+		}
+
+		@Override
+		public void focusGained(FocusEvent e) {
+		}
+
+		@Override
+		public void focusLost(FocusEvent e) {
+			if (isEnable) {
+				change();
+			}
+		}
+
+		private void change() {
+
+		}
+
+		public boolean isEnable() {
+			return isEnable;
+		}
+
+		public void setEnable(boolean isEnable) {
+			this.isEnable = isEnable;
+		}
+	}
+
+	class WidthFieldListener implements ActionListener, FocusListener {
+		private boolean isEnable = true;
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			setEnable(false);
+			change();
+			setEnable(true);
+		}
+
+		@Override
+		public void focusGained(FocusEvent e) {
+		}
+
+		@Override
+		public void focusLost(FocusEvent e) {
+			if (isEnable) {
+				change();
+			}
+		}
+
+		private void change() {
+
 		}
 
 		public boolean isEnable() {

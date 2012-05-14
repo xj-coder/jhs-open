@@ -2,11 +2,12 @@ package com.jhs.open.ui.shape;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
 
 import com.jhs.open.Define;
 import com.jhs.open.bean.ReceiverBean;
+import com.jhs.open.bean.Rect2D;
 import com.jhs.open.tool.GraphicsTools;
+import com.jhs.open.tool.ImgSelector;
 import com.jhs.open.ui.Canvas;
 
 /**
@@ -17,8 +18,6 @@ import com.jhs.open.ui.Canvas;
  */
 public class ReceiverShape extends Canvas {
 	public ReceiverBean bean;
-
-	public Image bgImage;
 
 	public ReceiverShape(ReceiverBean bean) {
 		super(bean.x * Define.Main.grid_size, bean.y * Define.Main.grid_size, Define.Main.grid_size,
@@ -51,8 +50,9 @@ public class ReceiverShape extends Canvas {
 			offsetY = owner.y + y;
 		}
 
-		if (bgImage != null) {
-			g.drawImage(bgImage, offsetX, offsetY, Define.Main.grid_size, Define.Main.grid_size, null);
+		if (owner != null) {
+			g.drawImage(ImgSelector.receiverSelector(this, new Rect2D(owner.x, owner.y, owner.width, owner.height)),
+					offsetX, offsetY, Define.Main.grid_size, Define.Main.grid_size, null);
 		}
 
 		if (isSelected) {

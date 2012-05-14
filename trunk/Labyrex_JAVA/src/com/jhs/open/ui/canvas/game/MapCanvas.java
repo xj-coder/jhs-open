@@ -6,14 +6,12 @@ import java.util.ArrayList;
 
 import com.jhs.open.Define;
 import com.jhs.open.bean.MapBean;
-import com.jhs.open.bean.Rect2D;
 import com.jhs.open.control.GameControl;
 import com.jhs.open.control.event.map.EmitterMouseClickedAdapter;
 import com.jhs.open.control.event.map.MirrorMouseClickedAdapter;
 import com.jhs.open.control.event.map.MouseMoveOnMapAdapter;
 import com.jhs.open.control.event.map.ReceiverMouseClickedAdapter;
 import com.jhs.open.tool.ImageTools;
-import com.jhs.open.tool.ImgSelector;
 import com.jhs.open.ui.Canvas;
 import com.jhs.open.ui.shape.EmitterShape;
 import com.jhs.open.ui.shape.MirrorShape;
@@ -56,7 +54,8 @@ public class MapCanvas extends Canvas {
 					// EmitterShape emitterShape = new EmitterShape(map.emitterList.get(i).x * Define.Main.grid_size,
 					// map.emitterList.get(i).y * Define.Main.grid_size, map.emitterList.get(i));
 
-					emitterShape.bgImage = ImgSelector.emitterSelector(emitterShape, new Rect2D(0, 0, width, height));
+					// emitterShape.bgImage = ImgSelector.emitterSelector(emitterShape, new Rect2D(0, 0, width,
+					// height));
 					emitterShape.addMouseListener(new MouseMoveOnMapAdapter(emitterShape));
 					emitterShape.addMouseListener(new EmitterMouseClickedAdapter(emitterShape));
 
@@ -72,8 +71,8 @@ public class MapCanvas extends Canvas {
 					// Define.Main.grid_size,
 					// map.receiverList.get(i).y * Define.Main.grid_size, map.receiverList.get(i));
 
-					receiverShape.bgImage = ImgSelector
-							.receiverSelector(receiverShape, new Rect2D(0, 0, width, height));
+					// receiverShape.bgImage = ImgSelector
+					// .receiverSelector(receiverShape, new Rect2D(0, 0, width, height));
 					receiverShape.addMouseListener(new MouseMoveOnMapAdapter(receiverShape));
 					receiverShape.addMouseListener(new ReceiverMouseClickedAdapter(receiverShape));
 
