@@ -34,7 +34,7 @@ import com.jhs.open.bean.ReceiverBean;
  * 
  */
 
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@SuppressWarnings({ "unchecked"})
 public class MapControl {
 	public final static String easy = "easy";
 	public final static String moderate = "moderate";

@@ -7,10 +7,23 @@ import com.jhs.open.ui.editor.MapEditorPanel;
 
 public class MapPanelMouseAdapter extends MouseAdapter {
 
-	private MapEditorPanel editorPanel;
+	private final MapEditorPanel editorPanel;
 
 	public MapPanelMouseAdapter(MapEditorPanel editorPanel) {
 		this.editorPanel = editorPanel;
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		editorPanel.setMouseDrag(true);
+
+		editorPanel.setMouseX(e.getX());
+		editorPanel.setMouseY(e.getY());
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		editorPanel.setMouseDrag(false);
 	}
 
 	@Override
