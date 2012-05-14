@@ -181,13 +181,13 @@ public class ImgSelector {
 	 * 根据Shape的x、y值判断Shape所在的方向。
 	 */
 	public static EDir getDir(Canvas canvas, Rect2D rec) {
-		if (canvas.x < rec.x) {
+		if (canvas.x < 0) {
 			return EDir.DIR_LEFT;
-		} else if (canvas.y < rec.y) {
+		} else if (canvas.y < 0) {
 			return EDir.DIR_UP;
-		} else if (canvas.x >= rec.x + rec.w) {
+		} else if (canvas.x >= rec.w) {
 			return EDir.DIR_RIGHT;
-		} else if (canvas.y >= rec.y + rec.h) {
+		} else if (canvas.y >= rec.h) {
 			return EDir.DIR_DOWN;
 		}
 
