@@ -208,7 +208,7 @@ public class LabyrexMapEditorFrame extends JFrame {
 	public JSplitPane getSplitPane2() {
 		if (splitPane2 == null) {
 			splitPane2 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
-			splitPane2.setDividerLocation(770);
+			splitPane2.setDividerLocation(760);
 			splitPane2.setLeftComponent(getSplitPane1());
 			splitPane2.setRightComponent(getToolPanel());
 			splitPane2.setEnabled(false);

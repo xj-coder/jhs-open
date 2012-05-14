@@ -19,8 +19,8 @@ public class MirrorShape extends Canvas {
 	public MirrorBean bean;
 
 	public MirrorShape(MirrorBean bean) {
-		super(bean.x * Define.Main.grid_size, bean.y * Define.Main.grid_size, Define.Main.grid_size,
-				Define.Main.grid_size);
+		super(bean.x * Define.Main.grid_size, bean.y * Define.Main.grid_size,
+				Define.Main.grid_size, Define.Main.grid_size);
 		this.bean = bean;
 	}
 
@@ -49,22 +49,25 @@ public class MirrorShape extends Canvas {
 			offsetY = owner.y + y;
 		}
 
-		g.drawImage(ImgSelector.mirrorSelector(this), offsetX, offsetY, Define.Main.grid_size, Define.Main.grid_size,
-				null);
+		g.drawImage(ImgSelector.mirrorSelector(this), offsetX, offsetY,
+				Define.Main.grid_size, Define.Main.grid_size, null);
 
 		if (bean.isLock) {
 			GraphicsTools.backupGraphics(g);
 			g.setColor(Color.white);
 
-			g.fillOval(offsetX + Define.Main.grid_size / 4, offsetY + Define.Main.grid_size / 4,
-					Define.Main.grid_size / 2, Define.Main.grid_size / 2);
+			g.fillOval(offsetX + Define.Main.grid_size / 4, offsetY
+					+ Define.Main.grid_size / 4, Define.Main.grid_size / 2,
+					Define.Main.grid_size / 2);
 			GraphicsTools.restoreGraphics(g);
 		}
 
 		if (isSelected) {
 			GraphicsTools.backupGraphics(g);
-			g.setColor(new Color(Color.RED.getRed(), Color.RED.getGreen(), Color.RED.getBlue(), 70));
-			g.fillRect(offsetX, offsetY, Define.Main.grid_size, Define.Main.grid_size);
+			g.setColor(new Color(Color.RED.getRed(), Color.RED.getGreen(),
+					Color.RED.getBlue(), 70));
+			g.fillRect(offsetX, offsetY, Define.Main.grid_size,
+					Define.Main.grid_size);
 			GraphicsTools.restoreGraphics(g);
 		}
 
