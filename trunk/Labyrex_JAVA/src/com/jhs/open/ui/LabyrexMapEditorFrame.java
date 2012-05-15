@@ -611,6 +611,15 @@ public class LabyrexMapEditorFrame extends JFrame {
 	public JCheckBox getEnableCheckBox() {
 		if (enableCheckBox == null) {
 			enableCheckBox = new JCheckBox("初始可见性", false);
+
+			enableCheckBox.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					getCurrMapBean().setEnabled(getEnableCheckBox().isSelected());
+					getCurrMapBean().setSave(false);
+				}
+			});
 		}
 		return enableCheckBox;
 	}
@@ -880,6 +889,15 @@ public class LabyrexMapEditorFrame extends JFrame {
 	public JButton getRestoreButton() {
 		if (restoreButton == null) {
 			restoreButton = new JButton("还原");
+			restoreButton.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					getCurrMapBean().restore();
+					setCurrMapBean(getCurrMapBean());
+					getCurrMapBean().setSave(true);
+				}
+			});
 		}
 		return restoreButton;
 	}
