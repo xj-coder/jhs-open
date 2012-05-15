@@ -150,7 +150,8 @@ public class MapBean implements IBackupable<MapBean>, Comparable<MapBean> {
 		int result = sort - map.sort;
 
 		if (result == 0) {
-			System.err.println("ERR : map[" + map + "].sort == map[" + this + "]");
+			System.err.println("ERR : map[" + map + "].sort == map[" + this
+					+ "]");
 		}
 
 		return result;
@@ -163,13 +164,19 @@ public class MapBean implements IBackupable<MapBean>, Comparable<MapBean> {
 
 	@Override
 	public boolean equals(Object obj) {
-		MapBean map = (MapBean) obj;
+		if (obj instanceof MapBean) {
+			MapBean map = (MapBean) obj;
 
-		if (!map.name.equals(name)) {
+			if (!map.name.equals(name)) {
+				return false;
+			}
+			if (!map.group.equals(group)) {
+				return false;
+			}
+			return true;
+		} else {
 			return false;
 		}
-
-		return true;
 	}
 
 	@Override

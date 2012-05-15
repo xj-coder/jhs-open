@@ -149,13 +149,17 @@ public class GroupBean implements IBackupable<GroupBean>, Comparable<GroupBean> 
 
 	@Override
 	public boolean equals(Object obj) {
-		GroupBean group = (GroupBean) obj;
+		if (obj instanceof GroupBean) {
+			GroupBean group = (GroupBean) obj;
 
-		if (!group.getName().equals(name)) {
+			if (!group.getName().equals(name)) {
+				return false;
+			}
+
+			return true;
+		} else {
 			return false;
 		}
-
-		return true;
 	}
 
 	@Override
