@@ -150,8 +150,7 @@ public class MapBean implements IBackupable<MapBean>, Comparable<MapBean> {
 		int result = sort - map.sort;
 
 		if (result == 0) {
-			System.err.println("ERR : map[" + map + "].sort == map[" + this
-					+ "]");
+			System.err.println("ERR : map[" + map + "].sort == map[" + this + "]");
 		}
 
 		return result;
@@ -188,6 +187,7 @@ public class MapBean implements IBackupable<MapBean>, Comparable<MapBean> {
 		map.width = width;
 		map.height = height;
 		map.sort = sort;
+		map.group = group;
 
 		for (int i = 0; i < receiverList.size(); i++) {
 			map.receiverList.add(receiverList.get(i).copy());
@@ -236,6 +236,8 @@ public class MapBean implements IBackupable<MapBean>, Comparable<MapBean> {
 			receiverList = backup.receiverList;
 			emitterList = backup.emitterList;
 			mirrorList = backup.mirrorList;
+
+			backup(key);
 		}
 
 		return backup;
