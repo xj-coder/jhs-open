@@ -229,7 +229,7 @@ public class Define {
 
 	public static final class Editor {
 		public static int WIDTH = 1024;
-		public static int HEIGHT = 680;
+		public static int HEIGHT = 700;
 
 		public static final int min_map_width = 6;
 		public static final int min_map_height = 6;
