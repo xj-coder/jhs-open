@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jhs.open.bean.EmitterBean;
+import com.jhs.open.bean.MapBean;
 import com.jhs.open.bean.MirrorBean;
 import com.jhs.open.bean.ReceiverBean;
 import com.jhs.open.control.GameControl;
 import com.jhs.open.ui.Canvas;
+import com.jhs.open.ui.LabyrexMapEditorFrame;
 import com.jhs.open.ui.canvas.game.MapCanvas;
 import com.jhs.open.ui.canvas.panel.GameCanvas;
 import com.jhs.open.ui.shape.BallShape;
@@ -159,5 +161,68 @@ public class CanvasSearcher {
 		} else {
 			return true;
 		}
+	}
+
+	public static EmitterBean hasEmitterBean(MapBean map, int x, int y) {
+		for (int i = 0; i < map.emitterList.size(); i++) {
+			if (map.emitterList.get(i).x == x && map.emitterList.get(i).y == y) {
+				return map.emitterList.get(i);
+			}
+		}
+
+		return null;
+	}
+
+	public static MirrorBean hasMirrorBean(MapBean map, int x, int y) {
+		for (int i = 0; i < map.mirrorList.size(); i++) {
+			if (map.mirrorList.get(i).x == x && map.mirrorList.get(i).y == y) {
+				return map.mirrorList.get(i);
+			}
+		}
+
+		return null;
+	}
+
+	public static ReceiverBean hasReceiverBean(MapBean map, int x, int y) {
+		for (int i = 0; i < map.receiverList.size(); i++) {
+			if (map.receiverList.get(i).x == x && map.receiverList.get(i).y == y) {
+				return map.receiverList.get(i);
+			}
+		}
+
+		return null;
+	}
+
+	public static boolean hasBean(MapBean map, int x, int y) {
+		return hasMirrorBean(map, x, y) != null || hasEmitterBean(map, x, y) != null
+				|| hasReceiverBean(map, x, y) != null;
+	}
+
+	public static boolean inEmitterRange(int x, int y) {
+		if ((x == -1 || x == LabyrexMapEditorFrame.gi().getCurrMapBean().width) && y >= 0
+				&& y < LabyrexMapEditorFrame.gi().getCurrMapBean().height) {
+			return true;
+		}
+		if ((y == -1 || y == LabyrexMapEditorFrame.gi().getCurrMapBean().height) && x >= 0
+				&& x < LabyrexMapEditorFrame.gi().getCurrMapBean().width) {
+			return true;
+		}
+		return false;
+	}
+
+	public static boolean inReceiverRange(int x, int y) {
+		return inEmitterRange(x, y);
+	}
+
+	public static boolean inMirrorRange(int x, int y) {
+		if (x >= 0 && x < LabyrexMapEditorFrame.gi().getCurrMapBean().width && y >= 0
+				&& y < LabyrexMapEditorFrame.gi().getCurrMapBean().height) {
+			return true;
+		}
+		return false;
+	}
+
+	public static boolean inDrawableRange(int x, int y) {
+		return inMirrorRange(x, y) || inReceiverRange(x, y) || inEmitterRange(x, y);
 	}
 }

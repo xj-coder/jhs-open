@@ -4,6 +4,9 @@ import java.awt.Image;
 import java.util.Vector;
 
 import com.jhs.open.Define;
+import com.jhs.open.bean.EmitterBean;
+import com.jhs.open.bean.MirrorBean;
+import com.jhs.open.bean.ReceiverBean;
 import com.jhs.open.bean.Rect2D;
 import com.jhs.open.control.GameControl;
 import com.jhs.open.ui.Canvas;
@@ -51,7 +54,7 @@ public class ImgSelector {
 	public static Image emitterSelector(EmitterShape emitter, Rect2D rec) {
 		Image image = null;
 
-		boolean inPath = inPath(emitter).size() == 0 ? false : true;
+		boolean inPath = inPath(emitter.bean).size() == 0 ? false : true;
 
 		int degree = 0;// 选择角度
 
@@ -106,7 +109,7 @@ public class ImgSelector {
 	public static Image receiverSelector(ReceiverShape receiver, Rect2D rec) {
 		Image image = null;
 
-		boolean inPath = inPath(receiver).size() == 0 ? false : true;
+		boolean inPath = inPath(receiver.bean).size() == 0 ? false : true;
 
 		int degree = 0;
 		switch (getDir(receiver, rec)) {
@@ -160,7 +163,7 @@ public class ImgSelector {
 	public static Image mirrorSelector(MirrorShape mirror) {
 		Image image = null;
 
-		boolean inPath = inPath(mirror).size() == 0 ? false : true;
+		boolean inPath = inPath(mirror.bean).size() == 0 ? false : true;
 
 		image = ImageTools.cut(Define.IMG_PATH + Define.Mirror.typeMap.get(mirror.bean.type) + (inPath ? "_r" : "")
 				+ ".png", 0, 0, mirror.width, mirror.height, "png");
@@ -211,7 +214,7 @@ public class ImgSelector {
 		return EDir.DIR_LEFT;
 	}
 
-	public static Vector<PathShape> inPath(EmitterShape shape) {
+	public static Vector<PathShape> inPath(EmitterBean bean) {
 		Vector<PathShape> paths = new Vector<PathShape>();
 		if (GameControl.gi().getCurrCanvas() instanceof GameCanvas) {
 			MapCanvas map = ((GameCanvas) GameControl.gi().getCurrCanvas()).getMapCanvas();
@@ -219,7 +222,7 @@ public class ImgSelector {
 			if (map != null) {
 				for (int i = 0; i < map.getPathCount(); i++) {
 					PathShape path = map.getPath(i);
-					if (path.emitter == shape) {
+					if (path.bean.emitter == bean) {
 						paths.add(path);
 					}
 				}
@@ -228,7 +231,7 @@ public class ImgSelector {
 		return paths;
 	}
 
-	public static Vector<PathShape> inPath(ReceiverShape shape) {
+	public static Vector<PathShape> inPath(ReceiverBean bean) {
 		Vector<PathShape> paths = new Vector<PathShape>();
 		if (GameControl.gi().getCurrCanvas() instanceof GameCanvas) {
 			MapCanvas map = ((GameCanvas) GameControl.gi().getCurrCanvas()).getMapCanvas();
@@ -236,7 +239,7 @@ public class ImgSelector {
 			if (map != null) {
 				for (int i = 0; i < map.getPathCount(); i++) {
 					PathShape path = map.getPath(i);
-					if (path.receiver == shape) {
+					if (path.bean.receiver == bean) {
 						paths.add(path);
 					}
 				}
@@ -245,7 +248,7 @@ public class ImgSelector {
 		return paths;
 	}
 
-	public static Vector<PathShape> inPath(MirrorShape shape) {
+	public static Vector<PathShape> inPath(MirrorBean bean) {
 		Vector<PathShape> paths = new Vector<PathShape>();
 		if (GameControl.gi().getCurrCanvas() instanceof GameCanvas) {
 			MapCanvas map = ((GameCanvas) GameControl.gi().getCurrCanvas()).getMapCanvas();
@@ -253,8 +256,8 @@ public class ImgSelector {
 			if (map != null) {
 				for (int i = 0; i < map.getPathCount(); i++) {
 					PathShape path = map.getPath(i);
-					for (int j = 0; j < path.mirrors.size(); j++) {
-						if (path.mirrors.get(j) == shape) {
+					for (int j = 0; j < path.bean.mirrors.size(); j++) {
+						if (path.bean.mirrors.get(j) == bean) {
 							paths.add(path);
 						}
 					}

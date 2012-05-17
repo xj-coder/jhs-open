@@ -11,13 +11,11 @@ import com.jhs.open.bean.impl.IBackupable;
  * @author JHS
  * 
  */
-public class MirrorBean implements IBackupable<MirrorBean> {
+public class MirrorBean extends BodyBean implements IBackupable<MirrorBean> {
 	public static final String LEFT = "L";
 	public static final String RIGHT = "R";
 
 	public String type;// 类型，左挡板和右挡板两种，以挡板头所指的方向为准
-	public int x;
-	public int y;
 	public boolean isLock = false;
 
 	@Override

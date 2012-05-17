@@ -15,7 +15,6 @@ import com.jhs.open.ui.shape.BallShape;
 import com.jhs.open.ui.shape.EDir;
 import com.jhs.open.ui.shape.EmitterShape;
 
-
 public class EmitterMouseClickedAdapter extends MouseAdapter {
 
 	private EmitterShape emitter;
@@ -27,7 +26,7 @@ public class EmitterMouseClickedAdapter extends MouseAdapter {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// 如果该发射器已经有连线则点击无效
-		if (ImgSelector.inPath(emitter).size() != 0) {
+		if (ImgSelector.inPath(emitter.bean).size() != 0) {
 			return;
 		}
 
@@ -68,8 +67,9 @@ public class EmitterMouseClickedAdapter extends MouseAdapter {
 
 		ball.dir = dir;
 		ball.type = emitter.bean.type;
-		ball.path.emitter = emitter;
+		ball.path.bean.emitter = emitter.bean;
 
+		// 关闭所有事件,当球消失后重新开启
 		ListenerControl.gi().loopRemoveCanvasListener(map);
 		// ListenerControl.gi().closeAllMapListener();
 

@@ -1,7 +1,6 @@
 package com.jhs.open.control.event.map;
 
-
-import java.awt.*;
+import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Vector;
@@ -26,11 +25,11 @@ public class MouseMoveOnMapAdapter extends MouseAdapter {
 		Vector<PathShape> thickPaths = null;
 
 		if (canvas instanceof EmitterShape) {
-			thickPaths = ImgSelector.inPath((EmitterShape) canvas);
+			thickPaths = ImgSelector.inPath(((EmitterShape) canvas).bean);
 		} else if (canvas instanceof ReceiverShape) {
-			thickPaths = ImgSelector.inPath((ReceiverShape) canvas);
+			thickPaths = ImgSelector.inPath(((ReceiverShape) canvas).bean);
 		} else if (canvas instanceof MirrorShape) {
-			thickPaths = ImgSelector.inPath((MirrorShape) canvas);
+			thickPaths = ImgSelector.inPath(((MirrorShape) canvas).bean);
 			LabyrexFrame.gi().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		}
 
@@ -48,11 +47,11 @@ public class MouseMoveOnMapAdapter extends MouseAdapter {
 		Vector<PathShape> thickPaths = null;
 
 		if (canvas instanceof EmitterShape) {
-			thickPaths = ImgSelector.inPath((EmitterShape) canvas);
+			thickPaths = ImgSelector.inPath(((EmitterShape) canvas).bean);
 		} else if (canvas instanceof ReceiverShape) {
-			thickPaths = ImgSelector.inPath((ReceiverShape) canvas);
+			thickPaths = ImgSelector.inPath(((ReceiverShape) canvas).bean);
 		} else if (canvas instanceof MirrorShape) {
-			thickPaths = ImgSelector.inPath((MirrorShape) canvas);
+			thickPaths = ImgSelector.inPath(((MirrorShape) canvas).bean);
 		}
 
 		if (thickPaths != null) {

@@ -4,20 +4,19 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.util.Vector;
 
+import com.jhs.open.bean.BodyBean;
+import com.jhs.open.bean.PathBean;
 import com.jhs.open.ui.Canvas;
 
 public class PathShape extends Canvas {
-	public EmitterShape emitter;
-	public ReceiverShape receiver;
-
-	public Vector<MirrorShape> mirrors = new Vector<MirrorShape>();
+	public PathBean bean;
 
 	public boolean isThick = false;
 
 	public PathShape(int x, int y, int width, int height) {
 		super(x, y, width, height);
+		bean = new PathBean();
 	}
 
 	@Override
@@ -29,14 +28,14 @@ public class PathShape extends Canvas {
 		Color c = g2.getColor();
 		g2.setColor(Color.red);
 
-		Canvas c1 = emitter;
-		Canvas c2 = null;
+		BodyBean body1 = bean.emitter;
+		BodyBean body2 = null;
 
-		for (int i = 0; i < mirrors.size() + 1; i++) {
-			if (i < mirrors.size()) {
-				c2 = mirrors.get(i);
+		for (int i = 0; i < bean.mirrors.size() + 1; i++) {
+			if (i < bean.mirrors.size()) {
+				body2 = bean.mirrors.get(i);
 			} else {
-				c2 = receiver;
+				body2 = bean.receiver;
 			}
 
 			int begin_x = 0;
@@ -44,10 +43,10 @@ public class PathShape extends Canvas {
 			int end_x = 0;
 			int end_y = 0;
 
-			begin_x = c1.owner.x + c1.x + c1.width / 2;
-			begin_y = c1.owner.y + c1.y + c1.height / 2;
-			end_x = c2.owner.x + c2.x + c2.width / 2;
-			end_y = c2.owner.y + c2.y + c2.height / 2;
+			begin_x = owner.x + body1.x * body1.width + body1.width / 2;
+			begin_y = owner.y + body1.y * body1.height + body1.height / 2;
+			end_x = owner.x + body2.x * body2.width + body2.width / 2;
+			end_y = owner.y + body2.y * body2.height + body2.height / 2;
 
 			// begin_x、begin_y值校正，保证线画在地图内
 			if (begin_x < owner.x) {
@@ -80,8 +79,8 @@ public class PathShape extends Canvas {
 			}
 			g2.drawLine(begin_x, begin_y, end_x, end_y);
 
-			if (i < mirrors.size()) {
-				c1 = mirrors.get(i);
+			if (i < bean.mirrors.size()) {
+				body1 = bean.mirrors.get(i);
 			}
 		}
 		g2.setColor(c);

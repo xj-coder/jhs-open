@@ -14,7 +14,6 @@ import com.jhs.open.ui.canvas.panel.GameCanvas;
 import com.jhs.open.ui.shape.MirrorShape;
 import com.jhs.open.ui.shape.PathShape;
 
-
 public class MirrorMouseClickedAdapter extends MouseAdapter {
 	private MirrorShape mirror;
 
@@ -36,7 +35,7 @@ public class MirrorMouseClickedAdapter extends MouseAdapter {
 		}
 
 		if (!mirror.bean.isLock) {
-			Vector<PathShape> paths = ImgSelector.inPath(mirror);
+			Vector<PathShape> paths = ImgSelector.inPath(mirror.bean);
 			if (paths.size() > 0) {
 				if (GameControl.gi().isSound()) {
 					SoundControl.play(Define.Sound.path_bad_sound);

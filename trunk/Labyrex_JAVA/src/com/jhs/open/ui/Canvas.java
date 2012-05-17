@@ -57,6 +57,7 @@ public class Canvas {
 	}
 
 	public Canvas() {
+		addMouseListener(new CanvasMouseMoveEvent(this));
 	}
 
 	public Canvas(int x, int y, int width, int height) {
