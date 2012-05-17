@@ -217,6 +217,17 @@ public class MapBean implements IBackupable<MapBean>, Comparable<MapBean> {
 	@Override
 	public void backup(String key) {
 		map.remove(key);
+
+		for (int i = 0; i < receiverList.size(); i++) {
+			receiverList.get(i).backup(key);
+		}
+		for (int i = 0; i < emitterList.size(); i++) {
+			emitterList.get(i).backup(key);
+		}
+		for (int i = 0; i < mirrorList.size(); i++) {
+			mirrorList.get(i).backup(key);
+		}
+
 		map.put(key, copy());
 	}
 
@@ -233,13 +244,18 @@ public class MapBean implements IBackupable<MapBean>, Comparable<MapBean> {
 			isSave = backup.isSave;
 			group = backup.group;
 
-			receiverList = backup.receiverList;
-			emitterList = backup.emitterList;
-			mirrorList = backup.mirrorList;
-
-			backup(key);
+		}
+		for (int i = 0; i < receiverList.size(); i++) {
+			receiverList.get(i).restore(key);
+		}
+		for (int i = 0; i < emitterList.size(); i++) {
+			emitterList.get(i).restore(key);
+		}
+		for (int i = 0; i < backup.mirrorList.size(); i++) {
+			mirrorList.get(i).restore(key);
 		}
 
+		backup(key);
 		return backup;
 	}
 

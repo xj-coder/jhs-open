@@ -16,7 +16,6 @@ import com.jhs.open.ui.canvas.game.MapCanvas;
 import com.jhs.open.ui.canvas.panel.GameCanvas;
 import com.jhs.open.ui.canvas.panel.WinPanel;
 
-
 /**
  * 球
  * 
@@ -62,7 +61,6 @@ public class BallShape extends Canvas {
 				if (!GameTools.isWin()) {
 					ListenerControl.gi().loopRegistCanvasListener(map);
 				}
-				// ListenerControl.gi().openAllMapListener();
 			}
 		} else {
 			g.drawImage(ImgSelector.ballSelector(this), owner.x + x, owner.y + y, Define.Main.grid_size,
@@ -108,7 +106,7 @@ public class BallShape extends Canvas {
 				SoundControl.play(Define.Sound.touch_mirror_sound);
 			}
 
-			path.mirrors.add(mirror);
+			path.bean.mirrors.add(mirror.bean);
 
 			if (mirror.bean.type.equals(MirrorBean.LEFT)) {
 				switch (dir) {
@@ -153,7 +151,7 @@ public class BallShape extends Canvas {
 					SoundControl.play(Define.Sound.path_right_sound);
 				}
 
-				path.receiver = receiver;
+				path.bean.receiver = receiver.bean;
 				map.addPath(path);
 
 				if (GameTools.isWin()) {

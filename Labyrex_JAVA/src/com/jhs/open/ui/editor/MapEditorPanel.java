@@ -217,68 +217,6 @@ public class MapEditorPanel extends JPanel {
 		return rect;
 	}
 
-	public boolean hasEmitterShape(int x, int y) {
-		for (int i = 0; i < emitterList.length; i++) {
-			if (emitterList[i].bean.x == x && emitterList[i].bean.y == y) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	public boolean hasMirrorShape(int x, int y) {
-		for (int i = 0; i < mirrorList.length; i++) {
-			if (mirrorList[i].bean.x == x && mirrorList[i].bean.y == y) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	public boolean hasReceiverShape(int x, int y) {
-		for (int i = 0; i < receiverList.length; i++) {
-			if (receiverList[i].bean.x == x && receiverList[i].bean.y == y) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	public boolean hasShape(int x, int y) {
-		return hasMirrorShape(x, y) || hasEmitterShape(x, y) || hasReceiverShape(x, y);
-	}
-
-	public boolean inEmitterRange(int x, int y) {
-		if ((x == -1 || x == LabyrexMapEditorFrame.gi().getCurrMapBean().width) && y >= 0
-				&& y < LabyrexMapEditorFrame.gi().getCurrMapBean().height) {
-			return true;
-		}
-		if ((y == -1 || y == LabyrexMapEditorFrame.gi().getCurrMapBean().height) && x >= 0
-				&& x < LabyrexMapEditorFrame.gi().getCurrMapBean().width) {
-			return true;
-		}
-		return false;
-	}
-
-	public boolean inReceiverRange(int x, int y) {
-		return inEmitterRange(x, y);
-	}
-
-	public boolean inMirrorRange(int x, int y) {
-		if (x >= 0 && x < LabyrexMapEditorFrame.gi().getCurrMapBean().width && y >= 0
-				&& y < LabyrexMapEditorFrame.gi().getCurrMapBean().height) {
-			return true;
-		}
-		return false;
-	}
-
-	public boolean inDrawableRange(int x, int y) {
-		return inMirrorRange(x, y) || inReceiverRange(x, y) || inEmitterRange(x, y);
-	}
-
 	public void mouseLeftClicked() {
 		boolean isRepaint = false;
 
@@ -286,13 +224,13 @@ public class MapEditorPanel extends JPanel {
 
 		if (LabyrexMapEditorFrame.gi().getCurrClickButton() != null) {
 
-			if (inDrawableRange(point.x, point.y)) {
+			if (CanvasSearcher.inDrawableRange(point.x, point.y)) {
 
-				if (hasShape(point.x, point.y)) {
+				if (CanvasSearcher.hasBean(LabyrexMapEditorFrame.gi().getCurrMapBean(), point.x, point.y)) {
 					return;
 				}
 
-				if (inEmitterRange(point.x, point.y)) {
+				if (CanvasSearcher.inEmitterRange(point.x, point.y)) {
 					if (LabyrexMapEditorFrame.gi().getCurrClickButton() == LabyrexMapEditorFrame.gi()
 							.getEmitterButton()) {
 						EmitterBean bean = new EmitterBean();
@@ -303,7 +241,8 @@ public class MapEditorPanel extends JPanel {
 						LabyrexMapEditorFrame.gi().getCurrMapBean().emitterList.add(bean);
 						isRepaint = true;
 					}
-				} else if (inReceiverRange(point.x, point.y)) {
+				}
+				if (CanvasSearcher.inReceiverRange(point.x, point.y)) {
 					if (LabyrexMapEditorFrame.gi().getCurrClickButton() == LabyrexMapEditorFrame.gi()
 							.getReceiverButton()) {
 						ReceiverBean bean = new ReceiverBean();
@@ -314,7 +253,8 @@ public class MapEditorPanel extends JPanel {
 						LabyrexMapEditorFrame.gi().getCurrMapBean().receiverList.add(bean);
 						isRepaint = true;
 					}
-				} else if (inMirrorRange(point.x, point.y)) {
+				}
+				if (CanvasSearcher.inMirrorRange(point.x, point.y)) {
 					if (LabyrexMapEditorFrame.gi().getCurrClickButton() == LabyrexMapEditorFrame.gi().getMirrorButton()) {
 						MirrorBean bean = new MirrorBean();
 						bean.type = LabyrexMapEditorFrame.gi().getMirrorButton().getName();
@@ -333,7 +273,7 @@ public class MapEditorPanel extends JPanel {
 				}
 			}
 		} else {
-			if (inDrawableRange(point.x, point.y)) {
+			if (CanvasSearcher.inDrawableRange(point.x, point.y)) {
 
 				EmitterShape emitterShape = CanvasSearcher.findEmitter(emitterList, getMouseX(), getMouseY());
 				ReceiverShape receiverShape = CanvasSearcher.findReceiver(receiverList, getMouseX(), getMouseY());
@@ -495,21 +435,22 @@ public class MapEditorPanel extends JPanel {
 				if (LabyrexMapEditorFrame.gi().getCurrSelectedCanvas() != null) {
 					Canvas canvas = LabyrexMapEditorFrame.gi().getCurrSelectedCanvas();
 
-					if (canvas instanceof MirrorShape && inMirrorRange(point.x, point.y) && !hasShape(point.x, point.y)) {
+					if (canvas instanceof MirrorShape && CanvasSearcher.inMirrorRange(point.x, point.y)
+							&& !CanvasSearcher.hasBean(LabyrexMapEditorFrame.gi().getCurrMapBean(), point.x, point.y)) {
 						((MirrorShape) canvas).bean.x = currPoint.x;
 						((MirrorShape) canvas).bean.y = currPoint.y;
 						((MirrorShape) canvas).reset();
 						LabyrexMapEditorFrame.gi().getCurrMapBean().setSave(false);
 						LabyrexMapEditorFrame.gi().updateBodyInfoPanel();
-					} else if (canvas instanceof EmitterShape && inEmitterRange(point.x, point.y)
-							&& !hasShape(point.x, point.y)) {
+					} else if (canvas instanceof EmitterShape && CanvasSearcher.inEmitterRange(point.x, point.y)
+							&& !CanvasSearcher.hasBean(LabyrexMapEditorFrame.gi().getCurrMapBean(), point.x, point.y)) {
 						((EmitterShape) canvas).bean.x = currPoint.x;
 						((EmitterShape) canvas).bean.y = currPoint.y;
 						((EmitterShape) canvas).reset();
 						LabyrexMapEditorFrame.gi().getCurrMapBean().setSave(false);
 						LabyrexMapEditorFrame.gi().updateBodyInfoPanel();
-					} else if (canvas instanceof ReceiverShape && inReceiverRange(point.x, point.y)
-							&& !hasShape(point.x, point.y)) {
+					} else if (canvas instanceof ReceiverShape && CanvasSearcher.inReceiverRange(point.x, point.y)
+							&& !CanvasSearcher.hasBean(LabyrexMapEditorFrame.gi().getCurrMapBean(), point.x, point.y)) {
 						((ReceiverShape) canvas).bean.x = currPoint.x;
 						((ReceiverShape) canvas).bean.y = currPoint.y;
 						((ReceiverShape) canvas).reset();
@@ -540,7 +481,8 @@ public class MapEditorPanel extends JPanel {
 
 			if (isMouseIn) {
 				// 绘制位置提示
-				if (isShowAssist() && inDrawableRange(point.x, point.y) && !hasShape(point.x, point.y)) {
+				if (isShowAssist() && CanvasSearcher.inDrawableRange(point.x, point.y)
+						&& !CanvasSearcher.hasBean(LabyrexMapEditorFrame.gi().getCurrMapBean(), point.x, point.y)) {
 					GraphicsTools.backupGraphics(graphics);
 					graphics
 							.setColor(new Color(Color.GREEN.getRed(), Color.GREEN.getGreen(), Color.GREEN.getBlue(), 70));
@@ -560,7 +502,9 @@ public class MapEditorPanel extends JPanel {
 								Define.Main.grid_size, LabyrexMapEditorFrame.gi().getCurrClickButton().getName(),
 								new Rect2D(draw_x, draw_y, draw_width, draw_height));
 
-						if (inEmitterRange(point.x, point.y) && !hasShape(point.x, point.y)) {
+						if (CanvasSearcher.inEmitterRange(point.x, point.y)
+								&& !CanvasSearcher.hasBean(LabyrexMapEditorFrame.gi().getCurrMapBean(), point.x,
+										point.y)) {
 							graphics.drawImage(bgImage, getMouseX() - Define.Main.grid_size / 2, getMouseY()
 									- Define.Main.grid_size / 2, Define.Main.grid_size, Define.Main.grid_size, null);
 						} else {
@@ -574,7 +518,9 @@ public class MapEditorPanel extends JPanel {
 								Define.Main.grid_size, LabyrexMapEditorFrame.gi().getCurrClickButton().getName(),
 								new Rect2D(draw_x, draw_y, draw_width, draw_height));
 
-						if (inReceiverRange(point.x, point.y) && !hasShape(point.x, point.y)) {
+						if (CanvasSearcher.inReceiverRange(point.x, point.y)
+								&& !CanvasSearcher.hasBean(LabyrexMapEditorFrame.gi().getCurrMapBean(), point.x,
+										point.y)) {
 							graphics.drawImage(bgImage, getMouseX() - Define.Main.grid_size / 2, getMouseY()
 									- Define.Main.grid_size / 2, Define.Main.grid_size, Define.Main.grid_size, null);
 						} else {
@@ -586,7 +532,9 @@ public class MapEditorPanel extends JPanel {
 						Image bgImage = ((ImageIcon) LabyrexMapEditorFrame.gi().getCurrClickButton().getIcon())
 								.getImage();
 
-						if (inMirrorRange(point.x, point.y) && !hasShape(point.x, point.y)) {
+						if (CanvasSearcher.inMirrorRange(point.x, point.y)
+								&& !CanvasSearcher.hasBean(LabyrexMapEditorFrame.gi().getCurrMapBean(), point.x,
+										point.y)) {
 							graphics.drawImage(bgImage, getMouseX() - Define.Main.grid_size / 2, getMouseY()
 									- Define.Main.grid_size / 2, Define.Main.grid_size, Define.Main.grid_size, null);
 						} else {
@@ -631,7 +579,7 @@ public class MapEditorPanel extends JPanel {
 
 				// 绘制标尺上的位置提示
 				if (isShowAssist()) {
-					if (isMouseIn && inDrawableRange(point.x, point.y)) {
+					if (isMouseIn && CanvasSearcher.inDrawableRange(point.x, point.y)) {
 						GraphicsTools.backupGraphics(graphics);
 
 						graphics.setStroke(new BasicStroke(3f));

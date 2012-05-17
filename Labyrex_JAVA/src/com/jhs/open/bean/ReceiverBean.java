@@ -11,10 +11,8 @@ import com.jhs.open.bean.impl.IBackupable;
  * @author JHS
  * 
  */
-public class ReceiverBean implements IBackupable<ReceiverBean> {
+public class ReceiverBean extends BodyBean implements IBackupable<ReceiverBean> {
 	public String type;// 类型，不同颜色的发射器就是不同类型
-	public int x;
-	public int y;
 
 	@Override
 	public ReceiverBean copy() {

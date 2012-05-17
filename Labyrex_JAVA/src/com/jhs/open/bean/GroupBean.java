@@ -192,6 +192,10 @@ public class GroupBean implements IBackupable<GroupBean>, Comparable<GroupBean> 
 	public void backup(String key) {
 		map.remove(key);
 		map.put(key, copy());
+
+		for (int i = 0; i < mapList.size(); i++) {
+			mapList.get(i).backup(key);
+		}
 	}
 
 	@Override
@@ -204,6 +208,12 @@ public class GroupBean implements IBackupable<GroupBean>, Comparable<GroupBean> 
 			isSave = backup.isSave;
 			mapList = backup.mapList;
 		}
+
+		for (int i = 0; i < mapList.size(); i++) {
+			mapList.get(i).restore(key);
+		}
+
+		backup(key);
 
 		return backup;
 	}

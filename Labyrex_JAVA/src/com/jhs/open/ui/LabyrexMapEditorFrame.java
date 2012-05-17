@@ -49,10 +49,12 @@ import com.jhs.open.bean.ReceiverBean;
 import com.jhs.open.control.MapControl;
 import com.jhs.open.tool.CanvasSearcher;
 import com.jhs.open.tool.ImgSelector;
+import com.jhs.open.tool.MapFactory;
 import com.jhs.open.tool.ScreenTools;
 import com.jhs.open.ui.editor.GroupEditorPanel;
 import com.jhs.open.ui.editor.MapEditorPanel;
 import com.jhs.open.ui.editor.dialog.NewMapDialog;
+import com.jhs.open.ui.editor.dialog.RandomMapDialog;
 import com.jhs.open.ui.shape.EmitterShape;
 import com.jhs.open.ui.shape.MirrorShape;
 import com.jhs.open.ui.shape.ReceiverShape;
@@ -875,6 +877,33 @@ public class LabyrexMapEditorFrame extends JFrame {
 	public JButton getRandomButton() {
 		if (randomButton == null) {
 			randomButton = new JButton("随即生成");
+
+			randomButton.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					RandomMapDialog dialog = new RandomMapDialog(LabyrexMapEditorFrame.gi());
+					dialog.getWidthTextField().setText(getCurrMapBean().width + "");
+					dialog.getHeightTextField().setText(getCurrMapBean().height + "");
+					dialog.setVisible(true);
+					if (dialog.getMap() != null) {
+						MapBean map = dialog.getMap();
+						map.name = getCurrMapBean().name;
+						map.isEnabled = getCurrMapBean().isEnabled;
+						map.isSave = false;
+
+						GroupBean groupBean = getCurrMapBean().getGroup();
+						groupBean.removeMap(getCurrMapBean());
+						groupBean.addMap(map);
+
+						DefaultMutableTreeNode node = (DefaultMutableTreeNode) getTree().getSelectionPath()
+								.getLastPathComponent();
+						node.setUserObject(map);
+
+						setCurrMapBean(map);
+					}
+				}
+			});
 		}
 		return randomButton;
 	}
@@ -882,6 +911,19 @@ public class LabyrexMapEditorFrame extends JFrame {
 	public JButton getCheckButton() {
 		if (checkButton == null) {
 			checkButton = new JButton("验证可行性");
+
+			checkButton.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					String result = MapFactory.checkMap(getCurrMapBean());
+					if (result.equals("")) {
+						JOptionPane.showMessageDialog(null, "验证成功");
+					} else {
+						JOptionPane.showMessageDialog(null, result);
+					}
+				}
+			});
 		}
 		return checkButton;
 	}
@@ -1440,15 +1482,15 @@ public class LabyrexMapEditorFrame extends JFrame {
 
 				if (value == -1 || value == getCurrMapBean().width) {
 					for (int i = -1; i <= getCurrMapBean().height; i++) {
-						if (!getMapPanel().hasShape(value, i) || shape.bean.y == i) {
+						if (!CanvasSearcher.hasBean(currMapBean, value, i) || shape.bean.y == i) {
 							getBodyYComboBox().addItem(i);
 						}
 					}
 				} else {
-					if (!getMapPanel().hasShape(value, -1) || shape.bean.y == -1) {
+					if (!CanvasSearcher.hasBean(currMapBean, value, -1) || shape.bean.y == -1) {
 						getBodyYComboBox().addItem(-1);
 					}
-					if (!getMapPanel().hasShape(value, getCurrMapBean().height)
+					if (!CanvasSearcher.hasBean(currMapBean, value, getCurrMapBean().height)
 							|| shape.bean.y == getCurrMapBean().height) {
 						getBodyYComboBox().addItem(getCurrMapBean().height);
 					}
@@ -1461,15 +1503,15 @@ public class LabyrexMapEditorFrame extends JFrame {
 
 				if (value == -1 || value == getCurrMapBean().width) {
 					for (int i = -1; i <= getCurrMapBean().height; i++) {
-						if (!getMapPanel().hasShape(value, i) || shape.bean.y == i) {
+						if (!CanvasSearcher.hasBean(currMapBean, value, i) || shape.bean.y == i) {
 							getBodyYComboBox().addItem(i);
 						}
 					}
 				} else {
-					if (!getMapPanel().hasShape(value, -1) || shape.bean.y == -1) {
+					if (!CanvasSearcher.hasBean(currMapBean, value, -1) || shape.bean.y == -1) {
 						getBodyYComboBox().addItem(-1);
 					}
-					if (!getMapPanel().hasShape(value, getCurrMapBean().height)
+					if (!CanvasSearcher.hasBean(currMapBean, value, getCurrMapBean().height)
 							|| shape.bean.y == getCurrMapBean().height) {
 						getBodyYComboBox().addItem(getCurrMapBean().height);
 					}
@@ -1481,7 +1523,7 @@ public class LabyrexMapEditorFrame extends JFrame {
 				MirrorShape shape = (MirrorShape) selectCanvas;
 
 				for (int i = 0; i < getCurrMapBean().height; i++) {
-					if (!getMapPanel().hasShape(value, i) || shape.bean.y == i) {
+					if (!CanvasSearcher.hasBean(currMapBean, value, i) || shape.bean.y == i) {
 						getBodyYComboBox().addItem(i);
 					}
 				}
