@@ -1,13 +1,12 @@
-package com.jhs.open.control.event.card;
+package com.jhs.open.control.event.cross;
 
-
-import java.awt.*;
+import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import com.jhs.open.ui.LabyrexFrame;
 
-public class CardMouseMoveEvent extends MouseAdapter {
+public class CrossCardMouseMoveEvent extends MouseAdapter {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {

@@ -12,6 +12,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
@@ -135,6 +137,8 @@ public class LabyrexMapEditorFrame extends JFrame {
 
 	private ReentrantReadWriteLock treeLock = new ReentrantReadWriteLock();
 
+	private boolean isSave = false;
+
 	public static LabyrexMapEditorFrame gi() {
 		if (gi == null) {
 			gi = new LabyrexMapEditorFrame();
@@ -144,7 +148,17 @@ public class LabyrexMapEditorFrame extends JFrame {
 
 	private LabyrexMapEditorFrame() {
 		setTitle("关卡编辑器");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				getSaveButton().doClick();
+				if (isSave) {
+					System.exit(0);
+				}
+			}
+		});
 	}
 
 	public void showFrame() {
@@ -952,19 +966,29 @@ public class LabyrexMapEditorFrame extends JFrame {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					String saveList = "";
+					for (int i = 0; i < MapControl.deleteList.size(); i++) {
+						saveList += "删除 " + MapControl.deleteList.get(i) + "\n";
+					}
 					for (int i = 0; i < MapControl.getGroupCount(); i++) {
 						GroupBean group = MapControl.getGroup(i);
+						if (!group.isSave) {
+							saveList += "分组修改 " + group.getName() + "\n";
+						}
 						for (int j = 0; j < group.getMapCount(); j++) {
 							if (!group.getMap(j).isSave()) {
-								saveList += group.getName() + "." + group.getMap(j).getName() + "\n";
+								saveList += "关卡修改 " + group.getName() + "." + group.getMap(j).getName() + "\n";
 							}
 						}
 					}
 					if (!saveList.equals("")) {
-						int result = JOptionPane.showConfirmDialog(null, "下列关卡将会被保存：\n" + saveList + "确定要保存？");
+						isSave = false;
+						int result = JOptionPane.showConfirmDialog(null, "下列修改将会被保存：\n" + saveList + "确定要保存？");
 						if (result == JOptionPane.OK_OPTION) {
 							MapControl.save();
+							isSave = true;
 						}
+					} else {
+						isSave = true;
 					}
 				}
 			});
@@ -1008,6 +1032,7 @@ public class LabyrexMapEditorFrame extends JFrame {
 						GroupBean group = new GroupBean();
 						group.setName(input);
 						group.setSort(MapControl.getMaxSort() + 1);
+						group.doChange();
 						MapControl.addGroup(group);
 
 						DefaultMutableTreeNode rootNode = (DefaultMutableTreeNode) getTree().getModel().getRoot();
@@ -1057,7 +1082,7 @@ public class LabyrexMapEditorFrame extends JFrame {
 						GroupBean group = (GroupBean) obj;
 
 						GroupBean groupClone = group.copy();
-						groupClone.setSave(false);
+						groupClone.doChange();
 
 						int tmp = 1;
 						while (MapControl.indexOf(groupClone) != -1) {
@@ -1083,7 +1108,7 @@ public class LabyrexMapEditorFrame extends JFrame {
 						MapBean map = (MapBean) obj;
 
 						MapBean mapClone = map.copy();
-						mapClone.setSave(false);
+						mapClone.doChange();
 
 						int tmp = 1;
 						while (map.getGroup().indexOf(mapClone) != -1) {
@@ -1170,6 +1195,9 @@ public class LabyrexMapEditorFrame extends JFrame {
 			group.setSort(tmp);
 			MapControl.sort();
 
+			swapBean.doChange();
+			group.doChange();
+
 			parentNode.insert(selectedNode, index + 1);
 			updateTree();
 		} else if (obj instanceof MapBean) {
@@ -1182,6 +1210,9 @@ public class LabyrexMapEditorFrame extends JFrame {
 			swapBean.setSort(map.getSort());
 			map.setSort(tmp);
 			group.sort();
+
+			swapBean.doChange();
+			map.doChange();
 
 			parentNode.insert(selectedNode, index + 1);
 			updateTree();
@@ -1207,6 +1238,9 @@ public class LabyrexMapEditorFrame extends JFrame {
 			group.setSort(tmp);
 			MapControl.sort();
 
+			swapBean.doChange();
+			group.doChange();
+
 			parentNode.insert(selectedNode, index - 1);
 			updateTree();
 		} else if (obj instanceof MapBean) {
@@ -1219,6 +1253,9 @@ public class LabyrexMapEditorFrame extends JFrame {
 			swapBean.setSort(map.getSort());
 			map.setSort(tmp);
 			group.sort();
+
+			swapBean.doChange();
+			map.doChange();
 
 			parentNode.insert(selectedNode, index - 1);
 			updateTree();
@@ -1237,12 +1274,16 @@ public class LabyrexMapEditorFrame extends JFrame {
 
 			MapControl.removeGroup(group);
 
+			MapControl.deleteList.add(group.name);
+
 			selectedNode.removeFromParent();
 			updateTree();
 		} else if (obj instanceof MapBean) {
 			MapBean map = (MapBean) obj;
 
 			map.getGroup().removeMap(map);
+
+			MapControl.deleteList.add(map.name);
 
 			selectedNode.removeFromParent();
 			updateTree();

@@ -132,6 +132,7 @@ public class NewMapDialog extends JDialog {
 						mapBean.doChange();
 
 						group.addMap(mapBean);
+						group.doChange();
 
 						DefaultMutableTreeNode rootNode = (DefaultMutableTreeNode) LabyrexMapEditorFrame.gi().getTree()
 								.getModel().getRoot();
@@ -147,8 +148,8 @@ public class NewMapDialog extends JDialog {
 										DefaultMutableTreeNode newMapNode = new DefaultMutableTreeNode(mapBean);
 										groupNode.insert(newMapNode, j);
 
-										LabyrexMapEditorFrame.gi().getTree()
-												.setSelectionPath(new TreePath(newMapNode.getPath()));
+										LabyrexMapEditorFrame.gi().getTree().setSelectionPath(
+												new TreePath(newMapNode.getPath()));
 										break;
 									}
 								}
@@ -156,8 +157,8 @@ public class NewMapDialog extends JDialog {
 									DefaultMutableTreeNode newMapNode = new DefaultMutableTreeNode(mapBean);
 									groupNode.add(newMapNode);
 
-									LabyrexMapEditorFrame.gi().getTree()
-											.setSelectionPath(new TreePath(newMapNode.getPath()));
+									LabyrexMapEditorFrame.gi().getTree().setSelectionPath(
+											new TreePath(newMapNode.getPath()));
 								}
 								break;
 							}
