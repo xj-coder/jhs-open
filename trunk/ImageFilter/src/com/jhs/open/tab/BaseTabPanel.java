@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 import com.jhs.open.MainFrame;
+import com.jhs.open.filter.SharpenFilter;
 
 /**
  * 
@@ -29,6 +30,10 @@ public class BaseTabPanel extends JPanel {
 	private JTextField pervasionRatioTextField;
 	private JTextField smoothRatioTextField;
 	private JTextField sharpenRatioTextField;
+
+	private SharpenFilter sharpenFilter = new SharpenFilter();
+
+	private Action action = new Action();
 
 	public BaseTabPanel() {
 		super();
@@ -97,6 +102,8 @@ public class BaseTabPanel extends JPanel {
 			sharpenCheckBox = new JCheckBox();
 			sharpenCheckBox.setBounds(10, 25, 21, 26);
 			sharpenCheckBox.setActionCommand("sharpenCheckBox");
+
+			sharpenCheckBox.addActionListener(action);
 		}
 		return sharpenCheckBox;
 	}
@@ -106,6 +113,8 @@ public class BaseTabPanel extends JPanel {
 			sharpenRatioTextField = new JTextField();
 			sharpenRatioTextField.setBounds(120, 29, 87, 22);
 			sharpenRatioTextField.setActionCommand("sharpenRatioTextField");
+
+			sharpenRatioTextField.addActionListener(action);
 		}
 		return sharpenRatioTextField;
 	}
@@ -115,6 +124,8 @@ public class BaseTabPanel extends JPanel {
 			smoothCheckBox = new JCheckBox();
 			smoothCheckBox.setBounds(10, 25, 21, 26);
 			smoothCheckBox.setActionCommand("smoothCheckBox");
+
+			smoothCheckBox.addActionListener(action);
 		}
 		return smoothCheckBox;
 	}
@@ -124,6 +135,8 @@ public class BaseTabPanel extends JPanel {
 			smoothRatioTextField = new JTextField();
 			smoothRatioTextField.setBounds(120, 29, 87, 22);
 			smoothRatioTextField.setActionCommand("smoothRatioTextField");
+
+			smoothRatioTextField.addActionListener(action);
 		}
 		return smoothRatioTextField;
 	}
@@ -133,6 +146,8 @@ public class BaseTabPanel extends JPanel {
 			pervasionCheckBox = new JCheckBox();
 			pervasionCheckBox.setBounds(10, 25, 21, 26);
 			pervasionCheckBox.setActionCommand("pervasionCheckBox");
+
+			pervasionCheckBox.addActionListener(action);
 		}
 		return pervasionCheckBox;
 	}
@@ -142,6 +157,8 @@ public class BaseTabPanel extends JPanel {
 			pervasionRatioTextField = new JTextField();
 			pervasionRatioTextField.setBounds(120, 29, 87, 22);
 			pervasionRatioTextField.setActionCommand("pervasionRatioTextField");
+
+			pervasionRatioTextField.addActionListener(action);
 		}
 		return pervasionRatioTextField;
 	}
@@ -151,6 +168,8 @@ public class BaseTabPanel extends JPanel {
 			carvingCheckBox = new JCheckBox();
 			carvingCheckBox.setBounds(10, 25, 21, 26);
 			carvingCheckBox.setActionCommand("carvingCheckBox");
+
+			carvingCheckBox.addActionListener(action);
 		}
 		return carvingCheckBox;
 	}
@@ -160,6 +179,8 @@ public class BaseTabPanel extends JPanel {
 			carvingRatioTextField = new JTextField();
 			carvingRatioTextField.setBounds(120, 29, 87, 22);
 			carvingRatioTextField.setActionCommand("carvingRatioTextField");
+
+			carvingRatioTextField.addActionListener(action);
 		}
 		return carvingRatioTextField;
 	}
@@ -173,9 +194,15 @@ public class BaseTabPanel extends JPanel {
 			if (targetImage != null) {
 
 				if (command.equals("sharpenCheckBox")) {
+					if (getSharpenCheckBox().isSelected()) {
+						MainFrame.gi().addFilter(sharpenFilter);
+					} else {
+						MainFrame.gi().removeFilter(sharpenFilter);
+					}
 					MainFrame.gi().getTargetImagePanel().repaint();
-				} else if (command.equals("sharpenCheckBox")) {
 				} else if (command.equals("sharpenRatioTextField")) {
+					sharpenFilter.ratio = Double.parseDouble(getSharpenRatioTextField().getText());
+					MainFrame.gi().getTargetImagePanel().repaint();
 				} else if (command.equals("smoothCheckBox")) {
 				} else if (command.equals("smoothRatioTextField")) {
 				} else if (command.equals("pervasionCheckBox")) {

@@ -103,9 +103,6 @@ public class MainFrame extends JFrame {
 						File file = chooser.getSelectedFile();
 						try {
 							sourceImage = ImageIO.read(file);
-							targetImage = new BufferedImage(sourceImage.getWidth(), sourceImage.getHeight(),
-									sourceImage.getType());
-							targetImage.setData(sourceImage.copyData(null));
 
 							getSourceImagePanel().repaint();
 							getTargetImagePanel().repaint();
@@ -127,7 +124,16 @@ public class MainFrame extends JFrame {
 				@Override
 				public void paint(Graphics g) {
 					super.paint(g);
-					if (targetImage != null) {
+
+					if (sourceImage != null) {
+						targetImage = new BufferedImage(sourceImage.getWidth(), sourceImage.getHeight(), sourceImage
+								.getType());
+						targetImage.setData(sourceImage.copyData(null));
+
+						for (int i = 0; i < getFilterCount(); i++) {
+							getFilter(i).filter(targetImage);
+						}
+
 						g.drawImage(targetImage, 0, 0, null);
 					}
 				}
