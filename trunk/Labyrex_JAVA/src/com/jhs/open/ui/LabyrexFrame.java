@@ -78,7 +78,7 @@ public class LabyrexFrame extends JFrame implements Runnable {
 			gamestate.update(l1);
 			gamestate.render();
 			if (Define.FPS) {
-				gamestate.drawText(new StringBuilder().append("FPS : ").append(fps).toString(), 500, 25, Color.red,
+				gamestate.drawText(new StringBuilder().append("FPS : ").append(fps).toString(), 400, 25, Color.red,
 						new Font("Dialog", Font.PLAIN, 18));
 			}
 			gamestate.flip(g);

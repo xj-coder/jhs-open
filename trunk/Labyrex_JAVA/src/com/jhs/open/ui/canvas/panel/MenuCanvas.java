@@ -3,14 +3,17 @@ package com.jhs.open.ui.canvas.panel;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.util.ArrayList;
 
 import com.jhs.open.Define;
-import com.jhs.open.bean.GroupBean;
+import com.jhs.open.bean.MapBean;
 import com.jhs.open.control.MapControl;
+import com.jhs.open.tool.GraphicsTools;
 import com.jhs.open.tool.ImageTools;
 import com.jhs.open.ui.Canvas;
-import com.jhs.open.ui.shape.CardShape;
+import com.jhs.open.ui.shape.CrossShape;
 import com.jhs.open.ui.shape.EXButton;
+import com.jhs.open.ui.shape.GroupShape;
 
 /**
  * 游戏关卡选择界面
@@ -19,6 +22,7 @@ import com.jhs.open.ui.shape.EXButton;
  * 
  */
 public class MenuCanvas extends Canvas {
+
 	private Image bgImage;
 
 	private int bgColorR = 0xFF;
@@ -27,61 +31,38 @@ public class MenuCanvas extends Canvas {
 
 	private EXButton backButton;
 
+	private ArrayList<GroupShape> groupList = new ArrayList<GroupShape>();
+	private ArrayList<CrossShape> crossList = new ArrayList<CrossShape>();
+
+	private GroupShape currGroupShape;
+
 	public MenuCanvas() {
 		super(0, 0, Define.Main.width, Define.Main.height);
 	}
 
 	@Override
 	public void init() {
+		groupList.clear();
 
 		bgImage = ImageTools.getImage(Define.MenuPanel.bg_image_path);
-
-		GroupBean easyGroup = MapControl.getEasyGroup();
-		int begin_x = 35;
-		int begin_y = 170;
-		if (easyGroup != null) {
-			for (int i = 0; i < easyGroup.getMapCount(); i++) {
-				CardShape card = new CardShape(begin_x + i % Define.MenuPanel.card_col * Define.MenuPanel.card_size
-						+ Define.MenuPanel.offset_size * i, begin_y + i / Define.MenuPanel.card_col
-						* Define.MenuPanel.card_size, easyGroup.getMap(i));
-				addCanvas(card);
-			}
-		}
-		begin_x = 385;
-		begin_y = 170;
-		GroupBean moderateGroup = MapControl.getModerateGroup();
-		if (moderateGroup != null) {
-			for (int i = 0; i < moderateGroup.getMapCount(); i++) {
-				CardShape card = new CardShape(begin_x + i % Define.MenuPanel.card_col * Define.MenuPanel.card_size
-						+ Define.MenuPanel.offset_size * i, begin_y + i / Define.MenuPanel.card_col
-						* Define.MenuPanel.card_size, moderateGroup.getMap(i));
-				addCanvas(card);
-			}
-		}
-		begin_x = 35;
-		begin_y = 360;
-		GroupBean difficuteGroup = MapControl.getDifficuteGroup();
-		if (difficuteGroup != null) {
-			for (int i = 0; i < difficuteGroup.getMapCount(); i++) {
-				CardShape card = new CardShape(begin_x + i % Define.MenuPanel.card_col * Define.MenuPanel.card_size
-						+ Define.MenuPanel.offset_size * i, begin_y + i / Define.MenuPanel.card_col
-						* Define.MenuPanel.card_size, difficuteGroup.getMap(i));
-				addCanvas(card);
-			}
-		}
-		begin_x = 385;
-		begin_y = 360;
-		GroupBean absurdGroup = MapControl.getAbsurdGroup();
-		if (absurdGroup != null) {
-			for (int i = 0; i < absurdGroup.getMapCount(); i++) {
-				CardShape card = new CardShape(begin_x + i % Define.MenuPanel.card_col * Define.MenuPanel.card_size
-						+ Define.MenuPanel.offset_size * i, begin_y + i / Define.MenuPanel.card_col
-						* Define.MenuPanel.card_size, absurdGroup.getMap(i));
-				addCanvas(card);
-			}
-		}
-
 		addCanvas(getBackButton());
+
+		// 添加分组按钮
+		int begin_x = (getWidth() - MapControl.getGroupCount()
+				* (Define.MenuPanel.group_card_size + Define.MenuPanel.group_card_offset)) / 2;
+		int begin_y = 420;
+		for (int i = 0; i < MapControl.getGroupCount(); i++) {
+			GroupShape card = new GroupShape(begin_x
+					+ (Define.MenuPanel.group_card_size + Define.MenuPanel.group_card_offset) * i, begin_y, MapControl
+					.getGroup(i));
+			addCanvas(card);
+			groupList.add(card);
+
+			if (i == 0) {
+				card.isAvtivity = true;
+				setCurrGroupShape(card);
+			}
+		}
 	}
 
 	public EXButton getBackButton() {
@@ -96,9 +77,41 @@ public class MenuCanvas extends Canvas {
 		return backButton;
 	}
 
+	public ArrayList<GroupShape> getGroupList() {
+		return groupList;
+	}
+
+	public void setCurrGroupShape(GroupShape currGroupShape) {
+		if (this.currGroupShape != null) {
+			this.currGroupShape.isAvtivity = false;
+		}
+		this.currGroupShape = currGroupShape;
+
+		while (crossList.size() > 0) {
+			removeCanvas(crossList.remove(0));
+		}
+
+		this.currGroupShape.isAvtivity = true;
+		int begin_x = 65;
+		int begin_y = 70;
+		for (int j = 0; j < this.currGroupShape.getGroup().getMapCount(); j++) {
+			MapBean map = this.currGroupShape.getGroup().getMap(j);
+
+			CrossShape cross = new CrossShape(begin_x + j % Define.MenuPanel.cross_card_col
+					* (Define.MenuPanel.cross_card_size + Define.MenuPanel.cross_card_offset), begin_y + j
+					/ Define.MenuPanel.cross_card_col
+					* (Define.MenuPanel.cross_card_offset + Define.MenuPanel.cross_card_size), map);
+
+			addCanvas(cross);
+			crossList.add(cross);
+		}
+	}
+
 	@Override
 	public void render() {
 		Graphics2D g2 = getGraphics();
+
+		GraphicsTools.backupGraphics(g2);
 
 		Color c = g2.getColor();
 		g2.setColor(new Color(bgColorR, bgColorG, bgColorB));
@@ -106,6 +119,8 @@ public class MenuCanvas extends Canvas {
 		g2.setColor(c);
 
 		g2.drawImage(bgImage, x, y, width, height, null);
+
+		GraphicsTools.restoreGraphics(g2);
 
 		super.render();
 	}

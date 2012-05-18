@@ -54,17 +54,22 @@ public class Define {
 
 	public static final class MenuPanel {
 		public static final String bg_image_path = IMG_PATH + "menuBG.png";
-		public static final String card_white_image_path = IMG_PATH + "card1.png";
-		public static final String card_black_image_path = IMG_PATH + "card2.png";
+		public static final String group_card_white_image_path = IMG_PATH + "card1.png";
+		public static final String group_card_black_image_path = IMG_PATH + "card2.png";
+		public static final String cross_card_white_image_path = IMG_PATH + "cross.png";
+		public static final String cross_card_black_image_path = IMG_PATH + "cross_gray.png";
 
-		public static final int border_size = 2;
-		public static final int offset_size = 3;
-		public static final int card_size = 20;
-		public static final int card_col = 10;
+		public static final int cross_card_size = 50;
+		public static final int cross_card_offset = 16;
+		public static final int cross_card_col = 8;
 
-		public static final int back_button_height = 55;
-		public static final int back_button_width = 120;
-		public static final int back_button_x = 500;
+		public static final int group_card_border = 2;
+		public static final int group_card_offset = 5;
+		public static final int group_card_size = 20;
+
+		public static final int back_button_height = 35;
+		public static final int back_button_width = 80;
+		public static final int back_button_x = 550;
 		public static final int back_button_y = 10;
 	}
 

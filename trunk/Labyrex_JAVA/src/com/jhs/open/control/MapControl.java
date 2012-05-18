@@ -34,7 +34,7 @@ import com.jhs.open.bean.ReceiverBean;
  * 
  */
 
-@SuppressWarnings({ "unchecked"})
+@SuppressWarnings( { "unchecked" })
 public class MapControl {
 	public final static String easy = "easy";
 	public final static String moderate = "moderate";
@@ -42,6 +42,8 @@ public class MapControl {
 	public final static String absurd = "absurd";
 
 	private static ArrayList<GroupBean> groupList = new ArrayList<GroupBean>();
+
+	public static ArrayList<String> deleteList = new ArrayList<String>();
 
 	/**
 	 * 读取关卡XML文件

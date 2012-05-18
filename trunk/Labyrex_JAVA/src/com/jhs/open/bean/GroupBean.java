@@ -13,7 +13,7 @@ public class GroupBean implements IBackupable<GroupBean>, Comparable<GroupBean> 
 
 	private ArrayList<MapBean> mapList = new ArrayList<MapBean>();
 
-	public boolean isSave;
+	public boolean isSave = true;
 
 	public int getMapCount() {
 		return mapList.size();
