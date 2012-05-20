@@ -4,12 +4,15 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import com.jhs.open.Define;
 import com.jhs.open.control.GameControl;
+import com.jhs.open.control.ListenerControl;
 import com.jhs.open.control.MapControl;
 import com.jhs.open.control.SoundControl;
 import com.jhs.open.tool.ScreenTools;
@@ -30,6 +33,8 @@ public class LabyrexFrame extends JFrame implements Runnable {
 
 	private JPanel panel;
 
+	private Graphics graphics;
+
 	public static LabyrexFrame gi() {
 		if (gi == null) {
 			gi = new LabyrexFrame();
@@ -48,6 +53,19 @@ public class LabyrexFrame extends JFrame implements Runnable {
 
 		setResizable(false);
 		setUndecorated(true);
+
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+				start();
+			}
+		});
+	}
+
+	@Override
+	public void paint(Graphics g) {
+		super.paint(g);
+		graphics = panel.getGraphics();
 	}
 
 	@Override
@@ -56,14 +74,10 @@ public class LabyrexFrame extends JFrame implements Runnable {
 		int i = 0;
 		int j = 0;
 		int fps = 0;
-		Graphics g = panel.getGraphics();
 
-		long step = 35l;
+		long step = 25l;
 		long sleep = 10l;
-		while (gameLoop == Thread.currentThread()) {
-			// 获得写锁
-			GameControl.gi().getReadWriteLock().writeLock().lock();
-
+		while (true) {
 			// 帧刷新频率矫正，确保每秒刷新的帧数最大值为固定的，最快每隔(step-sleep)毫秒刷新一帧,即每秒的帧数为1000/(step-sleep)
 			long l3 = System.currentTimeMillis();
 			long l2 = System.currentTimeMillis();
@@ -81,7 +95,7 @@ public class LabyrexFrame extends JFrame implements Runnable {
 				gamestate.drawText(new StringBuilder().append("FPS : ").append(fps).toString(), 400, 25, Color.red,
 						new Font("Dialog", Font.PLAIN, 18));
 			}
-			gamestate.flip(g);
+			gamestate.flip(graphics);
 			// 游戏渲染结束
 
 			// 每秒刷新帧数统计
@@ -95,33 +109,28 @@ public class LabyrexFrame extends JFrame implements Runnable {
 				i++;
 			}
 
-			// 释放写锁
-			GameControl.gi().getReadWriteLock().writeLock().unlock();
-
 			try {
 				// 线程休眠
 				Thread.sleep(sleep);
-			} catch (InterruptedException interruptedexception) {
+			} catch (InterruptedException e) {
 				if (Define.DEBUG) {
-					interruptedexception.printStackTrace();
+					e.printStackTrace();
 				}
 			}
 		}
 	}
 
-	public void start() {
+	private void start() {
+		System.out.println("游戏线程启动");
 		gameLoop = new Thread(this);
 		gameLoop.start();
-	}
-
-	public void stop() {
-		gameLoop = null;
 	}
 
 	/**
 	 * 游戏开发方法，初始化关卡控制器、声音控制器、游戏控制器，该方法应该有且只能调用一次
 	 */
 	public void begin() {
+		ListenerControl.gi().begin();// 打开事件控制器
 		MapControl.read();// 读入地图数据
 		SoundControl.play(Define.Sound.bg_sound, -1);// 启动声音管理器并播放背景音乐
 		GameControl.gi().setCurrCanvasIndex(GameControl.G_Title);// 启动游戏管理器并设置当前画面

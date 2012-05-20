@@ -61,7 +61,6 @@ public class MapFactory {
 		int mirrorCount = emitterNum / 2 == 0 ? 1 : emitterNum / 2;
 
 		for (int i = 0; i < width * height; i++) {
-			System.out.println("测试 挡板数量为 : " + mirrorCount + " 的情况");
 			ArrayList<MirrorBean> mirrorList = new ArrayList<MirrorBean>();
 			for (int j = 0; j < mirrorCount; j++) {
 				MirrorBean bean = new MirrorBean();
@@ -78,7 +77,6 @@ public class MapFactory {
 			map.mirrorList = mirrorList;
 
 			int threadCount = 1;
-			System.out.println("创建线程数 ： " + threadCount);
 			nextCount = 1;
 			threadRun = true;
 
@@ -120,8 +118,6 @@ public class MapFactory {
 			if (findMap != null) {
 				return findMap;
 			}
-
-			System.out.println("测试了 " + nextCount + " 种挡板排列组合");
 
 			mirrorCount++;
 		}

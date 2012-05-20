@@ -7,7 +7,6 @@ import java.awt.Image;
 import com.jhs.open.Define;
 import com.jhs.open.control.GameControl;
 import com.jhs.open.tool.ImageTools;
-import com.jhs.open.ui.Canvas;
 import com.jhs.open.ui.canvas.game.InfoCanvas;
 import com.jhs.open.ui.canvas.game.MapCanvas;
 import com.jhs.open.ui.canvas.game.MenuCanvas;
@@ -19,7 +18,7 @@ import com.jhs.open.ui.canvas.game.ToolCanvas;
  * @author JHS
  * 
  */
-public class GameCanvas extends Canvas {
+public class GameCanvas extends FullCanvas {
 	private InfoCanvas infoCanvas;
 	private MenuCanvas menuCanvas;
 	private ToolCanvas toolCanvas;
@@ -33,10 +32,13 @@ public class GameCanvas extends Canvas {
 
 	public GameCanvas() {
 		super(0, 0, Define.Main.width, Define.Main.height);
+		isAnimation = true;
 	}
 
 	@Override
 	public void init() {
+		super.init();
+
 		bgImage = ImageTools.getImage(Define.GamePanel.bg_image_path);
 
 		addCanvas(getMapCanvas());

@@ -20,7 +20,6 @@ import com.jhs.open.tool.CanvasSearcher;
 import com.jhs.open.ui.Canvas;
 import com.jhs.open.ui.LabyrexFrame;
 
-
 /**
  * 事件监听管理类
  * 
@@ -38,7 +37,6 @@ public class ListenerControl {
 	public static ListenerControl gi() {
 		if (gi == null) {
 			gi = new ListenerControl();
-			gi.initEvent();
 		}
 		return gi;
 	}
@@ -46,7 +44,7 @@ public class ListenerControl {
 	private ListenerControl() {
 	}
 
-	private void initEvent() {
+	public void begin() {
 
 		LabyrexFrame.gi().addMouseListener(new MouseListener() {
 
@@ -87,7 +85,6 @@ public class ListenerControl {
 				if (enterCanvas.size() > 0) {
 					for (int i = 0; i < enterCanvas.size(); i++) {
 						if (!canvasList.contains(enterCanvas.get(i))) {
-							// System.out.println(enterCanvas.get(i) + "   mouseExited");
 							loopInvokeMouseEventMethod(enterCanvas.get(i), "mouseExited", e);
 							enterCanvas.remove(i);
 							i--;
@@ -97,7 +94,6 @@ public class ListenerControl {
 				if (canvasList != null && canvasList.size() > 0) {
 					for (int i = 0; i < canvasList.size(); i++) {
 						if (!enterCanvas.contains(canvasList.get(i))) {
-							// System.out.println(canvasList.get(i) + "   mouseEntered");
 							loopInvokeMouseEventMethod(canvasList.get(i), "mouseEntered", e);
 							enterCanvas.add(canvasList.get(i));
 						}
@@ -142,14 +138,11 @@ public class ListenerControl {
 
 	private void loopInvokeMouseEventMethod(String methodName, MouseEvent e) {
 		getReadWriteLock().writeLock().lock();
-		System.out.println("fire event : " + methodName + " " + e.getSource());
 		try {
 
 			Vector<Canvas> canvasVector = new Vector<Canvas>();
 
 			Set<Canvas> keySet = mouseListenerMap.keySet();
-
-			System.out.println("all canvas " + keySet);
 
 			Iterator<Canvas> it = keySet.iterator();
 			while (it.hasNext()) {
@@ -159,14 +152,12 @@ public class ListenerControl {
 				}
 			}
 
-			System.out.println("selected canvas " + canvasVector);
 			for (int i = 0; i < canvasVector.size(); i++) {
 				Vector<MouseAdapter> adapters = mouseListenerMap.get(canvasVector.get(i));
 				if (adapters != null) {
 					for (int j = 0; j < adapters.size(); j++) {
 						MouseAdapter adapter = adapters.get(j);
 						try {
-							System.out.println(canvasVector.get(i) + " -- " + methodName);
 							Method method = adapter.getClass().getMethod(methodName, MouseEvent.class);
 							method.invoke(adapter, e);
 						} catch (Exception e1) {

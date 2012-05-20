@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import com.jhs.open.Define;
 import com.jhs.open.bean.MapBean;
-import com.jhs.open.control.GameControl;
 import com.jhs.open.control.event.map.EmitterMouseClickedAdapter;
 import com.jhs.open.control.event.map.MirrorMouseClickedAdapter;
 import com.jhs.open.control.event.map.MouseMoveOnMapAdapter;
@@ -39,63 +38,41 @@ public class MapCanvas extends Canvas {
 
 	@Override
 	public void init() {
-		GameControl.gi().getReadWriteLock().writeLock().lock();
-		try {
-			map.restore();
+		map.restore();
+		pathList = new ArrayList<PathShape>();
 
-			removeAllCanvas();
+		if (map.emitterList != null) {
+			emitterList = new EmitterShape[map.emitterList.size()];
+			for (int i = 0; i < map.emitterList.size(); i++) {
+				EmitterShape emitterShape = new EmitterShape(map.emitterList.get(i));
+				emitterShape.addMouseListener(new MouseMoveOnMapAdapter(emitterShape));
+				emitterShape.addMouseListener(new EmitterMouseClickedAdapter(emitterShape));
 
-			pathList = new ArrayList<PathShape>();
-
-			if (map.emitterList != null) {
-				emitterList = new EmitterShape[map.emitterList.size()];
-				for (int i = 0; i < map.emitterList.size(); i++) {
-					EmitterShape emitterShape = new EmitterShape(map.emitterList.get(i));
-					// EmitterShape emitterShape = new EmitterShape(map.emitterList.get(i).x * Define.Main.grid_size,
-					// map.emitterList.get(i).y * Define.Main.grid_size, map.emitterList.get(i));
-
-					// emitterShape.bgImage = ImgSelector.emitterSelector(emitterShape, new Rect2D(0, 0, width,
-					// height));
-					emitterShape.addMouseListener(new MouseMoveOnMapAdapter(emitterShape));
-					emitterShape.addMouseListener(new EmitterMouseClickedAdapter(emitterShape));
-
-					emitterList[i] = emitterShape;
-					addCanvas(emitterShape);
-				}
+				emitterList[i] = emitterShape;
+				addCanvas(emitterShape);
 			}
-			if (map.receiverList != null) {
-				receiverList = new ReceiverShape[map.receiverList.size()];
-				for (int i = 0; i < map.receiverList.size(); i++) {
-					ReceiverShape receiverShape = new ReceiverShape(map.receiverList.get(i));
-					// ReceiverShape receiverShape = new ReceiverShape(map.receiverList.get(i).x *
-					// Define.Main.grid_size,
-					// map.receiverList.get(i).y * Define.Main.grid_size, map.receiverList.get(i));
+		}
+		if (map.receiverList != null) {
+			receiverList = new ReceiverShape[map.receiverList.size()];
+			for (int i = 0; i < map.receiverList.size(); i++) {
+				ReceiverShape receiverShape = new ReceiverShape(map.receiverList.get(i));
+				receiverShape.addMouseListener(new MouseMoveOnMapAdapter(receiverShape));
+				receiverShape.addMouseListener(new ReceiverMouseClickedAdapter(receiverShape));
 
-					// receiverShape.bgImage = ImgSelector
-					// .receiverSelector(receiverShape, new Rect2D(0, 0, width, height));
-					receiverShape.addMouseListener(new MouseMoveOnMapAdapter(receiverShape));
-					receiverShape.addMouseListener(new ReceiverMouseClickedAdapter(receiverShape));
-
-					receiverList[i] = receiverShape;
-					addCanvas(receiverShape);
-				}
+				receiverList[i] = receiverShape;
+				addCanvas(receiverShape);
 			}
-			if (map.mirrorList != null) {
-				mirrorList = new MirrorShape[map.mirrorList.size()];
-				for (int i = 0; i < map.mirrorList.size(); i++) {
-					MirrorShape mirrorShape = new MirrorShape(map.mirrorList.get(i));
-					// MirrorShape mirrorShape = new MirrorShape(map.mirrorList.get(i).x * Define.Main.grid_size,
-					// map.mirrorList.get(i).y * Define.Main.grid_size, map.mirrorList.get(i));
+		}
+		if (map.mirrorList != null) {
+			mirrorList = new MirrorShape[map.mirrorList.size()];
+			for (int i = 0; i < map.mirrorList.size(); i++) {
+				MirrorShape mirrorShape = new MirrorShape(map.mirrorList.get(i));
+				mirrorShape.addMouseListener(new MouseMoveOnMapAdapter(mirrorShape));
+				mirrorShape.addMouseListener(new MirrorMouseClickedAdapter(mirrorShape));
 
-					mirrorShape.addMouseListener(new MouseMoveOnMapAdapter(mirrorShape));
-					mirrorShape.addMouseListener(new MirrorMouseClickedAdapter(mirrorShape));
-
-					mirrorList[i] = mirrorShape;
-					addCanvas(mirrorShape);
-				}
+				mirrorList[i] = mirrorShape;
+				addCanvas(mirrorShape);
 			}
-		} finally {
-			GameControl.gi().getReadWriteLock().writeLock().unlock();
 		}
 	}
 
@@ -139,5 +116,12 @@ public class MapCanvas extends Canvas {
 		// 画地图表格[end]
 
 		super.render(g);
+	}
+
+	public void restore() {
+		map.restore();
+		while (getPathCount() > 0) {
+			removePath(getPath(0));
+		}
 	}
 }

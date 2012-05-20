@@ -1,6 +1,5 @@
 package com.jhs.open.control.event;
 
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 

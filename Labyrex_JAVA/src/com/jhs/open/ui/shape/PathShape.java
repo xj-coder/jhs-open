@@ -4,9 +4,13 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.LinearGradientPaint;
+import java.awt.MultipleGradientPaint;
 
+import com.jhs.open.Define;
 import com.jhs.open.bean.BodyBean;
 import com.jhs.open.bean.PathBean;
+import com.jhs.open.tool.GraphicsTools;
 import com.jhs.open.ui.Canvas;
 
 public class PathShape extends Canvas {
@@ -23,11 +27,6 @@ public class PathShape extends Canvas {
 	public void render(Graphics g) {
 		super.render(g);
 
-		Graphics2D g2 = (Graphics2D) g;
-
-		Color c = g2.getColor();
-		g2.setColor(Color.red);
-
 		BodyBean body1 = bean.emitter;
 		BodyBean body2 = null;
 
@@ -38,53 +37,84 @@ public class PathShape extends Canvas {
 				body2 = bean.receiver;
 			}
 
-			int begin_x = 0;
-			int begin_y = 0;
-			int end_x = 0;
-			int end_y = 0;
+			int x1 = 0;
+			int y1 = 0;
+			int x2 = 0;
+			int y2 = 0;
 
-			begin_x = owner.x + body1.x * body1.width + body1.width / 2;
-			begin_y = owner.y + body1.y * body1.height + body1.height / 2;
-			end_x = owner.x + body2.x * body2.width + body2.width / 2;
-			end_y = owner.y + body2.y * body2.height + body2.height / 2;
+			x1 = owner.x + body1.x * body1.width + body1.width / 2;
+			y1 = owner.y + body1.y * body1.height + body1.height / 2;
+			x2 = owner.x + body2.x * body2.width + body2.width / 2;
+			y2 = owner.y + body2.y * body2.height + body2.height / 2;
 
 			// begin_x、begin_y值校正，保证线画在地图内
-			if (begin_x < owner.x) {
-				begin_x = owner.x;
-			} else if (begin_x > owner.x + owner.width) {
-				begin_x = owner.x + owner.width;
+			if (x1 < owner.x) {
+				x1 = owner.x;
+			} else if (x1 > owner.x + owner.width) {
+				x1 = owner.x + owner.width;
 			}
-			if (begin_y > owner.y + owner.height) {
-				begin_y = owner.y + owner.height;
-			} else if (begin_y < owner.y) {
-				begin_y = owner.y;
+			if (y1 > owner.y + owner.height) {
+				y1 = owner.y + owner.height;
+			} else if (y1 < owner.y) {
+				y1 = owner.y;
 
 			}
-			if (end_x < owner.x) {
-				end_x = owner.x;
-			} else if (end_x > owner.x + owner.width) {
-				end_x = owner.x + owner.width;
+			if (x2 < owner.x) {
+				x2 = owner.x;
+			} else if (x2 > owner.x + owner.width) {
+				x2 = owner.x + owner.width;
 			}
-			if (end_y > owner.y + owner.height) {
-				end_y = owner.y + owner.height;
-			} else if (end_y < owner.y) {
-				end_y = owner.y;
+			if (y2 > owner.y + owner.height) {
+				y2 = owner.y + owner.height;
+			} else if (y2 < owner.y) {
+				y2 = owner.y;
 			}
 
 			// 普通画线法
+			Graphics2D g2 = (Graphics2D) g;
+
+			GraphicsTools.backupGraphics(g2);
+			Color c = Define.Particle.typeMap.get(bean.emitter.type);
 			if (isThick) {
-				g2.setStroke(new BasicStroke(3.8f));
+
+				Color c1 = new Color(c.getRed(), c.getGreen(), c.getBlue(), 1);
+				Color c2 = new Color(c.getRed(), c.getGreen(), c.getBlue(), 50);
+				Color c3 = new Color(c.getRed(), c.getGreen(), c.getBlue(), 100);
+				int stroke = 10;
+
+				int _x1 = 0;
+				int _y1 = 0;
+				int _x2 = 0;
+				int _y2 = 0;
+
+				if (x1 == x2) {
+					_x1 = x1 - stroke;
+					_y1 = y1;
+					_x2 = x1;
+					_y2 = y1;
+				} else if (y1 == y2) {
+					_x1 = x1;
+					_y1 = y1 - stroke;
+					_x2 = x1;
+					_y2 = y1;
+				}
+
+				LinearGradientPaint gradient = new LinearGradientPaint(_x1, _y1, _x2, _y2, new float[] { 0.4f, 0.7f,
+						1.0f }, new Color[] { c1, c2, c3 }, MultipleGradientPaint.CycleMethod.REFLECT);
+
+				g2.setPaint(gradient);
+				g2.setStroke(new BasicStroke(stroke));
 			} else {
-				g2.setStroke(new BasicStroke(1));
+				g2.setColor(new Color(c.getRed(), c.getGreen(), c.getBlue(), 70));
+				g2.setStroke(new BasicStroke(2f));
 			}
-			g2.drawLine(begin_x, begin_y, end_x, end_y);
+			g2.drawLine(x1, y1, x2, y2);
 
 			if (i < bean.mirrors.size()) {
 				body1 = bean.mirrors.get(i);
 			}
+			GraphicsTools.restoreGraphics(g2);
 		}
-		g2.setColor(c);
-		g2.setStroke(new BasicStroke(1));
 
 	}
 }

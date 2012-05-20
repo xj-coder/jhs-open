@@ -1,5 +1,6 @@
 package com.jhs.open;
 
+import java.awt.Color;
 import java.io.File;
 import java.util.HashMap;
 
@@ -26,6 +27,25 @@ public class Define {
 		public static final int grid_size = 30;
 		public static final float path_size = 3.5f;
 
+	}
+
+	public static final class Canvas {
+		public static final long animationTime = 500;// 画面开始动画时间
+		public static final long closeTime = 300;// 画面关闭时间
+	}
+
+	public static final class HelpPanel {
+		public static final String bg_image_path = IMG_PATH + "help.png";
+	}
+
+	public static final class FullCanvas {
+		public static final String close_bg_path = IMG_PATH + "close_button.png";
+		public static final String close_bg_r_path = IMG_PATH + "close_button_l.png";
+
+		public static final int close_button_x = 590;
+		public static final int close_button_y = 10;
+		public static final int close_button_width = 40;
+		public static final int close_button_height = 40;
 	}
 
 	public static final class MainPanel {
@@ -70,7 +90,7 @@ public class Define {
 		public static final int back_button_height = 35;
 		public static final int back_button_width = 80;
 		public static final int back_button_x = 550;
-		public static final int back_button_y = 10;
+		public static final int back_button_y = 430;
 	}
 
 	public static final class GamePanel {
@@ -151,6 +171,17 @@ public class Define {
 			typeMap.put("green", "emitter_green");
 			typeMap.put("blue", "emitter_blue");
 			typeMap.put("yellow", "emitter_yellow");
+		}
+	}
+
+	public static final class Particle {
+		public static final HashMap<String, Color> typeMap = new HashMap<String, Color>();
+
+		static {
+			typeMap.put("red", Color.red);
+			typeMap.put("green", Color.green);
+			typeMap.put("blue", Color.blue);
+			typeMap.put("yellow", Color.yellow);
 		}
 	}
 

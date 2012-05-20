@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Vector;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -12,7 +13,6 @@ import javax.sound.sampled.DataLine;
 import javax.sound.sampled.SourceDataLine;
 
 import com.jhs.open.Define;
-
 
 /**
  * 声音管理器
@@ -23,6 +23,8 @@ import com.jhs.open.Define;
 public class SoundControl {
 
 	private static HashMap<String, Mp3Date> soundMap = new HashMap<String, Mp3Date>();
+
+	private static ReentrantReadWriteLock readWriteLock;
 
 	static {
 		loadSound(Define.Sound.bg_sound);
@@ -61,10 +63,6 @@ public class SoundControl {
 
 				mp3Date.audioFormat = audioFormat;
 
-				// DataLine.Info info = new DataLine.Info(SourceDataLine.class, mp3Date.audioFormat);
-				// SourceDataLine m_line = (SourceDataLine) AudioSystem.getLine(info);
-				// mp3Date.dateLine = m_line;
-
 				int bufferSize = (int) audioFormat.getSampleRate() * audioFormat.getFrameSize();
 				byte[] buffer = new byte[bufferSize];
 
@@ -95,39 +93,39 @@ public class SoundControl {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				System.out.println("Sound Thread running begin  " + srcPath);
+				writeLock();
 				Mp3Date date = loadSound(srcPath);
 				try {
 					DataLine.Info info = new DataLine.Info(SourceDataLine.class, date.audioFormat);
-					SourceDataLine m_line = (SourceDataLine) AudioSystem.getLine(info);
-					date.dateLine = m_line;
+					date.dateLine = (SourceDataLine) AudioSystem.getLine(info);
 
-					m_line.open(date.audioFormat, m_line.getBufferSize());
-					m_line.start();
+					date.dateLine.open(date.audioFormat, date.dateLine.getBufferSize());
+					date.dateLine.start();
+
 					date.loopTimes = loopTimes;
 					date.isPlay = true;
+
+					writeUnlock();
 
 					while (date.loopTimes != 0) {
 						date.loopTimes--;
 
 						for (int i = 0; i < date.date.size(); i++) {
 							if (!date.isPlay) {
-								m_line.flush();
+								date.dateLine.flush();
 								break;
 							}
-							m_line.write(date.date.get(i), 0, date.date.get(i).length);
+							date.dateLine.write(date.date.get(i), 0, date.date.get(i).length);
 						}
-						m_line.drain();
+						date.dateLine.drain();
 					}
 
-					m_line.close();
+					date.dateLine.close();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				System.out.println("Sound Thread running end  " + srcPath);
 			}
 		}).start();
-		System.out.println("Sound Thread Start  " + srcPath);
 	}
 
 	/**
@@ -147,11 +145,13 @@ public class SoundControl {
 	 *            音频文件
 	 */
 	public static void stop(String srcPath) {
+		writeLock();
 		Mp3Date date = loadSound(srcPath);
 		if (date.dateLine != null) {
 			date.loopTimes = 0;
 			date.isPlay = false;
 		}
+		writeUnlock();
 	}
 
 	/**
@@ -161,10 +161,14 @@ public class SoundControl {
 	 *            音频文件
 	 */
 	public static void pause(String srcPath) {
+		writeLock();
 		Mp3Date date = loadSound(srcPath);
-		if (date.dateLine != null && date.dateLine.isRunning()) {
+		if (date.dateLine != null && date.isPlay) {
+			// if (date.dateLine != null && date.dateLine.isRunning()) {
 			date.dateLine.stop();
+			date.isPlay = false;
 		}
+		writeUnlock();
 	}
 
 	/**
@@ -174,10 +178,29 @@ public class SoundControl {
 	 *            音频文件
 	 */
 	public static void go(String srcPath) {
+		writeLock();
 		Mp3Date date = loadSound(srcPath);
-		if (date.dateLine != null && !date.dateLine.isRunning()) {
+		if (date.dateLine != null && !date.isPlay) {
+			// if (date.dateLine != null && !date.dateLine.isRunning()) {
 			date.dateLine.start();
+			date.isPlay = true;
 		}
+		writeUnlock();
+	}
+
+	private static void writeLock() {
+		getReadWriteLock().writeLock().lock();
+	}
+
+	private static void writeUnlock() {
+		getReadWriteLock().writeLock().unlock();
+	}
+
+	private static ReentrantReadWriteLock getReadWriteLock() {
+		if (readWriteLock == null) {
+			readWriteLock = new ReentrantReadWriteLock(true);
+		}
+		return readWriteLock;
 	}
 }
 

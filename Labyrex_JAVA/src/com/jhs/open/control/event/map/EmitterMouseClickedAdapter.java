@@ -63,11 +63,12 @@ public class EmitterMouseClickedAdapter extends MouseAdapter {
 		}
 
 		BallShape ball = new BallShape(x, y, Define.Main.grid_size, Define.Main.grid_size);
-		map.addCanvas(ball);
 
 		ball.dir = dir;
 		ball.type = emitter.bean.type;
 		ball.path.bean.emitter = emitter.bean;
+
+		map.addCanvas(ball);
 
 		// 关闭所有事件,当球消失后重新开启
 		ListenerControl.gi().loopRemoveCanvasListener(map);

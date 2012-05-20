@@ -1460,7 +1460,7 @@ public class LabyrexMapEditorFrame extends JFrame {
 				shape.reset();
 			}
 
-			getCurrMapBean().setSave(false);
+			getCurrMapBean().doChange();
 
 			updateAttrField();
 			updateBodyInfoPanel();
@@ -1634,6 +1634,7 @@ public class LabyrexMapEditorFrame extends JFrame {
 				return;
 			} else {
 				getCurrMapBean().setName(name);
+				getCurrMapBean().doChange();
 				updateTree();
 			}
 		}
@@ -1687,6 +1688,7 @@ public class LabyrexMapEditorFrame extends JFrame {
 				mapNode.removeFromParent();
 				newGroupNode.add(mapNode);
 				updateTree();
+				newGroup.doChange();
 			}
 		}
 
@@ -1740,6 +1742,7 @@ public class LabyrexMapEditorFrame extends JFrame {
 			}
 
 			getMapPanel().resetHeight(newHeight);
+			getCurrMapBean().doChange();
 		}
 
 		public boolean isEnable() {
@@ -1792,6 +1795,7 @@ public class LabyrexMapEditorFrame extends JFrame {
 			}
 
 			getMapPanel().resetWidth(newWidth);
+			getCurrMapBean().doChange();
 		}
 
 		public boolean isEnable() {
