@@ -1,6 +1,7 @@
 package com.jhs.open.tool;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.util.Vector;
 
 import com.jhs.open.Define;
@@ -21,15 +22,15 @@ import com.jhs.open.ui.shape.ReceiverShape;
 
 public class ImgSelector {
 
-	public static Image ballSelector(BallShape ball) {
-		Image image = null;
+	public static BufferedImage ballSelector(BallShape ball) {
+		BufferedImage image = null;
 		image = ImageTools.cut(Define.IMG_PATH + Define.Ball.typeMap.get(ball.type) + ".png", 0, 0, ball.width,
 				ball.height, "png");
 		return image;
 	}
 
-	public static Image lineSelector(String type, boolean isLight, EDir dir) {
-		Image image = null;
+	public static BufferedImage lineSelector(String type, boolean isLight, EDir dir) {
+		BufferedImage image = null;
 
 		int degree = 0;// 选择角度
 
@@ -51,8 +52,8 @@ public class ImgSelector {
 		return image;
 	}
 
-	public static Image emitterSelector(EmitterShape emitter, Rect2D rec) {
-		Image image = null;
+	public static BufferedImage emitterSelector(EmitterShape emitter, Rect2D rec) {
+		BufferedImage image = null;
 
 		boolean inPath = inPath(emitter.bean).size() == 0 ? false : true;
 
@@ -76,8 +77,8 @@ public class ImgSelector {
 		return image;
 	}
 
-	public static Image emitterSelector(int x, int y, int width, int height, String type, Rect2D rec) {
-		Image image = null;
+	public static BufferedImage emitterSelector(int x, int y, int width, int height, String type, Rect2D rec) {
+		BufferedImage image = null;
 
 		int degree = 0;// 选择角度
 
@@ -106,8 +107,8 @@ public class ImgSelector {
 		return image;
 	}
 
-	public static Image receiverSelector(ReceiverShape receiver, Rect2D rec) {
-		Image image = null;
+	public static BufferedImage receiverSelector(ReceiverShape receiver, Rect2D rec) {
+		BufferedImage image = null;
 
 		boolean inPath = inPath(receiver.bean).size() == 0 ? false : true;
 
@@ -130,8 +131,8 @@ public class ImgSelector {
 		return image;
 	}
 
-	public static Image receiverSelector(int x, int y, int width, int height, String type, Rect2D rec) {
-		Image image = null;
+	public static BufferedImage receiverSelector(int x, int y, int width, int height, String type, Rect2D rec) {
+		BufferedImage image = null;
 
 		int degree = 0;
 		switch (getDir(x, y, rec)) {

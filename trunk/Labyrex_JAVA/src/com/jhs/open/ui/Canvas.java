@@ -21,6 +21,7 @@ public class Canvas {
 	private Graphics2D g;// 画笔
 
 	protected long timer = 0l;// 计时器
+	protected long closeTimer = -1l;// 关闭计时器,-1表示计时器为开启，当计时器被赋值为0时，计时器开始计时
 
 	protected ArrayList<Canvas> canvasList = new ArrayList<Canvas>();
 
@@ -36,8 +37,11 @@ public class Canvas {
 
 	public Canvas owner;
 
+	public boolean isClose = false;
+
 	protected boolean isOver = false;// 鼠标悬停
 	protected boolean isSelected = false;// 鼠标选择
+	public boolean isAnimation = false;
 
 	public boolean isMouseIn(int x, int y) {
 		if (owner != null) {
@@ -70,7 +74,7 @@ public class Canvas {
 	}
 
 	public void init() {
-
+		closeTimer = -1;
 	}
 
 	public void addCanvas(Canvas canvas) {
@@ -103,6 +107,10 @@ public class Canvas {
 
 	public Canvas getCanvas(int index) {
 		return canvasList.get(index);
+	}
+
+	public void close() {
+		closeTimer = 0;
 	}
 
 	public Graphics2D getGraphics() {
@@ -138,6 +146,13 @@ public class Canvas {
 		for (int i = 0; i < canvasList.size(); i++) {
 			canvasList.get(i).update(l);
 		}
+		if (closeTimer >= 0) {
+			closeTimer += l;
+			if (closeTimer >= Define.Canvas.closeTime) {
+				isClose = true;
+				removeAllCanvas();
+			}
+		}
 	}
 
 	/**
@@ -145,7 +160,25 @@ public class Canvas {
 	 */
 
 	public void flip(Graphics g) {
-		g.drawImage(backbuffer, 0, 0, null);
+		if (isAnimation) {
+			if (closeTimer != -1) {
+				double po = (double) closeTimer / Define.Canvas.closeTime;
+				int offset_width = (int) (width * (po > 1 ? 1 : po));
+
+				g.drawImage(backbuffer, 0, 0, width - offset_width, height, null);
+
+				GraphicsTools.backupGraphics(g);
+				g.setColor(Color.BLACK);
+				g.fillRect(width - offset_width, 0, width, height);
+				GraphicsTools.restoreGraphics(g);
+			} else {
+				double po = (double) timer / Define.Canvas.animationTime;
+				int offset_width = (int) (width * (po > 1 ? 1 : po));
+				g.drawImage(backbuffer, 0, 0, offset_width, height, null);
+			}
+		} else {
+			g.drawImage(backbuffer, 0, 0, null);
+		}
 	}
 
 	public void drawText(String s, int i, int j, Color c, Font f) {

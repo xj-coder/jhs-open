@@ -19,7 +19,6 @@ public class EXButtonMouseClickedEvent extends MouseAdapter {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		System.out.println("button click");
 		if (GameControl.gi().isSound()) {
 			SoundControl.play(Define.Sound.button_click_sound);
 		}
@@ -28,6 +27,8 @@ public class EXButtonMouseClickedEvent extends MouseAdapter {
 		}
 		if (button.getName().equals("start")) {
 			GameControl.gi().setCurrCanvasIndex(GameControl.G_Menu);
+		} else if (button.getName().equals("close")) {
+			System.exit(0);
 		} else if (button.getName().equals("music")) {
 			GameControl.gi().setMusic(!button.isSelected());
 		} else if (button.getName().equals("sound")) {
@@ -37,7 +38,7 @@ public class EXButtonMouseClickedEvent extends MouseAdapter {
 		} else if (button.getName().equals("back")) {
 			GameControl.gi().setCurrCanvasIndex(GameControl.G_Title);
 		} else if (button.getName().equals("reset")) {
-			((GameCanvas) GameControl.gi().getCurrCanvas()).getMapCanvas().init();
+			((GameCanvas) GameControl.gi().getCurrCanvas()).getMapCanvas().restore();
 		} else if (button.getName().equals("menu")) {
 			GameControl.gi().setCurrCanvasIndex(GameControl.G_Menu);
 		} else if (button.getName().equals("lock")) {

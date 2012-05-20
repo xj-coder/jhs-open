@@ -15,14 +15,13 @@ import com.jhs.open.control.event.win.WinCanvasMouseMoveEvent;
 import com.jhs.open.tool.GraphicsTools;
 import com.jhs.open.ui.Canvas;
 
-
 /**
  * 胜利界面
  * 
  * @author JHS
  * 
  */
-public class WinPanel extends Canvas {
+public class WinPanel extends FullCanvas {
 
 	private boolean isStop = false;
 
@@ -32,6 +31,8 @@ public class WinPanel extends Canvas {
 
 	@Override
 	public void init() {
+		super.init();
+
 		addMouseListener(new WinCanvasMouseClickedEvent());
 		addMouseListener(new WinCanvasMouseMoveEvent());
 	}

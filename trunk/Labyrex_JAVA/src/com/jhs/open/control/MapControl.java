@@ -318,7 +318,6 @@ public class MapControl {
 	 * 使指定关卡可见，该方法会自动保存XML文件
 	 */
 	public static boolean enableMap(MapBean map) {
-		map.isEnabled = true;
 		GroupBean group = map.getGroup();
 
 		if (group != null) {

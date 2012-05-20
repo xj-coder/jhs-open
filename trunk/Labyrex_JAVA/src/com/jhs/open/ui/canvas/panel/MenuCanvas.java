@@ -10,7 +10,6 @@ import com.jhs.open.bean.MapBean;
 import com.jhs.open.control.MapControl;
 import com.jhs.open.tool.GraphicsTools;
 import com.jhs.open.tool.ImageTools;
-import com.jhs.open.ui.Canvas;
 import com.jhs.open.ui.shape.CrossShape;
 import com.jhs.open.ui.shape.EXButton;
 import com.jhs.open.ui.shape.GroupShape;
@@ -21,7 +20,7 @@ import com.jhs.open.ui.shape.GroupShape;
  * @author JHS
  * 
  */
-public class MenuCanvas extends Canvas {
+public class MenuCanvas extends FullCanvas {
 
 	private Image bgImage;
 
@@ -38,10 +37,13 @@ public class MenuCanvas extends Canvas {
 
 	public MenuCanvas() {
 		super(0, 0, Define.Main.width, Define.Main.height);
+		isAnimation = true;
 	}
 
 	@Override
 	public void init() {
+		super.init();
+
 		groupList.clear();
 
 		bgImage = ImageTools.getImage(Define.MenuPanel.bg_image_path);

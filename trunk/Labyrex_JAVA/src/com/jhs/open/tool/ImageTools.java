@@ -1,11 +1,11 @@
 package com.jhs.open.tool;
 
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
-import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.awt.image.Raster;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -40,8 +40,8 @@ public class ImageTools {
 	 * @param format
 	 * @return
 	 */
-	public static Image cut(String path, int x, int y, int width, int height, String format) {
-		Image result = null;
+	public static BufferedImage cut(String path, int x, int y, int width, int height, String format) {
+		BufferedImage result = null;
 
 		ImageInputStream iis = null;
 
@@ -60,9 +60,9 @@ public class ImageTools {
 
 			param.setSourceRegion(rect);
 
-			BufferedImage bi = reader.read(0, param);
+			result = reader.read(0, param);
 
-			result = Toolkit.getDefaultToolkit().createImage(bi.getSource());
+			// result = Toolkit.getDefaultToolkit().createImage(bi.getSource());
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -87,7 +87,7 @@ public class ImageTools {
 	 *            旋转角度
 	 * @return
 	 */
-	public static Image rotateImage(final Image image, final int degree) {
+	public static BufferedImage rotateImage(final BufferedImage image, final int degree) {
 		int w = image.getWidth(null);
 		int h = image.getHeight(null);
 		BufferedImage img;
@@ -141,6 +141,42 @@ public class ImageTools {
 				.drawImage(bufferedimage, 0, 0, w, h, w, 0, 0, h, null);
 		graphics2d.dispose();
 		return img;
+	}
+
+	/**
+	 * 计算图片颜色的平均值
+	 * 
+	 * @return
+	 */
+	public static int calcImageMean(BufferedImage bufferedimage) {
+		Raster raster = bufferedimage.getData();
+		DataBufferByte bufferByte = (DataBufferByte) raster.getDataBuffer();
+		int result = -1;
+
+		int r = 0;
+		int g = 0;
+		int b = 0;
+		for (int i = 0; i < bufferByte.getData().length / 4; i++) {
+			r = bufferByte.getData()[i * 4 + 3];
+			g = bufferByte.getData()[i * 4 + 2];
+			b = bufferByte.getData()[i * 4 + 1];
+			r = r < 0 ? 0 : r;
+			g = g < 0 ? 0 : g;
+			b = b < 0 ? 0 : b;
+
+			if (r != 0 || g != 0 || b != 0) {
+				int rgb = r << 16 + g << 8 + b;
+				if (result == -1) {
+					result = rgb;
+				} else {
+					result = (result + rgb) / 2;
+				}
+				System.out
+						.println(Integer.toHexString(r) + " " + Integer.toHexString(g) + " " + Integer.toHexString(b));
+			}
+		}
+
+		return result;
 	}
 
 	public static BufferedImage createImage(int width, int height, int type) {

@@ -6,7 +6,6 @@ import java.awt.Image;
 import com.jhs.open.Define;
 import com.jhs.open.control.GameControl;
 import com.jhs.open.tool.ImageTools;
-import com.jhs.open.ui.Canvas;
 import com.jhs.open.ui.shape.EXButton;
 
 /**
@@ -15,7 +14,7 @@ import com.jhs.open.ui.shape.EXButton;
  * @author JHS
  * 
  */
-public class MainCanvas extends Canvas {
+public class TitleCanvas extends FullCanvas {
 	private Image bgImage;
 	private Image buttonBgImage;
 	private Image buttonBgrImage;
@@ -28,12 +27,15 @@ public class MainCanvas extends Canvas {
 	private EXButton soundButton;
 	private EXButton helpButton;
 
-	public MainCanvas() {
+	public TitleCanvas() {
 		super(0, 0, Define.Main.width, Define.Main.height);
+		isAnimation = true;
 	}
 
 	@Override
 	public void init() {
+		super.init();
+
 		bgImage = ImageTools.cut(Define.MainPanel.bg_image_path, 0, 0, Define.Main.width, Define.Main.height, "png");
 
 		buttonBgImage = ImageTools.resizeImage(ImageTools.getImage(Define.Button.bg_path),

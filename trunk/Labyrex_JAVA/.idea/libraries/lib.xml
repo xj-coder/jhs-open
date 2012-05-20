@@ -6,6 +6,7 @@
       <root url="jar://$PROJECT_DIR$/lib/jlayer-1.0.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/mp3spi-1.9.4.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/tritonus_share-1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jide-common.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
