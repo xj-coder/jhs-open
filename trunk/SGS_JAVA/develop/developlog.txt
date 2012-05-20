@@ -1,1 +1,6 @@
-﻿
+﻿三国杀开发记录
+	功能划分：
+	src
+		base（com.jhs.open.bease）		基础包
+		client（com.jhs.open.client）		客户端
+		server（com.jhs.open.server）		服务端
