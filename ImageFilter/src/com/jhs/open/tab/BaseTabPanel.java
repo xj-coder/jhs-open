@@ -13,6 +13,7 @@ import javax.swing.border.TitledBorder;
 
 import com.jhs.open.MainFrame;
 import com.jhs.open.filter.SharpenFilter;
+import com.jhs.open.filter.SmoothFilter;
 
 /**
  * 
@@ -32,6 +33,7 @@ public class BaseTabPanel extends JPanel {
 	private JTextField sharpenRatioTextField;
 
 	private SharpenFilter sharpenFilter = new SharpenFilter();
+	private SmoothFilter smoothFilter = new SmoothFilter();
 
 	private Action action = new Action();
 
@@ -195,16 +197,26 @@ public class BaseTabPanel extends JPanel {
 
 				if (command.equals("sharpenCheckBox")) {
 					if (getSharpenCheckBox().isSelected()) {
+						sharpenFilter.ratio = Double.parseDouble(getSharpenRatioTextField().getText());
 						MainFrame.gi().addFilter(sharpenFilter);
 					} else {
 						MainFrame.gi().removeFilter(sharpenFilter);
 					}
-					MainFrame.gi().getTargetImagePanel().repaint();
 				} else if (command.equals("sharpenRatioTextField")) {
 					sharpenFilter.ratio = Double.parseDouble(getSharpenRatioTextField().getText());
-					MainFrame.gi().getTargetImagePanel().repaint();
+					MainFrame.gi().removeFilter(sharpenFilter);
+					MainFrame.gi().addFilter(sharpenFilter);
 				} else if (command.equals("smoothCheckBox")) {
+					if (getSmoothCheckBox().isSelected()) {
+						smoothFilter.ratio = Double.parseDouble(getSmoothRatioTextField().getText());
+						MainFrame.gi().addFilter(smoothFilter);
+					} else {
+						MainFrame.gi().removeFilter(smoothFilter);
+					}
 				} else if (command.equals("smoothRatioTextField")) {
+					smoothFilter.ratio = Double.parseDouble(getSmoothRatioTextField().getText());
+					MainFrame.gi().removeFilter(smoothFilter);
+					MainFrame.gi().addFilter(smoothFilter);
 				} else if (command.equals("pervasionCheckBox")) {
 				} else if (command.equals("pervasionRatioTextField")) {
 				} else if (command.equals("carvingCheckBox")) {
@@ -213,4 +225,5 @@ public class BaseTabPanel extends JPanel {
 			}
 		}
 	}
+
 }

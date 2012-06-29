@@ -2,13 +2,20 @@ package com.jhs.open.filter;
 
 import java.awt.image.BufferedImage;
 
-public class Filter {
+public abstract class Filter {
 	private int total;
 	private int process;
 
-	public void filter(BufferedImage bufferedImage) {
-
+	public void filter(final BufferedImage bufferedImage) {
+		// new Thread(new Runnable() {
+		// @Override
+		// public void run() {
+		dofilter(bufferedImage);
+		// }
+		// }).start();
 	}
+
+	protected abstract void dofilter(BufferedImage bufferedImage);
 
 	public int getTotal() {
 		return total;
