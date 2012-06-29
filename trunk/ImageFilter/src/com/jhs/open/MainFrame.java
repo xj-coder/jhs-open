@@ -104,6 +104,31 @@ public class MainFrame extends JFrame {
 						try {
 							sourceImage = ImageIO.read(file);
 
+							if (sourceImage != null) {
+								targetImage = new BufferedImage(sourceImage.getWidth(), sourceImage.getHeight(),
+										sourceImage.getType());
+								targetImage.setData(sourceImage.copyData(null));
+
+								for (int i = 0; i < getFilterCount(); i++) {
+									final Filter f = getFilter(i);
+									f.filter(targetImage);
+
+									new Thread(new Runnable() {
+
+										@Override
+										public void run() {
+											while (true) {
+												System.out.println(f.getProcess() + "/" + f.getTotal());
+												if (f.getProcess() == f.getTotal()) {
+													return;
+												}
+											}
+										}
+									}).start();
+
+								}
+							}
+
 							getSourceImagePanel().repaint();
 							getTargetImagePanel().repaint();
 						} catch (IOException e1) {
@@ -124,16 +149,7 @@ public class MainFrame extends JFrame {
 				@Override
 				public void paint(Graphics g) {
 					super.paint(g);
-
-					if (sourceImage != null) {
-						targetImage = new BufferedImage(sourceImage.getWidth(), sourceImage.getHeight(), sourceImage
-								.getType());
-						targetImage.setData(sourceImage.copyData(null));
-
-						for (int i = 0; i < getFilterCount(); i++) {
-							getFilter(i).filter(targetImage);
-						}
-
+					if (targetImage != null) {
 						g.drawImage(targetImage, 0, 0, null);
 					}
 				}
@@ -165,11 +181,17 @@ public class MainFrame extends JFrame {
 
 	public void addFilter(Filter filter) {
 		filterList.add(filter);
-		getTargetImagePanel().repaint();
-	}
 
-	public void addFilter(Filter filter, int index) {
-		filterList.add(index, filter);
+		if (sourceImage != null) {
+			targetImage = new BufferedImage(sourceImage.getWidth(), sourceImage.getHeight(), sourceImage.getType());
+			targetImage.setData(sourceImage.copyData(null));
+
+			for (int i = 0; i < getFilterCount(); i++) {
+				final Filter f = getFilter(i);
+				f.filter(targetImage);
+			}
+		}
+
 		getTargetImagePanel().repaint();
 	}
 
@@ -183,12 +205,21 @@ public class MainFrame extends JFrame {
 
 	public Filter removeFilter(int index) {
 		Filter filter = filterList.remove(index);
-		getTargetImagePanel().repaint();
+		removeFilter(filter);
 		return filter;
 	}
 
 	public boolean removeFilter(Filter filter) {
 		boolean remove = filterList.remove(filter);
+		if (sourceImage != null) {
+			targetImage = new BufferedImage(sourceImage.getWidth(), sourceImage.getHeight(), sourceImage.getType());
+			targetImage.setData(sourceImage.copyData(null));
+
+			for (int i = 0; i < getFilterCount(); i++) {
+				final Filter f = getFilter(i);
+				f.filter(targetImage);
+			}
+		}
 		getTargetImagePanel().repaint();
 		return remove;
 	}
@@ -199,7 +230,6 @@ public class MainFrame extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		MainFrame mainFrame = new MainFrame();
-		mainFrame.setVisible(true);
+		MainFrame.gi().setVisible(true);
 	}
 }

@@ -4,17 +4,8 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.awt.image.WritableRaster;
 
-/**
- * Èñ»¯Ëã·¨
- * 
- * @author JHS
- * 
- */
-public class SharpenFilter extends Filter {
+public class SmoothFilter extends Filter {
 	public double ratio;
-
-	public SharpenFilter() {
-	}
 
 	@Override
 	protected void dofilter(BufferedImage bufferedImage) {
@@ -29,12 +20,7 @@ public class SharpenFilter extends Filter {
 
 		for (int i = 0; i < h - 1; i++) {
 			for (int j = 0; j < w - 1; j++) {
-				int offset = (i * w + j) * 3;
-				byte a_b = data[offset];
-				byte a_g = data[offset + 1];
-				byte a_r = data[offset + 2];
-
-				offset = (i * w + j + 1) * 3;
+				int offset = (i * w + j + 1) * 3;
 				byte b_b = data[offset];
 				byte b_g = data[offset + 1];
 				byte b_r = data[offset + 2];
@@ -49,25 +35,14 @@ public class SharpenFilter extends Filter {
 				byte f_g = data[offset + 1];
 				byte f_r = data[offset + 2];
 
-				byte delta = (byte) (a_r - (b_r + e_r + f_r) / 3);
-				byte n_r = (byte) (a_r + delta * ratio);
-				n_r = n_r > Byte.MAX_VALUE ? Byte.MAX_VALUE : n_r;
-				n_r = n_r < Byte.MIN_VALUE ? Byte.MIN_VALUE : n_r;
-
-				delta = (byte) (a_g - (b_g + e_g + f_g) / 3);
-				byte n_g = (byte) (a_g + delta * ratio);
-				n_g = n_g > Byte.MAX_VALUE ? Byte.MAX_VALUE : n_g;
-				n_g = n_g < Byte.MIN_VALUE ? Byte.MIN_VALUE : n_g;
-
-				delta = (byte) (a_b - (b_b + e_b + f_b) / 3);
-				byte n_b = (byte) (a_b + delta * ratio);
-				n_b = n_b > Byte.MAX_VALUE ? Byte.MAX_VALUE : n_b;
-				n_b = n_b < Byte.MIN_VALUE ? Byte.MIN_VALUE : n_b;
-
 				offset = (i * w + j) * 3;
-				dataBuffer.setElem(offset, n_b);
-				dataBuffer.setElem(offset + 1, n_g);
-				dataBuffer.setElem(offset + 2, n_r);
+
+				byte delta = (byte) ((b_b + e_b + f_b) / 3);
+				dataBuffer.setElem(offset, (int) (delta * ratio));
+				delta = (byte) ((b_g + e_g + f_g) / 3);
+				dataBuffer.setElem(offset + 1, (int) (delta * ratio));
+				delta = (byte) ((b_r + e_r + f_r) / 3);
+				dataBuffer.setElem(offset + 2, (int) (delta * ratio));
 
 				setProcess(getProcess() + 1);
 			}
