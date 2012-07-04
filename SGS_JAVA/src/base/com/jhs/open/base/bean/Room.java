@@ -2,6 +2,8 @@ package com.jhs.open.base.bean;
 
 import java.util.ArrayList;
 
+import com.jhs.open.base.tool.ListOperator;
+
 public class Room {
 	public static final String ROOM_STATE_BEGIN = "游戏中";
 	public static final String ROOM_STATE_WAIT = "等待中";
@@ -16,14 +18,14 @@ public class Room {
 	private int waitTime;// 出手等待时间，单位秒
 
 	private int maxUserNum;// 最大玩家数
-	private int userNum;// 当前玩家数
 
-	private int state;// 房间状态
+	private String state;// 房间状态
 
 	private User createUser;// 创建者
 
-	private ArrayList<GamePack> packList = new ArrayList<GamePack>();// 游戏使用的包
-	private ArrayList<User> userList = new ArrayList<User>();// 用户列表
+	private ListOperator<GamePack> packList = new ListOperator<GamePack>(new ArrayList<GamePack>());// 游戏使用的包
+	private ListOperator<User> userList = new ListOperator<User>(new ArrayList<User>());// 用户列表
+	private ListOperator<User> lookerList = new ListOperator<User>(new ArrayList<User>());// 旁观者列表，仅当isLook=true的时候有效
 
 	public int getNumber() {
 		return number;
@@ -81,19 +83,11 @@ public class Room {
 		this.maxUserNum = maxUserNum;
 	}
 
-	public int getUserNum() {
-		return userNum;
-	}
-
-	public void setUserNum(int userNum) {
-		this.userNum = userNum;
-	}
-
-	public int getState() {
+	public String getState() {
 		return state;
 	}
 
-	public void setState(int state) {
+	public void setState(String state) {
 		this.state = state;
 	}
 
@@ -105,100 +99,16 @@ public class Room {
 		this.createUser = createUser;
 	}
 
-	public int getUserCount() {
-		return userList.size();
+	public ListOperator<GamePack> getPackList() {
+		return packList;
 	}
 
-	public User getUser(int index) {
-		return userList.get(index);
+	public ListOperator<User> getUserList() {
+		return userList;
 	}
 
-	public User getUser(String name) {
-		for (int i = 0; i < getUserCount(); i++) {
-			if (getUser(i).getName().equals(name)) {
-				return getUser(i);
-			}
-		}
-		return null;
-	}
-
-	public int indexOfUser(User user) {
-		return userList.indexOf(user);
-	}
-
-	public int indexOfUser(String name) {
-		for (int i = 0; i < getUserCount(); i++) {
-			if (getUser(i).getName().equals(name)) {
-				return i;
-			}
-		}
-		return -1;
-	}
-
-	public boolean removeUser(User user) {
-		return userList.remove(user);
-	}
-
-	public User removeUser(int index) {
-		return userList.remove(index);
-	}
-
-	public User removeUser(String name) {
-		User user = getUser(name);
-		userList.remove(user);
-		return user;
-	}
-
-	public void clearUser() {
-		userList.clear();
-	}
-
-	public int getGamePackCount() {
-		return packList.size();
-	}
-
-	public GamePack getGamePack(int index) {
-		return packList.get(index);
-	}
-
-	public GamePack getGamePack(String name) {
-		for (int i = 0; i < getGamePackCount(); i++) {
-			if (getGamePack(i).getName().equals(name)) {
-				return getGamePack(i);
-			}
-		}
-		return null;
-	}
-
-	public int indexOfGamePack(User user) {
-		return packList.indexOf(user);
-	}
-
-	public int indexOfGamePack(String name) {
-		for (int i = 0; i < getGamePackCount(); i++) {
-			if (getGamePack(i).getName().equals(name)) {
-				return i;
-			}
-		}
-		return -1;
-	}
-
-	public boolean removeGamePack(GamePack pack) {
-		return packList.remove(pack);
-	}
-
-	public GamePack removeGamePack(int index) {
-		return packList.remove(index);
-	}
-
-	public GamePack removeGamePack(String name) {
-		GamePack pack = getGamePack(name);
-		packList.remove(pack);
-		return pack;
-	}
-
-	public void clearGamePack() {
-		packList.clear();
+	public ListOperator<User> getLookerList() {
+		return lookerList;
 	}
 
 	@Override
