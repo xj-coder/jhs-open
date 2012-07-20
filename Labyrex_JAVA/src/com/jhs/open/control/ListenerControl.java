@@ -1,5 +1,7 @@
 package com.jhs.open.control;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -46,6 +48,18 @@ public class ListenerControl {
 
 	public void begin() {
 
+		LabyrexFrame.gi().addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ADD) {
+					SoundControl.incVoice();
+				}
+				if (e.getKeyCode() == KeyEvent.VK_SUBTRACT) {
+					SoundControl.decVoice();
+				}
+			}
+		});
+
 		LabyrexFrame.gi().addMouseListener(new MouseListener() {
 
 			@Override
@@ -79,8 +93,8 @@ public class ListenerControl {
 
 			@Override
 			public void mouseMoved(MouseEvent e) {
-				List<Canvas> canvasList = CanvasSearcher.findCanvas(GameControl.gi().getCurrCanvas(), e.getX(), e
-						.getY());
+				List<Canvas> canvasList = CanvasSearcher.findCanvas(GameControl.gi().getCurrCanvas(), e.getX(),
+						e.getY());
 
 				if (enterCanvas.size() > 0) {
 					for (int i = 0; i < enterCanvas.size(); i++) {
