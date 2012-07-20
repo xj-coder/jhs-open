@@ -10,6 +10,7 @@ import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.DataLine;
+import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.SourceDataLine;
 
 import com.jhs.open.Define;
@@ -25,6 +26,8 @@ public class SoundControl {
 	private static HashMap<String, Mp3Date> soundMap = new HashMap<String, Mp3Date>();
 
 	private static ReentrantReadWriteLock readWriteLock;
+
+	public static float voiceNum = 0;
 
 	static {
 		loadSound(Define.Sound.bg_sound);
@@ -46,24 +49,24 @@ public class SoundControl {
 			soundMap.put(srcPath, mp3Date);
 
 			AudioInputStream m_audioInputStream = null;
-			AudioFormat audioFormat = null;
+			AudioFormat sourceFormat = null;
 			try {
 				File file = new File(srcPath);
 				m_audioInputStream = AudioSystem.getAudioInputStream(file);
-				audioFormat = m_audioInputStream.getFormat();
+				sourceFormat = m_audioInputStream.getFormat();
 
-				if (audioFormat.getEncoding() != AudioFormat.Encoding.PCM_SIGNED) {
-					AudioFormat newFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, audioFormat
-							.getSampleRate(), 16, audioFormat.getChannels(), audioFormat.getChannels() * 2, audioFormat
-							.getSampleRate(), false);
+				if (sourceFormat.getEncoding() != AudioFormat.Encoding.PCM_SIGNED) {
+					AudioFormat newFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED,
+							sourceFormat.getSampleRate(), 16, sourceFormat.getChannels(),
+							sourceFormat.getChannels() * 2, sourceFormat.getSampleRate(), false);
 					AudioInputStream newStream = AudioSystem.getAudioInputStream(newFormat, m_audioInputStream);
-					audioFormat = newFormat;
+					sourceFormat = newFormat;
 					m_audioInputStream = newStream;
 				}
 
-				mp3Date.audioFormat = audioFormat;
+				mp3Date.audioFormat = sourceFormat;
 
-				int bufferSize = (int) audioFormat.getSampleRate() * audioFormat.getFrameSize();
+				int bufferSize = (int) sourceFormat.getSampleRate() * sourceFormat.getFrameSize();
 				byte[] buffer = new byte[bufferSize];
 
 				int bytesRead = 0;
@@ -97,10 +100,30 @@ public class SoundControl {
 				Mp3Date date = loadSound(srcPath);
 				try {
 					DataLine.Info info = new DataLine.Info(SourceDataLine.class, date.audioFormat);
-					date.dateLine = (SourceDataLine) AudioSystem.getLine(info);
+
+					FloatControl volctrl = null;
+					for (int i = 0; i < AudioSystem.getMixerInfo().length; i++) {
+						if (AudioSystem.getMixer(AudioSystem.getMixerInfo()[i]).isLineSupported(info)
+								&& AudioSystem.getMixer(AudioSystem.getMixerInfo()[i]).getLine(info)
+										.isControlSupported(FloatControl.Type.MASTER_GAIN)) {
+							date.dateLine = (SourceDataLine) AudioSystem.getMixer(AudioSystem.getMixerInfo()[i])
+									.getLine(info);
+							volctrl = (FloatControl) date.dateLine.getControl(FloatControl.Type.MASTER_GAIN);
+							break;
+						}
+					}
 
 					date.dateLine.open(date.audioFormat, date.dateLine.getBufferSize());
 					date.dateLine.start();
+
+					if (voiceNum > volctrl.getMaximum()) {
+						voiceNum = volctrl.getMaximum();
+					}
+					if (voiceNum < volctrl.getMinimum()) {
+						voiceNum = volctrl.getMinimum();
+					}
+					System.out.println(voiceNum);
+					volctrl.setValue(voiceNum);
 
 					date.loopTimes = loopTimes;
 					date.isPlay = true;
@@ -126,6 +149,14 @@ public class SoundControl {
 				}
 			}
 		}).start();
+	}
+
+	public static void incVoice() {
+		voiceNum += 1f;
+	}
+
+	public static void decVoice() {
+		voiceNum -= 1f;
 	}
 
 	/**
