@@ -1,0 +1,81 @@
+DCC.game.Sudoku=Ext.extend(Ext.app.GameModule,{
+    id:'fivechess-win-game',
+	
+	init:function(){
+		
+	},//init end
+	
+	initUI:function(){
+		
+	},//initUI end
+	initGame:function(){
+		
+	},//initGame end
+	createWindow:function(){
+		var _win = this.getWindow();
+		if(!_win){
+			 _win = this.getDesktop().createWindow({
+				id: 'sudoku-win-game',
+				title: 'Sudoku Window',
+				width:550,
+				height:500,
+				iconCls: 'icon-sudoku-win',
+				shim:false,
+				animCollapse:true,
+				constrainHeader:true,
+				maximizable:false,
+				resizable:false,
+				
+				layout:'fit',
+				border:false,
+				tbar:[{
+					xtype:'button',
+					tooltip:'Restart',
+					iconCls:'sudoku-win-restart-tbar',
+					listeners :{
+						click:this.restart.createDelegate(this)
+					}
+				},{
+					xtype:'button',
+					tooltip:'Descreption',
+					iconCls:'sudoku-win-descreption-tbar',
+					listeners :{
+						click:function(t){
+							new Ext.Window({
+								title:'Sudoku Descreption',
+								id:'Sudoku Descreption',
+								width:500,
+								height:400,
+								manager:t.getWindowManager(),
+								minimizable: true,
+								maximizable: true,
+								autoScroll: true,
+								autoLoad: {url: '/page/game/sudoku/descreption.html'}
+							}).show();
+						}.createDelegate(this,[this.getThis()])
+					}
+				}],
+				html:this.HTML.innerHTML
+			})
+		}
+		_win.show();
+		this.start();
+	},//createWindow end
+	registMethod : function(){
+		return [
+			['',''],
+		];
+	},
+	registBeginMethod:function(){
+		return '';	
+	},
+	registLoopMethod:function(){
+		return '';
+	},
+	registStopMethod:function(){
+		return '';	
+	},
+	registWinMethod:function(){
+		return '';	
+	}
+});
