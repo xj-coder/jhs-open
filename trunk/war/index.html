@@ -1,0 +1,134 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>CodeWarfare</title>
+<link rel="stylesheet" type="text/css" href="lib/ext3.2/resources/css/ext-all.css" />
+<link rel="stylesheet" type="text/css" href="css/desktop.css" />
+<!--<link rel="stylesheet" type="text/css" href="css/game/mini/mini.css" />-->
+
+<!-- GC -->
+<!-- LIBS -->
+<script type="text/javascript" src="lib/ext3.2/adapter/ext/ext-base.js"></script>
+<script type="text/javascript" src="lib/ext3.2/ext-all.js"></script>
+<!-- ENDLIBS -->
+<script type="text/javascript">
+Ext.namespace("Ext.ux");
+Ext.namespace("DCC.util");
+Ext.namespace("DCC.editor");
+Ext.namespace("DCC.robot");
+Ext.namespace("DCC.game");
+Ext.namespace("DCC.widget");
+Ext.namespace("DCC.data");
+</script>
+<!--DATA-->
+<script type="text/javascript" src="data/modules.js"></script>
+<script type="text/javascript" src="data/launcher.js"></script>
+<script type="text/javascript" src="data/code.js"></script>
+<!--ENDDATA-->
+
+<!--MYWIDGET-->
+<script type="text/javascript" src="js/widget/TopMessageBoxWidget.js"></script>
+<script type="text/javascript" src="js/widget/ButtonCanChangeIcon.js"></script>
+<!--ENDMYWIDGET-->
+
+<!-- TOOLS -->
+<script type="text/javascript" src="js/util/CSSLoader.js"></script>
+<script type="text/javascript" src="js/util/JSLoader.js"></script>
+<script type="text/javascript" src="js/util/CodeLoader.js"></script>
+<script type="text/javascript" src="js/util/ModuleLoader.js"></script>
+<!--ENDTOOLS-->
+
+<!-- DESKTOP -->
+<script type="text/javascript" src="js/App.js"></script>
+<script type="text/javascript" src="js/Desktop.js"></script>
+<script type="text/javascript" src="js/StartMenu.js"></script>
+<script type="text/javascript" src="js/TaskBar.js"></script>
+<script type="text/javascript" src="js/Module.js"></script>
+<!-- ENDDESKTOP -->
+
+<!-- Module -->
+
+<!--SUPER MODULE-->
+<script type="text/javascript" src="js/game/GameModule.js"></script>
+<script type="text/javascript" src="js/RobotModule.js"></script>
+<!--END SUPER MODULE-->
+
+<!--MAIN MODULE-->
+<script type="text/javascript" src="js/Main.js"></script>
+<!--END MAIN MODULE-->
+
+<!--JSEDITOR-->
+<script type="text/javascript" src="js/editor/DCJSEditor.js"></script>
+<script type="text/javascript" src="js/editor/EditorModule.js"></script>
+<script type="text/javascript" src="js/editor/JSEditor.js"></script>
+<script type="text/javascript" src="js/editor/RobotEditor.js"></script>
+<script type="text/javascript" src="js/TabCloseMenu.js"></script>
+<!--ENDJSEDITOR-->
+
+<!--Game Module-->
+<!--<script type="text/javascript" src="js/sample.js"></script>-->
+<!--<script type="text/javascript" src="js/game/mini/mini.js"></script>-->
+<script type="text/javascript" src="js/game/tetris/tetris.js"></script>
+<script type="text/javascript" src="js/game/sudoku/sudoku.js"></script>
+<script type="text/javascript" src="js/game/snakes/snakes.js"></script>
+<script type="text/javascript" src="js/game/fivechess/fivechess.js"></script>
+<!--Game Module End-->
+
+<!--ROBOT MODULE-->
+<script type="text/javascript" src="js/robot/david/robot_david.js"></script>
+<!--END ROBOT MODULE-->
+
+<!--Module End-->
+</head>
+
+<body scroll="no">
+
+<div id="x-desktop">
+
+    <dl id="x-shortcuts">
+        <dt id="mini-win-game-shortcut">
+        	<a href="#"><img src="images/mini/mini_icon.gif" />
+            <div>Mini</div></a>
+        </dt>
+        <dt id="tetris-win-game-shortcut">
+        	<a href="#"><img src="images/tetris/tetris_icon.png" />
+            <div>Tetris</div></a>
+        </dt>
+        <dt id="sudoku-win-game-shortcut">
+        	<a href="#"><img src="images/sudoku/sudoku_icon.png" />
+            <div>Sudoku</div></a>
+        </dt>
+        <dt id="snakes-win-game-shortcut">
+        	<a href="#"><img src="images/snakes/snakes_icon.png" />
+            <div>Snakes</div></a>
+        </dt>
+        <dt id="fivechess-win-game-shortcut">
+        	<a href="#"><img src="images/fivechess/fivechess_icon.jpg" />
+            <div>FiveChess</div></a>
+        </dt>
+        <!--<dt id="test-win-game-shortcut">
+        	<a href="#"><img src="images/test/add.png" />
+            <div>Test</div></a>
+        </dt>-->
+        <!--<dt id="js-win-editor-shortcut">
+        	<a href="#"><img src="images/editor/notes_edit.png" />
+            <div>Edit</div></a>
+        </dt>-->
+    </dl>
+</div>
+
+<div id="ux-taskbar">
+	<div id="ux-taskbar-start"></div>
+  	<div id="ux-taskbar-panel-wrap">
+		<div id="ux-quickstart-panel"></div>
+		<div id="ux-taskbuttons-panel"></div>
+        <div id="ux-quickstart-r-panel"></div>
+		<!--<div id="ux-systemtray-panel"></div>-->
+	</div>
+	<!--<div id="ux-taskbuttons-panel"></div>-->
+	<div class="x-clear"></div>
+</div>
+
+</body>
+
+</html>
