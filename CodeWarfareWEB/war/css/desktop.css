@@ -660,19 +660,19 @@ td.ux-taskButtons-edge {
 .icon-ux-start-game-item{
 	background-image:url(../images/startmenu/game.png) !important;
 }
-.icon-start-item-mini{
+.icon-start-game-item-mini{
 	background-image:url(../images/startmenu/mini.png) !important;
 }
-.icon-start-item-tetris{
+.icon-start-game-item-tetris{
 	background-image:url(../images/startmenu/tetris.png) !important;
 }
-.icon-start-item-snakes{
+.icon-start-game-item-snakes{
 	background-image:url(../images/startmenu/snakes.png) !important;
 }
-.icon-start-item-sudoku{
+.icon-start-game-item-sudoku{
 	background-image:url(../images/startmenu/sudoku.png) !important;
 }
-.icon-start-item-fivechess{
+.icon-start-game-item-fivechess{
 	background-image:url(../images/startmenu/fivechess.png) !important;
 }
 /*Start Menu CSS END*/

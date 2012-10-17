@@ -7,11 +7,11 @@ DCC.editor.JSEditor =  Ext.extend(DCC.editor.EditorModule, {
 		activeTab:0,
 		enableTabScroll:true
 	}),
-	
+
     init : function(){
 		function beforeRemoveTabEvent(tabPanel, tab) {
-			var gameWin = MyDesktop.getDesktop().getWindow(tab.title);
-			var editorWin= MyDesktop.getDesktop().getWindow('js-win-editor');
+			var gameWin = MainApp.getDesktop().getWindow(tab.title);
+			var editorWin= MainApp.getDesktop().getWindow('js-win-editor');
 			if(!gameWin) return true;
 			DCC.widget.show({
 				title: 'Are you sure close',
@@ -31,11 +31,11 @@ DCC.editor.JSEditor =  Ext.extend(DCC.editor.EditorModule, {
 			});
 			//DCC.widget.topAlert('','');
 			//Ext.MessageBox.prompt('','');
-			return false;    
+			return false;
 		}
 		function afterRemoveTabEvent(tabPanel, tab){
 			if(tabPanel.items.length == 0) {
-				var editorWin = MyDesktop.getDesktop().getWindow('js-win-editor');
+				var editorWin = MainApp.getDesktop().getWindow('js-win-editor');
 				editorWin.hide();
 				editorWin.minimized = true;
 			};
@@ -47,7 +47,7 @@ DCC.editor.JSEditor =  Ext.extend(DCC.editor.EditorModule, {
 			listeners: {
 				tabchange:function(tabPanel, tab){
 					if(!tab)return;
-					var gameWin = MyDesktop.getDesktop().getWindow(tab.title);	
+					var gameWin = MainApp.getDesktop().getWindow(tab.title);
 					gameWin.toFront();
 					gameWin.fireEvent('move');
 				},
@@ -57,9 +57,9 @@ DCC.editor.JSEditor =  Ext.extend(DCC.editor.EditorModule, {
 			plugins: new Ext.ux.TabCloseMenu()
 		})
     },//init end
-	
+
   	createWindow : function(){
-		var desktop = MyDesktop.getDesktop();
+		var desktop = MainApp.getDesktop();
         var win = desktop.getWindow('js-win-editor');
 		if(!win){
 			win =desktop.createWindow({
@@ -76,7 +76,7 @@ DCC.editor.JSEditor =  Ext.extend(DCC.editor.EditorModule, {
 				closable:false,
 				resizable:true,
 				modal:false,
-				
+
 				layout:'fit',
 				tbar:[{
 					cls : "x-btn-icon",

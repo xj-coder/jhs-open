@@ -6,18 +6,18 @@
  */
 
 // Sample desktop configuration
-MyDesktop = new Ext.app.App({
+MainApp = new Ext.app.App({
 	init :function(){
 		Ext.QuickTips.init();
 	},
 
 	getModules : function(){
 		return [
-			new MyDesktop.GridWindow(),
-            new MyDesktop.TabWindow(),
-            new MyDesktop.AccordionWindow(),
-            new MyDesktop.BogusMenuModule(),
-            new MyDesktop.BogusModule()
+			new MainApp.GridWindow(),
+            new MainApp.TabWindow(),
+            new MainApp.AccordionWindow(),
+            new MainApp.BogusMenuModule(),
+            new MainApp.BogusModule()
 		];
 	},
 
