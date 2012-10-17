@@ -32,16 +32,16 @@ var DCJSEditor = Ext.extend(Ext.form.HtmlEditor, {
     enableFont : false,
 
 	enableKeyEvents: true,
-	
+
 	target : ' ',
-	
+
 	setTarget : function(target){
 		this.target = target;
 	},
 	getTarget : function(){
 		return target;
 	},
-	
+
 	//extends superclass
 	initEditor : function(){
 		DCJSEditor.superclass.initEditor.call(this);
@@ -54,7 +54,7 @@ var DCJSEditor = Ext.extend(Ext.form.HtmlEditor, {
         }
 		//Ext.EventManager.on(doc, 'keyup', this.lightSource, this);
 	},
-	
+
 	//extends superclass to listener keyEvent  ---IE || WebKit || Opera
 	keyBoardListener : function(e){
 
@@ -65,11 +65,11 @@ var DCJSEditor = Ext.extend(Ext.form.HtmlEditor, {
 			}else if(k == e.ENTER){
 				//this.insertAtCursor('<br/>');
 			}else if(k == e.F9){
-				MyDesktop.getModule(this.id,false).runSource();	
+                ModuleLoader.getModule(this.id).runSource();
 			}
         }else if(Ext.isChrome){
 			if(k == e.F9){// Ext Chrome Bug
-				MyDesktop.getModule('js-win-editor',false).runSource();	
+                ModuleLoader.getModule(DEFAULT_JS_EDITOR_ID).runSource();
 			}
         }else if(Ext.isOpera){
 			if(k == e.TAB){
@@ -87,13 +87,13 @@ var DCJSEditor = Ext.extend(Ext.form.HtmlEditor, {
 				this.execCmd('InsertHtml','<br /><br />');
 				this.deferFocus();
 			}else if(k == e.F9){// Ext Chrome Bug
-				MyDesktop.getModule('js-win-editor',false).runSource();	
+                ModuleLoader.getModule(DEFAULT_JS_EDITOR_ID).runSource();
 			}
         }else if(Ext.isGecko){
 			if(k == e.TAB){
 				this.insertAtCursor('&nbsp;&nbsp;&nbsp;&nbsp;')
 			}else if(k == e.F9){
-				MyDesktop.getModule('js-win-editor',false).runSource();	
+                ModuleLoader.getModule(DEFAULT_JS_EDITOR_ID).runSource();
 			}
 		}
 	},
@@ -111,7 +111,7 @@ var DCJSEditor = Ext.extend(Ext.form.HtmlEditor, {
 		return Ext.util.Format.stripTags(source);
 	},
 	setSource : function(source){
-		this.setValue(source);	
+		this.setValue(source);
 	}
 });//HTMLEditor end
 Ext.reg('DCJSEditor', DCJSEditor);

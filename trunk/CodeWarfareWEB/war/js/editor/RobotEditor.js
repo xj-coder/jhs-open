@@ -7,9 +7,9 @@ DCC.editor.RobotEditor =  Ext.extend(DCC.editor.EditorModule, {
 		activeTab:0,
 		enableTabScroll:true
 	}),
-	
+
   	createWindow : function(){
-		var desktop = MyDesktop.getDesktop();
+		var desktop = MainApp.getDesktop();
         var win = desktop.getWindow('robot-win-editor');
 		if(!win){
 			win =desktop.createWindow({
@@ -26,7 +26,7 @@ DCC.editor.RobotEditor =  Ext.extend(DCC.editor.EditorModule, {
 				closable:false,
 				resizable:true,
 				modal:false,
-				
+
 				layout:'fit',
 				tbar:[{
 					cls : "x-btn-icon",

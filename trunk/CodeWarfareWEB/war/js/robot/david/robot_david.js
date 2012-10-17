@@ -19,39 +19,28 @@ DCC.robot.David = Ext.extend(Ext.app.RobotModule, {
      active:false//是否为活动代码
      }],*/
     init:function () {
-        var json = new Ext.data.JsonStore({
-            url:'/data/robot_code/david/code.json',
-            // reader configs
-            root:'codes',
-            fields:['game_id', 'game_name', 'code_file_path', 'code_file_name', 'code_name']
-        });
-        json.load({
-            callback:function(){
-                for (var i = 0; i < json.getCount(); i++) {
-                    var codeFile = new Object();
-                    var obj = json.getAt(i);
-                    codeFile.game_id = obj.get('game_id');
-                    codeFile.game_name = obj.get('game_name');
-                    codeFile.code_file_path = obj.get('code_file_path');
-                    codeFile.code_file_name = obj.get('code_file_name');
-                    codeFile.code_name = obj.get('code_name');
-                    this.codeFiles.push(codeFile);
+        for (var i = 0; i < robotCodeJson.getCount(); i++) {
+            var codeFile = new Object();
+            var obj = robotCodeJson.getAt(i);
+            codeFile.game_id = obj.get('game_id');
+            codeFile.game_name = obj.get('game_name');
+            codeFile.code_file_path = obj.get('code_file_path');
+            codeFile.code_file_name = obj.get('code_file_name');
+            codeFile.code_name = obj.get('code_name');
+            this.codeFiles.push(codeFile);
 
-                    var gs = [obj.get('game_id'), obj.get('game_name')];
-                    var isHas = false;
-                    for (var j = 0; j < this.gameStore.length; j++) {
-                        if (this.gameStore[j][0] == gs[0]) {
-                            isHas = true;
-                            break;
-                        }
-                    }
-                    if (!isHas && this.gameStore.indexOf(gs) == -1) {
-                        this.gameStore.push(gs);
-                    }
+            var gs = [obj.get('game_id'), obj.get('game_name')];
+            var isHas = false;
+            for (var j = 0; j < this.gameStore.length; j++) {
+                if (this.gameStore[j][0] == gs[0]) {
+                    isHas = true;
+                    break;
                 }
-            },
-            scope:this
-        });
+            }
+            if (!isHas && this.gameStore.indexOf(gs) == -1) {
+                this.gameStore.push(gs);
+            }
+        }
     }, //init end
     info_label:{
         xtype:'label',
@@ -92,7 +81,7 @@ DCC.robot.David = Ext.extend(Ext.app.RobotModule, {
                                         this.setText('<span style=\'color:#ff0000\'>' + this.getText() + '</span>');
                                         for (var j = 0; j < robot.codeFiles.length; j++) {
                                             if (robot.codeFiles[j].game_id == record.json[0]) {
-                                                robot.currCodeFile = robot.codeFiles[j].code_file_path +robot.codeFiles[j].code_file_name;
+                                                robot.currCodeFile = robot.codeFiles[j].code_file_path + robot.codeFiles[j].code_file_name;
                                                 //alert((t.currCodeFile));
                                             }
                                         }
@@ -117,7 +106,7 @@ DCC.robot.David = Ext.extend(Ext.app.RobotModule, {
                 //alert(this.currGameId);
                 //alert(this.currCodeFile);
                 _toolTip = '<HTML>' + 'Click me to run game<BR>' + 'game_id:' + this.currGameId + '<BR>codeFile:' + this.currCodeFile + '</HTML>';
-                MyDesktop.getDesktop().getWindow('david-robot-win').items.itemAt(0).setTooltip(_toolTip);
+                MainApp.getDesktop().getWindow('david-robot-win').items.itemAt(0).setTooltip(_toolTip);
                 win.close();
             }.createDelegate(this)
         });
@@ -146,16 +135,12 @@ DCC.robot.David = Ext.extend(Ext.app.RobotModule, {
 
     }, //selectGame end
 
-    loadCode:function () {
-
-    }, //loadCode end
-
     run:function () {
 
     },
 
     createWindow:function () {
-        var desktop = MyDesktop.getDesktop();
+        var desktop = MainApp.getDesktop();
         var _win = desktop.getWindow('david-robot-win');
         if (!_win) {
             _win = desktop.createWindow({
@@ -185,7 +170,7 @@ DCC.robot.David = Ext.extend(Ext.app.RobotModule, {
                         height:80,
                         tooltip:'No game selected',
                         handler:function () {
-                            MyDesktop.getDesktop().openModule(this.currGameId, true, 'editor', this.currCodeFile)
+                            MainApp.getDesktop().openGameModule(this.currGameId, true, 'editor', this.currCodeFile)
                             //MyDesktop.getModule('robot-win-editor').runSource();
                         }.createDelegate(this)
                     },
