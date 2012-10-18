@@ -1,27 +1,27 @@
 {
     "games":[
         {
-            "id":"mini-win-game-start",
+            "id":"mini-game-start",
             "text":"Mini",
             "iconCls":"icon-start-game-item-mini"
         },
         {
-            "id":"tetris-win-game-start",
+            "id":"tetris-game-start",
             "text":"Tetris",
             "iconCls":"icon-start-game-item-tetris"
         },
         {
-            "id":"sudoku-win-game-start",
+            "id":"sudoku-game-start",
             "text":"Sudoku",
             "iconCls":"icon-start-game-item-sudoku"
         },
         {
-            "id":"snakes-win-game-start",
+            "id":"snakes-game-start",
             "text":"Snakes",
             "iconCls":"icon-start-game-item-snakes"
         },
         {
-            "id":"fivechess-win-game-start",
+            "id":"fivechess-game-start",
             "text":"FiveChess",
             "iconCls":"icon-start-game-item-fivechess"
         }

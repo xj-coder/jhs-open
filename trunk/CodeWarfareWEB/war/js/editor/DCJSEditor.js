@@ -65,11 +65,11 @@ var DCJSEditor = Ext.extend(Ext.form.HtmlEditor, {
 			}else if(k == e.ENTER){
 				//this.insertAtCursor('<br/>');
 			}else if(k == e.F9){
-                ModuleLoader.getModule(this.id).runSource();
+                ModuleLoader.getModuleInstance(this.id).runSource();
 			}
         }else if(Ext.isChrome){
 			if(k == e.F9){// Ext Chrome Bug
-                ModuleLoader.getModule(DEFAULT_JS_EDITOR_ID).runSource();
+                ModuleLoader.getModuleInstance(DEFAULT_JS_EDITOR_ID).runSource();
 			}
         }else if(Ext.isOpera){
 			if(k == e.TAB){
@@ -87,13 +87,13 @@ var DCJSEditor = Ext.extend(Ext.form.HtmlEditor, {
 				this.execCmd('InsertHtml','<br /><br />');
 				this.deferFocus();
 			}else if(k == e.F9){// Ext Chrome Bug
-                ModuleLoader.getModule(DEFAULT_JS_EDITOR_ID).runSource();
+                ModuleLoader.getModuleInstance(DEFAULT_JS_EDITOR_ID).runSource();
 			}
         }else if(Ext.isGecko){
 			if(k == e.TAB){
 				this.insertAtCursor('&nbsp;&nbsp;&nbsp;&nbsp;')
 			}else if(k == e.F9){
-                ModuleLoader.getModule(DEFAULT_JS_EDITOR_ID).runSource();
+                ModuleLoader.getModuleInstance(DEFAULT_JS_EDITOR_ID).runSource();
 			}
 		}
 	},

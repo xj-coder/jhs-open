@@ -18,12 +18,12 @@ Ext.extend(Ext.app.GameModule, Ext.util.Observable, {
     registWinMethod:Ext.emptyFn,
     getThis:function () {
         if (this.module) {
-            this.module = ModuleLoader.getModule(this.id);
+            this.module = ModuleLoader.getModuleInstance(this.id);
         }
         return this.module;
     },
     getWindow:function () {
-        return this.getDesktop().getWindow(this.id);
+        return this.getDesktop().getWindow(this.id + "-win");
     },
     getDesktop:function () {
         return MainApp.getDesktop();
@@ -32,26 +32,28 @@ Ext.extend(Ext.app.GameModule, Ext.util.Observable, {
         return this.getDesktop().getManager()
     },
     moveE:function (win) {
-        var availWidth = Ext.get('x-desktop').getWidth(true);
-        var availHeight = Ext.get('x-desktop').getHeight(true);
-        var editor = MainApp.getDesktop().getWindow('js-win-editor');
-        if (win && editor) {
+        //var availWidth = Ext.get('x-desktop').getWidth(true);
+        //var availHeight = Ext.get('x-desktop').getHeight(true);
+        var editorWin = MainApp.getDesktop().getWindow(DEFAULT_JS_EDITOR_WIN_ID);
+        if (win && editorWin) {
             //if(editor.hidden) editor.show();
             var w = win.getWidth();
             var x = win.x;
             var y = win.y;
             //y+(editor.getHeight()==0?editor.height:editor.getHeight())>availHeight?y=availHeight-(editor.getHeight()==0?editor.height:editor.getHeight()):y;
-            editor.setPosition(x + w, y)
-            ModuleLoader.getModule(DEFAULT_JS_EDITOR_ID).setActive(win.id);
-            editor.toFront()
-            win.un('activate', module.moveE);
-            win.toFront();
-            win.addListener('activate', module.moveE);
+            editorWin.setPosition(x + w, y)
+            editorWin.toFront()
+
+//            var module = ModuleLoader.getModuleInstance(DEFAULT_JS_EDITOR_ID);
+//            win.un('activate', module.moveE);
+//            module.setActive(win.id);
+//            win.toFront();
+//            win.addListener('activate', module.moveE);
         }
     },
 
     showE:function (win) {
-        var editorWin = MainApp.getDesktop().getWindow('js-win-editor');
+        var editorWin = MainApp.getDesktop().getWindow(DEFAULT_JS_EDITOR_WIN_ID);
         if (editorWin.minimized) {
             editorWin.minimized = false;
             editorWin.show();
@@ -64,20 +66,20 @@ Ext.extend(Ext.app.GameModule, Ext.util.Observable, {
         var availHeight = Ext.get('x-desktop').getHeight(true);
         var x = 0;
         var y = 0;
-        var editor = MainApp.getDesktop().getWindow('js-win-editor');
-        if (win && editor) {
+        var editorWin = MainApp.getDesktop().getWindow(DEFAULT_JS_EDITOR_WIN_ID);
+        if (win && editorWin) {
             //if(editor.hidden) editor.show();
             var w = win.getWidth();
             var h = win.getHeight();
-            var e_w = editor.getWidth() == 0 ? editor.width : editor.getWidth();
-            var e_h = editor.getHeight() == 0 ? editor.height : editor.getHeight();
+            var e_w = editorWin.getWidth() == 0 ? editorWin.width : editorWin.getWidth();
+            var e_h = editorWin.getHeight() == 0 ? editorWin.height : editorWin.getHeight();
 
             x = Math.max(0, (availWidth - w - e_w) / 2);
             y = Math.max(0, (availHeight - Math.max(h, e_h)) / 2);
             //e_y = (availHeight - e_h) / 2;
 
             win.setPosition(x, y);
-            editor.setPosition(x + w, y)
+            editorWin.setPosition(x + w, y)
         }
     },
 
@@ -89,8 +91,8 @@ Ext.extend(Ext.app.GameModule, Ext.util.Observable, {
             iconCls:'all-game-bar-showeditor',
             listeners:{
                 click:function (win, t) {
-                    var editorWin = MainApp.getDesktop().getWindow('js-win-editor');
-                    var editor = ModuleLoader.getModule(DEFAULT_JS_EDITOR_ID);
+                    var editorWin = MainApp.getDesktop().getWindow(DEFAULT_JS_EDITOR_WIN_ID);
+                    var editor = ModuleLoader.getModuleInstance(DEFAULT_JS_EDITOR_ID);
                     if (editorWin) {
                         if (!editor.getEditorTab(win.id))
                             editor.addEditorTab(win.id);
@@ -108,8 +110,9 @@ Ext.extend(Ext.app.GameModule, Ext.util.Observable, {
                 }.createDelegate(followBar, [this.getWindow(), this.getThis()])
             }
         });
+
         var followBar = new Ext.Button({
-            id:'game-bar-follow-' + this.getThis().id,
+            id:'game-bar-follow-' + this.id,
             toolTip:'follow',
             iconCls:'all-game-bar-follow',
             listeners:{

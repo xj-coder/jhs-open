@@ -11,29 +11,32 @@ DCC.util.ModuleLoader = function () {
         module.js_path = moduleJsonItem.get('js_path');
         module.page_path = moduleJsonItem.get('page_path');
         module.css_path = moduleJsonItem.get('css_path');
-        module.obj = moduleJsonItem.get('obj');
+        module.cls = moduleJsonItem.get('cls');
         module.lazy_load = moduleJsonItem.get('lazy_load');
         module.loaded = false;
         modules.push(module);
 
         if (!module.lazy_load) {
-            this.getModule(module.id);
+            this.getModuleInstance(module.id);
         }
     }
 
-    this.getModule = function (id) {
+    this.getModuleInstance = function (id) {
+       return this.getModule(id).instance;
+    };
+
+    this.getModule  = function (id) {
         for (var i = 0; i < modules.length; i++) {
             var module = modules[i];
             if (module.id == id) {
                 if (module.loaded) {
-                    var fun = (new Function('return new ' + module.obj + ';'))();
-                    return fun;
+                    return module;
                 } else {
                     cssLoader.loadCSS(module.id, module.css_path);
                     jsLoader.loadJS(module.id, module.js_path);
-                    var fun = (new Function('return new ' + module.obj + ';'))();
+                    module.instance = (new Function('return new ' + module.cls + ';'))();
                     module.loaded = true;
-                    return fun;
+                    return module;
                 }
             }
         }

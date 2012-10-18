@@ -106,7 +106,8 @@ Ext.Desktop = function (app) {
             },
             'close':{
                 fn:removeWin
-            }
+            },
+            scope:this
         });
         layout();
         return win;
@@ -171,7 +172,16 @@ Ext.Desktop = function (app) {
 
     // add shortcuts click event
     if (shortcuts) {
-        //shortcuts.insertHtml();
+        for(var i = 0;i<shortcutJson.getCount();i++){
+            var shortcutItem = shortcutJson.getAt(i);
+            shortcuts.insertHtml("beforeEnd","<dt id=\""+shortcutItem.get("id")+"-shortcut\">" +
+                "<a href=\"#\">" +
+                "<img src=\""+shortcutItem.get("img")+"\"/>" +
+                "<div>"+shortcutItem.get("name")+"</div>" +
+                "</a>" +
+                "</dt>");
+        }
+
         shortcuts.on('click', function (e, t) {
             if (t = e.getTarget('dt', shortcuts)) {
                 e.stopEvent();
@@ -181,21 +191,21 @@ Ext.Desktop = function (app) {
     }//end add shortcuts clock event
 
     this.openGameModule = function (id, openEditor, editorType, codeFile) {
-        var win = MainApp.getDesktop().getWindow(id);
-        var module = ModuleLoader.getModule(id);
+        var win = MainApp.getDesktop().getWindow(id+"-win");
+        var module = ModuleLoader.getModuleInstance(id);
         var editorWin = null;
         var editor = null;
         if (!win) {
             if (module) {
                 module.createWindow();
-                win = MainApp.getDesktop().getWindow(id);
+                win = MainApp.getDesktop().getWindow(id+"-win");
                 module.addDefaultToolBar();
             }
         }
         if (openEditor) {
             if (editorType == 'game') {
                 editorWin = MainApp.getDesktop().getWindow(DEFAULT_JS_EDITOR_WIN_ID);
-                editor = ModuleLoader.getModule(DEFAULT_JS_EDITOR_ID);
+                editor = ModuleLoader.getModuleInstance(DEFAULT_JS_EDITOR_ID);
                 if (editorWin) {
                     if (editorWin.minimized) {
                         editorWin.show();
@@ -206,15 +216,16 @@ Ext.Desktop = function (app) {
                     editor.createWindow();
                     editor.addEditorTab(module.id);
                 }
-                if (codeFile)
+                if (codeFile){
                     editor.loadSource();
+                }
                 win.addListener('show', module.showE);
                 win.addListener('resize', module.resizeE);
                 win.addListener('move', module.moveE);
                 win.addListener('activate', module.moveE);
             } else if (editorType == 'editor') {
                 editorWin = MainApp.getDesktop().getWindow(DEFAULT_ROBOT_JS_EDITOR_WIN_ID);
-                editor = ModuleLoader.getModule(DEFAULT_ROBOT_JS_EDITOR_ID);
+                editor = ModuleLoader.getModuleInstance(DEFAULT_ROBOT_JS_EDITOR_ID);
                 if (editorWin) {
                     if (editorWin.minimized) {
                         editorWin.show();
