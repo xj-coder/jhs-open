@@ -1,6 +1,6 @@
 // JavaScript Document
 DCC.editor.JSEditor =  Ext.extend(DCC.editor.EditorModule, {
-    id:'js-win-editor',
+    id:DEFAULT_JS_EDITOR_ID,
 	target:'',
 	editorPanel : new Ext.TabPanel({
 		id:'js-panel-editor',
@@ -10,8 +10,8 @@ DCC.editor.JSEditor =  Ext.extend(DCC.editor.EditorModule, {
 
     init : function(){
 		function beforeRemoveTabEvent(tabPanel, tab) {
-			var gameWin = MainApp.getDesktop().getWindow(tab.title);
-			var editorWin= MainApp.getDesktop().getWindow('js-win-editor');
+			var gameWin = MainApp.getDesktop().getWindow(tab.title+"-win");
+//			var editorWin= MainApp.getDesktop().getWindow(DEFAULT_JS_EDITOR_WIN_ID);
 			if(!gameWin) return true;
 			DCC.widget.show({
 				title: 'Are you sure close',
@@ -35,7 +35,7 @@ DCC.editor.JSEditor =  Ext.extend(DCC.editor.EditorModule, {
 		}
 		function afterRemoveTabEvent(tabPanel, tab){
 			if(tabPanel.items.length == 0) {
-				var editorWin = MainApp.getDesktop().getWindow('js-win-editor');
+				var editorWin = MainApp.getDesktop().getWindow(DEFAULT_JS_EDITOR_WIN_ID);
 				editorWin.hide();
 				editorWin.minimized = true;
 			};
@@ -47,7 +47,7 @@ DCC.editor.JSEditor =  Ext.extend(DCC.editor.EditorModule, {
 			listeners: {
 				tabchange:function(tabPanel, tab){
 					if(!tab)return;
-					var gameWin = MainApp.getDesktop().getWindow(tab.title);
+					var gameWin = MainApp.getDesktop().getWindow(tab.title+"-win");
 					gameWin.toFront();
 					gameWin.fireEvent('move');
 				},
@@ -60,10 +60,10 @@ DCC.editor.JSEditor =  Ext.extend(DCC.editor.EditorModule, {
 
   	createWindow : function(){
 		var desktop = MainApp.getDesktop();
-        var win = desktop.getWindow('js-win-editor');
+        var win = desktop.getWindow(DEFAULT_JS_EDITOR_WIN_ID);
 		if(!win){
 			win =desktop.createWindow({
-				id: 'js-win-editor',
+				id: DEFAULT_JS_EDITOR_WIN_ID,
                 title: 'Code Editor Window',
                 width:500,
                 height:500,

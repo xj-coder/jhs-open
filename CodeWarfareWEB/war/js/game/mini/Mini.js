@@ -1,6 +1,6 @@
 // JavaScript Document
 DCC.game.Mini=Ext.extend(Ext.app.GameModule,{
-	id:'mini-win-game',
+	id:'mini-game',
 	//name:'Mini',
 	rank : 0,
 	_size : 20,
@@ -17,11 +17,11 @@ DCC.game.Mini=Ext.extend(Ext.app.GameModule,{
 		this._html = document.createElement('div');
 		var _div = document.createElement('div');
 		_div.setAttribute('align','center');
-		_div.setAttribute('id','mini-panel-div');		
+		_div.setAttribute('id','mini-panel-div');
 		this._html.appendChild(_div);
 
 		for(var k=0;k<this.mm.length;k++){
-			this.mm[k]=0;	
+			this.mm[k]=0;
 			this._mm[k]=0;
 		}
 		for(var k=0;k<this.numArray[this.rank];k++){
@@ -33,11 +33,11 @@ DCC.game.Mini=Ext.extend(Ext.app.GameModule,{
 			this.mm[n] = -1;
 			n+1>=0&&n+1<this.widthArray[this.rank]*this.heightArray[this.rank]&&this.mm[n+1]!=-1?this.mm[n+1]++:0;
 			n-1>=0&&n-1<this.widthArray[this.rank]*this.heightArray[this.rank]&&this.mm[n-1]!=-1?this.mm[n-1]++:0;
-			
+
 			n+this.widthArray[this.rank]+1>=0&&n+this.widthArray[this.rank]+1<this.widthArray[this.rank]*this.heightArray[this.rank]&&this.mm[n+this.widthArray[this.rank]+1]!=-1?this.mm[n+this.widthArray[this.rank]+1]++:0;
 			n+this.widthArray[this.rank]>=0&&n+this.widthArray[this.rank]<this.widthArray[this.rank]*this.heightArray[this.rank]&&this.mm[n+this.widthArray[this.rank]]!=-1?this.mm[n+this.widthArray[this.rank]]++:0;
 			n+this.widthArray[this.rank]-1>=0&&n+this.widthArray[this.rank]-1<this.widthArray[this.rank]*this.heightArray[this.rank]&&this.mm[n+this.widthArray[this.rank]-1]!=-1?this.mm[n+this.widthArray[this.rank]-1]++:0;
-			
+
 			n-this.widthArray[this.rank]+1>=0&&n-this.widthArray[this.rank]+1<this.widthArray[this.rank]*this.heightArray[this.rank]&&this.mm[n-this.widthArray[this.rank]+1]!=-1?this.mm[n-this.widthArray[this.rank]+1]++:0;
 			n-this.widthArray[this.rank]>=0&&n-this.widthArray[this.rank]<this.widthArray[this.rank]*this.heightArray[this.rank]&&this.mm[n-this.widthArray[this.rank]]!=-1?this.mm[n-this.widthArray[this.rank]]++:0;
 			n-this.widthArray[this.rank]-1>=0&&n-this.widthArray[this.rank]-1<this.widthArray[this.rank]*this.heightArray[this.rank]&&this.mm[n-this.widthArray[this.rank]-1]!=-1?this.mm[n-this.widthArray[this.rank]-1]++:0;
@@ -62,7 +62,7 @@ DCC.game.Mini=Ext.extend(Ext.app.GameModule,{
 				_BTN.style.height = this._size;
 				_BTN.id = 'mini-basic-button-'+(i*this.widthArray[this.rank]+j);
 				_div.appendChild(_BTN);
-			}	
+			}
 			_div.appendChild(document.createElement('br'));
 		}
 	},//initGame end
@@ -70,7 +70,7 @@ DCC.game.Mini=Ext.extend(Ext.app.GameModule,{
         var _win = this.getWindow();
         if(!_win){
             _win = this.getDesktop().createWindow({
-                id: 'mini-win-game',
+                id: this.id+"-win",
                 title: 'Mini Window',
                 width:(this._size+1.5)*this.widthArray[this.rank],
                 height:(this._size+1.5)*this.heightArray[this.rank]+80-this.heightArray[this.rank],
@@ -80,10 +80,10 @@ DCC.game.Mini=Ext.extend(Ext.app.GameModule,{
                 constrainHeader:true,
 				maximizable:false,
 				resizable:false,
-				
+
                 layout:'fit',
                 border:false,
-				
+
 				tbar:[{
 					xtype:'splitbutton',
 					text:'Simple',
@@ -95,17 +95,12 @@ DCC.game.Mini=Ext.extend(Ext.app.GameModule,{
 						iconCls:'mini-win-rank0',
 						listeners :{
 							click : function(t){
+                                var win = this.getWindow();
+                                win.getTopToolbar().items.itemAt(0).setText("Simple")
+                                win.getTopToolbar().items.itemAt(0).setIconClass("mini-win-rank0");
 								this.restart();
-								/*var win = t.getWindow();
-								var module = t.getThis();
-								module.rank = 0;
-								win.getTopToolbar().items.itemAt(0).setText('Simple');
-								win.getTopToolbar().items.itemAt(0).setIconClass('mini-win-rank0');
-								win.setWidth((module._size+1.5)*module.widthArray[module.rank]);
-								win.setHeight((module._size+1.5)*module.heightArray[module.rank]+50-module.heightArray[module.rank]);
-								module.initGame();
-								win.body.update(module._html.innerHTML);*/		
-							}.createDelegate(this,[this.getThis()])
+                            },
+                            scope:this
 						}
 					},{
 						xtype:'btnIcon',
@@ -113,17 +108,12 @@ DCC.game.Mini=Ext.extend(Ext.app.GameModule,{
 						iconCls:'mini-win-rank1',
 						listeners :{
 							click:function(t){
+                                var win = this.getWindow();
+                                win.getTopToolbar().items.itemAt(0).setText("Medium")
+                                win.getTopToolbar().items.itemAt(0).setIconClass("mini-win-rank1");
 								this.restart();
-								/*var win = t.getWindow();
-								var module = t.getThis();
-								module.rank = 1;
-								win.getTopToolbar().items.itemAt(0).setText('Medium');
-								win.getTopToolbar().items.itemAt(0).setIconClass('mini-win-rank1');
-								win.setWidth((module._size+1.5)*module.widthArray[module.rank]);
-								win.setHeight((module._size+1.5)*module.heightArray[module.rank]+50-module.heightArray[module.rank]);
-								module.initGame();
-								win.body.update(module._html.innerHTML);*/		
-							}.createDelegate(this,[this.getThis()])
+                            },
+                            scope:this
 						}
 					},{
 						xtype:'btnIcon',
@@ -131,36 +121,32 @@ DCC.game.Mini=Ext.extend(Ext.app.GameModule,{
 						iconCls:'mini-win-rank2',
 						listeners :{
 							click:function(t){
+                                var win = this.getWindow();
+                                win.getTopToolbar().items.itemAt(0).setText("Heavy")
+                                win.getTopToolbar().items.itemAt(0).setIconClass("mini-win-rank2");
 								this.restart();
-								/*var win = t.getWindow();
-								var module = t.getThis();
-								module.rank = 2;
-								win.getTopToolbar().items.itemAt(0).setText('Heavy');
-								win.getTopToolbar().items.itemAt(0).setIconClass('mini-win-rank2');
-								win.setWidth((module._size+1.5)*module.widthArray[module.rank]);
-								win.setHeight((module._size+1.5)*module.heightArray[module.rank]+50-module.heightArray[module.rank]);
-								module.initGame();
-								win.body.update(module._html.innerHTML);*/		
-							}.createDelegate(this,[this.getThis()])
+                            },
+                            scope:this
 						}
 					}],
 					listeners :{
-						click:function(t){
-							var win = t.getWindow();
-							var module = t.getThis();
+						click:function(){
+							var win = this.getWindow();
 							var _text = win.getTopToolbar().items.itemAt(0).getText();
 							if(_text == "Simple"){
-								module.rank=0;
+                                this.rank=0;
 							}else if(_text == "Medium"){
-								module.rank=1;
+                                this.rank=1;
 							}else if(_text == "Heavy"){
-								module.rank=2;
+                                this.rank=2;
 							}
-							win.setWidth ((module._size+1.5)*module.widthArray[module.rank]);
-							win.setHeight((module._size+1.5)*module.heightArray[module.rank]+50-module.heightArray[module.rank]);
-							module.initGame();
-							win.body.update(module._html.innerHTML);
-						}.createDelegate(this,[this.getThis()])
+							win.setWidth ((this._size+1.5)*this.widthArray[this.rank]);
+							win.setHeight((this._size+1.5)*this.heightArray[this.rank]+50-this.heightArray[this.rank]);
+                            this.initGame();
+							win.body.update(this._html.innerHTML);
+                            //.createDelegate(this,[this.getThis()])
+						},
+                        scope:this
 					}
 				},{
 					xtype:'button',
@@ -179,7 +165,8 @@ DCC.game.Mini=Ext.extend(Ext.app.GameModule,{
 								autoScroll: true,
 								autoLoad: {url: 'page/game/mini/descreption.html'}
 							}).show();
-						}.createDelegate(this,[this.getThis()])
+						},//.createDelegate(this,[this.getThis()])
+                        scope:this
 					}
 				}],
 				html:this._html.innerHTML
@@ -191,19 +178,18 @@ DCC.game.Mini=Ext.extend(Ext.app.GameModule,{
     },
 	restart:function(){
 			var win = this.getWindow();
-			var module = this.getThis();
 			var _text = win.getTopToolbar().items.itemAt(0).getText();
 			if(_text == "Simple"){
-				module.rank=0;
+                this.rank=0;
 			}else if(_text == "Medium"){
-				module.rank=1;
+                this.rank=1;
 			}else if(_text == "Heavy"){
-				module.rank=2;
+                this.rank=2;
 			}
-			win.setWidth ((module._size+1.5)*module.widthArray[module.rank]);
-			win.setHeight((module._size+1.5)*module.heightArray[module.rank]+50-module.heightArray[module.rank]);
-			module.initGame();
-			win.body.update(module._html.innerHTML);	
+			win.setWidth ((this._size+1.5)*this.widthArray[this.rank]);
+			win.setHeight((this._size+1.5)*this.heightArray[this.rank]+50-this.heightArray[this.rank]);
+        this.initGame();
+			win.body.update(this._html.innerHTML);
 	},
 	/**
 	  *return -2--->not click
@@ -218,10 +204,10 @@ DCC.game.Mini=Ext.extend(Ext.app.GameModule,{
 		}else if(this._mm[x]==2){
 			return -3
 		}else{
-			return this.mm[x];	
+			return this.mm[x];
 		}
 	},
-	
+
 	clickMini:function(x){
 		this._mm[x] = 1;
 		if(this.mm[x]==-1){
@@ -239,23 +225,23 @@ DCC.game.Mini=Ext.extend(Ext.app.GameModule,{
 		}
 		if(this.isWin())DCC.widget.show({title:'win',msg:"Yes...You are win",buttons: Ext.Msg.YES});
 	},
-	
+
 	flat:function(x){
 		if(this._mm[x] == 0){
 			this._mm[x] = 2;
 			Ext.getDom('mini-basic-button-'+x).setAttribute('value',"F");
 		}
 	},
-	
+
 	isWin:function(){
 		for(var i=0;i<this.mm.length;i++){
 			if(this.mm[i]!=-1){
 				if(this._mm[i]==0)return false;
-			}	
+			}
 		}
 		return true;
 	},
-	
+
 	clickAll:function(x){
 		if(x+1>=0&&x+1<this.widthArray[this.rank]*this.heightArray[this.rank]&&this._mm[x+1]==0&&(x+1)%this.widthArray[this.rank]!=0){
 			if(this.mm[x+1]==0){
@@ -302,7 +288,7 @@ DCC.game.Mini=Ext.extend(Ext.app.GameModule,{
 			if(this.mm[x+this.widthArray[this.rank]]==0)this.clickAll(x+this.widthArray[this.rank]);
 		}
 	},//clickAll end
-	
+
 	showAll:function(){
 		for(var i=0;i<this.mm.length;i++){
 			if(this.mm[i]==0){
@@ -333,6 +319,6 @@ DCC.game.Mini=Ext.extend(Ext.app.GameModule,{
 		];
 	},
 	registWinMethod:function(){
-		return 'isWin';	
+		return 'isWin';
 	}
 });

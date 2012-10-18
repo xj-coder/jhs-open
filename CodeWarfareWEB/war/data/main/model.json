@@ -6,7 +6,7 @@
             "js_path":"js/game/mini/mini.js",
             "page_path":"page/game/mini/descreption.html",
             "css_path":"css/game/mini/mini.css",
-            "obj":"DCC.game.Mini()",
+            "cls":"DCC.game.Mini()",
             "lazy_load":"false"
         },
         {
@@ -15,7 +15,7 @@
             "js_path":"js/game/tetris/tetris.js",
             "page_path":"page/game/tetris/descreption.html",
             "css_path":"css/game/tetris/tetris.css",
-            "obj":"DCC.game.Tetris()",
+            "cls":"DCC.game.Tetris()",
             "lazy_load":"true"
         },
         {
@@ -24,7 +24,7 @@
             "js_path":"js/game/sudoku/sudoku.js",
             "page_path":"page/game/sudoku/descreption.html",
             "css_path":"css/game/sudoku/sudoku.css",
-            "obj":"DCC.game.Sudoku()",
+            "cls":"DCC.game.Sudoku()",
             "lazy_load":"true"
         },
         {
@@ -33,7 +33,7 @@
             "js_path":"js/game/snakes/snakes.js",
             "page_path":"page/game/snakes/descreption.html",
             "css_path":"css/game/snakes/snakes.css",
-            "obj":"DCC.game.Snakes()",
+            "cls":"DCC.game.Snakes()",
             "lazy_load":"true"
         },
         {
@@ -42,7 +42,7 @@
             "js_path":"js/game/fivechess/fivechess.js",
             "page_path":"page/game/fivechess/descreption.html",
             "css_path":"css/game/fivechess/fivechess.css",
-            "obj":"DCC.game.FiveChess()",
+            "cls":"DCC.game.FiveChess()",
             "lazy_load":"true"
         },
         {
@@ -51,7 +51,7 @@
             "js_path":"js/game/fivechess/fivechess.js",
             "page_path":"page/game/fivechess/descreption.html",
             "css_path":"css/game/fivechess/fivechess.css",
-            "obj":"DCC.game.FiveChess()",
+            "cls":"DCC.game.FiveChess()",
             "lazy_load":"true"
         },
         {
@@ -60,7 +60,7 @@
             "js_path":"js/editor/JSEditor.js",
             "page_path":"",
             "css_path":"",
-            "obj":"DCC.editor.JSEditor()",
+            "cls":"DCC.editor.JSEditor()",
             "lazy_load":"false"
         },
         {
@@ -69,7 +69,7 @@
             "js_path":"js/editor/RobotEditor.js",
             "page_path":"",
             "css_path":"",
-            "obj":"DCC.editor.RobotEditor()",
+            "cls":"DCC.editor.RobotEditor()",
             "lazy_load":"false"
         },
         {
@@ -78,7 +78,7 @@
             "js_path":"js/robot/david/robot_david.js",
             "page_path":"page/robot/david/robot_david.html",
             "css_path":"css/robot/david/robot_david.css",
-            "obj":"DCC.robot.David()",
+            "cls":"DCC.robot.David()",
             "lazy_load":"false"
         }
     ]

@@ -1,11 +1,11 @@
 DCC.game.Tetris=Ext.extend(Ext.app.GameModule,{
-    id:'tetris-win-game',
+    id:'tetris-game',
 	oSheet:document.styleSheets[1],
 	 //配置信息
 	cfg:{
 	  "ui": {
 		"skin":0,"grid":true, "shadow":false, "next":true
-	  } 
+	  }
 	  ,"direction":1 //旋转方向: 1顺时针 -1逆时针
 	  ,"startLevel":8
 	  ,"topScores":[]
@@ -66,7 +66,7 @@ DCC.game.Tetris=Ext.extend(Ext.app.GameModule,{
 	//升级行数，每消多少行升到下一级速度(两种升级策略，按行数和按分数，这里取按行数)(2009-7-31改为按分数)
 	uplevelScroe : 10000,
 	gLevelScroe : 0,//本级已消分数，升级或换级时清零
-	
+
 	//级别时间，每多少毫秒下落一格
 	levels : [500,450,400,350,300,250,200,150,100,70],
 	addScores : [0,100,300,600,1000], //消行加分
@@ -85,11 +85,11 @@ DCC.game.Tetris=Ext.extend(Ext.app.GameModule,{
 	currBlocks:[], //当前控制方块的数组
 	lastCannotDown : false,
 	movieY:19,movieX:0,aniTime:0,
-	
+
 	_continue : false,
 	_stop:true,
 	_isWin:false,
-	
+
 	init : function(){
 		this.currLevel=this.cfg.startLevel;
 		this.currMill = this.levels[this.currLevel]; //速度级别，间隔毫秒数
@@ -109,23 +109,23 @@ DCC.game.Tetris=Ext.extend(Ext.app.GameModule,{
 		this.initUI();
 		//this.initGame();
     },//init end
-	
+
 	initUI:function(){
 		this.HTML = document.createElement('div');
-		
+
 		var dvStage = document.createElement('div');
 		dvStage.id = 'tetris-win-dvStage';
-		
+
 		var dvOut = document.createElement('div');
 		dvOut.className = 'tetris-win-dvOut';
-		
+
 		var dvIn = document.createElement('div');
 		dvIn.className = "tetris-win-dvIn";
-		
+
 		var dvGameOver =document.createElement('div');
 		dvGameOver.id = 'tetris-win-dvGameOver';
 		dvGameOver.style.display = 'none';
-		
+
 		var dvGameOverBg = document.createElement('div');
 		dvGameOverBg.id = 'tetris-win-dvGameOverBg';
 		dvGameOverBg.className = 'opacity50';
@@ -133,21 +133,21 @@ DCC.game.Tetris=Ext.extend(Ext.app.GameModule,{
 		//网格
 		var dvGrid =document.createElement('div');
 		dvGrid.id = 'tetris-win-dvGrid';
-		
+
 		var dvBlocks = document.createElement('div');
 		dvBlocks.id = 'tetris-win-dvBlocks';
 		dvBlocks.className = 'dvBlocks';
 
 		var dvRightBar = document.createElement('div');
-		dvRightBar.id = 'tetris-win-dvRightBar'; 
+		dvRightBar.id = 'tetris-win-dvRightBar';
 		dvRightBar.style.textalign = 'left';
-		
+
 		var dvNextOutF = document.createElement('div');
 		dvNextOutF.id = 'tetris-win-dvNextOutF';;
-		
+
 		var dvNextOut = document.createElement('div');
 		dvNextOut.id = 'tetris-win-dvNextOut';
-		
+
 		var dvNextBlocks = document.createElement('div');
 		dvNextBlocks.id = 'tetris-win-dvNextBlocks';
 		dvNextBlocks.className = 'dvBlocks';
@@ -161,30 +161,30 @@ DCC.game.Tetris=Ext.extend(Ext.app.GameModule,{
 		dvLevel.id = 'tetris-win-dvLevel';
 		dvLevel.innerHTML = '&nbsp;';
 		//分数显示框
-		var dvScore =  document.createElement('span'); 
+		var dvScore =  document.createElement('span');
 		dvScore.id = 'tetris-win-dvScore';
 		dvScore.innerHTML = '&nbsp;';
-		
+
 		dvIn.appendChild(dvGameOver);
 		dvIn.appendChild(dvGameOverBg);
 		dvIn.appendChild(dvBlocks);
 		dvIn.appendChild(dvGrid);
 		dvOut.appendChild(dvIn);
-		
+
 		dvNextOut.appendChild(dvNextBlocks);
 		dvNextOutF.appendChild(dvNextOut);
-		
+
 		dvScoreF.appendChild(document.createTextNode('Level:'));
 		dvScoreF.appendChild(dvLevel);
 		dvScoreF.appendChild(document.createTextNode('Score:'));
 		dvScoreF.appendChild(dvScore);
-		
+
 		dvRightBar.appendChild(dvNextOutF);
 		dvRightBar.appendChild(dvScoreF);
-		
+
 		dvStage.appendChild(dvOut);
 		dvStage.appendChild(dvRightBar);
-		
+
 		this.HTML.appendChild(dvStage);
 		/*//速度等级选择框
 		seLevel :  Ext.getDom('tetris-win-seLevel'),
@@ -192,20 +192,20 @@ DCC.game.Tetris=Ext.extend(Ext.app.GameModule,{
 		seBlockSkin :  Ext.getDom('tetris-win-seBlockSkin'),
 		//网格选择显示框
 		ckGrid :  Ext.getDom('tetris-win-ckGrid'),*/
-		
+
 	},//initUI end
-	
+
 	initArg:function(){
 		this.dvGameOver = Ext.getDom('tetris-win-dvGameOver');
-		
+
 		this.dvGameOverBg = Ext.getDom('tetris-win-dvGameOverBg');
 
 		this.dvGrid = Ext.getDom('tetris-win-dvGrid');
-		
+
 		this.dvBlocks = Ext.getDom('tetris-win-dvBlocks');
-		
+
 		this.dvNextOutF = Ext.getDom('tetris-win-dvNextOutF');
-		
+
 		this.dvNextOut = Ext.getDom('tetris-win-dvNextOut');
 
 		this.dvNextBlocks = Ext.getDom('tetris-win-dvNextBlocks');
@@ -215,14 +215,14 @@ DCC.game.Tetris=Ext.extend(Ext.app.GameModule,{
 		this.dvScore = Ext.getDom('tetris-win-dvScore');
 
 	},//initArg end
-	
+
 	initGame : function(){
 		//初始化方阵
 		this.resetXY();
-		
+
 		//初始化预览框
 		this.dvNextBlocks.innerHTML="<div> </div><div> </div><div> </div><div> </div>";
-		
+
 		function min(arr){
 			for(var i=1,m=arr[0];i<arr.length;i++){
 				if(arr[i]<m)m=arr[i];
@@ -243,13 +243,13 @@ DCC.game.Tetris=Ext.extend(Ext.app.GameModule,{
 				d[2]=[min(d[0]),max(d[0]),min(d[1]),max(d[1])];
 			}
 		}
-	
+
 		this.currLevel = this.cfg.startLevel;
 		this.dvLevel.innerHTML = this.currLevel+1;
 		this.dvScore.innerHTML="0";
-	
+
 		this.display(this.dvGrid, this.cfg.ui.grid);
-	
+
 		//初始化放置一些方块在场景中
 		this.currColor=0,this.draw4(6,2,4,true);
 		this.currColor=1,this.draw4(4,5,5,true);
@@ -260,12 +260,12 @@ DCC.game.Tetris=Ext.extend(Ext.app.GameModule,{
 		this.currColor=6,this.draw4(3,2,16,true);
 		this.viewNext();
 	},//initGame end
-	
+
 	createWindow : function(){
 		var _win = this.getWindow();
 		if(!_win){
 			 _win = this.getDesktop().createWindow({
-				id: 'tetris-win-game',
+				id: this.id+"-win",
 				title: 'Tetris Window',
 				width:520,
 				height:650,
@@ -275,7 +275,7 @@ DCC.game.Tetris=Ext.extend(Ext.app.GameModule,{
 				constrainHeader:true,
 				maximizable:false,
 				resizable:false,
-				
+
 				layout:'fit',
 				border:false,
 				tbar:[{
@@ -306,9 +306,9 @@ DCC.game.Tetris=Ext.extend(Ext.app.GameModule,{
 		this.initGame();
 		//this.startNewGame();
 	},//createWindow end
-	
-	display:function(obj,b){ 
-		obj.style.display = b ?'':'none'; 
+
+	display:function(obj,b){
+		obj.style.display = b ?'':'none';
 	},
 	setBlockSkin:function(x){
 		var rules = this.oSheet.rules || this.oSheet.cssRules;
@@ -583,10 +583,10 @@ DCC.game.Tetris=Ext.extend(Ext.app.GameModule,{
 		return this._stop;
 	},
 	isWin:function(){
-		return this._isWin;	
+		return this._isWin;
 	},
 	M_getXY:function(){
-		return this.XY;	
+		return this.XY;
 	},
 	M_isBlock:function(x,y){
 		return this.XY[x][y];
@@ -600,12 +600,12 @@ DCC.game.Tetris=Ext.extend(Ext.app.GameModule,{
 			var _x = reg1.exec(str)[0].replace('x','');
 			var _y = reg2.exec(str)[0].replace('y','');
 			var r1 = [_x,_y];
-			r2[i] = r1; 
+			r2[i] = r1;
 		}
 		return r2;
 	},
 	M_getCurr:function(){
-		return this.curr;	
+		return this.curr;
 	},
 	M_getT:function(){
 		return this.T;
@@ -641,15 +641,15 @@ DCC.game.Tetris=Ext.extend(Ext.app.GameModule,{
 		];
 	},
 	registBeginMethod:function(){
-		return 'startNewGame';	
+		return 'startNewGame';
 	},
 	registLoopMethod:function(){
 		return 'canContinue';
 	},
 	registStopMethod:function(){
-		return 'isStop';	
+		return 'isStop';
 	},
 	registWinMethod:function(){
-		return 'isWin';	
+		return 'isWin';
 	}
 })

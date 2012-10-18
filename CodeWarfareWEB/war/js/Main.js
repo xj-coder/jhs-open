@@ -17,9 +17,19 @@ var CodeLoader = null;
 var MainApp = null;
 //json data
 {
-    var robotCodeJsonLoaded = false;
-    var gameLauncherJsonLoaded = false;
-    var moduleJsonLoaded = false;
+    function loaded() {
+        return robotCodeJson.getCount()>0 && gameLauncherJson.getCount()>0 && moduleJson.getCount()>0 && shortcutJson.getCount()>0;
+    }
+
+    function load(json) {
+        json.load({
+            callback:function () {
+                if (loaded()) {
+                    beginApp();
+                }
+            }
+        });
+    }
 
     var robotCodeJson = new Ext.data.JsonStore({
         url:'/data/robot_code/david/code.json',
@@ -27,6 +37,14 @@ var MainApp = null;
         root:'codes',
         fields:['game_id', 'game_name', 'code_file_path', 'code_file_name', 'code_name']
     });
+
+    var shortcutJson = new Ext.data.JsonStore({
+        url:'/data/main/shortcut.json',
+        // reader configs
+        root:'shortcuts',
+        fields:['id', 'name', 'img']
+    });
+
     var gameLauncherJson = new Ext.data.JsonStore({
         url:'/data/main/launcher.json',
         // reader configs
@@ -37,40 +55,17 @@ var MainApp = null;
         url:'/data/main/model.json',
         // reader configs
         root:'models',
-        fields:['id', 'type', 'js_path', 'page_path', 'css_path', 'obj', 'lazy_load']
-    });
-    robotCodeJson.load({
-        callback:function () {
-            robotCodeJsonLoaded = true;
-
-            if (robotCodeJsonLoaded && gameLauncherJsonLoaded && moduleJsonLoaded) {
-                beginApp();
-            }
-        }
-    });
-    gameLauncherJson.load({
-        callback:function () {
-            gameLauncherJsonLoaded = true;
-
-            if (robotCodeJsonLoaded && gameLauncherJsonLoaded && moduleJsonLoaded) {
-                beginApp();
-            }
-        }
-    });
-    moduleJson.load({
-        callback:function () {
-            moduleJsonLoaded = true;
-
-            if (robotCodeJsonLoaded && gameLauncherJsonLoaded && moduleJsonLoaded) {
-                beginApp();
-            }
-        }
+        fields:['id', 'type', 'js_path', 'page_path', 'css_path', 'cls', 'lazy_load']
     });
 
+    load(robotCodeJson);
+    load(shortcutJson);
+    load(gameLauncherJson);
+    load(moduleJson);
 }
 //json data end
 
-function beginApp(){
+function beginApp() {
     ModuleLoader = new DCC.util.ModuleLoader();
     CodeLoader = new DCC.util.CodeLoader();
 

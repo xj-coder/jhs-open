@@ -64,7 +64,7 @@ Ext.extend(Ext.app.App, Ext.util.Observable, {
         var showJSEditor = this.desktop.taskBar.quickStartPanel.add({
             handler:function () {
                 var editorWin = MainApp.getDesktop().getWindow(DEFAULT_JS_EDITOR_WIN_ID);
-                var editor = ModuleLoader.getModule(DEFAULT_JS_EDITOR_ID);
+                var editor = ModuleLoader.getModuleInstance(DEFAULT_JS_EDITOR_ID);
                 if (editorWin) {
                     if (editorWin.minimized) {
                         editorWin.show();
@@ -92,7 +92,7 @@ Ext.extend(Ext.app.App, Ext.util.Observable, {
             id:'david-robot-win-button',
             handler:function (btn) {
                 var robotWin = MainApp.getDesktop().getWindow(DEFAULT_ROBOT_WIN_ID);
-                var robot = ModuleLoader.getModule(DEFAULT_ROBOT_ID);
+                var robot = ModuleLoader.getModuleInstance(DEFAULT_ROBOT_ID);
                 if (robotWin) {
                     if (robotWin.minimized) {
                         robotWin.show();
@@ -164,14 +164,14 @@ Ext.extend(Ext.app.App, Ext.util.Observable, {
     doClick:function (t) {
         var win = MainApp.getDesktop().getWindow(t.id.replace('-start', ''));
         if (!win) {
-            var module = ModuleLoader.getModule(t.id.replace('-start', ''));
+            var module = ModuleLoader.getModuleInstance(t.id.replace('-start', ''));
             if (module) {
                 module.createWindow();
                 win = MainApp.getDesktop().getWindow(t.id.replace('-start', ''));
                 //if GameModule then do something
                 if (module.id.substring(module.id.length - 4, module.id.length) == 'game') {
                     var editorWin = MainApp.getDesktop().getWindow('js-win-editor');
-                    var editor = ModuleLoader.getModule(DEFAULT_JS_EDITOR_ID);
+                    var editor = ModuleLoader.getModuleInstance(DEFAULT_JS_EDITOR_ID);
                     if (editorWin) {
                         if (!editor.getEditorTab(module.id))
                             editor.addEditorTab(module.id);
