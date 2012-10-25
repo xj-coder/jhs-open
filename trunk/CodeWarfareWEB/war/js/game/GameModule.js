@@ -135,6 +135,7 @@ Ext.extend(Ext.app.GameModule, Ext.util.Observable, {
                 }.createDelegate(followBar, [this.getWindow(), this.getThis()])
             }
         });
+
         if (topTool) {
             topTool.addSpacer();
             topTool.addSeparator();

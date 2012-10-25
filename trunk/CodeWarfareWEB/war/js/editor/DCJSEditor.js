@@ -108,7 +108,9 @@ var DCJSEditor = Ext.extend(Ext.form.HtmlEditor, {
 		var source = this.getValue();
 		source = source.replace(new RegExp('; ','g'),';');
 		source = source.replace(new RegExp('&nbsp;','g'),'');
-		return Ext.util.Format.stripTags(source);
+        source =Ext.util.Format.stripTags(source);
+        source =Ext.util.Format.htmlDecode(source);
+		return source;
 	},
 	setSource : function(source){
 		this.setValue(source);
