@@ -122,10 +122,10 @@ Ext.extend(DCC.editor.EditorModule, Ext.util.Observable, {
                         times = times + ((new Date()) - d);
                         if (winMethod()) {
                             runner.stopAll();//(runner);
-                            DCC.widget.show({title:'End', msg:'use time: ' + times + 'ms', buttons:Ext.Msg.OK});
+                            DCC.widget.show({title:'WIN', msg:'use time: ' + times + 'ms', buttons:Ext.Msg.OK});
                         }
                     } catch (err) {
-                        DCC.widget.show({title:'End', msg:'Use time: ' + times + 'ms', buttons:Ext.Msg.OK});
+                        DCC.widget.show({title:'ERROR', msg:'Use time: ' + times + 'ms', buttons:Ext.Msg.OK});
                     }
                 }
             }
