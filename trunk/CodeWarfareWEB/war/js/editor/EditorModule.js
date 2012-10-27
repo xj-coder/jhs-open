@@ -2,11 +2,10 @@
 DCC.editor.EditorModule = function (config) {
     Ext.apply(this, config);
     DCC.editor.EditorModule.superclass.constructor.call(this);
-    this.init();
-    this.id;
 }
 Ext.extend(DCC.editor.EditorModule, Ext.util.Observable, {
     init:Ext.emptyFn,
+    id:null,
     setTarget:function (target) {
         this.target = target;
     },
@@ -17,7 +16,7 @@ Ext.extend(DCC.editor.EditorModule, Ext.util.Observable, {
 
     loadSource:function (source) {
         var desktop = MainApp.getDesktop();
-        var win = desktop.getWindow(this.id);
+        var win = desktop.getWindow(this.id + '-win');
         var editorPanel = win.items.itemAt(0).getActiveTab();
         if (!editorPanel) {
             DCC.widget.alert('Message', 'Not any code of game');
@@ -62,17 +61,22 @@ Ext.extend(DCC.editor.EditorModule, Ext.util.Observable, {
                 if (!src && module.registDefaultMethod()) {
                     src = module.registDefaultMethod();
                 }
+                var actionMethodName = module.id.replace(new RegExp('-', 'g'), '_') + '_action';
+                var actionMethod = new Function(module.id.replace(new RegExp('-', 'g'), '_') + '_action();');
                 src = src.replace(new RegExp('this.', 'g'), 'ModuleLoader.getModuleInstance(\'' + module.id + '\').')
                 for (var i = 0; i < json.getCount(); i++) {
                     src = src.replace(new RegExp(json.getAt(i).get('mapping') + '[\(]', 'g'), 'ModuleLoader.getModuleInstance(\'' + module.id + '\').' + json.getAt(i).get('method') + '(')
                 }
+                src = src.replace(new RegExp('function action', 'g'), 'function ' + actionMethodName );
 
-                var fn = new Function(src);
+                JSLoader.includeUserJsText(src);
+                //var fn = new Function(src);
                 var times = 0;
                 var beginMethod = module.registBeginMethod();
                 var loopMethod = module.registLoopMethod();
                 var stopMethod = module.registStopMethod();
                 var winMethod = module.registWinMethod();
+                var loopTime = module.getLoopTime();
 
                 if (winMethod) {
                     winMethod = 'return ModuleLoader.getModuleInstance(\'' + module.id + '\').' + winMethod + '()';
@@ -102,7 +106,7 @@ Ext.extend(DCC.editor.EditorModule, Ext.util.Observable, {
                             if (loopMethod()) {
                                 try {
                                     var d = new Date();
-                                    fn();
+                                    actionMethod();
                                     times = times + ((new Date()) - d);
                                 } catch (err) {
                                     DCC.widget.show({title:'Error', msg:err, buttons:Ext.Msg.OK});
@@ -113,12 +117,12 @@ Ext.extend(DCC.editor.EditorModule, Ext.util.Observable, {
                                 DCC.widget.show({title:'End', msg:'use time: ' + times + 'ms', buttons:Ext.Msg.OK});
                             }
                         },
-                        interval:module.getLoopTime()
+                        interval:loopTime
                     });
                 } else {
                     try {
                         var d = new Date();
-                        fn();
+                        actionMethod();
                         times = times + ((new Date()) - d);
                         if (winMethod()) {
                             runner.stopAll();//(runner);

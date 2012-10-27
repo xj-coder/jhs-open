@@ -63,7 +63,7 @@ DCC.game.Tetris=Ext.extend(Ext.app.GameModule,{
 	},//layout end
 	XY:[],
 	blockSkins : ["type1","type2","type3"],
-	//升级行数，每消多少行升到下一级速度(两种升级策略，按行数和按分数，这里取按行数)(2009-7-31改为按分数)
+	//升级行数，每消多少行升到下一级速度
 	uplevelScroe : 10000,
 	gLevelScroe : 0,//本级已消分数，升级或换级时清零
 
@@ -610,11 +610,15 @@ DCC.game.Tetris=Ext.extend(Ext.app.GameModule,{
 	M_getT:function(){
 		return this.T;
 	},
-	M_left:function(){
-		this.move_1step(this.T,-1,0);
+	M_left:function(step){
+        if(step)
+		    this.move_1step(this.T,-1*step,0);
+        this.move_1step(this.T,-1,0);
 	},
-	M_right:function(){
-		this.move_1step(this.T,1,0);
+	M_right:function(step){
+        if(step)
+		    this.move_1step(this.T,1*step,0);
+        this.move_1step(this.T,1,0);
 	},
 	M_down:function(){
 		this.move_quickdown(this.T);
@@ -651,5 +655,8 @@ DCC.game.Tetris=Ext.extend(Ext.app.GameModule,{
 	},
 	registWinMethod:function(){
 		return 'isWin';
-	}
+	},
+    getLoopTime:function(){
+        return this.currMill;
+    }
 })
