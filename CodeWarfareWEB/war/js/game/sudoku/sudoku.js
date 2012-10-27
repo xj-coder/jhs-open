@@ -1,5 +1,5 @@
 DCC.game.Sudoku=Ext.extend(Ext.app.GameModule,{
-    id:'sudoku-win-game',
+    id:'sudoku-game',
 	size:9,
 	_width:405,
 	_height:405,
@@ -14,13 +14,13 @@ DCC.game.Sudoku=Ext.extend(Ext.app.GameModule,{
 	answer : [],
 	// 答案的索引
 	answerPosition : [],
-	
+
 	oldSolving:[],
 	// 游戏时的待填局面
 	solving : [],
-	
+
 	HTML : document.createElement('div'),
-	
+
 	init:function(){
 		this.initGame();
 		this.initUI();
@@ -80,12 +80,12 @@ DCC.game.Sudoku=Ext.extend(Ext.app.GameModule,{
 			}
 		}
 	},//initUI end
-	
+
 	createWindow:function(){
 		var _win = this.getWindow();
 		if(!_win){
 			 _win = this.getDesktop().createWindow({
-				id: 'sudoku-win-game',
+				id: this.id+"-win",
 				title: 'Sudoku Window',
 				width:550,
 				height:500,
@@ -95,7 +95,7 @@ DCC.game.Sudoku=Ext.extend(Ext.app.GameModule,{
 				constrainHeader:true,
 				maximizable:false,
 				resizable:false,
-				
+
 				layout:'fit',
 				border:false,
 				tbar:[{
@@ -110,19 +110,22 @@ DCC.game.Sudoku=Ext.extend(Ext.app.GameModule,{
 					tooltip:'Descreption',
 					iconCls:'sudoku-win-descreption-tbar',
 					listeners :{
-						click:function(t){
-							new Ext.Window({
+						click:function(){
+							var win = new Ext.Window({
 								title:'Sudoku Descreption',
 								id:'Sudoku Descreption',
 								width:500,
 								height:400,
-								manager:t.getWindowManager(),
+								//manager:t.getWindowManager(),
 								minimizable: true,
 								maximizable: true,
 								autoScroll: true,
 								autoLoad: {url: 'page/game/sudoku/descreption.html'}
-							}).show();
-						}.createDelegate(this,[this.getThis()])
+							});
+                            win.show();
+                            win.toFront();
+						},//.createDelegate(this,[this.getThis()])
+                        scope:this
 					}
 				}],
 				html:this.HTML.innerHTML
@@ -234,7 +237,7 @@ DCC.game.Sudoku=Ext.extend(Ext.app.GameModule,{
 				count++;
 		return count;
 	},// getAnswerCount end
-	
+
 	// 返回指定行列在指定位置的解
 	getAnswerNum : function(row, col, ansPos) {
 		var cnt = 0;
@@ -250,7 +253,7 @@ DCC.game.Sudoku=Ext.extend(Ext.app.GameModule,{
 		}
 		return 0;// 没有找到，逻辑没有问题的话，应该不会出现这个情况
 	},//getAnswerNum end
-	
+
 	// 检查玩家的答案是否正确
 	checkAnswer : function() {
 		var flag = true;
@@ -441,11 +444,11 @@ DCC.game.Sudoku=Ext.extend(Ext.app.GameModule,{
 		res = h + ':' + m + ':' + s;
 		return res;
 	}, //changeTimeToString end
-	
+
 	M_getMap:function(){
 		return this.oldSolving;
 	},
-	
+
 	M_getCurrMap:function(){
 		return this.solving;
 	},
@@ -456,7 +459,7 @@ DCC.game.Sudoku=Ext.extend(Ext.app.GameModule,{
 			this.onSelect(v,y,x);
 		}
 	},
-	
+
 	registMethod : function(){
 		return [
 			['M_getMap','getMap'],
@@ -465,6 +468,6 @@ DCC.game.Sudoku=Ext.extend(Ext.app.GameModule,{
 		];
 	},
 	registWinMethod:function(){
-		return 'checkAnswer';	
+		return 'checkAnswer';
 	}
 })

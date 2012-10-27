@@ -161,20 +161,21 @@ DCC.game.Mini = Ext.extend(Ext.app.GameModule, {
                         tooltip:'Descreption',
                         iconCls:'mini-win-descreption-tbar',
                         listeners:{
-                            click:function (_this) {
-                                new Ext.Window({
+                            click:function () {
+                                var win = new Ext.Window({
                                     title:'Mini Descreption',
                                     id:'Mini Descreption',
                                     width:500,
                                     height:400,
-                                    //manager:_this.getWindowManager(),
                                     minimizable:true,
                                     maximizable:true,
                                     autoScroll:true,
                                     autoLoad:{url:'page/game/mini/descreption.html'}
-                                }).show();
-                            }.createDelegate(this, [this.getThis()])
-                            //scope:this
+                                });//.show();
+                                win.show();
+                                win.toFront();
+                            },//.createDelegate(this, [this.getThis()])
+                            scope:this
                         }
                     }
                 ],

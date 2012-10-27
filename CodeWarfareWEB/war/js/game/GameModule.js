@@ -6,7 +6,7 @@ Ext.app.GameModule = function (config) {
 }
 
 Ext.extend(Ext.app.GameModule, Ext.util.Observable, {
-    module:null,
+    id:null,
     init:Ext.emptyFn,
     restart:Ext.emptyFn,
     registDefaultMethod:Ext.emptyFn,
@@ -17,12 +17,6 @@ Ext.extend(Ext.app.GameModule, Ext.util.Observable, {
     registStopMethod:Ext.emptyFn,
     registWinMethod:Ext.emptyFn,
 
-    getThis:function () {
-        if (this.module) {
-            this.module = ModuleLoader.getModuleInstance(this.id);
-        }
-        return this.module;
-    },
     getWindow:function () {
         return this.getDesktop().getWindow(this.id + "-win");
     },
@@ -91,24 +85,27 @@ Ext.extend(Ext.app.GameModule, Ext.util.Observable, {
             toolTip:'showEditor',
             iconCls:'all-game-bar-showeditor',
             listeners:{
-                click:function (win, t) {
+                click:function () {
+                    var win = this.getWindow();
                     var editorWin = MainApp.getDesktop().getWindow(DEFAULT_JS_EDITOR_WIN_ID);
                     var editor = ModuleLoader.getModuleInstance(DEFAULT_JS_EDITOR_ID);
                     if (editorWin) {
-                        if (!editor.getEditorTab(win.id))
-                            editor.addEditorTab(win.id);
+                        if (!editor.getEditorTab(this.id))
+                            editor.addEditorTab(this.id);
                     } else {
                         editor.createWindow();
-                        editor.addEditorTab(win.id);
+                        editor.addEditorTab(this.id);
                         if (!win.hasListener('show') && !win.hasListener('move') && !win.hasListener('resize')) {
-                            win.addListener('show', t.showE);
-                            win.addListener('resize', t.resizeE);
-                            win.addListener('move', t.moveE);
+                            win.addListener('show', this.showE);
+                            win.addListener('resize', this.resizeE);
+                            win.addListener('move', this.moveE);
                         }
                     }
                     if (editorWin.hidden)editorWin.show();
-                    win.fireEvent('move', win);
-                }.createDelegate(followBar, [this.getWindow(), this.getThis()])
+                        win.fireEvent('move', win);
+                },
+                //}.createDelegate(followBar, [this.getWindow(), this.getThis()]),
+                scope:this
             }
         });
 
@@ -117,23 +114,25 @@ Ext.extend(Ext.app.GameModule, Ext.util.Observable, {
             toolTip:'follow',
             iconCls:'all-game-bar-follow',
             listeners:{
-                click:function (win, t) {
-                    var b = win.getTopToolbar().get('game-bar-follow-' + t.id);
+                click:function () {
+                    var win = this.getWindow();
+                    var b = win.getTopToolbar().get('game-bar-follow-' + this.id);
                     b.iconCls == 'all-game-bar-follow' ? b.setIconClass('all-game-bar-follow-un') : b.setIconClass('all-game-bar-follow');
                     if (win.hasListener('show') && win.hasListener('move') && win.hasListener('resize') && win.hasListener('activate')) {
-                        ;
-                        win.removeListener('show', t.showE);
-                        win.removeListener('resize', t.resizeE);
-                        win.removeListener('move', t.moveE);
-                        win.removeListener('activate', module.moveE);
+                        win.removeListener('show', this.showE);
+                        win.removeListener('resize', this.resizeE);
+                        win.removeListener('move', this.moveE);
+                        win.removeListener('activate', this.moveE);
                     } else {
-                        win.addListener('show', t.showE);
-                        win.addListener('resize', t.resizeE);
-                        win.addListener('move', t.moveE);
-                        win.addListener('activate', module.moveE);
+                        win.addListener('show', this.showE);
+                        win.addListener('resize', this.resizeE);
+                        win.addListener('move', this.moveE);
+                        win.addListener('activate', this.moveE);
                         win.fireEvent('move', win);
                     }
-                }.createDelegate(followBar, [this.getWindow(), this.getThis()])
+                },
+                //}.createDelegate(followBar, [this.getWindow(), this.getThis()]),
+                scope:this
             }
         });
 
