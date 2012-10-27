@@ -214,7 +214,7 @@ DCC.game.Mini = Ext.extend(Ext.app.GameModule, {
         if (this.mm[x] == -1) {
             this.showAll();
             DCC.widget.show({title:'Death', msg:"Oh...Has Mini....You death", buttons:Ext.Msg.YES});
-        } else {
+        } else if(x < this.mm.length){
             this._mm[x] = this.mm[x];
             if (this.mm[x] == 0) {
                 Ext.getDom('mini-basic-button-' + x).setAttribute('value', " ");
