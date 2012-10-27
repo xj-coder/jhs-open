@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< .mine
+    <list default="true" readonly="true" id="4ae2aa70-a73f-452e-9f13-3351f23a903d" name="Default" comment="" />
+=======
     <list default="true" readonly="true" id="4ae2aa70-a73f-452e-9f13-3351f23a903d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/war/js/editor/EditorModule.js" afterPath="$PROJECT_DIR$/war/js/editor/EditorModule.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/war/js/game/mini/Mini.js" afterPath="$PROJECT_DIR$/war/js/game/mini/Mini.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/war/page/game/mini/descreption.html" afterPath="$PROJECT_DIR$/war/page/game/mini/descreption.html" />
     </list>
+>>>>>>> .r94
     <ignored path="CodeWarfareWEB.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -60,11 +64,15 @@
         <entry file="file://$PROJECT_DIR$/war/js/game/mini/Mini.js">
           <provider selected="true" editor-type-id="text-editor">
             <state line="281" column="14" selection-start="15699" selection-end="15699" vertical-scroll-proportion="0.48777506">
+<<<<<<< .mine
+              <folding />
+=======
               <folding>
                 <element signature="e#433#5246#0" expanded="false" />
                 <element signature="e#5292#11133#0" expanded="false" />
                 <element signature="e#16499#17203#0" expanded="false" />
               </folding>
+>>>>>>> .r94
             </state>
           </provider>
         </entry>
@@ -72,8 +80,13 @@
       <file leaf-file-name="EditorModule.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/war/js/editor/EditorModule.js">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< .mine
+            <state line="124" column="55" selection-start="5021" selection-end="5021" vertical-scroll-proportion="0.0">
+              <folding />
+=======
             <state line="121" column="61" selection-start="4865" selection-end="4865" vertical-scroll-proportion="0.0">
               <folding />
+>>>>>>> .r94
             </state>
           </provider>
         </entry>
@@ -90,7 +103,11 @@
       <file leaf-file-name="CodeLoader.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/war/js/util/CodeLoader.js">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< .mine
+            <state line="267" column="25" selection-start="7225" selection-end="7225" vertical-scroll-proportion="0.0">
+=======
             <state line="1" column="14" selection-start="32" selection-end="42" vertical-scroll-proportion="0.0">
+>>>>>>> .r94
               <folding />
             </state>
           </provider>
@@ -99,7 +116,11 @@
       <file leaf-file-name="Main.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/war/js/Main.js">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< .mine
+            <state line="262" column="19" selection-start="13751" selection-end="13751" vertical-scroll-proportion="0.04676259">
+=======
             <state line="69" column="10" selection-start="1847" selection-end="1857" vertical-scroll-proportion="0.0">
+>>>>>>> .r94
               <folding>
                 <element signature="e#449#1755#0" expanded="false" />
               </folding>
@@ -110,7 +131,11 @@
       <file leaf-file-name="JSLoader.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/war/js/util/JSLoader.js">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< .mine
+            <state line="20" column="30" selection-start="733" selection-end="733" vertical-scroll-proportion="0.0">
+=======
             <state line="20" column="47" selection-start="694" selection-end="694" vertical-scroll-proportion="0.0">
+>>>>>>> .r94
               <folding />
             </state>
           </provider>
@@ -119,7 +144,20 @@
       <file leaf-file-name="CSSLoader.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/war/js/util/CSSLoader.js">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< .mine
+            <state line="111" column="0" selection-start="3094" selection-end="3094" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="App.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/war/js/App.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="184" column="58" selection-start="6388" selection-end="6388" vertical-scroll-proportion="0.0">
+=======
             <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+>>>>>>> .r94
               <folding />
             </state>
           </provider>
@@ -133,6 +171,8 @@
     </FindUsagesManager>
   </component>
   <component name="Git.Settings">
+    <option name="CHECKOUT_INCLUDE_TAGS" value="false" />
+    <option name="UPDATE_CHANGES_POLICY" value="STASH" />
     <option name="LINE_SEPARATORS_CONVERSION" value="ASK" />
   </component>
   <component name="IdeDocumentHistory">
@@ -160,8 +200,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="width" value="1296" />
+    <option name="height" value="776" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -197,7 +237,7 @@
       <flattenPackages />
       <showMembers />
       <showModules />
-      <showLibraryContents ProjectPane="true" />
+      <showLibraryContents ProjectPane="false" />
       <hideEmptyPackages />
       <abbreviatePackageNames />
       <autoscrollToSource ProjectPane="true" />
@@ -205,6 +245,20 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CodeWarfareWEB" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="codeWarWeb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="Scope">
         <subPane subId="Project Files">
           <PATH>
@@ -217,40 +271,8 @@
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
-        </subPane>
-      </pane>
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CodeWarfareWEB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CodeWarfareWEB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CodeWarfareWEB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CodeWarfareWEB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CodeWarfareWEB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="war" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
+<<<<<<< .mine
+=======
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="CodeWarfareWEB" />
@@ -387,6 +409,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+>>>>>>> .r94
         </subPane>
       </pane>
     </panes>
@@ -420,7 +443,7 @@
     <list size="0" />
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
-  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="true">
+  <component name="SvnConfiguration" maxAnnotateRevisions="500">
     <option name="USER" value="" />
     <option name="PASSWORD" value="" />
     <option name="mySSHConnectionTimeout" value="30000" />
@@ -443,16 +466,16 @@
     <option name="myMappingRoots">
       <list>
         <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="E:\code\my-source\web\CodeWarfareWEB" />
-          <option name="myCopyRoot" value="E:\code\my-source\web\CodeWarfareWEB" />
+          <option name="myVcsRoot" value="D:\codeWarWeb" />
+          <option name="myCopyRoot" value="D:\codeWarWeb" />
         </SvnCopyRootSimple>
       </list>
     </option>
     <option name="myMoreRealMappingRoots">
       <list>
         <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="E:\code\my-source\web\CodeWarfareWEB" />
-          <option name="myCopyRoot" value="E:\code\my-source\web\CodeWarfareWEB" />
+          <option name="myVcsRoot" value="D:\codeWarWeb" />
+          <option name="myCopyRoot" value="D:\codeWarWeb" />
         </SvnCopyRootSimple>
       </list>
     </option>
@@ -486,14 +509,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1296" height="776" extended-state="7" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943144" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1901566" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18344755" sideWeight="0.3736018" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18344755" sideWeight="0.8098434" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18297534" sideWeight="0.8098434" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20903955" sideWeight="0.33444816" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
@@ -542,10 +565,7 @@
     <option name="INCLUDE_TEXT_INTO_PATCH" value="false" />
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
     <option name="CREATE_PATCH_EXPAND_DETAILS_DEFAULT" value="true" />
-    <option name="SHOW_FILE_HISTORY_DETAILS" value="true" />
-    <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
     <option name="LAST_COMMIT_MESSAGE" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
@@ -606,6 +626,8 @@
         </state>
       </provider>
     </entry>
+<<<<<<< .mine
+=======
     <entry file="file://$PROJECT_DIR$/war/data/main/model.json">
       <provider selected="true" editor-type-id="text-editor">
         <state line="7" column="42" selection-start="215" selection-end="231" vertical-scroll-proportion="0.0">
@@ -613,6 +635,7 @@
         </state>
       </provider>
     </entry>
+>>>>>>> .r94
     <entry file="file://$PROJECT_DIR$/war/js/util/ModuleLoader.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="19" column="25" selection-start="797" selection-end="797" vertical-scroll-proportion="0.0">
@@ -627,52 +650,105 @@
         </state>
       </provider>
     </entry>
+<<<<<<< .mine
+    <entry file="file://$PROJECT_DIR$/war/js/game/GameModule.js">
+=======
     <entry file="file://$PROJECT_DIR$/war/js/util/CSSLoader.js">
+>>>>>>> .r94
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< .mine
+        <state line="30" column="4" selection-start="861" selection-end="861" vertical-scroll-proportion="0.0" />
+=======
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
+>>>>>>> .r94
       </provider>
     </entry>
+<<<<<<< .mine
+    <entry file="file://$PROJECT_DIR$/war/js/editor/EditorModule.js">
+=======
     <entry file="file://$PROJECT_DIR$/war/js/util/CodeLoader.js">
+>>>>>>> .r94
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< .mine
+        <state line="124" column="55" selection-start="5021" selection-end="5021" vertical-scroll-proportion="0.0" />
+=======
         <state line="1" column="14" selection-start="32" selection-end="42" vertical-scroll-proportion="0.0">
           <folding />
         </state>
+>>>>>>> .r94
       </provider>
     </entry>
+<<<<<<< .mine
+    <entry file="file://$PROJECT_DIR$/war/js/editor/DCJSEditor.js">
+=======
     <entry file="file://$PROJECT_DIR$/war/js/Main.js">
+>>>>>>> .r94
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< .mine
+        <state line="111" column="42" selection-start="3443" selection-end="3443" vertical-scroll-proportion="0.0" />
+=======
         <state line="69" column="10" selection-start="1847" selection-end="1857" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="e#449#1755#0" expanded="false" />
           </folding>
         </state>
+>>>>>>> .r94
       </provider>
     </entry>
+<<<<<<< .mine
+    <entry file="file://$PROJECT_DIR$/war/js/game/tetris/tetris.js">
+=======
     <entry file="file://$PROJECT_DIR$/war/js/Desktop.js">
+>>>>>>> .r94
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< .mine
+        <state line="267" column="25" selection-start="7225" selection-end="7225" vertical-scroll-proportion="0.0">
+          <folding />
+=======
         <state line="239" column="38" selection-start="7540" selection-end="7540" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="e#4288#4533#0" expanded="false" />
           </folding>
+>>>>>>> .r94
         </state>
       </provider>
     </entry>
+<<<<<<< .mine
+    <entry file="file://$PROJECT_DIR$/war/js/util/JSLoader.js">
+=======
     <entry file="file://$PROJECT_DIR$/war/js/widget/ButtonCanChangeIcon.js">
+>>>>>>> .r94
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< .mine
+        <state line="20" column="30" selection-start="733" selection-end="733" vertical-scroll-proportion="0.0">
+=======
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+>>>>>>> .r94
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< .mine
+    <entry file="file://$PROJECT_DIR$/war/js/editor/JSEditor.js">
+=======
     <entry file="file://$PROJECT_DIR$/war/js/widget/TopMessageBoxWidget.js">
+>>>>>>> .r94
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< .mine
+        <state line="111" column="0" selection-start="3094" selection-end="3094" vertical-scroll-proportion="0.0">
+          <folding />
+=======
         <state line="9" column="51" selection-start="361" selection-end="361" vertical-scroll-proportion="0.0">
           <folding />
+>>>>>>> .r94
         </state>
       </provider>
     </entry>
+<<<<<<< .mine
+    <entry file="file://$PROJECT_DIR$/war/js/App.js">
+=======
     <entry file="file://$PROJECT_DIR$/war/page/game/mini/descreption.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="17" column="20" selection-start="477" selection-end="477" vertical-scroll-proportion="-11.535714">
@@ -681,15 +757,24 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/war/js/editor/EditorModule.js">
+>>>>>>> .r94
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< .mine
+        <state line="184" column="58" selection-start="6388" selection-end="6388" vertical-scroll-proportion="0.0" />
+=======
         <state line="121" column="61" selection-start="4865" selection-end="4865" vertical-scroll-proportion="0.0">
           <folding />
         </state>
+>>>>>>> .r94
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/war/js/game/mini/Mini.js">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< .mine
+        <state line="262" column="19" selection-start="13751" selection-end="13751" vertical-scroll-proportion="0.04676259">
+=======
         <state line="281" column="14" selection-start="15699" selection-end="15699" vertical-scroll-proportion="0.48777506">
+>>>>>>> .r94
           <folding>
             <element signature="e#433#5246#0" expanded="false" />
             <element signature="e#5292#11133#0" expanded="false" />
