@@ -5,13 +5,18 @@
 </head>
 
 <body scroll="no">
-<p>
+<pre>
 扫雷游戏说明<br>
 可使用方法：<br>
 click(var index);点击指定位置.<br>
-get();获取指定位置的信息,<br>
-flat(var flat);标记指定位置<br>
-</p>
+get(var index);获取指定位置的已知信息,如果index未指定，将获得所有位置的已知信息，以一个一维数组都形式返回<br>
+                一维数组格式：<br>
+                1,2,3
+                4,5,6
+                7,8,9
+size():获得地雷矩阵的大小，地雷矩阵将必定是个正方形，你可以根据这个值来确定整体信息数组位置关系。<BR>
+miniNum():获得雷的总数量<BR>
+</pre>
 </body>
 
 </html>

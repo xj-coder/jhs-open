@@ -125,7 +125,7 @@ Ext.extend(DCC.editor.EditorModule, Ext.util.Observable, {
                             DCC.widget.show({title:'WIN', msg:'use time: ' + times + 'ms', buttons:Ext.Msg.OK});
                         }
                     } catch (err) {
-                        DCC.widget.show({title:'ERROR', msg:'Use time: ' + times + 'ms', buttons:Ext.Msg.OK});
+                        DCC.widget.show({title:'ERROR', msg:err, buttons:Ext.Msg.OK});
                     }
                 }
             }

@@ -3,11 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="4ae2aa70-a73f-452e-9f13-3351f23a903d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/war/js/editor/DCJSEditor.js" afterPath="$PROJECT_DIR$/war/js/editor/DCJSEditor.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/war/js/editor/EditorModule.js" afterPath="$PROJECT_DIR$/war/js/editor/EditorModule.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/war/js/game/GameModule.js" afterPath="$PROJECT_DIR$/war/js/game/GameModule.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/war/js/game/mini/Mini.js" afterPath="$PROJECT_DIR$/war/js/game/mini/Mini.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/开发记录.txt" afterPath="$PROJECT_DIR$/开发记录.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/war/page/game/mini/descreption.html" afterPath="$PROJECT_DIR$/war/page/game/mini/descreption.html" />
     </list>
     <ignored path="CodeWarfareWEB.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,63 +27,30 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ModuleLoader.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/war/js/util/ModuleLoader.js">
+      <file leaf-file-name="Desktop.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/war/js/Desktop.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="26" selection-start="845" selection-end="862" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Main.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/war/js/Main.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="16" selection-start="373" selection-end="385" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameModule.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/war/js/game/GameModule.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="4" selection-start="861" selection-end="861" vertical-scroll-proportion="0.0">
+            <state line="239" column="38" selection-start="7540" selection-end="7540" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="e#970#1859#0" expanded="false" />
-                <element signature="e#1887#2131#0" expanded="false" />
-                <element signature="e#2161#3009#0" expanded="false" />
-                <element signature="e#3170#4343#0" expanded="false" />
-                <element signature="e#4386#5663#0" expanded="false" />
+                <element signature="e#4288#4533#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EditorModule.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/war/js/editor/EditorModule.js">
+      <file leaf-file-name="ButtonCanChangeIcon.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/war/js/widget/ButtonCanChangeIcon.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="124" column="55" selection-start="5021" selection-end="5021" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#3631#4678#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DCJSEditor.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/war/js/editor/DCJSEditor.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="111" column="42" selection-start="3443" selection-end="3443" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tetris.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/war/js/game/tetris/tetris.js">
+      <file leaf-file-name="TopMessageBoxWidget.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/war/js/widget/TopMessageBoxWidget.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="267" column="25" selection-start="6927" selection-end="6927" vertical-scroll-proportion="0.0">
+            <state line="9" column="51" selection-start="361" selection-end="361" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -94,60 +59,49 @@
       <file leaf-file-name="Mini.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/war/js/game/mini/Mini.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="262" column="19" selection-start="13751" selection-end="13751" vertical-scroll-proportion="0.6051345">
+            <state line="281" column="14" selection-start="15699" selection-end="15699" vertical-scroll-proportion="0.48777506">
               <folding>
-                <element signature="e#422#5208#0" expanded="false" />
-                <element signature="e#950#1018#0" expanded="false" />
-                <element signature="e#1078#4565#0" expanded="false" />
-                <element signature="e#1220#1282#0" expanded="false" />
-                <element signature="e#3143#3819#0" expanded="false" />
-                <element signature="e#3879#4555#0" expanded="false" />
-                <element signature="e#5254#11095#0" expanded="false" />
-                <element signature="e#5312#10748#0" expanded="false" />
-                <element signature="e#5364#10718#0" expanded="false" />
-                <element signature="e#5912#10661#0" expanded="false" />
-                <element signature="e#5934#9599#0" expanded="false" />
-                <element signature="e#6144#8454#0" expanded="false" />
-                <element signature="e#6174#6906#0" expanded="false" />
-                <element signature="e#6372#6876#0" expanded="false" />
-                <element signature="e#6429#6794#0" expanded="false" />
-                <element signature="e#6936#7668#0" expanded="false" />
-                <element signature="e#7134#7638#0" expanded="false" />
-                <element signature="e#7191#7556#0" expanded="false" />
-                <element signature="e#7698#8428#0" expanded="false" />
-                <element signature="e#7895#8398#0" expanded="false" />
-                <element signature="e#7952#8316#0" expanded="false" />
-                <element signature="e#8490#9577#0" expanded="false" />
-                <element signature="e#8538#9511#0" expanded="false" />
-                <element signature="e#8746#8832#0" expanded="false" />
-                <element signature="e#8861#8947#0" expanded="false" />
-                <element signature="e#8975#9061#0" expanded="false" />
-                <element signature="e#9621#10643#0" expanded="false" />
-                <element signature="e#9805#10621#0" expanded="false" />
-                <element signature="e#9858#10515#0" expanded="false" />
-                <element signature="e#9907#10476#0" expanded="false" />
-                <element signature="e#11121#11685#0" expanded="false" />
-                <element signature="e#11257#11295#0" expanded="false" />
-                <element signature="e#11324#11362#0" expanded="false" />
-                <element signature="e#11390#11428#0" expanded="false" />
-                <element signature="e#13128#13318#0" expanded="false" />
-                <element signature="e#13179#13291#0" expanded="false" />
-                <element signature="e#13215#13281#0" expanded="false" />
-                <element signature="e#14218#14768#0" expanded="false" />
-                <element signature="e#14257#14453#0" expanded="false" />
-                <element signature="e#14459#14667#0" expanded="false" />
-                <element signature="e#14960#15735#0" expanded="false" />
-                <element signature="e#15024#15270#0" expanded="false" />
-                <element signature="e#15276#15559#0" expanded="false" />
-                <element signature="e#15927#16702#0" expanded="false" />
-                <element signature="e#15991#16237#0" expanded="false" />
-                <element signature="e#16243#16526#0" expanded="false" />
-                <element signature="e#16750#17454#0" expanded="false" />
-                <element signature="e#16801#17448#0" expanded="false" />
-                <element signature="e#16836#17020#0" expanded="false" />
-                <element signature="e#17048#17240#0" expanded="false" />
-                <element signature="e#17246#17438#0" expanded="false" />
-                <element signature="e#17956#17987#0" expanded="false" />
+                <element signature="e#433#5246#0" expanded="false" />
+                <element signature="e#5292#11133#0" expanded="false" />
+                <element signature="e#16499#17203#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EditorModule.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/war/js/editor/EditorModule.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="121" column="61" selection-start="4865" selection-end="4865" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="descreption.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/war/page/game/mini/descreption.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="20" selection-start="477" selection-end="477" vertical-scroll-proportion="-11.535714">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CodeLoader.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/war/js/util/CodeLoader.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1" column="14" selection-start="32" selection-end="42" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Main.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/war/js/Main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="69" column="10" selection-start="1847" selection-end="1857" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#449#1755#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -156,28 +110,16 @@
       <file leaf-file-name="JSLoader.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/war/js/util/JSLoader.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="34" selection-start="694" selection-end="694" vertical-scroll-proportion="0.0">
+            <state line="20" column="47" selection-start="694" selection-end="694" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JSEditor.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/war/js/editor/JSEditor.js">
+      <file leaf-file-name="CSSLoader.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/war/js/util/CSSLoader.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="111" column="27" selection-start="3094" selection-end="3094" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#248#1720#0" expanded="false" />
-                <element signature="e#1761#3071#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="App.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/war/js/App.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="184" column="58" selection-start="6388" selection-end="6388" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -196,11 +138,9 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/war/js/robot/david/robot_david.js" />
         <option value="$PROJECT_DIR$/war/js/LoadData.js" />
         <option value="$PROJECT_DIR$/war/js/App.js" />
         <option value="$PROJECT_DIR$/war/index.html" />
-        <option value="$PROJECT_DIR$/war/data/main/launcher.json" />
         <option value="$PROJECT_DIR$/war/data/main/shortcut.json" />
         <option value="$PROJECT_DIR$/war/js/Desktop.js" />
         <option value="$PROJECT_DIR$/war/data/main/model.json" />
@@ -210,6 +150,8 @@
         <option value="$PROJECT_DIR$/war/js/editor/JSEditor.js" />
         <option value="$PROJECT_DIR$/war/js/game/GameModule.js" />
         <option value="$PROJECT_DIR$/war/js/editor/DCJSEditor.js" />
+        <option value="$PROJECT_DIR$/war/data/main/launcher.json" />
+        <option value="$PROJECT_DIR$/war/page/game/mini/descreption.html" />
         <option value="$PROJECT_DIR$/war/js/editor/EditorModule.js" />
         <option value="$PROJECT_DIR$/war/js/game/mini/Mini.js" />
       </list>
@@ -323,11 +265,37 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
+              <option name="myItemId" value="page" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ext3.2" />
+              <option name="myItemId" value="game" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CodeWarfareWEB" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CodeWarfareWEB" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="war" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="page" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="game" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mini" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -346,54 +314,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CodeWarfareWEB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CodeWarfareWEB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="war" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="util" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CodeWarfareWEB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CodeWarfareWEB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="war" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="robot" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="david" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -416,32 +336,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="game" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CodeWarfareWEB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CodeWarfareWEB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="war" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="game" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tetris" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -489,165 +383,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="game" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fivechess" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CodeWarfareWEB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CodeWarfareWEB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="war" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="editor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CodeWarfareWEB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CodeWarfareWEB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="war" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="data" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CodeWarfareWEB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CodeWarfareWEB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="war" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="data" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="robot_code" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="david" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CodeWarfareWEB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CodeWarfareWEB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="war" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="data" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CodeWarfareWEB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CodeWarfareWEB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="war" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CodeWarfareWEB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CodeWarfareWEB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="war" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="robot" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="david" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CodeWarfareWEB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CodeWarfareWEB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="war" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="game" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -659,9 +395,9 @@
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="options.lastSelected" value="settings.xslt" />
-    <property name="GoToClass.includeJavaFiles" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
+    <property name="GoToClass.includeJavaFiles" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -755,6 +491,7 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943144" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1901566" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18344755" sideWeight="0.3736018" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18344755" sideWeight="0.8098434" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -765,7 +502,6 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1901566" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -840,156 +576,124 @@
     </PATH>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/war/data/main/shortcut.json">
+    <entry file="file://$PROJECT_DIR$/war/js/StartMenu.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="35" selection-start="688" selection-end="688" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/war/js/TaskBar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="97" column="14" selection-start="2966" selection-end="2966" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/war/lib/ext3.2/ext-all.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="21061" selection-start="21186" selection-end="21186" vertical-scroll-proportion="0.18597063" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/war/data/main/model.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="50" selection-start="2409" selection-end="2409" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/NodeJS/lib/NodeJS.jar!/com/jetbrains/nodejs/library/node_embedded_symbols.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="4" selection-start="1144" selection-end="1144" vertical-scroll-proportion="0.5467197" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/war/js/Desktop.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="201" column="23" selection-start="5862" selection-end="5862" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/war/js/util/ModuleLoader.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="26" selection-start="845" selection-end="862" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/war/js/Main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="16" selection-start="373" selection-end="385" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/war/js/game/tetris/tetris.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="267" column="25" selection-start="6927" selection-end="6927" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/war/js/util/JSLoader.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="34" selection-start="694" selection-end="694" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/war/js/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="184" column="58" selection-start="6388" selection-end="6388" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/war/js/editor/JSEditor.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="111" column="27" selection-start="3094" selection-end="3094" vertical-scroll-proportion="0.0">
+        <state line="6" column="0" selection-start="126" selection-end="126" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#248#1720#0" expanded="false" />
-            <element signature="e#1761#3071#0" expanded="false" />
+            <element signature="e#126#855#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/war/js/editor/DCJSEditor.js">
+    <entry file="file://$PROJECT_DIR$/war/js/TabCloseMenu.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="111" column="42" selection-start="3443" selection-end="3443" vertical-scroll-proportion="0.0">
+        <state line="15" column="45" selection-start="520" selection-end="520" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/war/js/game/GameModule.js">
+    <entry file="file://$PROJECT_DIR$/war/js/TaskBar.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="4" selection-start="861" selection-end="861" vertical-scroll-proportion="0.0">
+        <state line="27" column="30" selection-start="655" selection-end="666" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/war/js/util/Ajax.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/war/data/main/model.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="42" selection-start="215" selection-end="231" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/war/js/util/ModuleLoader.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="25" selection-start="797" selection-end="797" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/war/js/util/JSLoader.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="47" selection-start="694" selection-end="694" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/war/js/util/CSSLoader.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/war/js/util/CodeLoader.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="14" selection-start="32" selection-end="42" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/war/js/Main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="69" column="10" selection-start="1847" selection-end="1857" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#970#1859#0" expanded="false" />
-            <element signature="e#1887#2131#0" expanded="false" />
-            <element signature="e#2161#3009#0" expanded="false" />
-            <element signature="e#3170#4343#0" expanded="false" />
-            <element signature="e#4386#5663#0" expanded="false" />
+            <element signature="e#449#1755#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/war/js/Desktop.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="239" column="38" selection-start="7540" selection-end="7540" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#4288#4533#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/war/js/widget/ButtonCanChangeIcon.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/war/js/widget/TopMessageBoxWidget.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="51" selection-start="361" selection-end="361" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/war/page/game/mini/descreption.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="20" selection-start="477" selection-end="477" vertical-scroll-proportion="-11.535714">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/war/js/editor/EditorModule.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="124" column="55" selection-start="5021" selection-end="5021" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#3631#4678#0" expanded="false" />
-          </folding>
+        <state line="121" column="61" selection-start="4865" selection-end="4865" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/war/js/game/mini/Mini.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="262" column="19" selection-start="13751" selection-end="13751" vertical-scroll-proportion="0.6051345">
+        <state line="281" column="14" selection-start="15699" selection-end="15699" vertical-scroll-proportion="0.48777506">
           <folding>
-            <element signature="e#422#5208#0" expanded="false" />
-            <element signature="e#950#1018#0" expanded="false" />
-            <element signature="e#1078#4565#0" expanded="false" />
-            <element signature="e#1220#1282#0" expanded="false" />
-            <element signature="e#3143#3819#0" expanded="false" />
-            <element signature="e#3879#4555#0" expanded="false" />
-            <element signature="e#5254#11095#0" expanded="false" />
-            <element signature="e#5312#10748#0" expanded="false" />
-            <element signature="e#5364#10718#0" expanded="false" />
-            <element signature="e#5912#10661#0" expanded="false" />
-            <element signature="e#5934#9599#0" expanded="false" />
-            <element signature="e#6144#8454#0" expanded="false" />
-            <element signature="e#6174#6906#0" expanded="false" />
-            <element signature="e#6372#6876#0" expanded="false" />
-            <element signature="e#6429#6794#0" expanded="false" />
-            <element signature="e#6936#7668#0" expanded="false" />
-            <element signature="e#7134#7638#0" expanded="false" />
-            <element signature="e#7191#7556#0" expanded="false" />
-            <element signature="e#7698#8428#0" expanded="false" />
-            <element signature="e#7895#8398#0" expanded="false" />
-            <element signature="e#7952#8316#0" expanded="false" />
-            <element signature="e#8490#9577#0" expanded="false" />
-            <element signature="e#8538#9511#0" expanded="false" />
-            <element signature="e#8746#8832#0" expanded="false" />
-            <element signature="e#8861#8947#0" expanded="false" />
-            <element signature="e#8975#9061#0" expanded="false" />
-            <element signature="e#9621#10643#0" expanded="false" />
-            <element signature="e#9805#10621#0" expanded="false" />
-            <element signature="e#9858#10515#0" expanded="false" />
-            <element signature="e#9907#10476#0" expanded="false" />
-            <element signature="e#11121#11685#0" expanded="false" />
-            <element signature="e#11257#11295#0" expanded="false" />
-            <element signature="e#11324#11362#0" expanded="false" />
-            <element signature="e#11390#11428#0" expanded="false" />
-            <element signature="e#13128#13318#0" expanded="false" />
-            <element signature="e#13179#13291#0" expanded="false" />
-            <element signature="e#13215#13281#0" expanded="false" />
-            <element signature="e#14218#14768#0" expanded="false" />
-            <element signature="e#14257#14453#0" expanded="false" />
-            <element signature="e#14459#14667#0" expanded="false" />
-            <element signature="e#14960#15735#0" expanded="false" />
-            <element signature="e#15024#15270#0" expanded="false" />
-            <element signature="e#15276#15559#0" expanded="false" />
-            <element signature="e#15927#16702#0" expanded="false" />
-            <element signature="e#15991#16237#0" expanded="false" />
-            <element signature="e#16243#16526#0" expanded="false" />
-            <element signature="e#16750#17454#0" expanded="false" />
-            <element signature="e#16801#17448#0" expanded="false" />
-            <element signature="e#16836#17020#0" expanded="false" />
-            <element signature="e#17048#17240#0" expanded="false" />
-            <element signature="e#17246#17438#0" expanded="false" />
-            <element signature="e#17956#17987#0" expanded="false" />
+            <element signature="e#433#5246#0" expanded="false" />
+            <element signature="e#5292#11133#0" expanded="false" />
+            <element signature="e#16499#17203#0" expanded="false" />
           </folding>
         </state>
       </provider>
