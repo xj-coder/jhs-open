@@ -7,7 +7,7 @@ DCC.game.Tetris=Ext.extend(Ext.app.GameModule,{
 		"skin":0,"grid":true, "shadow":false, "next":true
 	  }
 	  ,"direction":1 //旋转方向: 1顺时针 -1逆时针
-	  ,"startLevel":8
+	  ,"startLevel":0
 	  ,"topScores":[]
 	},//cfg end
 	//var Ts=["S","Z","L","J","I","O","T"]; //形状类型
@@ -283,19 +283,22 @@ DCC.game.Tetris=Ext.extend(Ext.app.GameModule,{
 					tooltip:'Descreption',
 					iconCls:'tetris-win-descreption-tbar',
 					listeners :{
-						click:function(t){
-							new Ext.Window({
+						click:function(){
+							var win = new Ext.Window({
 								title:'Tetris Descreption',
 								id:'Tetris Descreption',
 								width:500,
 								height:400,
-								manager:t.getWindowManager(),
+								//manager:t.getWindowManager(),
 								minimizable: true,
 								maximizable: true,
 								autoScroll: true,
 								autoLoad: {url: 'page/game/tetris/descreption.html'}
-							}).show();
-						}.createDelegate(this,[this.getThis()])
+							});
+                            win.show();
+                            win.toFront();
+						},//.createDelegate(this,[this.getThis()])
+                        scope:this
 					}
 				}],
 				html:this.HTML.innerHTML
@@ -359,7 +362,7 @@ DCC.game.Tetris=Ext.extend(Ext.app.GameModule,{
 		var xy2=this.layout[this.T].xy[this.cfgNextBlock.curr][2];
 		var x = Math.floor((10-(xy2[1]-xy2[0]+1)-xy2[0]) / 2);
 		this.draw4(this.T,x,-1);
-		this.down_T();
+		this.down();
 		this.viewNext();
 		this._continue = true;
 	},
@@ -482,7 +485,7 @@ DCC.game.Tetris=Ext.extend(Ext.app.GameModule,{
 		}
 	},
 	//自然下落一步
-	down_T:function(){
+	down:function(){
 		if(this.gStatus != this.st_playing) return;
 		var nowCannotDown = !this.canMove4(this.T,0,1);
 		var nowCannotLeft = !this.canMove4(this.T,-1,0);
@@ -493,7 +496,7 @@ DCC.game.Tetris=Ext.extend(Ext.app.GameModule,{
 			return false;
 		}
 		//this.timer_down.start.defer(this.currMill, this, [{run: this.down_T, interval:  this.currMill, scope: this,repeat:1}])
-		this.timer_down.delay(this.currMill,this.down_T,this)
+		this.timer_down.delay(this.currMill,this.down,this)
 		nowCannotDown = !this.canMove4(this.T,0,1);
 		if(nowCannotDown){
 			this.lastCannotDown=true;
@@ -611,17 +614,28 @@ DCC.game.Tetris=Ext.extend(Ext.app.GameModule,{
 		return this.T;
 	},
 	M_left:function(step){
-        if(step)
-		    this.move_1step(this.T,-1*step,0);
-        this.move_1step(this.T,-1,0);
+        if(step>0){
+            for(var i = 0;i < step;i++)
+                this.move_1step(this.T,-1,0);
+        }else{
+            this.move_1step(this.T,-1,0);
+        }
 	},
 	M_right:function(step){
-        if(step)
-		    this.move_1step(this.T,1*step,0);
-        this.move_1step(this.T,1,0);
+        if(step>0){
+            for(var i = 0;i < step;i++)
+                this.move_1step(this.T,1,0);
+        }else{
+            this.move_1step(this.T,1,0);
+        }
 	},
-	M_down:function(){
-		this.move_quickdown(this.T);
+	M_down:function(step){
+        if(step>0){
+            for(var i = 0;i < step;i++)
+                this.down();
+        }else{
+		    this.move_quickdown(this.T);
+        }
 	},
 	M_move:function(x,y){
 		this.move(this.T,x,y);
@@ -638,7 +652,7 @@ DCC.game.Tetris=Ext.extend(Ext.app.GameModule,{
 			['M_left','left'],
 			['M_right','right'],
 			['M_down','down'],
-			['M_move','move'],
+			//['M_move','move'],
 			['M_pause','pause'],
 			['M_getCurr','getCurr'],
 			['M_getT','getT']
