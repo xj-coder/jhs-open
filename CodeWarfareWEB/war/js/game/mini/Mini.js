@@ -7,8 +7,8 @@ DCC.game.Mini = Ext.extend(Ext.app.GameModule, {
     numArray:[25, 90, 120],
     widthArray:[15, 25, 30],
     heightArray:[15, 25, 30],
-    mm:Array, //-1-->has mini;0~~other:��ʾ
-    _mm:Array, //0-->not click;1-->clicked;2-->flat
+    mm:Array, //地雷初始数组, -1-->has mini;0~~other:��ʾ
+    _mm:Array, //游戏进行中已知信息数组. -1-->not click;>=0:已知的信息
     init:function () {
         this.rank = 0;
         this.initGame();
@@ -24,11 +24,11 @@ DCC.game.Mini = Ext.extend(Ext.app.GameModule, {
 
         for (var k = 0; k < this.mm.length; k++) {
             this.mm[k] = 0;
-            this._mm[k] = 0;
+            this._mm[k] = -1;
         }
         for (var k = 0; k < this.numArray[this.rank]; k++) {
             var n = Math.round(Math.random() * this.widthArray[this.rank] * this.heightArray[this.rank]);
-            if (this.mm[n] == -1) {
+            if (this.mm[n] == -1) { //has mini,Repeat product
                 k--;
                 continue;
             }
@@ -200,33 +200,21 @@ DCC.game.Mini = Ext.extend(Ext.app.GameModule, {
         this.initGame();
         win.body.update(this._html.innerHTML);
     },
-    /**
-     *return -2--->not click
-     *return -3--->has flat
-     *return -1--->has mini
-     *return 0//
-     *
-     **/
+
     getMini:function (x) {
         if (x) {
-            if (this._mm[x] == 0) {
-                return -2;
-            } else if (this._mm[x] == 2) {
-                return -3
-            } else {
-                return this.mm[x];
-            }
+            return this._mm[x];
         } else {
-            return this.mm;
+            return this._mm;
         }
     },
 
     clickMini:function (x) {
-        this._mm[x] = 1;
         if (this.mm[x] == -1) {
             this.showAll();
             DCC.widget.show({title:'Death', msg:"Oh...Has Mini....You death", buttons:Ext.Msg.YES});
         } else {
+            this._mm[x] = this.mm[x];
             if (this.mm[x] == 0) {
                 Ext.getDom('mini-basic-button-' + x).setAttribute('value', " ");
                 Ext.fly('mini-basic-button-' + x).addClass('mini-basic-button-clicked');
@@ -239,66 +227,67 @@ DCC.game.Mini = Ext.extend(Ext.app.GameModule, {
         if (this.isWin())DCC.widget.show({title:'win', msg:"Yes...You are win", buttons:Ext.Msg.YES});
     },
 
-    flat:function (x) {
-        if (this._mm[x] == 0) {
-            this._mm[x] = 2;
-            Ext.getDom('mini-basic-button-' + x).setAttribute('value', "F");
-        }
-    },
+//    flat:function (x) {
+//        if (this._mm[x] == 0) {
+//            this._mm[x] = 2;
+//            Ext.getDom('mini-basic-button-' + x).setAttribute('value', "F");
+//        }
+//    },
 
     isWin:function () {
         for (var i = 0; i < this.mm.length; i++) {
             if (this.mm[i] != -1) {
-                if (this._mm[i] == 0)return false;
+                if (this._mm[i] == -1)return false;
             }
         }
         return true;
     },
 
     clickAll:function (x) {
-        if (x + 1 >= 0 && x + 1 < this.widthArray[this.rank] * this.heightArray[this.rank] && this._mm[x + 1] == 0 && (x + 1) % this.widthArray[this.rank] != 0) {
+        if (x + 1 >= 0 && x + 1 < this.widthArray[this.rank] * this.heightArray[this.rank] && this._mm[x + 1] == -1 && (x + 1) % this.widthArray[this.rank] != 0) {
+            this._mm[x + 1] = this.mm[x + 1];
             if (this.mm[x + 1] == 0) {
                 Ext.getDom('mini-basic-button-' + (x + 1)).setAttribute('value', "");
                 Ext.fly('mini-basic-button-' + (x + 1)).addClass('mini-basic-button-clicked');
+                this.clickAll(x + 1);
             } else {
                 Ext.getDom('mini-basic-button-' + (x + 1)).setAttribute('value', this.mm[x + 1]);
                 Ext.fly('mini-basic-button-' + (x + 1)).addClass('mini-basic-button-clicked');
             }
-            this._mm[x + 1] = 1;
-            if (this.mm[x + 1] == 0)this.clickAll(x + 1);
+
         }
-        if (x - 1 >= 0 && x - 1 < this.widthArray[this.rank] * this.heightArray[this.rank] && this._mm[x - 1] == 0 && (x) % this.widthArray[this.rank] != 0) {
+        if (x - 1 >= 0 && x - 1 < this.widthArray[this.rank] * this.heightArray[this.rank] && this._mm[x - 1] == -1 && (x-1) % this.widthArray[this.rank] != 0) {
+            this._mm[x - 1] = this.mm[x - 1];
             if (this.mm[x - 1] == 0) {
                 Ext.getDom('mini-basic-button-' + (x - 1)).setAttribute('value', "");
                 Ext.fly('mini-basic-button-' + (x - 1)).addClass('mini-basic-button-clicked');
+                this.clickAll(x - 1);
             } else {
                 Ext.getDom('mini-basic-button-' + (x - 1)).setAttribute('value', this.mm[x - 1]);
                 Ext.fly('mini-basic-button-' + (x - 1)).addClass('mini-basic-button-clicked');
             }
-            this._mm[x - 1] = 1;
-            if (this.mm[x - 1] == 0)this.clickAll(x - 1);
         }
-        if (x - this.widthArray[this.rank] >= 0 && x - this.widthArray[this.rank] < this.widthArray[this.rank] * this.heightArray[this.rank] && this._mm[x - this.widthArray[this.rank]] == 0) {
+        if (x - this.widthArray[this.rank] >= 0 && x - this.widthArray[this.rank] < this.widthArray[this.rank] * this.heightArray[this.rank] && this._mm[x - this.widthArray[this.rank]] == -1) {
+            this._mm[x - this.widthArray[this.rank]] = this.mm[x - this.widthArray[this.rank]];
             if (this.mm[x - this.widthArray[this.rank]] == 0) {
                 Ext.getDom('mini-basic-button-' + (x - this.widthArray[this.rank])).setAttribute('value', "");
                 Ext.fly('mini-basic-button-' + (x - this.widthArray[this.rank])).addClass('mini-basic-button-clicked');
+                this.clickAll(x - this.widthArray[this.rank]);
             } else {
                 Ext.getDom('mini-basic-button-' + (x - this.widthArray[this.rank])).setAttribute('value', this.mm[x - this.widthArray[this.rank]]);
                 Ext.fly('mini-basic-button-' + (x - this.widthArray[this.rank])).addClass('mini-basic-button-clicked');
             }
-            this._mm[x - this.widthArray[this.rank]] = 1;
-            if (this.mm[x - this.widthArray[this.rank]] == 0)this.clickAll(x - this.widthArray[this.rank]);
         }
-        if (x + this.widthArray[this.rank] >= 0 && x + this.widthArray[this.rank] < this.widthArray[this.rank] * this.heightArray[this.rank] && this._mm[x + this.widthArray[this.rank]] == 0) {
+        if (x + this.widthArray[this.rank] >= 0 && x + this.widthArray[this.rank] < this.widthArray[this.rank] * this.heightArray[this.rank] && this._mm[x + this.widthArray[this.rank]] == -1) {
+            this._mm[x + this.widthArray[this.rank]] = this.mm[x + this.widthArray[this.rank]];
             if (this.mm[x + this.widthArray[this.rank]] == 0) {
                 Ext.getDom('mini-basic-button-' + (x + this.widthArray[this.rank])).setAttribute('value', "");
                 Ext.fly('mini-basic-button-' + (x + this.widthArray[this.rank])).addClass('mini-basic-button-clicked');
+                this.clickAll(x + this.widthArray[this.rank]);
             } else {
                 Ext.getDom('mini-basic-button-' + (x + this.widthArray[this.rank])).setAttribute('value', this.mm[x + this.widthArray[this.rank]]);
                 Ext.fly('mini-basic-button-' + (x + this.widthArray[this.rank])).addClass('mini-basic-button-clicked');
             }
-            this._mm[x + this.widthArray[this.rank]] = 1;
-            if (this.mm[x + this.widthArray[this.rank]] == 0)this.clickAll(x + this.widthArray[this.rank]);
         }
     }, //clickAll end
 
@@ -328,11 +317,11 @@ DCC.game.Mini = Ext.extend(Ext.app.GameModule, {
         return [
             ['clickMini', 'click'],
             ['getMini', 'get'],
-            ['flat', 'flat'],
-            ['showAll', 'showAll'],
-            ['restart', 'restart'],
-            ['getSize', 'getSize'],
-            ['getMiniNum', 'getMiniNum']
+            //['flat', 'flat'],
+            //['showAll', 'showAll'],
+            //['restart', 'restart'],
+            ['getSize', 'size'],
+            ['getMiniNum', 'miniCount']
         ];
     },
     registWinMethod:function () {
