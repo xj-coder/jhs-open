@@ -5,10 +5,17 @@
     <list default="true" readonly="true" id="4ae2aa70-a73f-452e-9f13-3351f23a903d" name="Default" comment="" />
 =======
     <list default="true" readonly="true" id="4ae2aa70-a73f-452e-9f13-3351f23a903d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/war/template" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/war/template/Template1.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/war/index.html" afterPath="$PROJECT_DIR$/war/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/war/js/Desktop.js" afterPath="$PROJECT_DIR$/war/js/Desktop.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/war/js/Main.js" afterPath="$PROJECT_DIR$/war/js/Main.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/war/js/editor/EditorModule.js" afterPath="$PROJECT_DIR$/war/js/editor/EditorModule.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/war/js/game/GameModule.js" afterPath="$PROJECT_DIR$/war/js/game/GameModule.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/war/js/game/mini/Mini.js" afterPath="$PROJECT_DIR$/war/js/game/mini/Mini.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/war/page/game/mini/descreption.html" afterPath="$PROJECT_DIR$/war/page/game/mini/descreption.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/war/js/game/tetris/tetris.js" afterPath="$PROJECT_DIR$/war/js/game/tetris/tetris.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/war/js/util/JSLoader.js" afterPath="$PROJECT_DIR$/war/js/util/JSLoader.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/war/js/util/ModuleLoader.js" afterPath="$PROJECT_DIR$/war/js/util/ModuleLoader.js" />
     </list>
 >>>>>>> .r94
     <ignored path="CodeWarfareWEB.iws" />
@@ -31,31 +38,131 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Desktop.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/war/js/Desktop.js">
+      <file leaf-file-name="tetris.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/war/js/game/tetris/tetris.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="239" column="38" selection-start="7540" selection-end="7540" vertical-scroll-proportion="0.0">
+            <state line="376" column="28" selection-start="9879" selection-end="9879" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="e#4288#4533#0" expanded="false" />
+                <element signature="e#117#264#0" expanded="false" />
+                <element signature="e#128#186#0" expanded="false" />
+                <element signature="e#265#274#0" expanded="false" />
+                <element signature="e#333#1123#0" expanded="false" />
+                <element signature="e#354#437#0" expanded="false" />
+                <element signature="e#369#433#0" expanded="false" />
+                <element signature="e#444#527#0" expanded="false" />
+                <element signature="e#459#523#0" expanded="false" />
+                <element signature="e#534#675#0" expanded="false" />
+                <element signature="e#549#671#0" expanded="false" />
+                <element signature="e#682#823#0" expanded="false" />
+                <element signature="e#697#819#0" expanded="false" />
+                <element signature="e#830#911#0" expanded="false" />
+                <element signature="e#845#907#0" expanded="false" />
+                <element signature="e#918#971#0" expanded="false" />
+                <element signature="e#933#967#0" expanded="false" />
+                <element signature="e#978#1120#0" expanded="false" />
+                <element signature="e#993#1116#0" expanded="false" />
+                <element signature="e#1409#1414#0" expanded="false" />
+                <element signature="e#1545#1583#0" expanded="false" />
+                <element signature="e#1954#2609#0" expanded="false" />
+                <element signature="e#2140#2549#0" expanded="false" />
+                <element signature="e#2640#5107#0" expanded="false" />
+                <element signature="e#4919#5103#0" expanded="false" />
+                <element signature="e#5141#5649#0" expanded="false" />
+                <element signature="e#5687#6742#0" expanded="false" />
+                <element signature="e#5831#5923#0" expanded="false" />
+                <element signature="e#5874#5906#0" expanded="false" />
+                <element signature="e#5943#6035#0" expanded="false" />
+                <element signature="e#5986#6018#0" expanded="false" />
+                <element signature="e#6092#6233#0" expanded="false" />
+                <element signature="e#6154#6229#0" expanded="false" />
+                <element signature="e#6785#7792#0" expanded="false" />
+                <element signature="e#6829#7712#0" expanded="false" />
+                <element signature="e#6873#7707#0" expanded="false" />
+                <element signature="e#7145#7672#0" expanded="false" />
+                <element signature="e#7146#7671#0" expanded="false" />
+                <element signature="e#7257#7665#0" expanded="false" />
+                <element signature="e#7282#7620#0" expanded="false" />
+                <element signature="e#7306#7603#0" expanded="false" />
+                <element signature="e#7837#7877#0" expanded="false" />
+                <element signature="e#7904#8053#0" expanded="false" />
+                <element signature="e#8075#8678#0" expanded="false" />
+                <element signature="e#8487#8590#0" expanded="false" />
+                <element signature="e#8704#8974#0" expanded="false" />
+                <element signature="e#8821#8939#0" expanded="false" />
+                <element signature="e#9000#9223#0" expanded="false" />
+                <element signature="e#9123#9179#0" expanded="false" />
+                <element signature="e#9249#9571#0" expanded="false" />
+                <element signature="e#10010#12075#0" expanded="false" />
+                <element signature="e#10140#10705#0" expanded="false" />
+                <element signature="e#10273#10549#0" expanded="false" />
+                <element signature="e#10423#10455#0" expanded="false" />
+                <element signature="e#10759#12049#0" expanded="false" />
+                <element signature="e#10992#11329#0" expanded="false" />
+                <element signature="e#11363#11493#0" expanded="false" />
+                <element signature="e#11390#11488#0" expanded="false" />
+                <element signature="e#11575#11681#0" expanded="false" />
+                <element signature="e#11611#11651#0" expanded="false" />
+                <element signature="e#11729#12045#0" expanded="false" />
+                <element signature="e#11796#12040#0" expanded="false" />
+                <element signature="e#11820#12034#0" expanded="false" />
+                <element signature="e#12104#12685#0" expanded="false" />
+                <element signature="e#12477#12537#0" expanded="false" />
+                <element signature="e#12515#12533#0" expanded="false" />
+                <element signature="e#12602#12682#0" expanded="false" />
+                <element signature="e#12715#13465#0" expanded="false" />
+                <element signature="e#13009#13133#0" expanded="false" />
+                <element signature="e#13378#13412#0" expanded="false" />
+                <element signature="e#13416#13447#0" expanded="false" />
+                <element signature="e#13632#13733#0" expanded="false" />
+                <element signature="e#13688#13730#0" expanded="false" />
+                <element signature="e#13766#14002#0" expanded="false" />
+                <element signature="e#13881#13984#0" expanded="false" />
+                <element signature="e#14023#14662#0" expanded="false" />
+                <element signature="e#14096#14216#0" expanded="false" />
+                <element signature="e#14701#14844#0" expanded="false" />
+                <element signature="e#14867#14964#0" expanded="false" />
+                <element signature="e#14892#14961#0" expanded="false" />
+                <element signature="e#14990#15149#0" expanded="false" />
+                <element signature="e#15027#15125#0" expanded="false" />
+                <element signature="e#15070#15121#0" expanded="false" />
+                <element signature="e#15176#15265#0" expanded="false" />
+                <element signature="e#15198#15246#0" expanded="false" />
+                <element signature="e#15287#15312#0" expanded="false" />
+                <element signature="e#15331#15357#0" expanded="false" />
+                <element signature="e#15378#15400#0" expanded="false" />
+                <element signature="e#15426#15454#0" expanded="false" />
+                <element signature="e#15482#15784#0" expanded="false" />
+                <element signature="e#15542#15768#0" expanded="false" />
+                <element signature="e#15807#15831#0" expanded="false" />
+                <element signature="e#15851#15872#0" expanded="false" />
+                <element signature="e#16139#16174#0" expanded="false" />
+                <element signature="e#16247#16284#0" expanded="false" />
+                <element signature="e#16312#16610#0" expanded="false" />
+                <element signature="e#16323#16606#0" expanded="false" />
+                <element signature="e#16641#16670#0" expanded="false" />
+                <element signature="e#16700#16728#0" expanded="false" />
+                <element signature="e#16758#16781#0" expanded="false" />
+                <element signature="e#16810#16832#0" expanded="false" />
+                <element signature="e#16860#16897#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ButtonCanChangeIcon.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/war/js/widget/ButtonCanChangeIcon.js">
+      <file leaf-file-name="GameModule.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/war/js/game/GameModule.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TopMessageBoxWidget.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/war/js/widget/TopMessageBoxWidget.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="51" selection-start="361" selection-end="361" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="15" column="15" selection-start="430" selection-end="441" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#547#686#0" expanded="false" />
+                <element signature="e#714#783#0" expanded="false" />
+                <element signature="e#812#856#0" expanded="false" />
+                <element signature="e#891#944#0" expanded="false" />
+                <element signature="e#971#1860#0" expanded="false" />
+                <element signature="e#1888#2132#0" expanded="false" />
+                <element signature="e#2162#3010#0" expanded="false" />
+                <element signature="e#3047#6018#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -63,14 +170,16 @@
       <file leaf-file-name="Mini.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/war/js/game/mini/Mini.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="281" column="14" selection-start="15699" selection-end="15699" vertical-scroll-proportion="0.48777506">
+            <state line="231" column="27" selection-start="12772" selection-end="12772" vertical-scroll-proportion="0.7080292">
 <<<<<<< .mine
               <folding />
 =======
               <folding>
                 <element signature="e#433#5246#0" expanded="false" />
                 <element signature="e#5292#11133#0" expanded="false" />
-                <element signature="e#16499#17203#0" expanded="false" />
+                <element signature="e#11159#11723#0" expanded="false" />
+                <element signature="e#13112#16452#0" expanded="false" />
+                <element signature="e#16494#17198#0" expanded="false" />
               </folding>
 >>>>>>> .r94
             </state>
@@ -81,21 +190,61 @@
         <entry file="file://$PROJECT_DIR$/war/js/editor/EditorModule.js">
           <provider selected="true" editor-type-id="text-editor">
 <<<<<<< .mine
+            <state line="71" column="45" selection-start="2688" selection-end="2688" vertical-scroll-proportion="0.0">
+=======
+<<<<<<< .mine
             <state line="124" column="55" selection-start="5021" selection-end="5021" vertical-scroll-proportion="0.0">
               <folding />
 =======
             <state line="121" column="61" selection-start="4865" selection-end="4865" vertical-scroll-proportion="0.0">
+>>>>>>> .r95
               <folding />
 >>>>>>> .r94
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="descreption.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/war/page/game/mini/descreption.html">
+      <file leaf-file-name="Template1.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/war/template/Template1.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="20" selection-start="477" selection-end="477" vertical-scroll-proportion="-11.535714">
+            <state line="3" column="36" selection-start="26" selection-end="26" vertical-scroll-proportion="0.0">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JSEditor.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/war/js/editor/JSEditor.js">
+          <provider selected="true" editor-type-id="text-editor">
+<<<<<<< .mine
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+=======
+<<<<<<< .mine
+            <state line="267" column="25" selection-start="7225" selection-end="7225" vertical-scroll-proportion="0.0">
+=======
+            <state line="1" column="14" selection-start="32" selection-end="42" vertical-scroll-proportion="0.0">
+>>>>>>> .r95
+>>>>>>> .r94
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Desktop.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/war/js/Desktop.js">
+          <provider selected="true" editor-type-id="text-editor">
+<<<<<<< .mine
+            <state line="176" column="45" selection-start="4851" selection-end="4874" vertical-scroll-proportion="0.0">
+=======
+<<<<<<< .mine
+            <state line="262" column="19" selection-start="13751" selection-end="13751" vertical-scroll-proportion="0.04676259">
+=======
+            <state line="69" column="10" selection-start="1847" selection-end="1857" vertical-scroll-proportion="0.0">
+>>>>>>> .r95
+>>>>>>> .r94
+              <folding>
+                <element signature="e#4288#4533#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -103,27 +252,8 @@
       <file leaf-file-name="CodeLoader.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/war/js/util/CodeLoader.js">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< .mine
-            <state line="267" column="25" selection-start="7225" selection-end="7225" vertical-scroll-proportion="0.0">
-=======
-            <state line="1" column="14" selection-start="32" selection-end="42" vertical-scroll-proportion="0.0">
->>>>>>> .r94
+            <state line="17" column="36" selection-start="533" selection-end="533" vertical-scroll-proportion="0.0">
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Main.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/war/js/Main.js">
-          <provider selected="true" editor-type-id="text-editor">
-<<<<<<< .mine
-            <state line="262" column="19" selection-start="13751" selection-end="13751" vertical-scroll-proportion="0.04676259">
-=======
-            <state line="69" column="10" selection-start="1847" selection-end="1857" vertical-scroll-proportion="0.0">
->>>>>>> .r94
-              <folding>
-                <element signature="e#449#1755#0" expanded="false" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -132,18 +262,29 @@
         <entry file="file://$PROJECT_DIR$/war/js/util/JSLoader.js">
           <provider selected="true" editor-type-id="text-editor">
 <<<<<<< .mine
+            <state line="57" column="57" selection-start="1930" selection-end="1930" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#180#533#0" expanded="false" />
+                <element signature="e#885#1882#0" expanded="false" />
+              </folding>
+=======
+<<<<<<< .mine
             <state line="20" column="30" selection-start="733" selection-end="733" vertical-scroll-proportion="0.0">
 =======
             <state line="20" column="47" selection-start="694" selection-end="694" vertical-scroll-proportion="0.0">
 >>>>>>> .r94
               <folding />
+>>>>>>> .r95
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CSSLoader.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/war/js/util/CSSLoader.js">
+      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/war/index.html">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< .mine
+            <state line="76" column="49" selection-start="3277" selection-end="3287" vertical-scroll-proportion="-16.964285">
+=======
 <<<<<<< .mine
             <state line="111" column="0" selection-start="3094" selection-end="3094" vertical-scroll-proportion="0.0">
               <folding />
@@ -157,6 +298,7 @@
             <state line="184" column="58" selection-start="6388" selection-end="6388" vertical-scroll-proportion="0.0">
 =======
             <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+>>>>>>> .r95
 >>>>>>> .r94
               <folding />
             </state>
@@ -178,21 +320,21 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/war/js/LoadData.js" />
-        <option value="$PROJECT_DIR$/war/js/App.js" />
-        <option value="$PROJECT_DIR$/war/index.html" />
         <option value="$PROJECT_DIR$/war/data/main/shortcut.json" />
-        <option value="$PROJECT_DIR$/war/js/Desktop.js" />
         <option value="$PROJECT_DIR$/war/data/main/model.json" />
-        <option value="$PROJECT_DIR$/war/js/Main.js" />
-        <option value="$PROJECT_DIR$/war/js/util/ModuleLoader.js" />
-        <option value="$PROJECT_DIR$/war/js/game/tetris/tetris.js" />
         <option value="$PROJECT_DIR$/war/js/editor/JSEditor.js" />
-        <option value="$PROJECT_DIR$/war/js/game/GameModule.js" />
         <option value="$PROJECT_DIR$/war/js/editor/DCJSEditor.js" />
         <option value="$PROJECT_DIR$/war/data/main/launcher.json" />
         <option value="$PROJECT_DIR$/war/page/game/mini/descreption.html" />
+        <option value="$PROJECT_DIR$/war/js/game/GameModule.js" />
+        <option value="$PROJECT_DIR$/war/js/game/tetris/tetris.js" />
+        <option value="$PROJECT_DIR$/war/template/Template1.js" />
+        <option value="$PROJECT_DIR$/war/js/Main.js" />
+        <option value="$PROJECT_DIR$/war/js/util/ModuleLoader.js" />
+        <option value="$PROJECT_DIR$/war/index.html" />
+        <option value="$PROJECT_DIR$/war/js/Desktop.js" />
         <option value="$PROJECT_DIR$/war/js/editor/EditorModule.js" />
+        <option value="$PROJECT_DIR$/war/js/util/JSLoader.js" />
         <option value="$PROJECT_DIR$/war/js/game/mini/Mini.js" />
       </list>
     </option>
@@ -287,37 +429,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="page" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="game" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CodeWarfareWEB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CodeWarfareWEB" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="war" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="page" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="game" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mini" />
+              <option name="myItemId" value="template" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -336,6 +448,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CodeWarfareWEB" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CodeWarfareWEB" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="war" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="util" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -406,6 +540,50 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="editor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CodeWarfareWEB" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CodeWarfareWEB" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="war" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="data" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CodeWarfareWEB" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CodeWarfareWEB" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="war" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="data" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="robot_code" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="david" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -514,7 +692,7 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943144" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1901566" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1901566" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18344755" sideWeight="0.3736018" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18297534" sideWeight="0.8098434" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -596,30 +774,130 @@
     </PATH>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/war/js/StartMenu.js">
+    <entry file="file://$PROJECT_DIR$/war/data/main/launcher.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="0" selection-start="126" selection-end="126" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/war/data/main/model.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="67" selection-start="631" selection-end="631" vertical-scroll-proportion="0.517192">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/war/js/game/tetris/tetris.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="376" column="28" selection-start="9879" selection-end="9879" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#126#855#0" expanded="false" />
+            <element signature="e#117#264#0" expanded="false" />
+            <element signature="e#128#186#0" expanded="false" />
+            <element signature="e#265#274#0" expanded="false" />
+            <element signature="e#333#1123#0" expanded="false" />
+            <element signature="e#354#437#0" expanded="false" />
+            <element signature="e#369#433#0" expanded="false" />
+            <element signature="e#444#527#0" expanded="false" />
+            <element signature="e#459#523#0" expanded="false" />
+            <element signature="e#534#675#0" expanded="false" />
+            <element signature="e#549#671#0" expanded="false" />
+            <element signature="e#682#823#0" expanded="false" />
+            <element signature="e#697#819#0" expanded="false" />
+            <element signature="e#830#911#0" expanded="false" />
+            <element signature="e#845#907#0" expanded="false" />
+            <element signature="e#918#971#0" expanded="false" />
+            <element signature="e#933#967#0" expanded="false" />
+            <element signature="e#978#1120#0" expanded="false" />
+            <element signature="e#993#1116#0" expanded="false" />
+            <element signature="e#1409#1414#0" expanded="false" />
+            <element signature="e#1545#1583#0" expanded="false" />
+            <element signature="e#1954#2609#0" expanded="false" />
+            <element signature="e#2140#2549#0" expanded="false" />
+            <element signature="e#2640#5107#0" expanded="false" />
+            <element signature="e#4919#5103#0" expanded="false" />
+            <element signature="e#5141#5649#0" expanded="false" />
+            <element signature="e#5687#6742#0" expanded="false" />
+            <element signature="e#5831#5923#0" expanded="false" />
+            <element signature="e#5874#5906#0" expanded="false" />
+            <element signature="e#5943#6035#0" expanded="false" />
+            <element signature="e#5986#6018#0" expanded="false" />
+            <element signature="e#6092#6233#0" expanded="false" />
+            <element signature="e#6154#6229#0" expanded="false" />
+            <element signature="e#6785#7792#0" expanded="false" />
+            <element signature="e#6829#7712#0" expanded="false" />
+            <element signature="e#6873#7707#0" expanded="false" />
+            <element signature="e#7145#7672#0" expanded="false" />
+            <element signature="e#7146#7671#0" expanded="false" />
+            <element signature="e#7257#7665#0" expanded="false" />
+            <element signature="e#7282#7620#0" expanded="false" />
+            <element signature="e#7306#7603#0" expanded="false" />
+            <element signature="e#7837#7877#0" expanded="false" />
+            <element signature="e#7904#8053#0" expanded="false" />
+            <element signature="e#8075#8678#0" expanded="false" />
+            <element signature="e#8487#8590#0" expanded="false" />
+            <element signature="e#8704#8974#0" expanded="false" />
+            <element signature="e#8821#8939#0" expanded="false" />
+            <element signature="e#9000#9223#0" expanded="false" />
+            <element signature="e#9123#9179#0" expanded="false" />
+            <element signature="e#9249#9571#0" expanded="false" />
+            <element signature="e#10010#12075#0" expanded="false" />
+            <element signature="e#10140#10705#0" expanded="false" />
+            <element signature="e#10273#10549#0" expanded="false" />
+            <element signature="e#10423#10455#0" expanded="false" />
+            <element signature="e#10759#12049#0" expanded="false" />
+            <element signature="e#10992#11329#0" expanded="false" />
+            <element signature="e#11363#11493#0" expanded="false" />
+            <element signature="e#11390#11488#0" expanded="false" />
+            <element signature="e#11575#11681#0" expanded="false" />
+            <element signature="e#11611#11651#0" expanded="false" />
+            <element signature="e#11729#12045#0" expanded="false" />
+            <element signature="e#11796#12040#0" expanded="false" />
+            <element signature="e#11820#12034#0" expanded="false" />
+            <element signature="e#12104#12685#0" expanded="false" />
+            <element signature="e#12477#12537#0" expanded="false" />
+            <element signature="e#12515#12533#0" expanded="false" />
+            <element signature="e#12602#12682#0" expanded="false" />
+            <element signature="e#12715#13465#0" expanded="false" />
+            <element signature="e#13009#13133#0" expanded="false" />
+            <element signature="e#13378#13412#0" expanded="false" />
+            <element signature="e#13416#13447#0" expanded="false" />
+            <element signature="e#13632#13733#0" expanded="false" />
+            <element signature="e#13688#13730#0" expanded="false" />
+            <element signature="e#13766#14002#0" expanded="false" />
+            <element signature="e#13881#13984#0" expanded="false" />
+            <element signature="e#14023#14662#0" expanded="false" />
+            <element signature="e#14096#14216#0" expanded="false" />
+            <element signature="e#14701#14844#0" expanded="false" />
+            <element signature="e#14867#14964#0" expanded="false" />
+            <element signature="e#14892#14961#0" expanded="false" />
+            <element signature="e#14990#15149#0" expanded="false" />
+            <element signature="e#15027#15125#0" expanded="false" />
+            <element signature="e#15070#15121#0" expanded="false" />
+            <element signature="e#15176#15265#0" expanded="false" />
+            <element signature="e#15198#15246#0" expanded="false" />
+            <element signature="e#15287#15312#0" expanded="false" />
+            <element signature="e#15331#15357#0" expanded="false" />
+            <element signature="e#15378#15400#0" expanded="false" />
+            <element signature="e#15426#15454#0" expanded="false" />
+            <element signature="e#15482#15784#0" expanded="false" />
+            <element signature="e#15542#15768#0" expanded="false" />
+            <element signature="e#15807#15831#0" expanded="false" />
+            <element signature="e#15851#15872#0" expanded="false" />
+            <element signature="e#16139#16174#0" expanded="false" />
+            <element signature="e#16247#16284#0" expanded="false" />
+            <element signature="e#16312#16610#0" expanded="false" />
+            <element signature="e#16323#16606#0" expanded="false" />
+            <element signature="e#16641#16670#0" expanded="false" />
+            <element signature="e#16700#16728#0" expanded="false" />
+            <element signature="e#16758#16781#0" expanded="false" />
+            <element signature="e#16810#16832#0" expanded="false" />
+            <element signature="e#16860#16897#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/war/js/TabCloseMenu.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="45" selection-start="520" selection-end="520" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/war/js/TaskBar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="30" selection-start="655" selection-end="666" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/war/js/util/Ajax.js">
+    <entry file="file://$PROJECT_DIR$/war/js/Module.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
@@ -627,65 +905,100 @@
       </provider>
     </entry>
 <<<<<<< .mine
+    <entry file="file://$PROJECT_DIR$/war/js/util/ModuleLoader.js">
+=======
+<<<<<<< .mine
 =======
     <entry file="file://$PROJECT_DIR$/war/data/main/model.json">
+>>>>>>> .r95
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="42" selection-start="215" selection-end="231" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
->>>>>>> .r94
-    <entry file="file://$PROJECT_DIR$/war/js/util/ModuleLoader.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="25" selection-start="797" selection-end="797" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/war/js/util/JSLoader.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="47" selection-start="694" selection-end="694" vertical-scroll-proportion="0.0">
+        <state line="27" column="57" selection-start="967" selection-end="967" vertical-scroll-proportion="0.73495704">
           <folding />
         </state>
       </provider>
     </entry>
 <<<<<<< .mine
+    <entry file="file://$PROJECT_DIR$/war/index.html">
+=======
+>>>>>>> .r94
+    <entry file="file://$PROJECT_DIR$/war/js/util/ModuleLoader.js">
+>>>>>>> .r95
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="76" column="49" selection-start="3277" selection-end="3287" vertical-scroll-proportion="-16.964285">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/war/data/robot_code/david/code.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="30" selection-start="403" selection-end="403" vertical-scroll-proportion="0.3538682">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< .mine
+    <entry file="file://$PROJECT_DIR$/war/js/Main.js">
+=======
+<<<<<<< .mine
     <entry file="file://$PROJECT_DIR$/war/js/game/GameModule.js">
 =======
     <entry file="file://$PROJECT_DIR$/war/js/util/CSSLoader.js">
+>>>>>>> .r95
 >>>>>>> .r94
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< .mine
+        <state line="8" column="41" selection-start="171" selection-end="175" vertical-scroll-proportion="0.21776505">
+          <folding>
+            <element signature="e#449#1755#0" expanded="false" />
+          </folding>
+=======
 <<<<<<< .mine
         <state line="30" column="4" selection-start="861" selection-end="861" vertical-scroll-proportion="0.0" />
 =======
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
+>>>>>>> .r95
         </state>
 >>>>>>> .r94
       </provider>
     </entry>
 <<<<<<< .mine
+    <entry file="file://$PROJECT_DIR$/war/template/Template1.js">
+=======
+<<<<<<< .mine
     <entry file="file://$PROJECT_DIR$/war/js/editor/EditorModule.js">
 =======
     <entry file="file://$PROJECT_DIR$/war/js/util/CodeLoader.js">
+>>>>>>> .r95
 >>>>>>> .r94
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< .mine
+        <state line="3" column="36" selection-start="26" selection-end="26" vertical-scroll-proportion="0.0">
+=======
 <<<<<<< .mine
         <state line="124" column="55" selection-start="5021" selection-end="5021" vertical-scroll-proportion="0.0" />
 =======
         <state line="1" column="14" selection-start="32" selection-end="42" vertical-scroll-proportion="0.0">
+>>>>>>> .r95
           <folding />
         </state>
 >>>>>>> .r94
       </provider>
     </entry>
 <<<<<<< .mine
+    <entry file="file://$PROJECT_DIR$/war/js/util/CodeLoader.js">
+=======
+<<<<<<< .mine
     <entry file="file://$PROJECT_DIR$/war/js/editor/DCJSEditor.js">
 =======
     <entry file="file://$PROJECT_DIR$/war/js/Main.js">
+>>>>>>> .r95
 >>>>>>> .r94
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< .mine
+        <state line="17" column="36" selection-start="533" selection-end="533" vertical-scroll-proportion="0.0">
+          <folding />
+=======
 <<<<<<< .mine
         <state line="111" column="42" selection-start="3443" selection-end="3443" vertical-scroll-proportion="0.0" />
 =======
@@ -693,6 +1006,7 @@
           <folding>
             <element signature="e#449#1755#0" expanded="false" />
           </folding>
+>>>>>>> .r95
         </state>
 >>>>>>> .r94
       </provider>
@@ -704,10 +1018,14 @@
 >>>>>>> .r94
       <provider selected="true" editor-type-id="text-editor">
 <<<<<<< .mine
+        <state line="176" column="45" selection-start="4851" selection-end="4874" vertical-scroll-proportion="0.0">
+=======
+<<<<<<< .mine
         <state line="267" column="25" selection-start="7225" selection-end="7225" vertical-scroll-proportion="0.0">
           <folding />
 =======
         <state line="239" column="38" selection-start="7540" selection-end="7540" vertical-scroll-proportion="0.0">
+>>>>>>> .r95
           <folding>
             <element signature="e#4288#4533#0" expanded="false" />
           </folding>
@@ -716,54 +1034,92 @@
       </provider>
     </entry>
 <<<<<<< .mine
+    <entry file="file://$PROJECT_DIR$/war/js/game/GameModule.js">
+=======
+<<<<<<< .mine
     <entry file="file://$PROJECT_DIR$/war/js/util/JSLoader.js">
 =======
     <entry file="file://$PROJECT_DIR$/war/js/widget/ButtonCanChangeIcon.js">
+>>>>>>> .r95
 >>>>>>> .r94
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< .mine
+        <state line="15" column="15" selection-start="430" selection-end="441" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#547#686#0" expanded="false" />
+            <element signature="e#714#783#0" expanded="false" />
+            <element signature="e#812#856#0" expanded="false" />
+            <element signature="e#891#944#0" expanded="false" />
+            <element signature="e#971#1860#0" expanded="false" />
+            <element signature="e#1888#2132#0" expanded="false" />
+            <element signature="e#2162#3010#0" expanded="false" />
+            <element signature="e#3047#6018#0" expanded="false" />
+          </folding>
+=======
 <<<<<<< .mine
         <state line="20" column="30" selection-start="733" selection-end="733" vertical-scroll-proportion="0.0">
 =======
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
 >>>>>>> .r94
           <folding />
+>>>>>>> .r95
+        </state>
+      </provider>
+    </entry>
+<<<<<<< .mine
+    <entry file="file://$PROJECT_DIR$/war/js/editor/EditorModule.js">
+=======
+<<<<<<< .mine
+    <entry file="file://$PROJECT_DIR$/war/js/editor/JSEditor.js">
+=======
+    <entry file="file://$PROJECT_DIR$/war/js/widget/TopMessageBoxWidget.js">
+>>>>>>> .r95
+>>>>>>> .r94
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< .mine
+        <state line="71" column="45" selection-start="2688" selection-end="2688" vertical-scroll-proportion="0.0">
+=======
+<<<<<<< .mine
+        <state line="111" column="0" selection-start="3094" selection-end="3094" vertical-scroll-proportion="0.0">
+          <folding />
+=======
+        <state line="9" column="51" selection-start="361" selection-end="361" vertical-scroll-proportion="0.0">
+>>>>>>> .r95
+          <folding />
+>>>>>>> .r94
         </state>
       </provider>
     </entry>
 <<<<<<< .mine
     <entry file="file://$PROJECT_DIR$/war/js/editor/JSEditor.js">
 =======
-    <entry file="file://$PROJECT_DIR$/war/js/widget/TopMessageBoxWidget.js">
->>>>>>> .r94
-      <provider selected="true" editor-type-id="text-editor">
-<<<<<<< .mine
-        <state line="111" column="0" selection-start="3094" selection-end="3094" vertical-scroll-proportion="0.0">
-          <folding />
-=======
-        <state line="9" column="51" selection-start="361" selection-end="361" vertical-scroll-proportion="0.0">
-          <folding />
->>>>>>> .r94
-        </state>
-      </provider>
-    </entry>
 <<<<<<< .mine
     <entry file="file://$PROJECT_DIR$/war/js/App.js">
 =======
     <entry file="file://$PROJECT_DIR$/war/page/game/mini/descreption.html">
+>>>>>>> .r95
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="20" selection-start="477" selection-end="477" vertical-scroll-proportion="-11.535714">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/war/js/editor/EditorModule.js">
+    <entry file="file://$PROJECT_DIR$/war/js/util/JSLoader.js">
 >>>>>>> .r94
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< .mine
+        <state line="57" column="57" selection-start="1930" selection-end="1930" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#180#533#0" expanded="false" />
+            <element signature="e#885#1882#0" expanded="false" />
+          </folding>
+=======
 <<<<<<< .mine
         <state line="184" column="58" selection-start="6388" selection-end="6388" vertical-scroll-proportion="0.0" />
 =======
         <state line="121" column="61" selection-start="4865" selection-end="4865" vertical-scroll-proportion="0.0">
           <folding />
+>>>>>>> .r95
         </state>
 >>>>>>> .r94
       </provider>
@@ -771,14 +1127,20 @@
     <entry file="file://$PROJECT_DIR$/war/js/game/mini/Mini.js">
       <provider selected="true" editor-type-id="text-editor">
 <<<<<<< .mine
+        <state line="231" column="27" selection-start="12772" selection-end="12772" vertical-scroll-proportion="0.7080292">
+=======
+<<<<<<< .mine
         <state line="262" column="19" selection-start="13751" selection-end="13751" vertical-scroll-proportion="0.04676259">
 =======
         <state line="281" column="14" selection-start="15699" selection-end="15699" vertical-scroll-proportion="0.48777506">
+>>>>>>> .r95
 >>>>>>> .r94
           <folding>
             <element signature="e#433#5246#0" expanded="false" />
             <element signature="e#5292#11133#0" expanded="false" />
-            <element signature="e#16499#17203#0" expanded="false" />
+            <element signature="e#11159#11723#0" expanded="false" />
+            <element signature="e#13112#16452#0" expanded="false" />
+            <element signature="e#16494#17198#0" expanded="false" />
           </folding>
         </state>
       </provider>

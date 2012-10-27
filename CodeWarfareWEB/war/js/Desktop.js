@@ -185,7 +185,7 @@ Ext.Desktop = function (app) {
         shortcuts.on('click', function (e, t) {
             if (t = e.getTarget('dt', shortcuts)) {
                 e.stopEvent();
-                MainApp.getDesktop().openGameModule(t.id.replace('-shortcut', ''), true, 'game')
+                MainApp.getDesktop().openGameModule(t.id.replace('-shortcut', ''), true, 'game','template/Template1.js')
             }
         });
     }//end add shortcuts clock event
@@ -217,7 +217,7 @@ Ext.Desktop = function (app) {
                     editor.addEditorTab(module.id);
                 }
                 if (codeFile){
-                    editor.loadSource();
+                    editor.loadSource(CodeLoader.loadCode(codeFile));
                 }
                 win.addListener('show', module.showE);
                 win.addListener('resize', module.resizeE);

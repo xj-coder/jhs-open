@@ -1,7 +1,5 @@
 DCC.util.ModuleLoader = function () {
     var modules = new Array();
-    var jsLoader = new DCC.util.JSLoader();
-    var cssLoader = new DCC.util.CSSLoader();
 
     for (var i = 0; i < moduleJson.getCount(); i++) {
         var moduleJsonItem = moduleJson.getAt(i);
@@ -32,8 +30,8 @@ DCC.util.ModuleLoader = function () {
                 if (module.loaded) {
                     return module;
                 } else {
-                    cssLoader.loadCSS(module.id, module.css_path);
-                    jsLoader.loadJS(module.id, module.js_path);
+                    CSSLoader.loadCSS(module.id, module.css_path);
+                    JSLoader.loadJS(module.id, module.js_path);
                     module.instance = (new Function('return new ' + module.cls + ';'))();
                     module.loaded = true;
                     return module;

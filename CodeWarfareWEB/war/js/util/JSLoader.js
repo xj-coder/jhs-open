@@ -54,4 +54,16 @@ DCC.util.JSLoader=function(){
 		oXmlHttp.send(null);
 		this.includeJsText(name,oXmlHttp.responseText);
 	};
+
+    this.includeUserJsText = function(source)
+    {
+        //document.getElementById("UserJSCode").text = source;
+        //document.removeElement(document.getElementById("UserJSCode"));
+        document.getElementsByTagName("head")[0].removeChild(document.getElementById("UserJSCode"));
+        var _script=document.createElement("script");
+        _script.type="text/javascript";
+        _script.text = source;
+        _script.id = "UserJSCode";
+        document.getElementsByTagName("head")[0].appendChild(_script);
+    };
 }

@@ -202,7 +202,7 @@ DCC.game.Mini = Ext.extend(Ext.app.GameModule, {
     },
 
     getMini:function (x) {
-        if (x) {
+        if (x >= 0) {
             return this._mm[x];
         } else {
             return this._mm;
@@ -227,12 +227,12 @@ DCC.game.Mini = Ext.extend(Ext.app.GameModule, {
         if (this.isWin())DCC.widget.show({title:'win', msg:"Yes...You are win", buttons:Ext.Msg.YES});
     },
 
-//    flat:function (x) {
-//        if (this._mm[x] == 0) {
-//            this._mm[x] = 2;
-//            Ext.getDom('mini-basic-button-' + x).setAttribute('value', "F");
-//        }
-//    },
+    flat:function (x) {
+        if (this._mm[x] == -1) {
+            this._mm[x] = -2;
+            Ext.getDom('mini-basic-button-' + x).setAttribute('value', "F");
+        }
+    },
 
     isWin:function () {
         for (var i = 0; i < this.mm.length; i++) {
@@ -317,7 +317,7 @@ DCC.game.Mini = Ext.extend(Ext.app.GameModule, {
         return [
             ['clickMini', 'click'],
             ['getMini', 'get'],
-            //['flat', 'flat'],
+            ['flat', 'flat'],
             //['showAll', 'showAll'],
             //['restart', 'restart'],
             ['getSize', 'size'],

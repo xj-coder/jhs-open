@@ -68,6 +68,8 @@ var MainApp = null;
 function beginApp() {
     ModuleLoader = new DCC.util.ModuleLoader();
     CodeLoader = new DCC.util.CodeLoader();
+    JSLoader = new DCC.util.JSLoader();
+    CSSLoader = new DCC.util.CSSLoader();
 
     MainApp = new Ext.app.App({
         init:function () {

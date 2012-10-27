@@ -16,6 +16,7 @@ Ext.extend(Ext.app.GameModule, Ext.util.Observable, {
     getLoopTime:Ext.emptyFn,
     registStopMethod:Ext.emptyFn,
     registWinMethod:Ext.emptyFn,
+
     getThis:function () {
         if (this.module) {
             this.module = ModuleLoader.getModuleInstance(this.id);
