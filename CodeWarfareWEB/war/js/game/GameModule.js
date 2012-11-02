@@ -9,6 +9,7 @@ Ext.extend(Ext.app.GameModule, Ext.util.Observable, {
     id:null,
     init:Ext.emptyFn,
     restart:Ext.emptyFn,
+
     registDefaultMethod:Ext.emptyFn,
     defaultMothed:Ext.emptyFn,
     registBeginMethod:Ext.emptyFn,
@@ -26,6 +27,7 @@ Ext.extend(Ext.app.GameModule, Ext.util.Observable, {
     getWindowManager:function () {
         return this.getDesktop().getManager()
     },
+
     moveE:function (win) {
         //var availWidth = Ext.get('x-desktop').getWidth(true);
         //var availHeight = Ext.get('x-desktop').getHeight(true);
