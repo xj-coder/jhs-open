@@ -201,5 +201,4 @@ DCC.robot.David = Ext.extend(Ext.app.RobotModule, {
         _win.show();
     }
 //createWindow end
-})
-;
+});

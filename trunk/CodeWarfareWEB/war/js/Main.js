@@ -5,6 +5,8 @@
  */
 
 //global variable
+var ROOT_PATH = "/codewar/";
+
 var DEFAULT_JS_EDITOR_ID = "js-editor";
 var DEFAULT_JS_EDITOR_WIN_ID = "js-editor-win";
 var DEFAULT_ROBOT_JS_EDITOR_ID = 'robot-editor';
@@ -18,7 +20,7 @@ var MainApp = null;
 //json data
 {
     function loaded() {
-        return robotCodeJson.getCount()>0 && gameLauncherJson.getCount()>0 && moduleJson.getCount()>0 && shortcutJson.getCount()>0;
+        return robotCodeJson.getCount() > 0 && gameLauncherJson.getCount() > 0 && moduleJson.getCount() > 0 && shortcutJson.getCount() > 0;
     }
 
     function load(json) {
@@ -32,27 +34,27 @@ var MainApp = null;
     }
 
     var robotCodeJson = new Ext.data.JsonStore({
-        url:'/data/robot_code/david/code.json',
+        url:ROOT_PATH + 'data/robot_code/david/code.js',
         // reader configs
         root:'codes',
         fields:['game_id', 'game_name', 'code_file_path', 'code_file_name', 'code_name']
     });
 
     var shortcutJson = new Ext.data.JsonStore({
-        url:'/data/main/shortcut.json',
+        url:ROOT_PATH +'data/main/shortcut.js',
         // reader configs
         root:'shortcuts',
         fields:['id', 'name', 'img']
     });
 
     var gameLauncherJson = new Ext.data.JsonStore({
-        url:'/data/main/launcher.json',
+        url:ROOT_PATH +'data/main/launcher.js',
         // reader configs
         root:'games',
         fields:['id', 'text', 'iconCls']
     });
     var moduleJson = new Ext.data.JsonStore({
-        url:'/data/main/model.json',
+        url:ROOT_PATH +'data/main/model.js',
         // reader configs
         root:'models',
         fields:['id', 'type', 'js_path', 'page_path', 'css_path', 'cls', 'lazy_load']

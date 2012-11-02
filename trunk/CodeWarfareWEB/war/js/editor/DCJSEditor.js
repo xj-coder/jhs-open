@@ -97,14 +97,16 @@ var DCJSEditor = Ext.extend(Ext.form.HtmlEditor, {
 			}
 		}
 	},
-	lightSource : function(e){
+
+    lightSource : function(e){
 		var src = this.getValue();
 		src = src.replace('var','<font color=\"#660066\">var</font>');
 
 		this.setValue('');
 		this.insertAtCursor(src);
 	},
-	getSource : function(){
+
+    getSource : function(){
 		var source = this.getValue();
 		source = source.replace(new RegExp('; ','g'),';');
 		source = source.replace(new RegExp('&nbsp;','g'),'');

@@ -3,6 +3,7 @@ DCC.editor.EditorModule = function (config) {
     Ext.apply(this, config);
     DCC.editor.EditorModule.superclass.constructor.call(this);
 }
+
 Ext.extend(DCC.editor.EditorModule, Ext.util.Observable, {
     init:Ext.emptyFn,
     id:null,
@@ -35,6 +36,7 @@ Ext.extend(DCC.editor.EditorModule, Ext.util.Observable, {
         var editor;
 
     }, //share end
+
     runSource:function () {
         var desktop = MainApp.getDesktop();
         var win = desktop.getWindow(this.id + "-win");
