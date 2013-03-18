@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="libs/httpclient/examples"/>
+	<classpathentry kind="src" path="libs/dom4j/xmlmapping"/>
+	<classpathentry kind="lib" path="libs/dom4j/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="libs/dom4j/jaxen-1.1.1.jar"/>
+	<classpathentry kind="lib" path="libs/httpclient/commons-codec-1.6.jar"/>
+	<classpathentry kind="lib" path="libs/httpclient/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="libs/httpclient/fluent-hc-4.2.3.jar"/>
+	<classpathentry kind="lib" path="libs/httpclient/httpclient-4.2.3.jar"/>
+	<classpathentry kind="lib" path="libs/httpclient/httpclient-cache-4.2.3.jar"/>
+	<classpathentry kind="lib" path="libs/httpclient/httpcore-4.2.2.jar"/>
+	<classpathentry kind="lib" path="libs/httpclient/httpmime-4.2.3.jar"/>
+	<classpathentry kind="lib" path="libs/jackson/jackson-annotations-2.1.4.jar"/>
+	<classpathentry kind="lib" path="libs/jackson/jackson-core-2.1.4.jar"/>
+	<classpathentry kind="lib" path="libs/jackson/jackson-databind-2.1.4.jar"/>
+	<classpathentry kind="lib" path="libs/jide-common.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
